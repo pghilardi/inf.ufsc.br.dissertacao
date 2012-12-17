@@ -1,0 +1,51 @@
+-> Ter diagrama de sequencia normal. Diagrama de sequencia composto e diagrama de sequencia 
+do aspecto.
+->> O diagrama de sequencia normal é o refinamento do caso de uso (fluxo principal)
+->> O diagrama de sequencia do aspecto é o comportamento de um dado aviso que extenderá o caso de uso.
+->> O diagrama de sequencia composto será a composição entre o diagrama normal e o diagrama do
+aviso. 
+
+A composição será realizada utilizando informações do diagrama estrutural de classes com a
+utilização de stereotypes e tagged values. (pointcuts, pointcuts realization). Essa composição faz com
+que o resultado seja apenas aplicável ao OCEAN/SEA! Totalmente específico. 
+->> Criar conceito genérico (qualquer classe, qualquer método, etc)
+
+...O resultado poderia ser exportado em XMI. E os diagramas fontes importados em XMI. Mas por enquanto 
+isso não existe...
+->> Estudar XMI.
+
+->>> GRANDE DESAFIO: E se tivermos um um ponto de corte que seleciona vários pontos de junção? Como 
+encontrar todos os pontos de junção e gerar um diagrama resultante? Será necessário elaborar um parser 
+para interpretar os wildcards, varrer por todos os diagramas e gerar os diagramas compostos.
+
+
+-> Around é paralelo?
+->> Não. O around é um tipo de aviso que será executada "em volta" de um ponto de corte. Isso quer
+dizer que o aviso poderá ser executada AO INVÉS do ponto de corte (o ponto de corte NÃO executaria
+nesse caso). Ele também pode executar antes e depois (inclusivamente). Usando uma chamada do tipo:
+
+1 do something before
+2 proceed() $ proceeds to pointcut execution
+3 do something after
+
+
+-> E para pontos de corte com expressões regulares (wildcards)? Como ficaria no diagrama de 
+sequência?
+->> ?
+
+
+-> Tabular notation on sequence diagrams. Anexo e superstructure.
+->> ?
+
+
+-> Possibilidade de colocar diretamente o ref e perceber que deve atualizar o pointcut.
+->> ?
+
+
+-> Utilizar SEA. Adicionar esteriotipos, tagged values.
+->> ?
+
+
+-> Possibilidade de representar algoritmos complexos mas que envolvem apenas o aspecto com diagra-
+mas de máquinas de estados.
+->> ?

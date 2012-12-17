@@ -1,0 +1,150 @@
+\chapter{Proposta}
+
+Algumas conclusões importantes:
+\begin{itemize}
+  \item Casos de uso de extensão usam pontos de corte, avisos, e a idéia de aspectos
+  \item Casos de uso de inclusão podem usar declarações intertipos. (StaticCrossucttingFeature)
+  \item Casos de uso base podem usar declarações intertipos. (StaticCrossucttingFeature)
+\end{itemize}
+
+Sobre modelagem:
+\begin{itemize}
+  \item Modelagem estrutural de sistema: Diagrama de Classes e de Pacotes
+  \item Modelagem estrutural de classe: Diagrama de Classes
+  \item Modelagem comportamental de sistema: Casos de Uso, Visão Geral de Interação, Sequência
+  \item Modelagem comportamental de classe: Diagrama de Estados. Essa parte da
+  modelagem é igual a modelagem orientada a objetos.
+\end{itemize}
+
+A parte estrutural é modelada com diagrama de classes, utilizando o perfil UML proposto 
+pelo trabalho de \cite{evermann:07}. Além disso, estende-se esse perfil para 
+representar \textit{wildcards}, isto é, a possibilidade de ter um comportamento
+inserido em diversos pontos de um modelo com robustez. O comportamento do sistema é 
+representando através de casos de uso e diagramas de sequência. 
+
+Modelagem Completa:
+
+Definem-se dois requisitos principais para a modelagem de um
+sistema que utiliza aspectos:
+
+\begin{enumerate}
+  \item Mapeamento de interesses: Deve ser possível identificar os
+  artefatos que representam a estrutura e o comportamento de um interesse. 
+  Esses artefatos devem ser agrupados em um único módulo na modelagem.
+  \item Representação dos quatro pontos de vista essenciais: Deve-se representar
+  um interesse estruturalmente e comportamentalmente. Para tal, podem-se
+  utilizar os diagramas da UML.
+\end{enumerate}
+
+Composição de modelos:
+
+Na modelagem comportamental, classificam-se os casos de uso em dois
+tipos:
+
+\begin{itemize}
+  \item Casos de uso base: São os casos de uso que representam os interesses
+  núcleo.
+  \item Casos de uso de extensão: São os casos de uso que representam os
+  interesses entrecortantes. Estendem os casos de uso base.
+\end{itemize}
+
+Os casos de uso base e de extensão são refinados em diagramas de sequência. Propõe-se um algoritmo para 
+realizar a composição de diagramas de sequência base (refinamento de um caso de
+uso base) com diagramas de sequência de extensão (refinamento de um caso de uso
+de extensão). Assim, obtem-se como resultado um diagrama de sequência composto
+com o comportamento base juntamente com o extendido, o qual mostra o
+comportamento dos interesses núcleo juntamente com os interesses entrecortantes,
+facilitando a compreensão e manutenção do sistema.
+
+\begin{enumerate}
+  \item Modelagem alto nível: Criar diagrama de classes e diagrama de casos de uso.
+  \item Para cada caso de uso, refinar um diagrama de sequência. Casos de uso de extensão e de
+  inclusão serão refinados em diagrama de sequência também. A junção entre os casos de uso de
+  extensão e os casos de uso base será feita automaticamente pela ferramenta. No relacionamento de
+  extensão foi modificado ou adicionado o esteriótipo \textit{extend} para conter o seguinte
+  valor rotulado: \textit{advice} que deve conter uma referência ao modelo. Essa referência ao
+  modelo é o aviso que deve estar presente no diagrama de classes dentro de um aspecto. Esse valor
+  rotulado dirá quando essa extensão acontecerá e quais pontos de junção estão sendo atingidos (
+  isso é definido pelo aviso). Isso será utilizado pelo parser para que ele saiba se deve inserir o
+  diagrama de sequência antes, durante ou depois do diagrama de sequência base. Deverá ser elaborada 
+  uma verificação de consistência pois o diagrama base deve ser compatível com o diagrama de
+  extensão. Isso já é uma novidade que não tinha em nenhum outro trabalho. A referência de um caso
+  de uso para o aviso!
+  \item declare precedence entre aspectos.
+\end{enumerate}
+
+E para validar\ldots
+\begin{itemize}
+  \item Estabelecer a hipótese que é o que eu vou tentar provar. Minha hipótese
+  é que a modelagem de aspectos por múltiplos pontos de vista juntamente com a
+  automatização do processo de composição nos diagramas de sequência traz
+  evidências que resulta em uma modelagem de fácil compreensão, manutenabilidade
+  e é um importante passo para geração de código.
+  \item Criar uma tabela comparativa entre as modelagens propostas até agora e
+  a minha modelagem.
+  \item Criticar a modelagem por múltiplos pontos de vista falando que é
+  complexa, pois não utiliza a UML pura\ldots etc\ldots etc
+\end{itemize}
+
+Em relação ao OCEAN:
+\begin{itemize}
+  \item Steriótipo seria um conceito que é associado ao modelo. Cada
+  especificação terão seus esteriótipos e pode ser feito IO disso. 
+  \item Ex: mensagem do diagrama de sequência é um conceito e o diagrama é o
+  modelo. Um conceito deve ter um modelo associado a ele.
+\end{itemize}
+
+
+
+Comparação entre as modelagens:
+
+- PRÉ-REQUISITO: Todas utilizarem a UML 2.0.
+
+- Estende via perfil ou modifica o meta-modelo?
+- Representa os quatro pontos de vista? Quais representa? -> representa
+estrutural e dinamica? 
+- Clareza para utilizar, compreender e MANTER os modelos. -> quantidade muito
+grande de elementos sintáticos na modelagem e não há como separar. Referenciar 7
++- 2. 
+- Dispõe de ferramentas para realizar a composição? 
+ - Composição em nível de modelo ou código? 
+ - Representa as principais características da POA (como a possibilidade de
+ capturar múltiplos pontos de junção com o uso de wildcards)? O que não representa?
+
+
+
+
+-> Diagrama de sequência para o comportamento normal e para o aviso. Nesse
+diagrama existirá uma invariante de estado que será disparada quando esse estado
+for atingido. O refinamento desse estado deve ser definido em um diag de máquina
+de estados do ponto de corte.
+
+Pontos de corte serão representados no diagrama de máquina de estados. Quando
+chegar em um dado estado, disparará! Qu	e dispara a invariante de estado.
+
+ELEMENTO ESTADO no diagrama de sequência? StateInvariant
+- StateInvariant. A idéia é colocar o estado na lifeline do primeiro objeto
+(que é o trigger) e representar esse estado no diag de maq de estados.
+
+-- Múltiplos pontos de vista -> SCALABILITY???
+
+-- Alternância de visões -> Também facilita compreensão, também leve a
+SCALABILITY!! =====> composição automática de
+diagramas de sequência base com extensões (aspectos)
+
+-- Agrupar interesse em um único local na modelagem -> SCALABILITY!!!
+
+O que eu quero?
+
+O trabalho proposto pretende cobrir os quatro pontos de vista essenciais,
+automatizando uma parte do processo, a fim de permitir melhor compreensão, 
+manutenção e geração de código. Para atingir esses objetivos, estende-se o perfil UML proposto por
+\cite{evermann:07} adicionando a representação de pontos de corte
+com wildcards e expressões regulares. Propõe-se também a representação das
+características comportamentais através de diagramas de sequência e de casos de
+uso. A composição entre diagramas de sequência de aspectos com diagramas de
+sequência base resulta em diagramas já com o comportamento de extensão (comportamento introduzido pelo aspecto).
+A composição é realizada em nível de modelo. Para realizar essa composição
+propõe-se um algoritmo baseado no algoritmo de composição da linguagem AspectJ. Pretende-se também permitir a
+importação e exportação de modelos utilizando XMI, para permitir a troca de
+modelos entre diferentes ferramentas CASE.

@@ -1,0 +1,351 @@
+\chapter{Estado da Arte}
+
+\section{Aspect-Oriented Multi-View Modeling}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2009
+\end{itemize}
+
+Resumo: Multi-view modeling allows a developer to describe a software
+system from multiple points of view, e.g. structural
+and behavioral, using different modeling notations. Aspectoriented
+modeling techniques have been proposed to address
+the scalability problem within individual modeling notations.
+This paper presents RAM, an aspect-oriented modeling
+approach that provides scalable multi-view modeling.
+RAM allows the modeler to define stand-alone reusable aspect
+models using 3 modeling notations. The aspect models
+support the modeling of structure (using UML class diagrams)
+and behavior (using UML state and sequence diagrams).
+RAM supports aspect dependency chains, which allows
+an aspect providing complex functionality to reuse the
+functionality provided by other aspects. The RAM weaver
+can create woven views of the composed model for debugging,
+simulation or code generation purpose, as well as perform
+consistency checks during the weaving and on the woven
+model to detect inconsistencies of the composition.
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+
+\item Integra múltiplas visões de modelagem para modelar aspectos:
+	\begin{itemize}
+		\item Modelagem comportamental: Diagrama de Sequência e Diagrama de Estados
+		\item Modelagem estrutural: Diagrama de Classes
+	\end{itemize} 
+	\item Checagem de consistência entre modelos (compostos e básicos). Assim,
+	diferentes modelos de diferentes visões ficam consistentes.
+	\item Faz weaving e gerá código.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize} 
+  \item Diagramas grandes e complexos. (como medir isso?) . Além disso, ele usa
+  um diagrama de pacotes que não parece ser possível de se construir apenas
+  usando estereótipos e tagged values da UML.
+  \item Poderia usar diagrama de atividades para modelar algoritmo de métodos ,
+  pontos de corte ou avisos.
+  \item Alguma confusão no que é ponto de corte e o que é aviso nos modelos.
+  (como explicar isso?)
+  \item Fala pouco dos três momentos em que um aviso pode ser executado: antes,
+  durante ou depois. Deixa isso sub-entendido nos modelos.
+  \item Alguma redundância de informação nos modelos.
+\end{itemize}
+
+
+\section{A Meta-Level Specification and Profile for AspectJ in UML}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2007
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Não requer criar novas classes de meta-modelo para UML. Apenas se
+estendem as classes já existentes da UML. (através de stereotypes e tagged
+values)
+\item Pode ser usado em ferramentas de modelagem UML atuais (UML 2.0 e suporte
+a importar Profiles UML)
+\item Faz weaving e gera código.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize} 
+  \item Gera apenas o esqueleto da aplicação mas sem nenhum diagrama
+  comportamental. Falha no ponto de visto comportamental (multi-view). Poderia
+  se utilizar esse profile mas agora modelando o ponto de vista comportamental
+  com diagramas de atividade, sequência, visão geral de interaçao e diagrama de
+  estados. 
+  \item Apenas modelagem para AspectJ.
+  \item Não permite capturar múltiplos pontos de junção em um ponto de corte.
+  (falha da UML segundo o autor). Mas esse conceito é FUNDAMENTAL na
+  Programação por Aspectos. GRANDE PROBLEMA!
+  \item Checagem de consistência na modelagem UML requer uma certa complexidade
+  na geração de código.
+\end{itemize}
+
+\section{Weaving Security Aspects into UML 2.0 Design Models}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2009
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Integra requisitos de segurança utilizando aspectos, sem ter que colocar
+esse código em várias partes do código atual (tangling).
+\item Simples e de fácil entendimento.
+\item Faz weaving nos modelos. (apenas design)
+\item Mostra como identificar pontos de junção nos diagramas comportamentais da
+UML.
+\item Cria um UML Profiler.
+\item Pontos de Corte modelados com diagrama de atividade.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize} 
+  \item Frisa apenas no weaving do diagrama de sequência. O modelo composto é o
+  diagrama de sequencia. (modelo resultante).
+  \item Não demonstra o algoritmo de weaving.
+  \item Não mostra diagramas estruturais do sistema atual. Não é feita uma
+  ligação entre os modelos base para depois serem compostos pelos modelos de
+  aspecto.
+  \item Não gera código diretamente, mas com o diagrama
+de sequência obtido poderia gerar o código? Pelo jeito não.
+\end{itemize}
+
+\section{Approaches to aspect-oriented design: a study}
+
+\begin{itemize}
+  \item Grau de relevância: Baixo
+  \item Ano: 2006
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Faz um estudo sobre como deve ser uma linguagem para design de
+programação por aspectos. Leva em consideração integração com programação
+orientada a objetos.
+\item Diz que essa linguagem de projeto deve ser voltada para um domínio
+genérico de aplicações (todas as aplicações).
+\item Linguagem ou modelagem deve ser de fácil integração com tecnologias
+existentes, como a programação orientada a objetos. Crosscuting Concerns são
+elementos importantíssimos na POA e a linguagem deve permitir separá-los.
+Módulos já existentes não devem ser modificados para se usar programação por
+aspectos.
+\end{itemize} 
+
+
+\section{Modeling and Integrating Aspects With UML Activity Diagrams}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2009
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Estende a UML apenas com estereótipos e tags.
+\item Abordagem simples e leve apenas utilizando diagramas de atividade.
+\item Faz weaving de modelos. (Não gera código diretamente)
+\item Pode ser integrado como um plug-in do Eclipse e importar um modelo de uma
+ferramenta de modelagem UML para o plug-in do Eclipse.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize}
+\item Utiliza apenas diagramas de atividade para modelar e fazer weaving de
+modelos de aspectos. Poderia utilizar também diagramas de sequência e algum
+diagrama estrutural.
+\item Não faz consistência entre modelo final e requisitos.
+\end{itemize} 
+
+\section{An Aspect-Oriented UML Tool for Software Development with Early
+Aspects}
+
+\begin{itemize}
+  \item Grau de relevância: Médio
+  \item Ano: 2006
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Introduz aspectos fazendo com que não ocorra emaranhamento de código
+desde as primeiras fases de um projeto (design)
+\item Modela um 'processo' de desenvolvimento e modelagem utilizando aspectos
+por todo o ciclo de desenvolvimento (análise de requisitos, análise, design e
+implementação)
+\item Guiado para engenharia de software baseada em componentes. Maior reuso.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize}
+\item Apenas diagramas estruturais na modelagem.
+\item Não fala sobre pontos de corte, pontos de junção e avisos. Estranho um
+trabalho sobre aspectos não falar das construções básicas de qualquer linguagem.
+\end{itemize} 
+
+\section{Aspect-Oriented Use Case Modeling for Software Product Lines}
+
+\begin{itemize}
+  \item Grau de relevância: Médio
+  \item Ano: 2006
+\end{itemize}
+
+Resumo: 
+
+\textbf{Pontos Fortes:}
+
+\begin{itemize}
+\item Cobre a área de software product lines.
+\end{itemize} 
+
+\textbf{Pontos Fracos:}
+
+\begin{itemize}
+\item Rede de Petri gerada é complexa e difícil de entender. Quanto maior o
+caso de uso, maior a complexidade da rede.
+\item Pontos de corte em muito baixo nível.
+\item Faltam diagramas.
+\item Poderia integrar com modelagem já existente.
+\end{itemize} 
+
+\section{MATA: A Tool for Aspect-Oriented Modeling Based on Graph
+Transformation}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2008
+\end{itemize}
+
+Resumo:
+
+\textbf{Pontos Fortes}
+
+\begin{itemize}
+  \item Técnica bastante formal.
+  \item Permite utilizar qualquer elemento de um modelo como ponto de junção.
+  \item Não faz \textit{match} por nome, evitando conflitos.
+\end{itemize}
+
+\textbf{Pontos Fracos}
+
+\begin{itemize}
+  \item O formalismo da técnica acaba afastando um pouco ela do que os
+  desenvolvedores/modeladores estão acostumados a usar.
+  \item Em nenhum momento é mostrado um diagrama de classes (estrutural)
+\end{itemize}
+
+
+\section{An Aspect-Oriented Approach to Early Design Modeling}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2005
+\end{itemize}
+
+Resumo:
+
+\textbf{Pontos Fortes}
+
+\begin{itemize}
+  \item Modelagem independente de linguagem.
+  \item Excelente reuso de modelos de aspectos (crosscuting concerns) através
+  de templates. Até a operação pode ser passada como parâmetro.
+  \item Diretivas de composição aumentam as possibilidades de instanciar um
+  aspecto.
+  \item Usa OCL para definir pré-condições e pós-condições de operações.
+\end{itemize}
+
+\textbf{Pontos Fracos}
+
+\begin{itemize}
+  \item \textit{Match} para composição é feito pelo nome do elemento.
+  \item Diretivas de composição talvez não são tão necessárias em alguns casos
+  (como no caso do \textit{match} pelo nome da função)
+  \item Diretivas de composição podem gerar conflitos e exigir uma grande
+  participação do usuário na composição entre modelo base e modelo de aspecto.
+  Talvez fosse possível gerar uma linguagem com estratégias de composição.
+  \item Não está definido explicitamente o que seria um ponto de corte nessa
+  técnica de modelagem. Acho importante essa definição.
+  \item Faltam \textit{guidelines} para identificar conceitos que devem ser
+  modelados com aspectos.
+  \item Melhorar a análise dos modelos.
+\end{itemize}
+
+
+\section{Expressing Different Conceptual Models of Join Point Selections in
+Aspect-Oriented Design}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2006
+\end{itemize}
+
+Resumo:
+
+\textbf{Pontos Fortes}
+
+\begin{itemize}
+  \item Estuda diferentes formas de capturar pontos de junção. Cada técnica
+  hoje em dia captura de um jeito. Ele estuda essas formas e corrige os
+  principais problemas.
+  \item Modelos estudados: Control Flow (AspectJ), Data Flow and State Flow
+  \item Pode-se integrar vários modelos em um único.
+\end{itemize}
+
+\textbf{Pontos Fracos}
+
+\begin{itemize}
+  \item Não é possível visualizar os avisos nos diagramas modelados. Apenas os
+  pontos de junção e pontos de corte. Não modela o novo comportamento.
+  \item 
+\end{itemize}
+
+\section{Theme Approach}
+
+\begin{itemize}
+  \item Grau de relevância: Alto
+  \item Ano: 2006
+\end{itemize}
+
+Resumo: Objetivo: Conseguir identificar o design de um crosscuting concern
+através dos requisitos e vice-versa.
+
+\textbf{Pontos Fortes}
+
+\begin{itemize}
+  \item Proposta inovadora para manter a rastreabilidade entre requisitos e
+  design (UML)
+\end{itemize}
+
+\textbf{Pontos Fracos}
+
+\begin{itemize}
+  \item Pouco auxílio na localização de requisitos. Esse levantamento de
+  requisitos é muito dependente da experiência do desenvolvedor.
+\end{itemize}

@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{ufscThesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacotes usados especificamente para este documento
+% Definidos pelo criador do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{moreverb}
+\usepackage{setspace}
+\usepackage{anysize}
+\usepackage{lscape}
+
+%\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
+
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titulo{Modelagem de Aspectos por Múltiplos Pontos de Vista}
+\autor{Pedro Ghilardi}
+\data{18}{julho}{2011}                           
+\orientador{Prof. Dr. Ricardo Pereira e Silva }
+\coordenador{Prof. Chefe, Dr. Ronaldo Santos Mello}              
+
+\departamento[o]{Departamento de Informática Estatística}
+\curso[o]{Programa de Pós-Graduação em Ciências da Computação}
+\documento[a]{Dissertação}
+\grau{Mestre em Ciências da Computação}
+
+
+%%% Sobre a Banca
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Prof. Dr Ricardo Pereira e Silva} %Nome do presidente da banca
+
+\dedicatoria{}
+
+\agradecimento{Agradeço ao Prof. Ricardo pela sua orientação e compreensão.}
+
+\epigrafe{}{}
+
+\textoResumo{}
+
+\palavrasChave {chave 1. chave 2. ... chave n.}
+
+\textAbstract {}
+
+\keywords {key 1. key 2. ... key n.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+\folhaderosto[comficha] % Se nao quiser imprimir a ficha, é só não usar o parâmetro
+\folhaaprovacao
+\paginadedicatoria
+\paginaagradecimento
+\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas 
+\listadeabreviaturas
+\listadesimbolos
+\sumario
+
+%-------------------------------------------------------------------------------
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
+% dois tipos de elementos de texto e possuem os comandos
+% \listofalgorithms e \lstlistoflistings, respectivamente.
+%-------------------------------------------------------------------------------
+
+%--------------------------------------------------------
+% Elementos textuais
+
+\input{introducao}
+\input{contextualizacao}
+\input{relacionados}
+
+%\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+
+
+\end{document}

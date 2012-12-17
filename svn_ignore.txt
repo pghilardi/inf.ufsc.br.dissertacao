@@ -1,0 +1,5 @@
+*.toc
+*.lof
+*.lot
+*.las
+*.lsb

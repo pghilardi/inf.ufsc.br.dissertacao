@@ -1,0 +1,1237 @@
+\chapter{Trabalhos Relacionados}
+\label{sec:trabalhos_relacionados}
+
+A POA tem elementos que não podem ser representados com o meta-modelo padrão da
+segunda versão da UML. Esta limitação faz com que seja necessário estender a
+linguagem para modelagem de sistemas orientados a aspectos. Esta extensão 
+pode ser obtida com a definição de perfis UML ou através da definição de
+um novo meta-modelo. Propostas que estendem a UML através de um perfil podem ser
+reusadas diretamente em ferramentas CASE que suportem a importação de
+perfis. Os trabalhos que trabalham em nível de meta-modelagem podem ser
+utilizados em outras ferramentas CASE apenas através de transformações nos
+modelos, pois as ferramentas CASE suportam apenas o meta-modelo padrão da UML ou
+a extensão através de perfis.
+
+Alguns trabalhos estendem a UML para modelagem de programas orientados a
+aspectos. \cite{evermann:07} propõe um Perfil UML para AspectJ. O foco 
+deste trabalho é o desenvolvimento de um perfil que estenda a UML através da
+introdução de estereótipos, valores rotulados e restrições que permitam
+representar programas orientados a aspectos. Este perfil não remove restrições
+do meta-modelo padrão da linguagem e também não adiciona novas meta-classes em
+nível de meta-modelo, apenas estende meta-classes através de estereótipos.
+Assim, é possível utilizar esse meta-modelo como um Perfil UML em qualquer 
+ferramenta que suporte a importação de perfis.
+
+Nesta proposta, os aspectos são agrupados em um interesse entrecortante. Para
+tal introduz-se o estereótipo \textit{CrossCutingConcern} que estende
+a meta-classe \textit{Package}. Um aspecto (\textit{Aspect} é representado
+estendendo a meta-classe \textit{Class}. Este pode conter características
+estruturais e dinâmicas. Um aviso representa comportamento e estende a
+meta-classe \textit{BehavioralFeature}, significando que este aviso pode incluir
+colaborações e máquinas de estado. Os pontos de corte são características
+estruturais e são representados estendendo a classe do meta-modelo
+\textit{StructuralFeature}. Para representar os possíveis tipos de ponto de
+corte estende-se a meta-classe abstrata \textit{PointCut} em diversas
+sub-classes. Um aviso pode ter um ou mais pontos de corte associados. Os pontos
+de junção capturados por um ponto de corte devem ser elementos do modelo, como
+operações, atributos, etc. Um aspecto pode conter também declarações inter-tipos
+(\textit{StaticCrossCutingFeatures}), uma construção que possibilita a
+introdução de novos membros e relacionamentos em classes existentes. 
+
+A figura \ref{fig:p21_meta_class} mostra o exemplo de um estereótipo que estende
+um elemento do meta-modelo da UML: o estereótipo \textit{Aspect} estendendo a
+meta-classe \textit{Class}. O nome do estereótipo está representado em negrito e
+a meta-classe a qual ele estende está representada entre colchetes. Um
+estereótipo pode ter relacionamentos com outros estereótipos, como composições, 
+agregações e associações.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=100px]{img/p21_meta_class.png}
+	\caption{Exemplo de estereótipo estendendo uma
+	meta-classe em um diagrama de Perfil UML.}\label{fig:p21_meta_class}
+\end{figure}
+
+O Perfil UML completo proposto por \cite{evermann:07} pode ser visualizado na
+figura \ref{fig:p21_aspectj_profile}. Como todas as construções são definidas em 
+linguagem de meta-modelo, pode-se realizar a geração de código em AspectJ. 
+É de responsabilidade do modelador elaborar uma modelagem que esteja de acordo 
+com as construções da linguagem alvo para geração do código. 
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=650px]{img/p21_aspectj_profile.png}
+	\caption{Perfil UML para modelagem de aspectos}\label{fig:p21_aspectj_profile}
+\end{figure}
+\end{landscape}
+
+Para exemplificar o uso deste Perfil UML em uma modelagem, \cite{evermann:07}
+implementou o padrão de projeto Observador em um sistema para desenho de
+interface gráfica. O diagrama de classes do interesse núcleo pode ser visualizado 
+na figura \ref{fig:p21_base_model}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/p21_base_model.png}
+	\caption{Interesse núcleo para desenho de interface
+	gráfica.}\label{fig:p21_base_model}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/p21_extension_model.png}
+	\caption{Interesse entrecortante para implementação
+	do padrão de projeto Observador.}\label{fig:p21_extension_model}
+\end{figure}
+
+O interesse entrecortante é o padrão de projeto Observador e a sua modelagem 
+pode ser visualizada na figura \ref{fig:p21_extension_model}. 
+O modelo do interesse entrecortante contém um aspecto que especifica quatro
+pontos de corte, três introduções e dois avisos. O ponto de corte \textit{setXYPointCut} captura
+modificações nos atributos x e y da classe \textit{Point}. O ponto de corte 
+\textit{twoIntArgsPC} captura chamadas e execuções com dois
+argumentos do tipo inteiro. O ponto de corte \textit{observePointPC} 
+compõe os dois pontos de cortes anteriores com o operador \textit{And},
+capturando modificações nos atributos x e y da classe \textit{Point} com dois
+argumentos do tipo inteiro. Finalmente, define-se o ponto de corte 
+\textit{makeLinePointCut} que captura chamadas ao método \textit{makeLine()}. As
+introduções adicionadas são os métodos \textit{addObserver()} e
+\textit{removeObserver()} e o atributo \textit{theObservers} nas classes
+\textit{Line} e \textit{Point}. Estes membros permitem adicionar, remover e
+armazenar os observadores. Para introduzir os novos comportamentos,
+especifica-se o aviso \textit{pointChange} que é executado antes do ponto de
+corte \textit{observePointPC} e o aviso \textit{newLine} que é executado antes
+do ponto de corte \textit{makeLinePointCut}. A composição do interesse
+entrecortante no interesse núcleo pode ser visualizada na figura
+\ref{fig:p21_code}. A composição é realizada em nível de código.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/p21_code.png}
+	\caption{Composição do padrão observador no sistema de
+	interface gráfica (em nível de código).}\label{fig:p21_code}
+\end{figure}
+
+A principal contribuição deste trabalho é a especificação do meta-modelo apenas
+em termos da UML, sem a necessidade de descrições textuais e de ferramentas adicionais 
+para interpretação ou geração de código a partir do modelo. Além disso, o
+meta-modelo pode ser utilizado como um perfil UML em ferramentas que suportem
+a importação de perfis, pois o mesmo está de acordo com o formato XMI padrão da
+OMG. Com a representação de elementos apenas em termos de meta-modelo, perde-se
+a possibilidade de representar padrões para captura de pontos de junção: 
+os \textit{wildcards}. A especificação por padrões é uma importante
+funcionalidade da programação por aspectos, pois simplifica a forma de capturar
+pontos de junção, sem a necessidade de explicitar cada elemento que será capturado. Assim,
+é importante que a extensão à UML permita representar essas características de uma
+maneira simples e praticável, para que seja possível expressar todas as
+características da POA na modelagem.
+
+O trabalho de \cite{evermann:07} permite representar a estrutura de um
+programa orientado a aspectos através das meta-classes
+\textit{CrossCutingConcern}, \textit{Aspect}, \textit{PointCut} e \textit{StaticCrossCutingFeatures}. 
+É importante observar que apenas a parte estrutural é especificada por esta
+proposta. Em relação às características comportamentais, como a
+meta-classe \textit{Advice} estende a meta-classe \textit{BehavioralFeature},
+é possível representá-las com colaborações e diagramas de máquinas de estados,
+mas o trabalho não demonstra como realizar a modelagem de colaborações e nem 
+permite a composição automatizada entre modelos que representam aspectos
+dinâmicos do sistema. Assim, conclui-se que o foco do trabalho é a representação 
+da estrutura de um sistema orientado a aspectos. A parte dinâmica deve ser
+implementada manualmente no código gerado.
+
+Uma modelagem por múltiplos pontos de vista é proposta por \cite{kienzle:09}.
+Propõe-se RAM (\textit{Reusable Aspects Models}), uma abordagem para
+especificar aspectos com dois diagramas dinâmicos (diagrama de
+máquina de estados e de sequência) e um diagrama estrutural (diagrama de
+classes). O objetivo deste trabalho é a melhora da escalabilidade de um sistema, mantendo a
+consistência entre as diferentes visões de um interesse entrecortante. RAM
+define modelos base para representar interesses núcleo e de aspectos para
+representar interesses entrecortantes.
+
+Duas ferramentas são utilizadas para a composição dos modelos. \textit{Kompose}
+\cite{kompose:07} é utilizado para composição da parte estrutural (diagramas de classe). 
+Para composição, os elementos do modelo devem ser instâncias da mesma classe do
+meta-modelo. A composição é realizada comparando a assinatura de tipo dos 
+elementos. Cada elemento do modelo deve possuir uma assinatura de tipo que o
+representa unicamente na modelagem. Dois elementos que tiverem a mesma
+assinatura podem ser compostos. A composição de diagramas de sequência e de
+estado é realizada utilizando uma outra ferramenta denominada GeKo
+\cite{geko:08}. Com essa ferramenta, para inserção de um novo comportamento em
+um modelo base deve-se definir um modelo de aspecto. Esse modelo de aspecto é 
+composto por um diagrama refinando o ponto de corte e outro diagrama refinando o
+aviso. A composição acontece em duas fases: primeiramente são detectados os 
+elementos do modelo base que são impactados pelo ponto de corte
+do modelo do aspecto. Com os elementos capturados executa-se um mecanismo de
+composição que gera o modelo composto com o comportamento (aviso) do modelo do
+aspecto inserido no modelo base (antes, durante ou depois). Essas duas
+ferramentas permitem representar aspectos e a composição entre um modelo base e
+um modelo de aspecto.
+
+Um interesse em RAM é modelado através de um pacote UML. Este pacote contém três
+visões: estrutural, de estado e de mensagens e é denominado modelo de um aspecto, 
+podendo ser reusado em diferentes aplicações. A visão estrutural é composta por
+diagrama de classes. Nesta visão, as classes não precisam ser completamente
+especificadas, pois só precisam expressar o que é relevante para o
+interesse em questão. A visão de estado descreve o protocolo de uso de uma classe. Para
+classes completas, utiliza-se o diagrama de máquina de estados da UML.
+Classes incompletas são modeladas com um diagrama de máquina de estados para
+aspectos, composto por uma parte representando o ponto de corte e outra representando o aviso. O ponto
+de corte determina quais estados devem existir para o aviso ser executado. A
+visão de troca de mensagens utiliza o diagrama de sequência, onde cada método 
+público das classes modeladas deve ser representando. Aqui também pode-se
+especificar o comportamento de aspectos através de dois diagramas de sequência:
+um para o ponto de corte e outro para o aviso. O ponto de corte determina a
+sequência de mensagens que deve ocorrer pra ativar o aviso. O aviso descreve a
+sequência de mensagens que substituem o ponto de corte em uma execução. Nas três
+visões, alguns elementos podem estar incompletos, o que significa que eles não 
+são especificados no modelo de aspecto e deverão ser especificados por algum
+outro modelo na composição de modelos. Esses elementos são denominados
+\textbf{parâmetros de instanciação mandatória}, identificados pelo prefixo | e
+modelados como parâmetros de \textit{template} UML.
+
+RAM permite estabelecer dependências entre aspectos, com o objetivo
+de possibilitar o reuso de modelos. Se um aspecto A depende de um aspecto B, A
+deve instanciar todos os parâmetros de instanciação mandatória de B através 
+de \textbf{diretivas de instancialização}. Por exemplo, para uma
+classe incompleta em B, A deve especificar uma classe que possa completá-la 
+com os métodos e atributos faltantes. Esta regra vale também para as visões de
+estado e de mensagens. Além disso, A pode definir \textbf{diretivas de ligação} 
+que mapeiam entidades incompletas de A em entidades completas de B. Nesse caso,
+as entidades incompletas de A não podem ser parâmetros de instanciação mandatória. 
+É importante observar que diretivas de ligação e parâmetros de instanciação mandatória podem ser definidos 
+com \textit{wildcards}, permitindo a captura de padrões, uma funcionalidade
+importante da programação por aspectos.
+
+Com as dependências definidas entre aspectos, executa-se o algoritmo de
+composição que gerará um único modelo com os aspectos compostos. A figura
+\ref{fig:p87_structural_weaving} mostra um exemplo de composição entre três
+aspectos. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=375px]{img/p87_structural_weaving.png}
+	\caption{Composição da parte estrutural de aspectos na ferramenta
+	RAM}\label{fig:p87_structural_weaving}
+\end{figure}
+
+RAM também faz a verificação de consistências entre as diferentes visões e
+modelos de aspectos. São realizadas verificações em diferentes níveis: 
+
+\begin{itemize}
+  \item \textbf{No modelo de aspecto}: Pode-se verificar se existe um diagrama
+  de máquina de estados para cada classe na visão estrutural.
+  \item \textbf{Entre modelos de aspectos}: Pode-se verificar que um aspecto A
+  que depende de B deve inicializar todos os parâmetros de instanciação mandatórios de B.
+  \item \textbf{No modelo final}: Pode-se comparar a sequência de mensagens
+  na visão de mensagens com o diagrama de máquina de estados. As mensagens devem
+  obedecer o protocolo do diagrama de máquina de estados.
+\end{itemize}
+
+Um estudo de caso foi realizado para avaliar a modelagem por
+múltiplos pontos de vista. No estudo adiciona-se a funcionalidade de garantia de
+atomicidade em um modelo de transações. Para garantir a atomicidade de transações utiliza-se o aspecto
+\textit{Recovering} que tem dependência com nove aspectos. Este aspecto pode
+ser visualizado na figura \ref{fig:p87_recovering_aspect.png}. Uma das
+dependências indiretas é o aspecto \textit{Checkpointable}, que
+pode ser visualizado na figura \ref{fig:p87_checkpointable_aspect.png} (\textit{Recovering} 
+depende de \textit{Checkpointing} que depende de \textit{Checkpointable}). 
+Este aspecto permite estabelecer pontos de verificação de um objeto, armazenando
+o seu estado e permitindo a restauração do mesmo. O aspecto \textit{Checkpointable} depende de um 
+outro aspecto denominado \textit{Copyable} e ele deve instancializar os
+elementos incompletos de \textit{Copyable}. Um exemplo de instancialização pode ser
+visualizado na visão de mensagens do aspecto \textit{Checkpointable}. A diretiva
+de instancialização \textit{clone.ICaller-ICheckpointable}
+indica que o objeto \textit{ICaller} da visão de mensagens do método \textit{clone} em
+\textit{Copyable} está sendo instancializado com o objeto
+\textit{ICheckpointable} de \textit{Checkpointable}. O aspecto
+\textit{Recovering} também contém diretivas de instancialização para
+os elementos incompletos dos aspectos os quais depende. 
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/p87_recovering_aspect.png}
+	\caption{Aspecto para Recuperação (Garantia de
+	Atomicidade)}\label{fig:p87_recovering_aspect.png}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/p87_checkpointable_aspect.png}
+	\caption{Modelo de Aspecto para
+	Pontos de Verificação}\label{fig:p87_checkpointable_aspect.png}
+\end{figure}
+\end{landscape}
+
+Com o aspecto para garantia de atomicidade definido, deve-se realizar a
+composição com o modelo base. O modelo base é uma aplicação para realização de 
+transações bancárias e pode ser visualizado na figura \ref{fig:p87_base_model}. 
+O modelo final após a composição pode ser visualizado nas figuras
+\ref{fig:p87_class_final_model} (visão estrutural), \ref{fig:p87_state_final_model} (visão de estados) e 
+\ref{fig:p87_sequence_final_model} (visão de mensagens). Observa-se a presença
+de alguns elementos referentes ao aspecto \textit{Checkpointable} no modelo final 
+como a classe \textit{Stack} e a inserção  dos métodos \textit{establish(),
+restore()} e \textit{discard()} na visão de mensagens. Na visão de troca de 
+mensagens, as mensagens referentes ao aspecto \textit{Checkpointable} também
+estão destacadas. Nesta visão, as mensagens de cada aspecto dependente estão
+destacadas. Assim, o modelo final contém uma parte de cada aspecto,
+compostas com o modelo base, resultando em um modelo que representa o
+comportamento desejado para garantia de atomicidade de transações.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=375px]{img/p87_base_model.png}
+	\caption{Modelo Base para Transações}\label{fig:p87_base_model}
+\end{figure}
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=500px]{img/p87_class_final_model.png}
+	\caption{Visão Estrutural do Modelo Final para Garantia de Atomicidade de
+	Transações}\label{fig:p87_class_final_model}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=500px]{img/p87_sequence_final_model.png}
+	\caption{Visão de Mensagens do Modelo Final para Garantia de Atomicidade de
+	Transações}\label{fig:p87_sequence_final_model}
+\end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/p87_state_final_model.png}
+	\caption{Visão de Estados do Modelo Final para Garantia de Atomicidade de
+	Transações}\label{fig:p87_state_final_model}
+\end{figure}
+\end{landscape}
+
+A abordagem RAM permite representar a estrutura de ums sistema através da
+visão estrutural e a dinâmica do sistema através das visões de estado
+e de troca de mensagens. A maior contribuição deste trabalho é o foco na
+representação das caracaterísticas dinâmicas de um sistema, utilizando
+diagramas de máquinas de estado para representar o protocolo de um aspecto e
+diagramas de sequência para representar as possíveis interações entre objetos. 
+Por isso, uma modelagem criada com a ferramenta pode ser considerada completa.
+A especificação de pontos de corte com padrões (\textit{wildcards}) 
+também é suportada pela ferramenta, permitindo assim o uso de uma 
+importante funcionalidade da programação orientada a aspectos. Outra característica 
+importante de RAM é a garantia de consistência entre as diferentes 
+visões e a orientação ao reuso de aspectos através da definição 
+de dependências. Uma limitação da proposta é que nem todos
+os diagramas podem ser elaborados apenas estendendo a UML, pois a 
+abordagem realiza modificações no meta-modelo da UML, introduzindo novos
+conceitos que não estão presentes na versão padrão da OMG. Exemplos 
+são as diretivas de instancialização e as diretivas de ligação. Além disso, são
+necessárias ferramentas adicionais para realizar a composição entre 
+aspectos e a verificação de dependências (Kompose e GeKo), 
+o que é algo plausível, pois hoje nenhuma ferramenta CASE comercial suporta
+composição de aspectos em nível de modelo.
+
+A complexidade do modelo composto também pode ser considerada uma limitação da
+abordagem, pois o modelo gerado é extenso, o que dificulta a compreensão, já que
+existem muitas dependências indiretas entre aspectos e muitos elementos sintáticos na
+modelagem. Segundo \cite{seventwo:11}, quando uma pessoa entra em contato com
+novas informações, o limite de sua memória de trabalho é entre três ou quatro
+elementos de informação. A modelagem proposta por \cite{kienzle:09} é difícil de
+ser compreendida, pois o modelo final (composto) contém muitos elementos de
+informação. No exemplo de composição de aspectos, o modelo final contém
+elementos que vieram de nove diferentes aspectos. Além disso, contém elementos
+que não são padrões na modelagem de sistemas com UML, como as diretivas de
+instancialização e de ligação. Para facilitar a compreensão do comportamento
+dinâmico de uma modelagem, este trabalho poderia disponibilizar um visualizador
+de aspectos, que permitisse habilitar e desabilitar modelos de aspectos
+dinamicamente em um modelo base.
+
+O trabalho de \cite{mouheb:09} propõe uma solução para modelagem de aspectos no
+domínio de requisitos relacionados a segurança. Esta abordagem engloba desde a
+especificação de requisitos de segurança até a composição dos aspectos. O
+objetivo é propor um mecanismo elegante para injeção de soluções de segurança,
+aonde os interesses de segurança ficarão separados em módulos, evitando o
+emarranhamento com os demais interesses do sistema. A composição entre interesses 
+de segurança e interesses núcleo é realizada em nível de modelo. A abordagem é
+composta por quatro fases:
+
+\begin{enumerate}
+  \item \textbf{Especificação dos requisitos das soluções de segurança}:
+  Especialistas na área de segurança especificam quais são os requisitos que
+  devem ser implementados no sistema.
+  \item \textbf{Modelagem das soluções de segurança com um aspecto para cada
+  requisito}: O modelo do aspecto é elaborado utilizando um Perfil UML proposto
+  para área de segurança. Este Perfil UML é semelhante ao perfil proposto por
+  \cite{evermann:07} e permite representar a estrutura dos aspectos e pontos de
+  corte. 
+  \item \textbf{Definição de quais partes do sistema serão impactadas pelos
+  aspectos de segurança}: Devem-se definir quais pontos de junção serão
+  capturados. Uma das contribuições deste trabalho é a identificação 
+  dos pontos de junção em alguns diagramas da UML: diagrama de atividades,
+  diagrama de sequência e diagrama de máquina de estados. A figura
+  \ref{fig:mouheb_join_points_definition} mostra a identificação de pontos de junção para os 
+  principais diagramas comportamentais da UML.
+
+  \begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/mouheb_join_points_definition.png}
+	\caption{Definição de Pontos de
+	Junção em Diagramas Comportamentais
+	da UML}\label{fig:mouheb_join_points_definition}
+  \end{figure}
+  
+  \item \textbf{Composição entre os modelos de aspecto e o modelo base do
+  sistema}: Primeiramente devem-se selecionar manualmente os métodos do modelo
+  base que terão o comportamento de segurança (aviso) introduzido antes, durante ou depois. 
+  Além disso, cada aviso já tem um ponto de corte associado que foi especificado
+  pelo especialista de segurança. Após a seleção manual, os pontos de junção e
+  os pontos de corte especificados pelos especialistas são
+  identificados no modelo base e associados com os avisos correspondentes. É
+  importante observar que o desenvolvedor não necessita ser especialista em soluções de segurança, 
+  pois ele apenas especifica em qual método do modelo base o novo comportamento
+  será inserido. Mas, o especialista em segurança precisa conhecer o modelo base ao
+  definir os pontos de corte, o que gera uma incoerência, pois uma das
+  afirmações do trabalho é que os especialistas especificam bibliotecas
+  independentemente do modelo base. O passo final é a composição dos modelos, 
+  resultando em um modelo final com o comportamento dos avisos introduzido nos 
+  pontos especificados. No modelo final, aparecem referências aos modelos dos avisos (ao invés do
+  comportamento completo), diminuindo o número de elementos presentes em um diagrama 
+  a fim de facilitar a visualização e diminuir a complexidade.
+\end{enumerate}
+
+Um estudo de caso foi realizado utilizando a abordagem proposta por
+\cite{mouheb:09}. O modelo base é uma aplicação que processa requisições de
+usuário a um servidor através de um canal de comunicação. A requisição somente
+será respondida se as credenciais do usuário estiverem corretas. O modelo de 
+aspecto introduzirá comunicação segura entre o cliente e o servidor
+através do uso de Secure Sockets Layer (SSL). O modelo base pode ser visualizado
+na figura \ref{fig:mouheb_aspect_base} e o modelo de aspecto está descrito na
+figura \ref{fig:mouheb_aspect_specification}. Após a composição, é obtido o
+modelo final que pode ser visualizado na figura \ref{fig:mouheb_aspect_final}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/mouheb_aspect_base.png}
+	\caption{Modelo Base}\label{fig:mouheb_aspect_base}
+\end{figure}
+
+\begin{landscape}
+\begin{figure}
+	\centering
+	\includegraphics[width=650px]{img/mouheb_aspect_specification.png}
+	\caption{Modelo de Aspecto SSL}\label{fig:mouheb_aspect_specification}
+\end{figure}
+\end{landscape}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/mouheb_aspect_final.png}
+	\caption{Modelo Final (Composto)}\label{fig:mouheb_aspect_final}
+\end{figure}
+
+A proposta para modelagem de aspectos de requisitos de segurança de
+\cite{mouheb:09} é uma leve extensão à segunda versão da UML. Uma parte da
+extensão é realizada com a definição de um Perfil UML para representar a estrutura 
+dos aspectos através do diagrama de classes estendido, permitindo representar a
+estrutura do sistema. O perfil proposto pode ser reutilizado 
+em ferramentas CASE que suportem a importação de perfis. No entanto, este perfil
+não permite representar todas as características estruturais da POA. 
+Não é posível especificar a captura de pontos de junção de inicialização e
+pré-inicialização de classes e nem o tratamento de exceções. 
+O perfil de \cite{evermann:07} é mais completo do que o
+proposto por \cite{mouheb:09}, sendo o recomendado para representação da
+estrutura de POA. Além disso, esta proposta não permite representar a composição
+de pontos de corte através dos operadores ! (negação), \&\& (adição) e
+\textbar\textbar (opção). A parte dinâmica do sistema é representada com o
+diagrama de sequência, utilizado também para especificação do comportamento do
+aspecto. A proposta disponibiliza ferramentas para composição dos modelos de
+interesses entrecortantes com os modelos de intereses núcleo e realiza 
+a composição em nível de modelo. Uma das limitações da abordagem é 
+o foco apenas em sistemas de segurança. O exemplo de uso da abordagem é simples
+e não utiliza algumas construções da POA como \textit{wildcards} 
+e dependência entre aspectos. Seria interessante realizar um caso de uso
+utilizando a abordagem em um exemplo mais complexo, como o 
+que foi proposto pelo trabalho de \cite{kienzle:09} e pelo trabalho de
+\cite{jacobson:04}.
+
+O trabalho de \cite{cui:09} modela a dinâmica de um sistema com
+diagramas de atividades da segunda versão da UML. Os interesses núcleo são
+modelados com a versão pura da UML. No caso dos interesses entrecortantes, é
+proposta uma extensão ao diagrama de atividades com estereótipos e valores
+rotulados. Um interesse entrecortante é representado por dois modelos: 
+um para o ponto de corte e outro para o aviso. Adiciona-se o
+estereótipo \textit{Pointcut} para indicar que um diagrama de atividades 
+representa um \textbf{modelo de ponto de corte}. O estereótipo \textit{Pointcut}
+tem um valor rotulado denominado \textit{advice} que aponta para o nome do
+modelo de aviso associado a este ponto de corte. Para representar os
+pontos de execução de um programa que serão capturados adiciona-se o estereótipo
+\textit{Joinpoint}. Esta abordagem permite a seleção de pontos de junção com o uso de
+\textit{wildcards}. Um elemento no modelo de ponto de corte estereotipado com
+\textit{Argument} define os argumentos que serão passados para o modelo de aviso. 
+O estereótipo \textit{Argument} tem um valor rotulado
+denominado \textit{parameter} que define o nome dos parâmetros que serão
+preenchidos no modelo de aviso. O estereótipo \textit{Advice} é adicionado para
+especificar que um diagrama de atividades representa um \textbf{modelo de
+aviso}. O valor rotulado \textit{type} está associado com este estereótipo indicando o
+tipo de aviso: antes ou depois. O estereótipo \textit{Parameter} é adicionado
+para representar os parâmetros que são aceitos pelo modelo de aviso. Estes
+parâmetros são utilizados para possibilitar o reuso de avisos, apenas
+modificando os parâmetros passados na inicialização. Finalmente, adicionam-se
+dois estereótipos \textit{Entry} e \textit{Exit} para especificar o início e o
+fim de uma execução de um modelo de aviso.
+ 
+ A figura \ref{fig:withdraw_base} mostra o modelo base de um caso de uso para
+ realizar a transação bancária de saque. Este modelo será estendido utilizando a
+ abordagem proposta por \cite{cui:09} com a definição de dois pontos de corte 
+ e dois avisos. Os modelos do primeiro ponto de corte e do primeiro aviso podem ser visualizados
+ na figura \ref{fig:withdraw_1}. O ponto de corte \textit{Pointcut1} seleciona
+ os elementos no modelo base aonde o aviso de autorização deve ser aplicado. O
+ aviso \textit{Advice1} representa o comportamento de autorização. A figura
+ \ref{fig:withdraw_2} mostra o ponto de corte \textit{Pointcut2} que pretende
+ capturar os elementos no modelo base aonde o aviso de envio de e-mail será
+ aplicado. O aviso \textit{Advice2} representa o comportamento de enviar um
+ e-mail. Observa-se uma diferença no comportamento dos dois avisos: a
+ autorização é realizada antes (aviso do tipo \textit{before}) da execução dos
+ pontos de junção selecionados pelo primeiro ponto de corte. No entanto, o 
+ envio de e-mail é realizado depois (aviso do tipo \textit{after}) dos pontos de
+ junção selecionados pelo segundo ponto de corte, e, o envio de e-mail é
+ realizado paralelamente ao comportamento dos pontos de junção. A opção de executar o
+ aviso paralelamente aos pontos de junção é uma opção dos autores desta
+ proposta para avisos do tipo depois \textit{after}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/withdraw_base.png}
+	\caption{Modelo base para realizar a transação de
+	saque}\label{fig:withdraw_base}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/withdraw_1.png}
+	\caption{Ponto de corte e aviso para capturar pontos
+	de junção que necessitam de autorização antes de
+	serem executados.}\label{fig:withdraw_1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/withdraw_2.png}
+	\caption{Ponto de corte para capturar pontos de junção onde é necessário
+	enviar um e-mail após a execução dos mesmos.}\label{fig:withdraw_2}
+\end{figure}
+
+Após a definição do modelo base e dos modelos para os interesses entrecortantes,
+deve-se realizar a composição entre os modelos. Esta composição consiste em três
+passos:
+
+\begin{itemize}
+  \item \textbf{Captura}: Encontrar os pontos de junção no modelo base.
+  \item \textbf{Inicialização}: Inicializar os modelos de aspectos com os
+  parâmetros obtidos do modelo base.
+  \item \textbf{Composição}: Realizar a composição entre os modelos
+  de aspectos e o modelo base.
+\end{itemize}
+
+Após a composição, obtém-se o modelo final com os interesses entrecortantes
+introduzidos. O modelo final pode ser visualizado na figura
+\ref{fig:withdraw_final}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/withdraw_final.png}
+	\caption{Modelo composto para transação bancária de
+	saque com autorização e envio de e-mail.}\label{fig:withdraw_final}
+\end{figure}
+
+A proposta de \cite{cui:09} é uma extensão à segunda versão da UML,
+estendendo apenas o diagrama de atividades com a adição de novos estereótipos e
+valores rotulados para representar interesses entrecortantes. A extensão segue o
+padrão do meta-modelo definido pela OMG para a segunda versão da UML e pode ser 
+utilizada em qualquer ferramenta que suporte a definição de perfis. É possível
+realizar a composição entre modelos de interesses núcleo e modelos de interesses
+entrecortantes e a mesma é realizada em nível de modelo. Em relação a POA, a
+abordagem não permite representar as principais características do paradigma. 
+Não é possível adicionar introduções a classes e interfaces nos modelos de
+interesses núcleo. Também não é possível representar todos os tipos de
+ponto de junção e nem adicionar avisos do tipo \textit{around}, que permite
+substituir a execução de um ponto de junção ou modificar o comportamento 
+de execução do mesmo. Em relação as visões representadas pela modelagem, a
+parte estrutural não pode ser representada apenas com diagrama de atividades 
+e a abordagem não utiliza nenhum diagrama estrutural para representar o
+sistema. Assim, esta proposta representa apenas a parte dinâmica de um sistema
+orientado a aspectos. A principal contribuição desta proposta é uma extensão
+leve e simples aos diagramas de atividades da UML para representação da dinâmica
+de aspectos em alto nível de abstração.
+
+O trabalho de \cite{jacobson:04} utiliza casos de uso para modelagem de
+interesses entrecortantes. São identificados dois tipos de caso de uso:
+
+\begin{itemize}
+  \item \textit{Peer Use Cases}: São casos de uso que não tem relacionamentos
+  com outros casos de uso, mas sua implementação impacta mais de uma classe. São
+  os interesses núcleo de um sistema.
+  \item \textit{Extension Use Cases}: São casos de uso que estendem o
+  comportamento de um caso de uso base. Tem relacionamentos com outros casos de
+  uso e sua implementação pode impactar mais de uma classe. São os interesses
+  entrecortantes de um sistema.
+\end{itemize}
+
+Propõe-se uma construção denominada \textbf{fatia de caso de
+uso} (\textit{use-case slice}) que deve modelar apenas as especificidades de um 
+caso de uso. Para tal adiciona-se o estereótipo \textit{use-case slice} ao
+meta-modelo da UML. Uma fatia de caso de uso contém: definições de novas classes
+necessárias para realizar o caso de uso, extensões a classes existentes 
+(apenas a extensão será representada na fatia do caso de uso) e colaborações para
+representar a realização do caso de uso. O gráfico da
+figura \ref{fig:jacobson_slices} mostra o impacto dos casos de uso nas classes
+de um sistema de gerenciamento de hotel. Observa-se que os casos de uso
+\textit{Reserve Room}, \textit{Check In Customer} e \textit{Check Out Customer} 
+modificam a mesma classe \textit{Room}. Cada fatia de caso de uso define uma
+parte desta classe. A classe completa é obtida realizando a composição das
+fatias de caso de uso. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400px]{img/jacobson_slices.png}
+	\caption{Fatias de casos de uso em um sistema de
+	gerenciamento de hotel.}\label{fig:jacobson_slices}
+\end{figure}
+
+A figura \ref{fig:jacobson_reserve_room_slice} mostra a fatia do caso de uso
+\textit{Reserve Room}. Observa-se nesta figura um aspecto representado pelo
+estereótipo \textit{aspect}. Dentro deste aspecto definem-se extensões à três
+classes do modelo: \textit{CustomerMainForm}, \textit{Reservation} e
+\textit{Room}. A representação de extensões à classes é equivalente às
+introduções da linguagem AspectJ. Esta fatia de caso de uso define também duas
+novas classes: \textit{ReserveRoomForm} e \textit{ReserveRoomHandler}. Este caso
+de uso é do tipo \textit{Peer Use Case}, pois ele não estende nenhum caso de
+uso, apenas define novas classes e introduz métodos em classes já existentes.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/jacobson_reserve_room_slice.png}
+	\caption{Fatia de caso de uso para o
+	caso de uso \textit{Reserve Room}.}\label{fig:jacobson_reserve_room_slice}
+\end{figure}
+
+Os casos de uso de extensão (\textit{Extension Use Cases}) estendem o
+comportamento de um caso de uso base. A figura
+\ref{fig:jacobson_use_case_extension} mostra o caso de uso \textit{Handle
+Waiting List} que estende o caso de uso \textit{Reserve Room}. Um caso de uso
+base define um conjunto de \textbf{pontos de extensão} representando os pontos
+que podem ser estendidos por outros casos de uso. Um caso de uso de extensão
+define \textbf{pontos de corte de extensão} para representar quais pontos de
+extensão do caso de uso base serão estendidos. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300px]{img/jacobson_use_case_extension.png}
+	\caption{Caso de uso de extensão
+	\textit{Handle Waiting List}.}\label{fig:jacobson_use_case_extension}
+\end{figure}
+
+A fatia de caso de uso da figura \ref{fig:jacobson_handle_waiting_list_slice}
+mostra a modelagem do caso de uso de extensão \textit{Handle Waiting List}, que
+adiciona o cliente em uma lista de espera se não for possível reservar um
+quarto. Para tal, o caso de uso de extensão define o ponto de corte
+\textit{updatingRoomAvailability} para capturar as chamadas ao método
+\textit{UpdateAvailability()} da classe \textit{Room}. Dentro do aspecto define-se
+uma extensão à classe \textit{ReserveRoomHandler}, adicionando o método
+\textit{makeReservation()}. Este método será executado depois
+do ponto de corte \textit{updatingRoomAvailability} quando forem lançadas as
+exceções \textit{NoRoomAvailable} ou \textit{QueueForRooms}. Além disso, são
+introduzidos dois novos métodos à classe \textit{Reservation} relativos a
+reserva de quartos. Esta fatia de caso de uso cria duas novas classes:
+\textit{WaitingListHandler} e \textit{WaitingList}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/jacobson_handle_waiting_list_slice.png}
+	\caption{Fatia do caso de uso de extensão
+	\textit{Handle Waiting List}.}\label{fig:jacobson_handle_waiting_list_slice}
+\end{figure}
+
+A proposta de \cite{jacobson:04} propõe a definição de
+\textbf{modelos de caso de uso} para agrupar as fatias de caso de uso em
+diferentes níveis de abstração. Define-se o estereótipo \textit{use-case
+module} no meta-modelo. São propostos quatro níveis de modelo: caso de uso,
+análise, projeto e implementação. A fatia de caso de uso será refinada de
+acordo com o nível de abstração. Esta proposta consegue obter o rastreamento
+completo do requisito para o código que o implementa, passando pelos modelos 
+de caso de uso, análise e projeto, como pode ser visualizado 
+na figura \ref{fig:jacobson_use_case_modules}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/jacobson_use_case_modules.png}
+	\caption{Rastreamento completo
+	de um requisito por todos
+	modelos.}\label{fig:jacobson_use_case_modules}
+\end{figure}
+
+Após a definição das fatias de caso de uso em diferentes níveis de abstração,
+deve-se compor os modelos de caso de uso para se obter um sistema completo com o
+comportamento de cada caso de uso inserido nas respectivas classes. A figura 
+\ref{fig:jacobson_use_case_merge} mostra a composição de três modelos de
+casos de uso (cada modelo representado como um pacote UML) para gerar uma
+construção válida do sistema. Para tal utiliza-se o estereótipo \textit{merge} 
+que representa dependência entre pacotes.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350px]{img/jacobson_use_case_merge.png}
+	\caption{Composição entre modelos de caso
+	de uso.}\label{fig:jacobson_use_case_merge}
+\end{figure}
+
+A proposta de \cite{jacobson:04} representa as principais características da
+POA. Permite representar \textit{wildcards} na definição de pontos de corte 
+dentro de uma fatia de caso de uso. Uma contribuição importante deste trabalho é
+a possibilidade de obter o rastreamento completo de um requisito até o
+código que o implementa. Segundo \cite{wimmer:2011:SUA:1978802.1978807}, o 
+mapeamento de requisitos entre as diferentes fases do desenvolvimento é 
+importante na modelagem de sistemas orientados a aspectos, como para sistemas
+desenvolvidos em outros paradigmas como programação orientada a objetos. Em
+relação as diferentes visões representadas por uma modelagem, os modelos propostos por
+este trabalho permitem representar a estrutura de um sistema com fatias de caso de uso e
+diagramas de classes. A dinâmica do sistema é representada através de 
+colaborações que são associadas às fatias de caso de uso. Colaborações podem ser
+utilizadas para descrever a dinâmica de casos de uso e avisos. Outro ponto
+importante a ser destacado é a representatividade do exemplo utilizado para
+realizar uma modelagem com a proposta. O sistema de gerenciamento de hotel é
+complexo e contém interesses entrecortantes de diversos tipos, possibilitando a
+representação de boa parte das características inerentes a programas orientados
+a aspectos.
+
+Em relação as limitações do trabalho de \cite{jacobson:04}, destaca-se a
+falta de ferramental para composição dos modelos, o que é importante para que
+seja possível visualizar o impacto dos interesses entrecortantes nos 
+interesses núcleo do sistema. A geração automatizada de modelos também diminui o
+tempo necessário para realização de uma modelagem, diminuindo o tempo de entrega
+ao cliente. Nesta proposta, a composição entre interesses núcleos e interesses
+entrecortantes deve ser realizada manualmente, com o uso de diagramas de
+sequência, o que demanda um esforço adicional de modelagem. Outra limitação é a
+forma de extensão à UML, com a definição de um meta-modelo que não pode 
+ser reusado em diferentes ferramentas CASE. Este meta-modelo tem construções
+específicas, como fatias de caso de uso, que não são suportadas por ferramentas
+CASE padrão segunda versão da UML.
+
+Uma das unidades de negócio mais importantes da Motorola também está focada no
+desenvolvimento de soluções para modelagem de programas orientados a aspectos. O
+trabalho de \cite{cottenier:06} foi desenvolvido na unidade de negócios
+empresariais e de redes da Motorola. O projeto é denominado de \textbf{Motorola
+WEAVR} e é focado na especificação de sistemas de telecomunicações, que são
+sistemas reativos discretos e orientados a eventos. Um sistema reativo é um sistema que recebe uma
+entrada e deve emitir uma reação a este estímulo. Já um sistema discreto é um 
+sistema cuja interação ocorre em eventos discretos no tempo. A motivação para
+este trabalho foi a percepção de que existem muitas mudanças nos requisitos de 
+sistemas de telecomunicação ao longo do desenvolvimento. A modularização de
+interesses facilita a manutenabilidade e a inserção de novos requisitos ao longo do ciclo de 
+vida desse tipo de sistema. 
+
+Motorola WEAVR permite a composição de aspectos que são modelados \textbf{com
+diagramas de máquina de estados focadas em transições}. Este tipo de máquina de 
+estado é uma extensão à máquina de estados da UML focada em estados, com o
+objetivo de prover um maior nível de detalhe na dinâmica das transições. Segundo
+\cite{Bjorkander:2000:GPU:619058.621607}, o diagrama de máquina de estados
+focado em estados da UML não dá a atenção que as transições merecem. Estas
+máquinas de estado ignoram as ações que ocorrem durante uma transição. A
+linguagem Specification and Description Language (SDL) 
+\sigla{SDL}{Specification and Description Language} \cite{sdl:00} foca nas 
+ações que acontecem durante uma transição. Esta linguagem é amplamente utilizada
+para especificar sistemas orientados a eventos na área de telecomunicações. Assim, a extensão
+proposta foca nas ações que ocorrem durante uma transição e estende o diagrama
+de máquina de estados da UML com novas construções que permitem representar as
+ações de uma transição. O diagrama de máquina de estados focado em transições
+permite diminuir o nível de abstração de uma modelagem, aproximando-o ao código
+e permitindo a geração de código em uma linguagem alvo. A modelagem de
+ações que ocorrem durante transições já está disponível na especificação
+do diagrama de máquina de estados da segunda versão da UML através deu um Perfil
+UML \cite{uml:05}.
+%figure 15.44 on superstructure
+
+Esta abordagem também utiliza diagramas de estrutura composta da segunda versão
+da UML para especificar as interfaces do sistema e os componentes em termo de
+sinais necessários e realizados. Este tipo de diagrama raramente é modificado durante 
+o ciclo de vida de um sistema, por isso não são utilizados na modelagem de programas 
+orientados a aspectos. O diagrama da figura \ref{fig:weavr_composite_structure}
+mostra um diagrama de estrutura composta para representar a estrutura de um
+servidor de recursos. Um servidor de recursos é composto por um
+despachante \textit{Dispatcher} e por um ou mais tratadores de requisições
+\textit{RequestHandler}. O despachante tem a responsabilidade de passar
+requisições externas para um dos tratadores de requisições. Um tratador de requisições é
+responsável por controlar o acesso a recursos, permitindo o acesso apenas se 
+todos os recursos necessários estiverem disponíveis. Esse tipo de controle pode ser 
+implementado com o protocolo \textit{Two Phase Commit} \sigla{2PC}{Two Phase
+Commit}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350px]{img/weavr_composite_structure.png}
+	\caption{Diagrama de Estrutura Composta
+	representando um servidor de recursos.}\label{fig:weavr_composite_structure}
+\end{figure}
+
+Após modelar a estrutura deste sistema, deve-se modelar a dinâmica de cada um
+dos componentes do servidor. Para tal, utilizam-se os diagramas de máquina
+de estado focados em transições. Estes diagramas são utilizados para representar o 
+comportamento de um componente em detalhes, com precisão e sem ambiguidades. Um
+diagrama deste tipo destaca o fluxo de controle e as ações executadas durante as transições
+entre os diferentes estados. O diagrama da figura \ref{fig:weavr_state_machine_base} 
+representa a modelagem do comportamento de um tratador de requisições.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=450px]{img/weavr_state_machine_base.png}
+	\caption{Diagrama de máquina de estados focado em transições
+	para um tratador de requisições.}\label{fig:weavr_state_machine_base}
+\end{figure}
+
+Observando o primeiro diagrama de máquina de estados, verifica-se a presença de
+um conjunto de ações entre os estados \textit{Init} e \textit{Ready}. 
+A primeira ação \textit{request(rid)} indica o recebimento de um sinal para
+iniciar uma requisição. A segunda ação dentro de um retângulo tenta adquirir o
+canal e armazena o resultado na variável \textit{status}. Após estas ações está
+presente um nodo decisão para verificar a variável \textit{status}. Se o
+resultado for um \textit{OK}, significa que o canal foi adquirido com
+sucesso e executa-se uma nova ação para adquirir o recurso desejado,
+armazenando o resultado na variável \textit{status}. Se o valor da variável
+\textit{status} no nodo decisão for \textit{OK}, executa-se a ação
+\textit{resource\_commit(cid,rid)} que indica o envio de um sinal. Este sinal
+indica que o recurso foi adquirido. Finalmente, atinge-se o estado
+\textit{Ready}. Se em algum momento a variável \textit{status} retornar uma
+falha, o canal e o recurso serão liberados, abortando a acquisição do
+recurso. Todas estas ações ocorrem durante o disparo de uma transição. 
+
+No ambiente distribuído da Motorola existem vários sistemas que utilizam o
+protocolo 2PC no tratamento de requisições. Cada sistema implementa uma variação
+deste protocolo. A implementação do protocolo apenas com POO é possível, mas
+gera um código emarranhado e de difícil manutenção, pois o código do protocolo
+fica misturado com o código da aplicação. A POA permite implementar de maneira
+modular o protocolo 2PC. Esta foi uma das motivações para criação da
+ferramenta \textbf{Motorola WEAVR}. 
+
+Esta ferramenta define um perfil UML para modelagem de aspectos. A extensão
+proposta por \cite{cottenier:06} pode ser reutilizada em outras ferramentas 
+de modelagem. O perfil adiciona o estereótipo \textit{Aspect} que
+estende o elemento \textit{Class} do meta-modelo da UML. Um aspecto pode 
+conter conectores e pontos de corte. Um conector é o equivalente 
+a um aviso na terminologia de aspectos. O estereótipo
+\textit{Connector} foi criado para representar um conector. Para representar
+pontos de corte utiliza-se o estereótipo \textit{Pointcut}. Estes estereótipos
+estendem o elemento do meta-modelo \textit{Operation}. Conectores são associados
+a pontos de corte através do relacionamento de dependência \textit{Binds}. A
+ordem de precedência de conectores é definida pelo
+relacionamento de dependência \textit{Follows}. O estereótipo \textit{Crosscuts}
+define o escopo de aplicação de um aspecto. Se nenhum escopo for definido,
+indica que o aspecto é aplicado a todo o sistema.
+
+A figura \ref{fig:weavr_timeout} mostra a implementação de um aspecto de
+controle de tempo (\textit{timeout}) para o protocolo 2PC. A motivação para
+implementação deste aspecto é que o tratador de requisições da figura
+\ref{fig:weavr_state_machine_base} tem um problema: se uma instância entrar no
+estado \textit{Ready}, mas não receber nenhum sinal do tipo \textit{Commit} 
+ou \textit{Abort}, ela nunca terminará e não poderá receber
+novas requisições. Para solucionar este problema, adiciona-se um tempo máximo
+para que esta instância receba um sinal. Ao final deste tempo, a instância será
+destruída. Este comportamento é introduzido através do aspecto
+\textit{2PCTimeoutAspect} que pode ser visualizado na figura
+\ref{fig:weavr_timeout}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350px]{img/weavr_timeout.png}
+	\caption{Aspecto para controle de tempo ao protocolo 2PC.}\label{fig:weavr_timeout}
+\end{figure}
+
+Um dos elemenos definidos neste aspecto é o ponto de corte
+\textit{requestCommitTransition}. A ferramenta WEAVR permite definir pontos de 
+corte com o uso do diagrama de máquina de estados. Existem duas categorias de
+pontos de junção que que foram identificados nos diagramas de máquinas de
+estado:
+
+\begin{itemize}
+  \item \textbf{Pontos de junção de ação}: Englobam as chamadas de operações,
+  ações temporais e chamadas de construtores. 
+  \item \textbf{Pontos de junção de transição}: Compreendem o conjunto de
+  caminhos de execução dentro de uma máquina de estados.
+\end{itemize}
+
+O ponto de corte \textit{requestCommitTransition} captura pontos de junção de
+transição, pois captura execuções ao método \textit{request(x)} enquanto uma
+instância estiver entre os estados \textit{Init} e \textit{Ready}, capturando
+um conjunto de caminhos de execução. Quando o ponto de corte for disparado,
+executa-se o comportamento descrito no conector \textit{Timeout}. A ferramenta
+WEAVR representa a dinâmica de conectores através de diagrama de máquina de
+estados. Este conector é refinado em duas máquinas de estado. A primeira máquina
+de estado representa a reinicialização do contador de tempo antes das transições 
+capturadas pelo ponto de corte. A segunda representa a destruição da 
+instância ao atingir o tempo máximo sem receber nenhum sinal. 
+
+Para visualizar o impacto de aspectos em um modelo base, a ferramenta WEAVR
+disponibiliza um \textbf{visualizador do efeito de aspectos}. O visualizador é
+uma importante contribuição deste trabalho, pois permite visualizar em quais
+pontos do modelo base serão inseridos novos comportamentos. Por exemplo, ao 
+aplicar o aspecto \textit{2PCTimeoutAspect} (figura \ref{fig:weavr_timeout}) 
+no tratador de requisições \textit{RequestHandler} (figura \ref{fig:weavr_state_machine_base}),
+o visualizador de aspectos gera a máquina de estados que pode ser
+visualizada na figura \ref{fig:weavr_composed}. Esta máquina de estado mostra
+os locais da máquina de estado que são impactados pelo aspecto de controle de
+tempo. Os pontos de junção de ação são marcados com a cor roxo, enquanto os
+pontos de junção de transição são marcados com uma marca horizontal verde ao 
+longo das transições. O usuário pode clicar em um determinado ponto de junção
+para visualizar a máquina de estado do conector (aviso) que será executada naquele
+ponto. Observa-se na máquina de estados 15.a que a transição capturada é a
+transição que ocorre após o a variável \textit{status} retornar OK até o estado
+\textit{Ready} (dois marcadores horizontais verdes). O conector que será
+disparado pode ser visualizado na máquina de estados 15.b e 
+uma representação da transição capturada pode ser visualizada na
+máquina de estados 15.c.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=475px]{img/weavr_composed.png}
+	\caption{Visualização da composição do aspecto
+	para controle de tempo no tratador de requisições.}\label{fig:weavr_composed}
+\end{figure}
+
+Motorola WEAVR também disponibiliza uma ferramenta para executar modelos de
+aspectos. Ao encontrar um conector, a ferramenta executa a máquina de estado
+referente ao mesmo e retorna o controle a máquina de estado base. A
+possibilidade de executar um modelo de aspectos facilita a compreensão do fluxo
+de execução de um programa orientado a aspectos.
+
+O trabalho de \cite{cottenier:06} estende a segunda versão da UML através de um
+Perfil UML para representar aspectos com diagramas de classes e diagramas de
+máquina de estados. Esta extensão pode ser importada em diferentes ferramentas CASE.
+Diagramas de classes permitem representar a parte estrutural de um sistema. Os
+diagramas de máquinas de estado são responsáveis por representar a dinâmica do
+sistema. Motorola WEAVR permite representar a maior parte das
+características de programas orientados a aspectos, como \textit{wildcards}, 
+pontos de corte, avisos, introduções e dependência entre aspectos. 
+Uma limitação desta proposta é que apenas avisos do tipo durante (\textit{around}) 
+são suportados. No entanto, este tipo de aviso é o mais poderoso e 
+permite executar comportamentos antes, durante ou depois de determinados pontos
+de um programa. A ferramenta também disponibiliza vasto ferramental para
+visualização, composição e execução de modelos de aspectos. Este ferramental é
+uma das principais contribuições do trabalho, pois automatiza grande parte do
+processo de modelagem e permite gerar código em um linguagem alvo. Uma das
+desvantagens desta proposta, é o baixo nível de abstração dos modelos. Isto
+acontece, pois um dos focos do trabalho é a execução do sistema em nível de
+modelo, deixando os modelos próximos do nível de código. Os diagramas de
+máquinas de estado desta proposta contém trechos de código e código referente 
+a POA, como chamadas ao método \textit{proceed()}. O baixo nível de abstração 
+dificulta a compreensão dos modelos, pois o desenvolvedor precisa compreender
+chamadas próximas do nível de código. A utilização de diagramas como os diagramas de caso de uso e de
+sequência permitiriam representar um sistema em um maior nível de abstração, 
+facilitando a compreensão e manutenção do mesmo. 
+
+O trabalho de \cite{klein:07} propõe uma extensão aos diagramas de sequência da
+UML para permitir a modelagem de sistemas que utilizam o paradigma de POA. Esta
+extensão é realizada no meta-modelo da UML, adicionando novas classes. Separam-se os 
+diagramas de sequência em dois tipos:
+
+\begin{itemize}
+  \item \textbf{bSD}: Diagrama de sequência básico que descreve um número finito
+  de interações entre um conjunto de objetos. É equivalente ao diagrama de
+  sequência padrão da UML.
+  \item \textbf{cSD}: Diagrama de sequência composto que permite compor
+  diagramas de sequência básicos através de operadores como nodos decisão
+  e iterações. Este tipo de diagrama permire representar comportamentos
+  infinitos e é semelhante ao diagrama de visão geral de interação.
+\end{itemize}
+
+O meta-modelo para diagramas de sequência pode ser visualizado na figura
+\ref{fig:klein_meta_model}. Observa-se a presença de duas classes que
+derivam da super classe \textbf{SD}(\textit{SequenceDiagram}):
+\textbf{bSD}(\textit{BasicSequenceDiagram}) e
+\textbf{cSD}(\textit{ComposedSequenceDiagram}). Um diagrama de sequência
+composto contém um conjunto de nodos e um conjunto de transições que estão 
+associadas a diagramas de sequência básicos.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=475px]{img/klein_meta_model.png}
+	\caption{Meta-modelo de extensão aos diagramas de
+	sequência da UML.}\label{fig:klein_meta_model}
+\end{figure}
+
+No lado esquerdo da figura \ref{fig:klein_sequence_diagrams} estão dispostos
+quatro bSD's: \textit{Propose}, \textit{Accept}, \textit{Retry} e \textit{Rejected}. 
+Estes bSD's representam etapas na interação com um servidor para realizar a
+autenticação de um usuário(\textit{log in}). O cSD central e o cSD a direita 
+são equivalentes e compõem os quatro bSD's a esquerda. Ambos cSD's especificam a
+autenticação de usuário(\textit{log in}). O cSD central utiliza nodos decisão e
+o cSD a direita utiliza fragmentos do tipo \textit{alt} para representar 
+diferentes caminhos de execução.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=475px]{img/klein_sequence_diagrams.png}
+	\caption{Exemplos de diagramas de sequência
+	estendidos: bSD's e cSD's.}\label{fig:klein_sequence_diagrams}
+\end{figure}
+
+Para modelagem de aspectos deve-se definir um \textbf{aspecto comportamental}
+que é composto por dois bSD's: um para representar o ponto de corte e outro para
+representar o novo comportamento (aviso). Um ponto de corte é representado como
+uma sequência de mensagens entre um conjunto de objetos. A ferramenta não
+suporta a utilização de \textit{wildcards} na definição de pontos de corte, uma
+funcionalidade importante da POA, que permite a captura de múltiplos pontos de
+junção em uma única declaração. Um aviso também é representado com bSD's e pode
+ser executado antes, durante ou depois dos pontos de junção capturados por um
+ponto de corte. A figura \ref{fig:klein_aspects} mostra três aspectos
+comportamentais: registro de mensagens, segurança e atualização de interface
+gráfica. O aspecto de segurança(\textit{Aspect Security}) define um ponto de
+corte que captura a troca das mensagens \textit{log in} e \textit{try again}
+entre os objetos \textit{customer} e \textit{server}. O aviso que
+implementa o comportamento do aspecto de segurança adiciona a mensagem
+\textit{save bad attempt} entre as mensagens \textit{log in} e 
+\textit{try again}. Uma limitação nesta abordagem é que o diagrama de sequência
+dos avisos é redundante, pois repete as mensagens capturadas no ponto de corte.
+No exemplo do aspecto de segurança, as mensagens \textit{log in} e \textit{try
+again} são repetidas no aviso. Assim, se o ponto de corte for modificado, o
+aviso também deve ser modificado, gerando um re-trabalho desnecessário. Na linguagem 
+AspectJ, a modificação de um ponto de corte não gera modificações aos avisos associados 
+aquele ponto de corte.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=475px]{img/klein_aspects.png}
+	\caption{Exemplos de aspectos comportamentais.}\label{fig:klein_aspects}
+\end{figure}
+
+Após definir os aspectos, deve-se realizar a composição dos aspectos em um
+modelo base. O foco deste proposta é a composição de múltiplos aspectos em um
+mesmo ponto de junção. Na composição de aspectos, o primeiro aspecto que for composto pode 
+modificar a sequência de mensagens entre objetos no modelo base, fazendo com que
+o próximo aspecto não detecte o ponto de junção no qual o 
+novo comportamento deveria ser inserido. Considerando a composição
+entre o diagrama de sequência (cSD) \textit{log in} da figura
+\ref{fig:klein_sequence_diagrams} como modelo base e os aspectos para registro
+de mensagens, segurança e atualização de interface. Se o aspecto de segurança
+for o primeiro a ser composto, ele mudará a sequência de mensagens entre os
+objetos \textit{customer} e \textit{server}, adicionando a mensagem
+\textit{save bad attempt} entre as mensagens \textit{log in} e \textit{try
+again}. Se não existir um tratamento no algoritmo de detecção de pontos de junção, 
+os aspectos de registro de mensagens e atualização de interface não capturarão os 
+pontos de junção definidos por seus pontos de corte e a composição não será
+realizada corretamente. Assim, o algoritmo de detecção de pontos de junção deve
+ser capaz de capturar pontos de junção, mesmo que existam mensagens introduzidas
+por outros aspectos durante a composição de aspectos. A proposta de
+\cite{klein:07} resolve este problema detectando mensagens inseridas por outros 
+aspectos durante a composição de aspectos e permitindo a composição de
+múltiplos aspectos em um mesmo ponto de junção. A composição entre os aspectos e
+o modelo base pode ser visualizada na figura \ref{fig:klein_composition}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=475px]{img/klein_composition.png}
+	\caption{Composição entre aspectos de registro de mensagens, segurança e 
+	atualização de interface gráfica com modelo
+	base para autenticação de usuário.}\label{fig:klein_composition}
+\end{figure}
+
+Uma das limitações da proposta de \cite{klein:07} é a não representação da
+estrutura do sistema. Este trabalho utiliza apenas diagramas de sequência para
+modelagem da dinâmica do sistema. Em relação a POA, não é possível representar
+introduções de membros em classes, uma funcionalidade importante da linguagem. 
+Não é possível utilizar \textit{wildcards} na definição de pontos de corte, o
+que torna difícil a captura de múltiplos pontos de junção em um mesmo 
+ponto de corte. Além disso, a especificação de avisos contém redundâncias, pois replicam-se 
+as mensagens referentes ao ponto de corte capturado. A principal contribuição do
+trabalho é a possibilidade de realizar a composição de múltiplos aspectos em um
+mesmo ponto de junção, mantendo as mensagens disparadas em cada aviso e
+identificando corretamente os pontos de junção, mesmo com mensagens introduzidas
+após a introdução de um aviso. Em relação a forma de extensão à UML,
+as modificações da proposta não podem ser usadas diretamente em qualquer
+ferramenta CASE. Os modelos gerados por esta proposta devem ser convertidos para
+o meta-modelo padrão da UML (através de transformações). A conversão de modelos 
+não é tratada neste trabalho, dificultando ainda mais o reuso da proposta em
+diferentes ferramentas CASE.
+
+A proposta de \cite{clarke:04} permite realizar a análise e projeto de sistemas
+orientados a aspectos, desde o eliciamento de requisitos, passando pela
+modelagem e a automatizando parte do processo com a composição automatizada de
+modelos base com modelos de aspecto. A proposta permite representar
+\textit{wildcards} utilizando \textit{templates} da UML e realiza a composição
+automatizada de modelos através de um plug-in do Eclipse. Uma das limitações da
+proposta é a forma de extensão à UML. Theme/UML estende o meta-modelo da UML no
+nível M2. O meta-modelo depende da versão 1.3 \textit{beta} da UML
+e não pode ser utilizado em qualquer ferramenta CASE. Com o objetivo de
+padronizar a abordagem, foi desenvolvido um perfil UML baseado na versão 2.1 da
+UML \cite{Carton:2009:MT:1692821.1692829}. No entanto, este trabalho ainda
+depende do meta-modelo original, pois para realizar a composição deve-se transformar 
+os estereótipos e valores rotulados para o meta-modelo original do Theme/UML. 
+
+Criticar que com UML 1.3 não pode ter fragmentos combinados.
+
+Dois possíveis problemas: definição de
+quando acontece um aspecto: antes, durante ou depois e também não conseguiram fazer a composição 
+com diagrama de sequência no novo trabalho (tiveram que desenhar na mão por problemas no MagicDraw). 
+Também não usaram um exemplo com wildcards.
+
+\section{Análise dos Trabalhos Relacionados}
+
+Como visto na seção \ref{sec:trabalhos_relacionados}, existem várias propostas
+para modelagem de sistemas orientados a aspectos. Os trabalhos estudados
+utilizam a segunda versão da UML para modelagem. Este trabalho considera a
+utilização da segunda versão da UML como um pré-requisito para modelagem de 
+programas orientados a aspectos. Algumas propostas estendem a primeira versão da
+UML e não foram estudadas neste trabalho (\cite{Aldawud03umlprofile}, 
+\cite{clarke:04},\cite{stein:02} e \cite{pawlak:02}).
+
+Identificam-se alguns pontos importantes na modelagem de programas orientados a
+aspectos. Estes pontos servem como base para a comparação entre as propostas
+estudadas e a proposta deste trabalho. É desejável que uma proposta satisfaça o
+maior número de pontos. A seguir serão descritos cada um destes pontos.
+
+\subsection{Pontos para comparação de abordagens}
+
+O primeiro ponto a ser observado é a \textbf{forma de extensão à UML}. Algumas
+modelagens estendem o meta-modelo da UML através de perfis, facilitando o reuso em 
+diferentes ferramentas CASE. Outras modificam o meta-modelo da UML
+com novas meta-classes, relacionamentos e restrições, permitindo maior 
+flexibilidade na definição dos conceitos, mas dificultando o reuso. É
+recomendado a utilização de perfis para representar sistemas orientados a
+aspectos, pois os mesmos podem ser compartilhados e estendidos em outras
+ferramentas CASE. Os trabalhos de \cite{evermann:07}, \cite{cui:09},
+\cite{mouheb:09} e \cite{cottenier:06} definem perfis UML, enquanto as propostas
+de \cite{jacobson:04}, \cite{klein:07} e \cite{kienzle:09} modificam o
+meta-modelo da UML. O trabalho de \cite{evermann:07} define um Perfil UML
+completo para especificação da estrutura de programas orientados a aspectos,
+superior ao Perfil UML proposto por \cite{mouheb:09}.
+
+Um outro aspecto importante são as \textbf{visões representadas na modelagem}.
+\cite{silva:00} destaca a importância de representar as visões estruturais e
+dinâmicas de um sistema, com o objetivo de permitir a geração de código, 
+automatização de processos de modelagem e facilitar a manutenção e compreensão
+do sistema. O trabalho de \cite{kienzle:09} destaca-se neste quesito, pois
+representa a estrutura e a dinâmica de um sistema com diferentes visões:
+estrutural, mensagens e de estados. As propostas de \cite{mouheb:09},
+\cite{cottenier:06} e \cite{jacobson:04} também representam as visões
+estruturais e dinâmicas. Os trabalhos de \cite{cui:09} e \cite{klein:07}
+representam apenas a visão dinâmica e o trabalho de \cite{evermann:07} apenas a
+parte estrutural.
+
+A proposta de modelagem deve permitir realizar a \textbf{composição dos modelos
+de aspectos (interesses entrecortantes) em modelos base (interesses núcleo)}.
+Esta composição pode ser realizada em nível de modelo ou de código. Recomenda-se
+que a composição seja realizada em nível de modelo, pois o analista pode compreender
+mais facilmente o sistema em um maior nível de abstração. Além disso, o
+próprio compilador AspectJ já realiza a composição em nível de código. Os
+trabalhos de \cite{cottenier:06}, \cite{kienzle:09}, \cite{mouheb:09},
+\cite{cui:09}, \cite{klein:07} disponibilizam ferramentas para composição em
+nível de modelo. Destaca-se o trabalho de \cite{cottenier:06}, que disponibiliza
+um visualizador de aspectos para avaliar o impacto dos aspectos em um sistema
+dinamicamente. 
+
+Um ponto fundamental é a \textbf{possibilidade de representar as características
+inerentes a POA} em uma modelagem. As abordagens devem permitir representar
+pontos de corte, avisos, introduções e \textit{wildcards} na captura de pontos
+de junção. Dentre os trabalhos analisados, apenas os trabalhos de
+\cite{kienzle:09}, \cite{jacobson:04} e \cite{cottenier:06} permitem representar
+todas as características da POA.
+
+Também comparam-se os trabalhos em relação a \textbf{dificuldade para
+compreensão e manutenção} dos modelos. A modelagem de \cite{cottenier:06} é de
+difícil compreensão, pois os modelos são representados em baixo nível de abstração
+(próximos ao nível de código). O trabalho de \cite{kienzle:09} contém muitas
+dependências entre aspectos e conceitos novos que dificultam a compreensão de
+modelos. Além disso, o modelo composto contém muitos elementos sintáticos em um
+único diagrama. Os outros trabalhos podem ser compreendidos sem maiores
+problemas.
+
+Finalmente, destaca-se a importância de de realizar a \textbf{alternância entre
+visões} diretamente no modelo final composto, ora visualizando o comportamento
+do sistema com aspectos, ora visualizando o sistema sem aspectos. Um visualizador 
+dinâmico deste tipo é importante, pois permite visualizar e analisar o efeito de
+modelos de aspectos em modelos base, isto é, permite compreender em qual parte 
+o comportamento do aspecto é inserido no modelo base. O trabalho de
+\cite{cottenier:06} é o único que disponibiliza um visualizador dinâmico e 
+uma ferramenta para execução de modelos de aspectos.
+
+As tabelas \ref{tab:work_comparison_1} e \ref{tab:work_comparison_2} destacam
+cada um dos pontos previamente apresentados e a comparação entre os trabalhos
+relacionados. Analisando a tabela, observa-se que existe uma divisão entre
+propostas que estendem o meta-modelo com perfis ou definem um novo meta-modelo.
+A maior parte das propostas disponibiliza ferramentas para composição e permitem
+representar a estrutura e a dinâmica de programas orientados aspectos. Algumas
+propostas falham na representação das características inerentes à POA. Apenas
+dois trabalhos geram modelos de difícil compreensão pelo analista e apenas um
+trabalho implementa um visualizador dinâmico de aspectos, que permite visualizar
+o impacto de aspectos em um sistema. 
+
+Este trabalho estende a UML através de um Perfil UML, representando as visões
+estruturais e dinâmicas de um sistema. Representando todas as características inerentes à POA com
+modelos de fácil compreensão e manutenção, disponibilizando ferramentas para
+composição em nível de modelo. Finalmente, um visualizador dinâmico de aspectos
+é implementado para permitir a visualização do efeito de modelos de aspectos em
+modelos base, juntamente com a inserção e remoção dinâmica de modelos de
+aspectos, considerada a principal contribuição deste trabalho.
+
+\begin{table}
+	\centering
+	\begin{tabular}{ | c | c | c | c | c | }
+		\hline
+		  & \cite{evermann:07} & \cite{kienzle:09} & \cite{jacobson:04} &
+		  \cite{cui:09}
+		  \\
+		\hline
+		 Tipo de Extensão & Perfil UML & Meta-modelo & Meta-modelo & Perfil
+		 UML \\
+		\hline
+		 Visões Representadas & Estrutural & Estrutural e Dinâmica & Estrutural e
+		 Dinâmica & Dinâmica \\
+		\hline
+		 Permite Composição & Sim & Sim & Não & Sim  \\
+		\hline
+		 Nível de Composição & Código & Modelo & - & Modelo \\
+		\hline
+		 Representação da POA & Parcial & Total & Total & Parcial \\
+		\hline
+		 Difícil Compreensão & Não & Sim & Não & Não \\
+		\hline
+		 Visualização Dinâmica & Não & Não & Não & Não \\
+		\hline
+	\end{tabular}
+	\caption{Comparação entre trabalhos para modelagem de programas orientados a
+	aspectos (1).}
+	\label{tab:work_comparison_1}
+\end{table} 
+
+
+\begin{table}
+	\centering
+	\begin{tabular}{ | c | c | c | c | }
+		\hline
+		  & \cite{klein:07} & \cite{mouheb:09} & \cite{cottenier:06}
+		  \\
+		\hline
+		 Tipo de Extensão & Meta-modelo & Perfil UML & Perfil UML
+		 \\
+		\hline
+		 Visões Representadas & Dinâmica & Estrutural e Dinâmica & Estrutural e
+		 Dinâmica \\
+		\hline
+		 Permite Composição & Sim & Sim & Sim \\
+		\hline
+		 Nível de Composição & Modelo & Modelo & Modelo \\
+		\hline
+		 Representação da POA & Parcial & Parcial & Total \\
+		\hline
+		 Difícil Compreensão & Não & Não & Sim \\
+		\hline
+		 Visualização Dinâmica & Não & Não & Sim \\
+		\hline
+	\end{tabular}
+	\caption{Comparação entre trabalhos para modelagem de programas orientados a
+	aspectos (2).}
+	\label{tab:work_comparison_2}
+\end{table} 

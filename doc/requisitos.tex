@@ -1,0 +1,65 @@
+\chapter{Drafts}
+
+Segundo \cite{silva:00}, para ser possível gerar código e entender um sistema a
+partir de uma modelagem orientada a objetos , deve-se ter diagramas
+estruturais e comportamentais. Estes diagramas devem representar o sistema e
+as classes separadamente. Sendo assim, para elaborar uma modelagem de um
+programa orientado a aspectos recomenda-se usar os seguintes diagramas da UML:
+
+\begin{itemize}
+  \item Diagrama de Classes (Aspectos): Este diagrama representa o aspecto e os
+  relacionamentos com os outros aspectos e classes.
+		\begin{itemize}
+		      \item Para elaborar esse diagrama poderia se utilizar a
+			      meta-especificação de uma linguagem para modelar aspectos proposta por 
+			      \cite{evermann:07}. O grande problema dessa linguagem é a
+			      impossibilidade de capturar múltiplos pontos de junção em um mesmo
+			      ponto de corte. \textbf{Aqui existe uma abertura para melhora nessa
+			      especificação: Permitir expressar a captura de múltiplos pontos de
+			      junção na UML. Segundo os autores, a especificação da UML não permite
+			      isso}
+		      \item Deve-se então estender essa modelagem com a possibilidade de
+          capturar múltiplos pontos de junção. Representar isso no diagrama de
+          classes.
+         \end{itemize}
+  \item Diagrama de Casos de Uso: Modelará as funcionalidades do sistema (o que
+  um usuário pode fazer e como o sistema responde a isso).
+  		\begin{itemize}
+            \item Criar casos de uso representando o novo comportamento (após
+            introduzir os aspectos). Esses casos de uso podem ser casos de uso
+            de extensão (seguindo idéia do Jacobson). Para isso deve-se ter os
+            casos de uso do sistema atual, para então estendê-los. \textbf{Esse
+            assunto poderia ser melhor estudado afim de localizar defeitos na
+            técnica de Jacobson. }
+		\end{itemize}		
+  \item Diagrama de Atividades: Utilizado para refinar os casos de uso em mais
+  alto nível (seguindo a idéia da modelagem OO) e representar os avisos.
+  		\begin{itemize}
+            \item Os avisos podem ser representados por diagramas de atividade:
+            Um aviso basicamente é uma sequência de atividades que serão
+            executadas. É o comportamento que será executado antes, durante ou
+            depois de um ponto de corte.
+            \item Os casos de uso podem ser refinados por diagramas de
+            atividade. Deve-se estudar como identificar os pontos de junção e
+            pontos de corte nos diagramas de atividade. 
+            \item Diagrama de atividades com partições. (aspecto/fluxo
+            principal)
+        \end{itemize}
+  \item Diagrama de Sequência: Utilizado para refinar os casos de uso em mais
+  baixo nível.
+  \item Diagrama de Visão Geral de Interação: Utilizado para associar os pontos
+  de junção (JPPDS)
+\end{itemize}
+
+É importante destacar também:
+
+\begin{itemize}
+  \item Para modelar programas orientados a aspectos
+não deve ser necessário modificar módulos já existentes elaborados utilizando algum
+outro paradigma  
+  \item Deve-se também representar todos os conceitos de aspectos (seguindo os
+conceitos oferecidos pela linguagem AspectJ).
+\end{itemize} 
+
+Quadro comparativo com outras abordagens.
+Explicitar diferenças com aspectos.
