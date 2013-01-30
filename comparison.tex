@@ -1,0 +1,106 @@
+\chapter{Comparação de Abordagens}
+
+There are several proposals for modeling aspect-oriented applications in the AOM
+research area. It is important to identify some variation points between these
+approaches. This paper makes a comparison between the related approaches by comparing 
+some points like: 
+
+\begin{table*}
+	\centering
+	\begin{tabular}{ | c | c | c | c | c | c | c |}
+		\hline
+		  & Klein \cite{Klein:2007:WMA:1805812.1805819} & 
+		  Evermann \cite{Evermann:2007:MSP:1229375.1229379} &
+		  Kienzle \cite{Kienzle:2009:AMM:1509239.1509252} &
+		  Jacobson \cite{Jacobson:2004:ASD:1062430} &
+		  Cui \cite{Cui:2009:MIA:1529282.1529377} &
+		  Zhang \cite{Zhang:2012:WSA:2162049.2162080} 
+		  \\
+		\hline
+		 Extension Type & Meta-model & UML Profile & Meta-model & Meta-model &
+		 UML Profile & Meta-model \\
+		\hline
+		 Represents Structure? & No & Yes & Yes & Yes & No & No\\
+		\hline
+		 Represents Behavior? & Yes & No & Yes & Yes & Yes & Yes\\
+		\hline
+		 Automatic Composition?  & Yes & Yes & Yes & No & Yes & Yes\\
+		\hline
+		 AOP Representation & Partial & Partial & Total & Total & Partial & Partial\\
+		\hline
+		 Visualization Toggling? & No & No & No & No & No & No\\
+		\hline
+		 Level of Abstraction & High & High & High & High & High & High \\
+		\hline
+	\end{tabular}
+	\caption{Table Comparison between AOM approaches (1).}
+	\label{tab:comparison_table_1}
+\end{table*} 
+
+\begin{table*}
+	\centering
+	\begin{tabular}{ | c | c | c | c | c | c | c |}
+		\hline
+		  & Cottenier \cite{Cottenier06themotorola} &
+		  Clarke \cite{theme:04} &
+		  France \cite{france:06} &
+		  Whittle \cite{Whittle:2008} &
+		  Ghilardi
+		  \\
+		\hline
+		 Extension Type & UML Profile & Meta-model & Meta-model & UML
+		 Profile & UML Profile\\
+		\hline
+		 Represents Structure? & Yes & Yes & Yes & Yes & Yes\\
+		\hline
+		 Represents Behavior? & Yes & Yes & No & Yes & Yes\\
+		\hline
+		 Automatic Composition? & Yes & Yes & Yes & Yes & Yes\\
+		\hline
+		 AOP Representation & Total & Total & Partial & Total & Total\\
+		\hline
+		 Visualization Toggling? & Yes & No & No & No & Yes\\
+		\hline
+		 Level of Abstraction & Low & High & High & High & High\\
+		\hline
+	\end{tabular}
+	\caption{Table Comparison between AOM approaches (2).}
+	\label{tab:comparison_table_2}
+\end{table*} 
+
+\begin{itemize}
+  \item \textbf{Extension Type:} Some approaches create a lightweight extension
+  to UML using a profile that can be reused in any CASE tool. Others changes the UML
+  meta-model, diminishing the possibility of reuse.
+  \item \textbf{Represents Structure?} The structural of aspect-oriented
+  applications is represented? Modeling introductions of fields or changes in the inheritance
+  hierarchy.
+  \item \textbf{Represents Behavior?} The behavior of aspect-oriented
+  applications is represented? Modeling pointcuts and advices, representing the execution points that will be
+  captured and the behavior that will be executed in these points.
+  \item \textbf{Automatic Composition?} Allows the automatic composition of
+  models, without effort from the developer.
+  \item \textbf{AOP Representation:} Represents the inherent characteristics of
+  the aspect-oriented approach like the modularization of concerns and the
+  possibility to capture multiple join points in the same definition
+  (wildcards).
+  \item \textbf{Visualization Toggling:} Allows the toggling of views,
+  visualizing the core concern, the crosscutting concern or both intertwined.
+  \item \textbf{Level of Abstraction:} Represents the application in low or
+  high-level of abstraction.
+\end{itemize}
+
+The comparison table can be view in the tables \ref{tab:comparison_table_1} and
+\ref{tab:comparison_table_2}. It is important to highlight the approaches that
+use a UML profile to represent aspect-orientead applications. An extension
+through a profile can be reused in any CASE tool, which is an important
+advantage of the approaches that extends the language with this mechanism. The
+automatic composition of models is a desired functionality, because it decreases
+the time spent in the modeling by automating part of it. It is
+important to represent all the characteristics of AOP using structural
+and behavioral diagrams. Finally, approaches that allows the dynamic
+visualization of concerns give an additional advantage, because they facilitates
+the understanding of aspect-oriented applications. High levels of abstraction are desired,
+because it facilitates the understanding of the system being modeled. A modeling
+in low-level of abstraction has constructions too close to the code, which
+eases code generation, but difficults the system understanding.
