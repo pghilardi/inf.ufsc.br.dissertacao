@@ -5,5 +5,5 @@
 \contentsline {sig}{\hbox to\@tempdima {CASE\hfil }{Computer Aided Software Engineering}}{40}
 \contentsline {sig}{\hbox to\@tempdima {BNF\hfil }{Backus Naur Form}}{41}
 \contentsline {sig}{\hbox to\@tempdima {MOF\hfil }{Meta-Object Facility}}{41}
-\contentsline {sig}{\hbox to\@tempdima {SDL\hfil }{Specification and Description Language}}{68}
-\contentsline {sig}{\hbox to\@tempdima {2PC\hfil }{Two Phase Commit}}{68}
+\contentsline {sig}{\hbox to\@tempdima {SDL\hfil }{Specification and Description Language}}{63}
+\contentsline {sig}{\hbox to\@tempdima {2PC\hfil }{Two Phase Commit}}{63}

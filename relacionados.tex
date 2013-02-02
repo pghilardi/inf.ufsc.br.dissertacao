@@ -1,19 +1,13 @@
 \chapter{Trabalhos Relacionados}
 \label{sec:trabalhos_relacionados}
 
-A POA tem elementos que não podem ser representados com o meta-modelo padrão da
-segunda versão da UML. Esta limitação faz com que seja necessário estender a
-linguagem para modelagem de sistemas orientados a aspectos. Esta extensão 
-pode ser obtida com a definição de perfis UML ou através da definição de
-um novo meta-modelo. Propostas que estendem a UML através de um perfil podem ser
-reusadas diretamente em ferramentas CASE que suportem a importação de
-perfis. Os trabalhos que trabalham em nível de meta-modelagem podem ser
-utilizados em outras ferramentas CASE apenas através de transformações nos
-modelos, pois as ferramentas CASE suportam apenas o meta-modelo padrão da UML ou
-a extensão através de perfis.
+A POA tem elementos que não podem ser representados com o meta-modelo padrão da segunda versão da UML. Esta limitação faz com que seja necessário
+estender a linguagem para modelagem de sistemas orientados a aspectos. Esta extensão pode ser obtida com a definição de perfis UML ou através da
+definição de um novo meta-modelo. Propostas que estendem a UML através de um perfil podem ser reusadas diretamente em ferramentas CASE que suportem a
+importação de perfis. Os trabalhos que trabalham em nível de meta-modelagem podem ser utilizados em outras ferramentas CASE apenas através de
+transformações nos modelos, pois as ferramentas CASE suportam apenas o meta-modelo padrão da UML ou a extensão através de perfis.
 
-Alguns trabalhos estendem a UML para modelagem de programas orientados a
-aspectos. \cite{evermann:07} propõe um Perfil UML para AspectJ. O foco 
+Alguns trabalhos estendem a UML para modelagem de programas orientados a aspectos. \cite{evermann:07} propõe um Perfil UML para AspectJ. O foco 
 deste trabalho é o desenvolvimento de um perfil que estenda a UML através da
 introdução de estereótipos, valores rotulados e restrições que permitam
 representar programas orientados a aspectos. Este perfil não remove restrições
@@ -350,114 +344,6 @@ instancialização e de ligação. Para facilitar a compreensão do comportamento
 dinâmico de uma modelagem, este trabalho poderia disponibilizar um visualizador
 de aspectos, que permitisse habilitar e desabilitar modelos de aspectos
 dinamicamente em um modelo base.
-
-O trabalho de \cite{mouheb:09} propõe uma solução para modelagem de aspectos no
-domínio de requisitos relacionados a segurança. Esta abordagem engloba desde a
-especificação de requisitos de segurança até a composição dos aspectos. O
-objetivo é propor um mecanismo elegante para injeção de soluções de segurança,
-aonde os interesses de segurança ficarão separados em módulos, evitando o
-emarranhamento com os demais interesses do sistema. A composição entre interesses 
-de segurança e interesses núcleo é realizada em nível de modelo. A abordagem é
-composta por quatro fases:
-
-\begin{enumerate}
-  \item \textbf{Especificação dos requisitos das soluções de segurança}:
-  Especialistas na área de segurança especificam quais são os requisitos que
-  devem ser implementados no sistema.
-  \item \textbf{Modelagem das soluções de segurança com um aspecto para cada
-  requisito}: O modelo do aspecto é elaborado utilizando um Perfil UML proposto
-  para área de segurança. Este Perfil UML é semelhante ao perfil proposto por
-  \cite{evermann:07} e permite representar a estrutura dos aspectos e pontos de
-  corte. 
-  \item \textbf{Definição de quais partes do sistema serão impactadas pelos
-  aspectos de segurança}: Devem-se definir quais pontos de junção serão
-  capturados. Uma das contribuições deste trabalho é a identificação 
-  dos pontos de junção em alguns diagramas da UML: diagrama de atividades,
-  diagrama de sequência e diagrama de máquina de estados. A figura
-  \ref{fig:mouheb_join_points_definition} mostra a identificação de pontos de junção para os 
-  principais diagramas comportamentais da UML.
-
-  \begin{figure}
-	\centering
-	\includegraphics[width=300px]{img/mouheb_join_points_definition.png}
-	\caption{Definição de Pontos de
-	Junção em Diagramas Comportamentais
-	da UML}\label{fig:mouheb_join_points_definition}
-  \end{figure}
-  
-  \item \textbf{Composição entre os modelos de aspecto e o modelo base do
-  sistema}: Primeiramente devem-se selecionar manualmente os métodos do modelo
-  base que terão o comportamento de segurança (aviso) introduzido antes, durante ou depois. 
-  Além disso, cada aviso já tem um ponto de corte associado que foi especificado
-  pelo especialista de segurança. Após a seleção manual, os pontos de junção e
-  os pontos de corte especificados pelos especialistas são
-  identificados no modelo base e associados com os avisos correspondentes. É
-  importante observar que o desenvolvedor não necessita ser especialista em soluções de segurança, 
-  pois ele apenas especifica em qual método do modelo base o novo comportamento
-  será inserido. Mas, o especialista em segurança precisa conhecer o modelo base ao
-  definir os pontos de corte, o que gera uma incoerência, pois uma das
-  afirmações do trabalho é que os especialistas especificam bibliotecas
-  independentemente do modelo base. O passo final é a composição dos modelos, 
-  resultando em um modelo final com o comportamento dos avisos introduzido nos 
-  pontos especificados. No modelo final, aparecem referências aos modelos dos avisos (ao invés do
-  comportamento completo), diminuindo o número de elementos presentes em um diagrama 
-  a fim de facilitar a visualização e diminuir a complexidade.
-\end{enumerate}
-
-Um estudo de caso foi realizado utilizando a abordagem proposta por
-\cite{mouheb:09}. O modelo base é uma aplicação que processa requisições de
-usuário a um servidor através de um canal de comunicação. A requisição somente
-será respondida se as credenciais do usuário estiverem corretas. O modelo de 
-aspecto introduzirá comunicação segura entre o cliente e o servidor
-através do uso de Secure Sockets Layer (SSL). O modelo base pode ser visualizado
-na figura \ref{fig:mouheb_aspect_base} e o modelo de aspecto está descrito na
-figura \ref{fig:mouheb_aspect_specification}. Após a composição, é obtido o
-modelo final que pode ser visualizado na figura \ref{fig:mouheb_aspect_final}.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=400px]{img/mouheb_aspect_base.png}
-	\caption{Modelo Base}\label{fig:mouheb_aspect_base}
-\end{figure}
-
-\begin{landscape}
-\begin{figure}
-	\centering
-	\includegraphics[width=650px]{img/mouheb_aspect_specification.png}
-	\caption{Modelo de Aspecto SSL}\label{fig:mouheb_aspect_specification}
-\end{figure}
-\end{landscape}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=400px]{img/mouheb_aspect_final.png}
-	\caption{Modelo Final (Composto)}\label{fig:mouheb_aspect_final}
-\end{figure}
-
-A proposta para modelagem de aspectos de requisitos de segurança de
-\cite{mouheb:09} é uma leve extensão à segunda versão da UML. Uma parte da
-extensão é realizada com a definição de um Perfil UML para representar a estrutura 
-dos aspectos através do diagrama de classes estendido, permitindo representar a
-estrutura do sistema. O perfil proposto pode ser reutilizado 
-em ferramentas CASE que suportem a importação de perfis. No entanto, este perfil
-não permite representar todas as características estruturais da POA. 
-Não é posível especificar a captura de pontos de junção de inicialização e
-pré-inicialização de classes e nem o tratamento de exceções. 
-O perfil de \cite{evermann:07} é mais completo do que o
-proposto por \cite{mouheb:09}, sendo o recomendado para representação da
-estrutura de POA. Além disso, esta proposta não permite representar a composição
-de pontos de corte através dos operadores ! (negação), \&\& (adição) e
-\textbar\textbar (opção). A parte dinâmica do sistema é representada com o
-diagrama de sequência, utilizado também para especificação do comportamento do
-aspecto. A proposta disponibiliza ferramentas para composição dos modelos de
-interesses entrecortantes com os modelos de intereses núcleo e realiza 
-a composição em nível de modelo. Uma das limitações da abordagem é 
-o foco apenas em sistemas de segurança. O exemplo de uso da abordagem é simples
-e não utiliza algumas construções da POA como \textit{wildcards} 
-e dependência entre aspectos. Seria interessante realizar um caso de uso
-utilizando a abordagem em um exemplo mais complexo, como o 
-que foi proposto pelo trabalho de \cite{kienzle:09} e pelo trabalho de
-\cite{jacobson:04}.
 
 O trabalho de \cite{cui:09} modela a dinâmica de um sistema com
 diagramas de atividades da segunda versão da UML. Os interesses núcleo são
@@ -1076,4 +962,8 @@ Dois possíveis problemas: definição de
 quando acontece um aspecto: antes, durante ou depois e também não conseguiram fazer a composição 
 com diagrama de sequência no novo trabalho (tiveram que desenhar na mão por problemas no MagicDraw). 
 Também não usaram um exemplo com wildcards.
+
+Falar da proposta de \cite{france:06}\ldots
+Talvez falar da proposta de \cite{klein:2022}\ldots
+Talvez falar da proposta de \cite{Aldawud03umlprofile}\ldots
 
