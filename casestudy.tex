@@ -75,13 +75,13 @@ Novamente, o valor rotulado não é exibido no diagrama de sequência para não polu
   \begin{figure}[tb]
 	\centering
 	\includegraphics[scale=0.8]{img/case_study_behavioral_pointcut_waiting_list.png}
-	\caption{Pointcut of the crosscutting concern to handle a waiting list.}\label{fig:case_study_behavioral_pointcut_waiting_list}
+	\caption{Ponto de Corte: Controle de uma Lista de Espera.}\label{fig:case_study_behavioral_pointcut_waiting_list}
   \end{figure}
   
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_waiting_list.png}
-	\caption{Advice behavior of the crosscutting concern to handle a waiting list.}\label{fig:case_study_behavioral_waiting_list}
+	\caption{Aviso: Controle de uma Lista de Espera.}\label{fig:case_study_behavioral_waiting_list}
   \end{figure}
   
 Depois da modelagem comportamental dos interesses núcleo e entrecortantes, o desenvolvedor pode intercambiar as visões do sistema, selecionando quais
@@ -96,8 +96,7 @@ cada interesse tem uma cor associada. Esta diferenciação é importante para difer
   \begin{figure*}[tb]
 	\centering
 	\includegraphics{img/case_study_compound_1.png}
-	\caption{Case Study: Reserve
-	Room composed with Log.}\label{fig:case_study_compound_1}
+	\caption{Estudo de Caso: Reserve de Quarto composta com Registro de Mensagens.}\label{fig:case_study_compound_1}
   \end{figure*}
 \end{landscape}
 
@@ -105,22 +104,18 @@ cada interesse tem uma cor associada. Esta diferenciação é importante para difer
   \begin{figure*}[tb]
 	\centering
 	\includegraphics[scale=0.7]{img/case_study_compound_2.png}
-	\caption{Case Study: Reserve
-	Room composed with Log and Waiting List.}\label{fig:case_study_compound_2}
+	\caption{Estudo de Caso: Reserve de Quarto composta com Registro de Mensagens e Controle de Lista de Espera.}\label{fig:case_study_compound_2}
   \end{figure*}
 \end{landscape}
   
 \section{Estudo de Caso: Check-out de Clientes, Registro de Mensagens e Programa de Fidelidade}
 
-The second case study\ldots
+O segundo estudo de caso \ldots
 
 \section{Discussão}
 
-Applying the proposed approach in a case study shows how it facilitates the
-understanding of aspect-oriented applications, by enabling the toggling of
-views, viewing only the core concerns or a composition between the core and
-crosscutting concerns, without effort from the developer. The composed models
-shows the effect of aspects in a system, with each aspect differentiated by a unique
-color that represents it. The SEA/Aspect allows the separation of concerns in
-the early development phases, which is one of the objectives of the AOM
-approaches too.
+A aplicação da abordagem em um estudo de caso mostra como a proposta para especificação e composição de aspectos facilita a compreensão de
+sistemas orientados a aspectos, permitindo a alternância de visões, visualizando somente os interesses núcleo ou uma composição entre interesses núcleo e entrecortantes, sem esforço do
+desenvolvedor. Os modelos compostos mostram o efeito dos aspectos em um sistema, com cada aspecto diferenciado por uma única cor que o representa. A
+ferramenta SEA/Aspect permite a separação de interesses nas primeiras fases de desenvolvimento, o que é um dos objetivos das abordagens para modelagem
+de sistemas orientados a aspectos.

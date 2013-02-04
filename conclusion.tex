@@ -1,21 +1,54 @@
-\chapter{Conclusion}
+\chapter{Conclusão}
 
-This work has proposed an approach to model aspect-oriented systems using UML, with a lightweight profile that allows to implement an aspect
-visualizer in the SEA environment. The SEA/Aspect tool performs the composition between core and crosscutting models automatically, allowing the visualization of
-the aspect dynamics in a system.
+Este trabalho propõe uma abordagem para modelagem de sistemas orientados a aspectos usando UML, através de um perfil UML que permite especificar a
+estrutura e o comportamento de sistemas orientados a aspectos. Um importante produto deste trabalho é o visualizador de aspectos no
+ambiente SEA: SEA/Aspect. A ferramenta SEA/Aspect realiza a composição entre modelos núcleo e entrecortantes automaticamente, permitindo a
+visualização da dinãmica de aspectos em um sistema.
 
-\section{Main Contributions}
+\section{Principais Contribuições}
 
-The main advantages of the proposed approach in relation to the others are: the representation of the important characteristics of the AOP, like the
-capture of multiple join points with the representation of the aspect behavior; the definition of a profile within the UML standards, which can be
-added in CASE tools that support importing profiles, and the composition and automatic visualization of the effect of the crosscutting models in the
-core models in the SEA environment, which eases the understanding and maintenance of aspect-oriented systems. The tool that allows the composition and
-visualization toggling of concerns may be added to CASE tools that allow functional extension, which is the case of the SEA environment.
+As principais vantagens da abordagem proposta em relação as outras são: 
 
-\section{Limitations}
+\begin{itemize}
+\item Representação das características importantes da POA, como a captura de múltiplos pontos de junção e a representação da dinâmica de aspectos
+com os diagramas de máquina de estado para representar pontos de corte e os diagramas de sequência para representar avisos. Este é o primeiro
+trabalho que utiliza invariantes de estado para conectar a satisfação de pontos de corte com o disparo de avisos;
+\item Definição de um perfil dentro dos padrões da UML, o qual pode ser adicionado em ferramentas CASE que suportem a importação
+de perfis; 
+\item Composição automática e visualização dinâmica do efeito dos modelos entrecortantes (aspectos) nos modelos núcleo, que facilita a compreensão e
+manutenção de sistemas orientados a aspectos. A ferramenta que permite a composição e a alternância de visões pode ser adicionada a ferramentas CASE 
+que suportem extensão funcional, que é o caso do ambiente SEA.
+\end{itemize}
 
-These limitations\ldots
+\section{Produtos de Trabalho}
 
-\section{Future Work}
+Os produtos resultantes deste trabalho de pesquisa são:
 
-The future\ldots
+\begin{itemize}
+  \item Suporte a modelagem de sistemas orientados a aspectos no ambiente SEA;
+  \item Visualizador da dinâmica de aspectos no ambiente SEA;
+  \item Artigo submetido e aceito: International Conference on Computers and Their Applications (CATA) \cite{ghilardi_cata:13};
+  \item Artigo submetido e aceito: Congreso Iberoamericano en Ingeniería de Software (CibSE) \cite{ghilardi_cibse:13};
+\end{itemize}
+
+\section{Limitações}
+
+O presente trabalho tem as seguintes limitações:
+
+\begin{itemize}
+  \item A especificação de aspectos é baseada nas construções disponíveis na linguagem AspectJ. Logo, a modelagem proposta por este trabalho é
+  dependente de plataforma.
+  \item O perfil UML para especificação de aspectos pode ser utilizado por outras ferramentas CASE. No entanto, a ferramenta para composição de
+  modelos só pode ser utilizada em ferramentas que suportem a extensão funcional, através de um plug-in, por exemplo.
+  \item A aplicabilidade da abordagem proposta é verificada em dois estudos de caso propostos por Jacobson \cite{Jacobson:2004:ASD:1062430}. Nenhum
+  caso real foi modelado com o perfil proposto.
+\end{itemize}
+
+\section{Trabalhos Futuros}
+
+Como trabalho futuro sugere-se realizar um novo estudo de caso com um caso real de alguma aplicação, contendo pontos de corte mais complexos, como os
+que tratam do fluxo de execução da aplicação (\textit{cflow}, \textit{cflowbelow}). Este estudo de caso pode fornecer resultados mais concretos, com
+o objetivo de verificar que o visualizador de aspectos facilita a compreensão e manutenção de um sistema orientado a aspectos. A comparação entre
+abordagens também é um tema que pode ser pesquisado, com o objetivo de unificar critérios utilizados em outros artigos que realizam comparação
+entre diferentes abordagens para modelagem de sistemas orientados a aspectos \cite{wimmer:2011:SUA:1978802.1978807}. Também pode-se investigar a
+possibilidade de geração de código em AspectJ a partir dos modelos núcleo e entrecortantes.

@@ -50,11 +50,11 @@ Em relação a modelagem de sistemas orientados a aspectos, deve-se modelar a estr
 para modelagem de sistemas orientados a aspectos com UML. Um grupo de propostas estende o meta-modelo da linguagem
 \cite{Kienzle:2009:AMM:1509239.1509252} \cite{theme:04} \cite{Klein:2007:WMA:1805812.1805819} \cite{Jacobson:2004:ASD:1062430} \cite{france:06},
 introduzindo novas construções para representar a estrutura e o comportamento de aplicações orientadas a aspectos. Outro conjunto de propostas estende
-a UML através de um perfil UML \cite{Evermann:2007:MSP:1229375.1229379} \cite{Cottenier06themotorola} \cite{Cui:2009:MIA:1529282.1529377}, as quais podem 
-ser utilizadas em ferramentas CASE que suportem a importação de perfis. No entanto, não existe nenhuma abordagem para modelagem de aspectos que
+a UML através de um perfil UML \cite{Evermann:2007:MSP:1229375.1229379} \cite{Cottenier06themotorola} \cite{Cui:2009:MIA:1529282.1529377}, o qual
+pode ser utilizado em ferramentas CASE que suportem a importação de perfis. No entanto, não existe nenhuma abordagem para modelagem de aspectos que
 represente a estrutura e a dinâmica de um sistema e que forneça subsídios para visualização do efeito dos aspectos no sistema, realizando a
-composição de interesses automaticamente. Além disso, é importante que a modelagem permita representar as características inerentes à POA, como a
-possibilidade de capturar múltiplos pontos de execução de um programa com apenas uma expressão regular. A maior parte das propostas se
+composição de modelos de aspectos com modelos núcleo automaticamente. Além disso, é importante que a modelagem permita representar as características
+inerentes à POA, como a possibilidade de capturar múltiplos pontos de execução de um programa com apenas uma expressão regular. A maior parte das propostas se
 limitam a modelar apenas parte destas características.
 
 \section{Objetivos}
@@ -70,10 +70,10 @@ explicitação dos aspectos) e, com isso, facilitar a compreensão e manutenção dos
 \begin{itemize}
   \item Modelar as características inerentes a aspectos com a segunda versão da Unified Modeling Language (UML) \cite{uml:05} \sigla{UML}{Unified
   Modeling Language}.
-  \item Permitir a alternância de visões do comportamento dinâmico de um sistema orientado a aspectos, visualizando o efeito de modelos de
-  interesses entrecortantes (aspectos) em modelos núcleo.
   \item Representar a estrutura e a dinâmica de sistemas orientados a aspectos, fornecendo subsídios para a composição de modelos e facilitando 
   a compreensão e manutenção do sistema.
+  \item Permitir a alternância de visões do comportamento dinâmico de um sistema orientado a aspectos, visualizando o efeito de modelos de
+  interesses entrecortantes (aspectos) em modelos núcleo.
 \end{itemize}
 
 \section{Hipótese de Pesquisa}
@@ -87,7 +87,7 @@ Tratando-se de POO, uma modelagem pode ser considerada completa se modelar os qu
 programas orientados a aspectos, definem-se dois requisitos importantes para se obter uma modelagem completa:
 
 \begin{enumerate}
-  \item Representação das características inerentes à programas, orientados a aspectos como \textit{wildcards}, pontos de corte, avisos e
+  \item Representação das características inerentes à programas orientados a aspectos como: \textit{wildcards}, pontos de corte, avisos e
   introduções. 
   \item Representação da estrutura e da dinâmica do sistema para permitir a composição em nível de modelo de interesses núcleo com interesses
   entrecortantes (aspectos).
@@ -98,7 +98,7 @@ conclui-se que este trabalho justifica-se pelo uso de artefatos que representem 
 A compreensão do fluxo de execução de programas orientados a aspectos é difícil, assim, justifica-se a implementação de um visualizador do efeito de
 aspectos em modelos núcleo. Sabe-se também que a segunda versão da UML é um padrão e é amplamente utilizada na modelagem de aplicações, sendo assim,
 justifica-se que os modelos propostos estejam de acordo com a especificação proposta por esta linguagem, estendendo a linguagem através de um perfil UML. Em 
-relação a aspectos, a modelagem de \textit{wildcards} é fundamental para possibilitar a captura dos pontos do sistema que serão modificados de maneira
+relação a aspectos, a modelagem de \textit{wildcards} é fundamental para possibilitar a captura dos pontos do sistema que serão estendidos de maneira
 praticável. Logo, justifica-se a preocupação em modelar todas as características inerentes à POA.
 
 \section{Método de Pesquisa}
@@ -107,7 +107,7 @@ A realização deste trabalho é composta pelos seguintes passos:
 
 \begin{enumerate}
   \item Análise de trabalhos correlatos;
-  \item Proposta para especificação de sistemas orientados a aspectos utilizando a segunda versão da UML;
+  \item Proposta para a especificação de sistemas orientados a aspectos utilizando a segunda versão da UML;
   \item Implementar o suporte para modelagem proposta no ambiente SEA \cite{silva:00}, gerando um produto deste trabalho, que é o suporte a
   modelagem de programas orientados a aspectos no ambiente SEA, permitindo a alternância de visões dos interesses modelados automaticamente;
   \item Realizar um estudo de caso com a proposta de modelagem, realizando a composição de aspectos em nível de modelo e utilizando o visualizador de
@@ -133,6 +133,8 @@ implementação do protótipo para modelagem de aspectos no ambiente SEA.
 Com a conclusão desse trabalho tem-se como resultados esperados:
 
 \begin{itemize}
+  \item Um perfil UML que permita representar as características de sistemas orientados a aspectos. Este perfil pode ser importado em ferramentas CASE
+  que suportem a importação de perfis.
   \item Uma ferramenta que possibilite modelar um sistema orientado a aspectos, representando as características inerentes à POA, permitindo
   realizar a composição de aspectos e visualizar o efeito dos mesmos em modelos núcleo. 
   \item Comparação entre este trabalho e outros propostos na literatura, de acordo com alguns parâmetros de comparação.
@@ -140,14 +142,18 @@ Com a conclusão desse trabalho tem-se como resultados esperados:
 
 \section{Limitações desta Dissertação}
 
-Este trabalho foca na linguagem AspectJ, linguagem padrão para o desenvolvimento de programas orientados a aspectos em Java. Esta é a linguagem mais
-madura para o paradigma de POA, sendo a primeira linguagem originada a partir do trabalho pioneiro sobre POA \cite{Kiczales97aspect-orientedprogramming}. A ferramenta proposta
-neste trabalho não permitirá a geração de código na linguagem AspectJ, apenas a composição em nível de modelo.
+Este trabalho é focado na linguagem AspectJ, linguagem padrão para o desenvolvimento de programas orientados a aspectos em Java. Optou-se por
+utilizar AspectJ, pois é uma das linguagens mais maduras do paradigma de orientação a aspectos. Além disso, esta linguagem foi a primeira
+linguagem que trata de aspectos, originada a partir do trabalho pioneiro sobre aspectos de Kickzales \cite{Kiczales97aspect-orientedprogramming}. 
+
+A ferramenta proposta neste trabalho não permitirá a geração de código na linguagem AspectJ, apenas a composição em nível de modelo, pois o foco
+deste trabalho é na modelagem de sistemas em alto nível de abstração, para facilitar a compreensão e manutenção de um sistema.
 
 \section{Organização desta dissertação}
 
 Esta dissertação está organizada da seguinte maneira: o Capítulo {2} apresenta a fundamentação teórica com conceitos de programação orientada a
 aspectos e da linguagem AspectJ, conceitos de análise e projetos de sistemas e modelagem e meta-modelagem com a segunda versão da UML. O Capítulo {3}
-apresenta uma análise acerca dos trabalhos correlatos. O Capítulo {4} apresenta apresenta a metodologia de modelagem para a especificação de sistemas orientados a aspectos.
-O Capítulo {5} apresenta dois estudos de caso que verificam a aplicabilidade da abrodagem proposta. O Capítulo {6} apresenta uma comparação
-entre diferentes abordagens para modelagem de sistemas orientados a aspectos. Finalizando, O Capítulo {7} apresenta as conclusões deste trabalho.
+apresenta uma análise acerca dos trabalhos correlatos. O Capítulo {4} apresenta a metodologia de modelagem para a especificação de sistemas orientados
+a aspectos, incluindo o algoritmo para composição de aspectos. O Capítulo {5} apresenta dois estudos de caso que verificam a aplicabilidade da
+abrodagem proposta. O Capítulo {6} apresenta uma comparação entre diferentes abordagens para modelagem de sistemas orientados a aspectos. Finalizando, 
+o Capítulo {7} apresenta as conclusões deste trabalho.
