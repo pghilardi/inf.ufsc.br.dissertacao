@@ -1,58 +1,35 @@
 \chapter{Contextualização}
 
-O objetivo deste capítulo é fornecer subsídios para a compreensão dos assuntos
-tratados nesta dissertação. Primeiramente, contextualiza-se o paradigma de
-Programação por Aspectos (POA), apresentando a motivação para o uso de aspectos
-e as construções específicas da linguagem AspectJ, que devem ser representáveis 
-na modelagem. A segunda parte discorre sobre análise e projeto de sistemas
-utilizando a segunda versão da UML. Apresentam-se alguns conceitos sobre análise
-e projeto e os diagramas da UML. O tópico final fala sobre meta-modelagem, que
-permite estender um modelo para representar elementos de um domínio específico.
+O objetivo deste capítulo é fornecer subsídios para a compreensão dos assuntos tratados nesta dissertação. Primeiramente, contextualiza-se o paradigma
+de Programação Orientada a Aspectos (POA), apresentando a motivação para o uso de aspectos e as construções específicas da linguagem AspectJ, que devem ser representáveis 
+na modelagem. A segunda parte discorre sobre análise e projeto de sistemas utilizando a segunda versão da UML. Apresentam-se alguns conceitos sobre
+análise e projeto e os diagramas da UML. O tópico final fala sobre meta-modelagem, que permite estender um modelo para representar elementos de um
+domínio específico.
 
-\section{Programação por Aspectos}
+\section{Programação Orientada a Aspectos}
 
-Esta seção discorre sobre a separação de um sistema em um conjunto de
-interesses e os problemas decorrentes da implementação de interesses com os
-paradigmas tradicionais. Devido a estes problemas surge a necessidade de um
-novo paradigma para realizar a separação de interesses: o paradigma
-de Programação Orientada a Aspectos (POA). A seção é finalizada com a
-apresentação da principal linguagem para implementação de aspectos em Java: 
+Esta seção discorre sobre a separação de um sistema em um conjunto de interesses e os problemas decorrentes da implementação de interesses com os
+paradigmas tradicionais. Devido a estes problemas surge a necessidade de um novo paradigma para realizar a separação de interesses: o paradigma de
+Programação Orientada a Aspectos (POA). A seção é finalizada com a apresentação da principal linguagem para implementação de aspectos em Java: 
 AspectJ.
 
 \subsection{Abstração de Interesses}\label{sec:concerns_abstraction}
 
-Ao iniciar a análise e projeto de um sistema, existe um conjunto de requisitos
-que devem ser implementados para satisfazer as necessidades do cliente. Cada
-requisito pode ser considerado um interesse que deve ser realizado para
-finalizar o sistema como um todo. Assim, um sistema é composto por um conjunto de
-interesses. Em um sistema para gerenciamento de hotel é possível
-identificá-los como: reserva de quartos, \textit{check-in}, \textit{check-out},
-plano de fidelização, controle de acesso, garantia de \textit{performance}, 
-etc \cite{jacobson:04}. Segundo \cite{laddad:03}, um sistema contém dois tipos
-de interesses:
+Ao iniciar a análise e projeto de um sistema, existe um conjunto de requisitos que devem ser implementados para satisfazer as necessidades do cliente.
+Cada requisito pode ser considerado um interesse que deve ser realizado para finalizar o sistema como um todo. Assim, um sistema é composto por um
+conjunto de interesses. Em um sistema para gerenciamento de hotel, por exemplo, é possível identificá-los como: reserva de quartos, \textit{check-in},
+\textit{check-out}, plano de fidelização, controle de acesso, garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
 
-\begin{itemize}
-  \item \textbf{Interesses núcleo}: Capturam uma funcionalidade principal e
-  impactam apenas uma parte do sistema. São implementados em um único módulo.
-  \item \textbf{Interesses entrecortantes} (\textit{Crosscutting concerns}):
-  Capturam uma funcionalidade que impactará diversas partes do sistema. São implementados em
-  diferentes módulos.
-\end{itemize} 
-
-No sistema de gerenciamento de hotel é possível classificar reserva de quartos e 
-plano de fidelização como interesses núcleo. Controle de acesso e garantia de
-\textit{performance} impactam diversas partes do sistema, por isso, são
-classificados como interesses entrecortantes. Controle de acesso deve verificar 
-quais usuários podem acessar quais partes do sistema e, por isso, deve ser executado em todos
-os interesses núcleo. Garantia de \textit{performance} impacta todos os
-outros interesses, pois para garantir \textit{peformance} todo o sistema deve
-ser implementado com cuidados específicos. 
+No sistema de gerenciamento de hotel é possível classificar reserva de quartos e plano de fidelização como interesses núcleo. Controle de acesso e
+garantia de \textit{performance} impactam diversas partes do sistema, por isso, são classificados como interesses entrecortantes. Controle de acesso
+deve verificar quais usuários podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses núcleo. Garantia de
+\textit{performance} impacta todos os outros interesses, pois para garantir \textit{peformance} todo o sistema deve ser implementado com cuidados
+específicos.
 
 \begin{figure}
 	\centering
 	\includegraphics{img/context_aspect_concerns.png}
-	\caption{Separação de interesses do módulo
-	para Reserva de Quarto}\label{fig:context_aspect_concerns}
+	\caption{Separação de interesses do módulo para Reserva de Quarto}\label{fig:context_aspect_concerns}
 \end{figure}
 
 Utilizando os paradigmas convencionais para implementação de
@@ -61,14 +38,13 @@ para implementar o interesse de reserva de quartos seria composto
 por código referente a reserva, e também a garantia de \textit{performance} e 
 controle de acesso. A figura \ref{fig:context_aspect_concerns} mostra 
 os interesses presentes no módulo de reserva de quartos. Observa-se a
-implementação de vários interesses no mesmo módulo. Segundo
-\cite{laddad:03}, essa situação é conhecida como \textbf{emaranhamento de
-código} (\textit{code tangling}).
+implementação de vários interesses no mesmo módulo. Segundo Laddad\cite{Laddad:2003:AAP:993468}, essa situação é conhecida como
+\textbf{emaranhamento de código} (\textit{code tangling}).
 
 Outro sintoma de implementação deselegante de interesses é o
 \textbf{espalhamento de código} (\textit{code scattering}), quando o código 
 referente a um mesmo interesse está disposto em diferentes módulos
-\cite{laddad:03}. O espalhamento de código pode acontecer em duas situações:
+\cite{Laddad:2003:AAP:993468}. O espalhamento de código pode acontecer em duas situações:
 
 \begin{itemize}
   \item \textbf{Duplicação de código}: Diferentes módulos núcleo executam código
@@ -92,18 +68,18 @@ pois modificar um interesse impacta em modificar diferentes módulos. Além
 disso, é complicado realizar um rastreamento entre interesses e módulos, pois o
 código de um interesse está disposto em mais de um módulo. Outro problema é a
 dificuldade de reuso de módulos devido a dependência de um módulo com vários
-interesses \cite{laddad:03}. 
+interesses \cite{Laddad:2003:AAP:993468}. 
 
 \subsection{A necessidade de aspectos}
 
 Os problemas destacados na sessão \ref{sec:concerns_abstraction} indicam a
 necessidade de separação de interesses em diferentes módulos. A Programação Orientada a Aspectos 
-(POA) \cite{kiczales:97} é um paradigma de programação para representar
+(POA) \cite{Kiczales97aspect-orientedprogramming} é um paradigma de programação para representar
 elegantemente os interesses de um sistema que impactam diversos módulos. 
 Uma representação elegante de um interesse o separa em um único módulo e permite
 o reuso entre diferentes aplicações. O objetivo da POA é a modularização dos interesses entrecortantes 
 para que os mesmos fiquem separados dos módulos que implementam os interesses
-núcleo da aplicação \cite{laddad:03}.
+núcleo da aplicação \cite{Laddad:2003:AAP:993468}.
 
 É importante observar que, boa parte dos interesses de uma aplicação
 são interesses núcleo e podem ser implementados elegantemente com a POO. Por
@@ -113,7 +89,7 @@ entrecortantes.
 
 \subsection{Metodologia de desenvolvimento}
 
-Segundo \cite{laddad:03}, para implementar um sistema utilizando aspectos
+Segundo \cite{Laddad:2003:AAP:993468}, para implementar um sistema utilizando aspectos
 geralmente executam-se três fases:
 
 \begin{enumerate}
@@ -133,90 +109,65 @@ geralmente executam-se três fases:
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/aspects_weaving.png}
+	\includegraphics[scale=0.9]{img/aspects_weaving.png}
 	\caption{Fluxo de desenvolvimento de uma
 	aplicação com aspectos}\label{fig:aspects_weaving}
 \end{figure}
 
 \subsection{A linguagem AspectJ}
 
-A linguagem AspectJ \cite{AspectJ11} é uma extensão a linguagem Java para
-se trabalhar com aspectos. Qualquer programa implementado em Java pode ser
-estendido utilizando AspectJ. A linguagem provê mecanismos para representar
-interesses entrecortantes e permite a composição dos mesmos com os interesses 
-núcleo de um sistema. A linguagem oferece construções de extensão dinâmicas e
-estáticas. As extensões dinâmicas permitem que um novo comportamento seja
-executado antes, durante ou depois de um determinado ponto de execução do
-sistema. As extensões estáticas permitem adicionar novos elementos na estrutura
-das classes, por exemplo, a inserção de um novo método ou atributo.
+A linguagem AspectJ \cite{AspectJ11} é uma extensão da linguagem Java para programação orientada a aspectos. Qualquer programa implementado em Java
+pode ser estendido utilizando AspectJ. A linguagem provê mecanismos para representar interesses entrecortantes e permite a composição dos mesmos com os interesses 
+núcleo de um sistema. A linguagem oferece construções de extensão dinâmicas e estáticas. As extensões dinâmicas permitem que um novo comportamento
+seja executado antes, durante ou depois de um determinado ponto de execução do sistema. As extensões estáticas permitem adicionar novos elementos na
+estrutura das classes, por exemplo, a inserção de um novo método ou atributo. O conteúdo das próximas seções é baseado no guia de programação da
+linguagem AspectJ \cite{aspectjguide} e no livro AspectJ: in Action \cite{Laddad:2003:AAP:993468}. Os exemplos, no entanto, são originais desta
+dissertação.
 
 \subsubsection{Construções Dinâmicas}
 
-Um dos principais conceitos dinâmicos que devem ser compreendidos na linguagem é
-o de \textbf{ponto de junção}. Um ponto de junção é um determinado ponto na execução
-de um programa. É importante observar que, um ponto de junção não é uma
-construção sintática de AspectJ, mas sim um conceito. 
+Um dos principais conceitos dinâmicos que devem ser compreendidos na linguagem é o de \textbf{ponto de junção}. Um ponto de junção é um determinado
+ponto na execução de um programa. É importante observar que, um ponto de junção não é uma construção sintática de AspectJ, mas sim um conceito. 
 
-A figura \ref{fig:aspects_join_point_model} descreve o fluxo de execução de um
-programa através da troca de mensagens entre diferentes objetos. Nesta troca de
-mensagens existem diversos pontos de junção que podem ser capturados pela 
-linguagem AspectJ. A seguir, será destacado cada ponto de junção nesse fluxo de
-execução. No início da troca de mensagens, é chamado o método
-\textbf{umMetodo()} do \textbf{objetoA}. A chamada de um método em AspectJ 
-é representada pelo ponto de junção \textit{call}. Após a chamada do método, 
-o código do mesmo será executado. A execução de um método é representada pelo 
-ponto de junção \textit{execution}. A duração de execução do método \textbf{umMetodo()} 
-pode ser visualizada na linha de vida em azul. No início da execução de
-\textbf{umMetodo()}, realiza-se a chamada a \textbf{outroMetodo()}. A linha de
-vida em verde representa a duração da execução desse método. Dentro de
-\textbf{outroMetodo()} o método \textbf{metodoInterno()} é chamado. A linha de
-vida em amarelo representa a duração de sua execução. Finalmente, instancia-se o
-\textbf{objetoC} através da chamada \textit{new}. A chamada de um construtor também é um ponto de 
-junção \textit{call} em AspectJ. A execução do mesmo pode ser capturada com o
-ponto de junção \textit{execution}. O tempo de execução da instanciação desse
-construtor pode ser visualizado na linha de vida em rosa. Os pontos de junção
-\textit{call} e \textit{execution} são utilizados para capturar chamada e
-execução de métodos e construtores. 
+A figura \ref{fig:aspects_join_point_model} descreve o fluxo de execução de um programa através da troca de mensagens entre diferentes objetos. Nesta
+troca de mensagens existem diversos pontos de junção que podem ser capturados pela linguagem AspectJ. A seguir, será destacado cada ponto de junção
+nesse fluxo de execução. No início da troca de mensagens, é chamado o método \textbf{umMetodo()} do \textbf{objetoA}. A chamada de um método em
+AspectJ é representada pelo ponto de junção \textit{call}. Após a chamada do método, o código do mesmo será executado. A execução de um método é
+representada pelo ponto de junção \textit{execution}. A duração de execução do método \textbf{umMetodo()} pode ser visualizada na ocorrência de
+execução em azul. No início da execução de \textbf{umMetodo()}, realiza-se a chamada a \textbf{outroMetodo()}. A ocorrência de execução em verde
+representa a duração da execução desse método. Dentro de \textbf{outroMetodo()} o método \textbf{metodoInterno()} é chamado. A ocorrência de execução em 
+amarelo representa a duração de sua execução. Finalmente, instancia-se o \textbf{objetoC} através da chamada \textit{new}. A chamada de um construtor
+também é um ponto de junção \textit{call} em AspectJ. A execução do mesmo pode ser capturada com o ponto de junção \textit{execution}. O tempo de
+execução da instanciação desse construtor pode ser visualizado na ocorrência de execução em rosa. Os pontos de junção \textit{call} e
+\textit{execution} são utilizados para capturar chamada e execução de métodos e construtores. 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/aspects_join_point_model.png}
+	\includegraphics{img/aspects_join_point_model.png}
 	\caption{Identificação de pontos de
 	junção.}\label{fig:aspects_join_point_model}
 \end{figure}
 
-É importante observar a diferença entre entre os pontos de junção de
-\textbf{chamada} (\textit{call}) e \textbf{execução} (\textit{execution}). Um ponto de junção 
-de chamada não está no código do método ou construtor sendo chamado, mas
-sim no código de quem está chamando o método ou construtor em questão. Observe na
-figura \ref{fig:call_vs_execution} que a chamada (\textit{call}) ao método
-\textbf{umMetodo()} é realizada dentro do código \textit{main} da aplicação. Já
-o ponto de junção de execução de um método ou construtor é disparado no corpo do método 
-ou construtor em questão. Observa-se na figura que a execução
-(\textit{execution}) do método \textbf{umMetodo()} refere-se à execução do
-código do próprio método.
+É importante observar a diferença entre entre os pontos de junção de \textbf{chamada} (\textit{call}) e \textbf{execução} (\textit{execution}). Um
+ponto de junção de chamada não está no código do método ou construtor sendo chamado, mas sim no código de quem está chamando o método ou construtor em
+questão. Observe na figura \ref{fig:call_vs_execution} que a chamada (\textit{call}) ao método \textbf{umMetodo()} é realizada dentro do código
+\textit{main} da aplicação. Já o ponto de junção de execução de um método ou construtor é disparado no corpo do método ou construtor em questão.
+Observa-se na figura que a execução (\textit{execution}) do método \textbf{umMetodo()} refere-se à execução do código do próprio método.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/call_vs_execution.png}
+	\includegraphics{img/call_vs_execution.png}
 	\caption{Diferença entre os pontos de junção de chamada (call) e
 	execução (execution).}\label{fig:call_vs_execution}
 \end{figure}
 
-Os pontos de junção que capturam a chamada e execução de métodos e
-construtores são os mais utilizados. No entanto, o modelo de pontos de junção
-de AspectJ permite capturar também o tratamento de exceções, acesso e
-modificação de atributos (\textit{get} e \textit{set}), inicialização e 
-pré-inicialização de objetos, contexto de uma execução e execução de avisos.
-Estes pontos de junção, embora menos utilizados, também devem ser 
-representáveis em uma proposta para modelagem de programas orientados a
-aspectos.
+O modelo de pontos de junção de AspectJ permite capturar também o tratamento de exceções, acesso e modificação de atributos (\textit{get} e
+\textit{set}), inicialização e pré-inicialização de objetos, contexto de uma execução e execução de avisos. Estes pontos de junção também devem ser
+representáveis em uma proposta para modelagem de programas orientados a aspectos.
 
-Os pontos de junção em AspectJ definem quais são os pontos da execução de um
-programa possíveis de serem capturados. A linguagem deve disponibilizar
-alguma construção sintática para selecionar pontos de junção. Para isso, 
-AspectJ disponibiliza os \textbf{pontos de corte} (\textit{pointcuts}). Um ponto
-de corte permite selecionar um conjunto de pontos de junção. 
+Os pontos de junção em AspectJ definem quais são os pontos da execução de um programa possíveis de serem capturados. A linguagem deve disponibilizar
+alguma construção sintática para selecionar pontos de junção. Para isso, AspectJ disponibiliza os \textbf{pontos de corte} (\textit{pointcuts}). Um
+ponto de corte permite selecionar um conjunto de pontos de junção. 
 
 Existem dois tipos de ponto de corte:
 
@@ -256,7 +207,7 @@ código na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/pointcut_vs_joinpoint.png}
+	\includegraphics{img/pointcut_vs_joinpoint.png}
 	\caption{Exemplo de ponto de corte.}\label{fig:pointcut_vs_joinpoint}
 \end{figure}
 
@@ -286,23 +237,20 @@ A captura de todos os métodos pode ser visualizada no código da parte inferior
 da figura \ref{fig:pointcut_vs_joinpoint} (métodos selecionados estão destacados
 com flechas laranjas).
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[width=450px]{img/pointcut_vs_joinpoint_wildcard.png}
+	\includegraphics{img/pointcut_vs_joinpoint_wildcard.png}
 	\caption{Exemplo de ponto de corte utilizando
 	wildcards.}\label{fig:pointcut_vs_joinpoint_wildcard}
 \end{figure}
 
-Os pontos de corte das figuras \ref{fig:pointcut_vs_joinpoint} e
-\ref{fig:pointcut_vs_joinpoint_wildcard} foram definidos utilizando
-\textbf{padrões de assinatura} (\textit{signature patterns}). Um padrão de
-assinatura é utilizado para especificar quais assinaturas de um programa em Java serão capturadas. No
-exemplo de ponte de corte da figura \ref{fig:pointcut_vs_joinpoint}, a
-assinatura \textbf{public void ObjetoA.umMetodo()} permite capturar as chamadas
-ao método \textbf{umMetodo()} do \textbf{ObjetoA}. AspectJ disponibiliza padrões de 
-assinatura para especificar pontos de corte para capturar métodos, construtores,
-tipos, exceções, atribuições, etc. Os seguintes padrões de assinatura estão
-disponíveis:
+Os pontos de corte das figuras \ref{fig:pointcut_vs_joinpoint} e \ref{fig:pointcut_vs_joinpoint_wildcard} foram definidos utilizando \textbf{padrões
+de assinatura} (\textit{signature patterns}). Um padrão de assinatura é utilizado para especificar quais assinaturas de um programa em Java serão capturadas. No
+exemplo de ponte de corte da figura \ref{fig:pointcut_vs_joinpoint} a assinatura \textbf{public void ObjetoA.umMetodo()} permite capturar as chamadas
+ao método \textbf{umMetodo()} do \textbf{ObjetoA} sem retornar nenhum objeto. Já a assinatura \textbf{public void ObjetoA.*(..)} da 
+figura \ref{fig:pointcut_vs_joinpoint_wildcard} permite capturar as chamadas a qualquer método, com qualquer número de parâmetro e sem nenhum
+tipo de retorno do \textbf{ObjetoA}. AspectJ disponibiliza padrões de assinatura para especificar pontos de corte para capturar métodos, construtores,
+tipos, exceções, atribuições, etc. Os seguintes padrões de assinatura estão disponíveis:
 
 \begin{itemize}
   \item \textbf{Assinaturas de Tipo} (\textit{AssinaturaDeTipo}): Permite
@@ -327,9 +275,9 @@ tipo \textbf{ObjetoB}, em qualquer o escopo. O último exemplo apresenta o padrão
 de construtor para capturar a inicialização de objetos do tipo \textbf{ObjetoA}
 sem nenhum parâmetro.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[width=450px]{img/signatures.png}
+	\includegraphics{img/signatures.png}
 	\caption{Exemplo de assinaturas em AspectJ.}\label{fig:signatures}
 \end{figure}
 
@@ -370,16 +318,16 @@ ao próprio método. O ponto de corte da figura \ref{fig:flow_p2} é do tipo
 \textit{cflowbelow()} e captura os mesmos pontos de junção do anterior, exceto a
 chamada ao próprio método.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[width=450px]{img/flow_p1.png}
+	\includegraphics{img/flow_p1.png}
 	\caption{Ponto de corte para captura do fluxo de execução inclusivo:
 	cflow().}\label{fig:flow_p1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[width=450px]{img/flow_p2.png}
+	\includegraphics{img/flow_p2.png}
 	\caption{Ponto de corte para captura do fluxo de execução exclusivo:
 	cflowbelow().}\label{fig:flow_p2}
 \end{figure}
@@ -425,7 +373,7 @@ avisos:
   \textit{after returning}.
   \item \textbf{Durante} (around): É o tipo de aviso mais poderoso, pois
   pode executar no lugar do ponto de junção capturado, continuar a execução
-  original ou alterar o contexto de execução \cite{laddad:03}.
+  original ou alterar o contexto de execução.
 \end{itemize}
 
 A figura \ref{fig:advice_code} mostra um exemplo de um aviso que executa
@@ -441,7 +389,7 @@ permitem passar o contexto de execução para um aviso.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/advice_code.png}
+	\includegraphics{img/advice_code.png}
 	\caption{Exemplo de aviso com contexto de execução.}\label{fig:advice_code}
 \end{figure}
 
@@ -459,20 +407,20 @@ e o objeto que executará este método será um objeto do tipo \textbf{ObjetoA}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=535px]{img/introduction.png}
+	\includegraphics[scale=0.9]{img/introduction.png}
 	\caption{Introdução de métodos e atributos.}\label{fig:introduction}
 \end{figure}
 
 Outra funcionalidade disponível na linguagem é a
 \textbf{modificação da hierarquia de classes}, permitindo a definição de
 relacionamentos de herança, implementação de interfaces, dentre outras
-alterações \cite{laddad:03}. O exemplo da figura
+alterações \cite{Laddad:2003:AAP:993468}. O exemplo da figura
 \ref{fig:introduction_interface} mostra a introdução de um relacionamento de
 herança entre as classes \textbf{ObjetoA} e \textbf{ObjetoB}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=250px]{img/introduction_interface.png}
+	\includegraphics{img/introduction_interface.png}
 	\caption{Introdução de relacionamentos de
 	herança.}\label{fig:introduction_interface}
 \end{figure}
@@ -485,17 +433,15 @@ implementar o aviso que introduzirá o novo comportamento antes, durante ou
 depois do ponto de corte. O elemento da linguagem que agrupa todas essas
 construções é o \textbf{aspecto}. Um aspecto é uma unidade de modularização 
 semelhante a uma classe, mas com diferenças em relação ao ciclo de vida, pois
-não pode ser instancializado e não pode estender de um outro aspecto concreto.
+não pode ser instancializado e não pode especializar de um outro aspecto concreto.
 No entanto, um aspecto pode ser declarado como abstrato e aspectos concretos
 podem estendê-lo para implementar suas declarações abstratas.
 
 \subsubsection{Exemplo de Aspecto}
 
-O objetivo deste exemplo é utilizar a linguagem AspectJ para implementar de
-maneira elegante o padrão de projeto \textbf{Observador}. Este padrão permite
-que um ou mais objetos se cadastrem para escutar mudanças de um outro objeto. A
-implementação do padrão está presente nos exemplos da IDE para desenvolvimento
-com aspectos: AspectJ Development Tools (AJDT) \cite{AspectJ11}.
+O objetivo deste exemplo é utilizar a linguagem AspectJ para implementar de maneira elegante o padrão de projeto \textbf{Observador}
+\cite{Gamma:1995:DPE:186897}. Este padrão permite que um ou mais objetos se cadastrem para escutar mudanças de um outro objeto. A implementação do padrão está 
+presente nos exemplos da IDE para desenvolvimento com aspectos: AspectJ Development Tools (AJDT) \cite{AspectJ11}.
 
 Um dos requisitos deste padrão é que um ou mais objetos (observadores) possam
 escutar mudanças de um outro objeto (sujeito) e serem atualizados. Assim,
@@ -513,7 +459,7 @@ atributo \textit{observers} e dos métodos \textit{addObserver()},
 
 \begin{figure}
 	\centering
-	\includegraphics[width=325px]{img/aspect_1.png}
+	\includegraphics{img/aspect_1.png}
 	\caption{Introduções de métodos e atributos para
 	sujeito e observador.}\label{fig:aspect_1}
 \end{figure}
@@ -530,7 +476,7 @@ ponto de corte e o aviso pode ser visualizado na figura \ref{fig:aspect_2}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=350px]{img/aspect_2.png}
+	\includegraphics{img/aspect_2.png}
 	\caption{Especificação do ponto de corte abstrato para capturar mudanças e
 	implementação do aviso para atualizar observadores na
 	ocorrência de uma mudança.}\label{fig:aspect_2}
@@ -546,7 +492,7 @@ nome de \textit{SubjectObserverProtocol} e pode ser visualizado na figura
 
 \begin{figure}
 	\centering
-	\includegraphics[width=425px]{img/aspects_observer_1.png}
+	\includegraphics{img/aspects_observer_1.png}
 	\caption{Aspecto abstrato para implementação do
 	padrão de projeto Observador.}\label{fig:aspects_observer_1}
 \end{figure}
@@ -581,7 +527,7 @@ Este aspecto captura cliques em um botão, atualizando a cor de um texto.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=425px]{img/aspects_observer_2.png}
+	\includegraphics{img/aspects_observer_2.png}
 	\caption{Aspecto concreto implementando o
 	padrão de projeto Observador em um sistema de
 	interface gráfica.}\label{fig:aspects_observer_2}
@@ -589,7 +535,7 @@ Este aspecto captura cliques em um botão, atualizando a cor de um texto.
 
 \section{Análise e Projeto com UML}
 
-A análise e projeto de sistemas orientados a objetos é fundamental para o
+A análise e projeto de sistemas orientados a objetos é importante para o
 desenvolvimento de aplicações complexas. Aplicações complexas necessitam de um
 planejamento antes da implementação. Usualmente divide-se o desenvolvimento de
 um sistema em quatro fases: análise, projeto, implementação e testes
@@ -623,138 +569,115 @@ diferentes pontos de vista:
   desse elemento.
 \end{itemize}
   
-Uma modelagem que permita representar esses quatro pontos de vista pode ser
-considerada completa. Uma \textbf{modelagem completa} fornece subsídios para a
-geração de código e facilita a compreensão de um sistema, tornando-o
-manutenível e possibilitando o reuso. 
+Uma modelagem que permita representar esses quatro pontos de vista pode ser considerada completa. Uma \textbf{modelagem completa} fornece subsídios
+para a geração de código e facilita a compreensão de um sistema, tornando-o manutenível e possibilitando o reuso. 
 
 \section{UML: Segunda Versão}
 
-A segunda versão da UML \cite{uml:05} permite representar os elementos e o
-comportamento e a estrutura de um sistema nas fases de análise e projeto através
-de diagramas estruturais e comportamentais. Esta linguagem 
-é um padrão da \textit{Object Management Group} (OMG), por isso é compreendida e
-utilizada por grande parte dos desenvolvedores e analistas para realizar a
-modelagem de sistemas. Os diagramas da segunda versão da UML permitem a
-representação dos quatro pontos de vista essenciais para programas 
-orientados a objetos.
+A segunda versão da UML \cite{uml:05} permite representar os elementos e o comportamento e a estrutura de um sistema nas fases de análise e projeto
+através de diagramas estruturais e comportamentais. Esta linguagem é um padrão da \textit{Object Management Group} (OMG), por isso é compreendida e
+utilizada por grande parte dos desenvolvedores e analistas para realizar a modelagem de sistemas. Os diagramas da segunda versão da UML permitem a
+representação dos quatro pontos de vista essenciais para programas  orientados a objetos. As seções que tratam dos diagramas estruturais e
+comportamentais da UML são baseadas no conteúdo do livro UML 2 em Modelagem Orientada a Objetos \cite{uml2ricardo:03} e no Tutorial de UML da Sparx
+Systems \cite{sparx_tutorial}.
 
 \subsection{Diagramas Estruturais}
 
-A segunda versão da UML disponibiliza sete diagramas estruturais:
-diagrama de classes, componentes, estrutura composta, instalação, objetos,
-pacotes e perfil. Os diagramas estruturais utilizados nesta dissertação 
-são os diagramas de classe e o diagrama de perfil. Este último foi introduzido
-na segunda versão da linguagem e é fundamental para extensão da linguagem para
-um domínio específico.
+A segunda versão da UML disponibiliza sete diagramas estruturais: diagrama de classes, componentes, estrutura composta, instalação, objetos,
+pacotes e perfil. Os diagramas estruturais utilizados nesta dissertação são os diagramas de classe e o diagrama de perfil. Este último foi
+introduzido na versão 2.2 da linguagem e é importante para extensão da linguagem para um domínio específico.
 
 \subsubsection{Diagrama de Classes}
 
-O diagrama de classes permite representar a estrutura e os relacionamentos dos
-elementos de um sistema. Este diagrama permite visualizar o sistema como um
-todo, visualizando os relacionamentos entre os elementos e também permite
-visualizar a estrutura de cada elemento, com seus atributos e
-métodos.
+O diagrama de classes permite representar a estrutura e os relacionamentos dos elementos de um sistema. Este diagrama permite visualizar o sistema
+como um todo, visualizando os relacionamentos entre os elementos e também permite visualizar a estrutura de cada elemento, com seus atributos e
+métodos. Os principais componentes deste diagrama são as classes, associações, atributos, métodos e pacotes.
 
 \subsubsection{Diagrama de Perfil}
 
-O diagrama de perfil foi introduzido na segunda versão da UML, com o objetivo de
-permitir estender o modelo da linguagem para representar conceitos de um
-determinado domínio de aplicações. Um perfil é composto por \textbf{estereótipos}, \textbf{restrições}
-e \textbf{valores rotulados}. 
+O diagrama de perfil permite estender o modelo da linguagem para representar conceitos de um determinado domínio de aplicações. Um perfil é composto
+por \textbf{estereótipos}, \textbf{restrições} e \textbf{valores rotulados}. 
 
 Um \textbf{estereótipo} adiciona uma semântica adicional a um elemento da UML.
 Geralmente adiciona-se um estereótipo para diferenciar os papéis dos elementos de um
 modelo. Por exemplo, a classe \textit{RoomManager} da figura
-\ref{fig:stereotype_1} foi associada ao estereótipo \textit{<<Controller>>} 
+\ref{fig:stereotype_1} foi associada ao estereótipo \textit{Controller} 
 para representar que esta classe tem o papel de controlador. É possível
 adicionar mais de um esreótipo a mesma classe. A classe
 \textit{ReservationManager} foi associada aos estereótipos
-\textit{<<Controller>>} e \textit{<<Client>>} para representar que esta classe é
+\textit{Controller} e \textit{Client} para representar que esta classe é
 um controlador e que encontra-se do lado do cliente. Os estereótipos
-\textit{<<Client>>} e \textit{<<Controller>>} estendem o elemento do 
+\textit{Client} e \textit{Controller} estendem o elemento do 
 meta-modelo da UML \textit{Class}, podendo assim ser aplicados a qualquer classe. 
 É importante observar que, um estereótipo pode ser associado a qualquer elemento 
 do meta-modelo da UML. O atributo \textit{id} da classe \textit{Room} está associado 
-ao estereótipo \textit{<<key>>} para representar que este atributo define unicamente 
-uma sala. O estereótipo \textit{<<key>>} está estendendo o meta-modelo da UML
+ao estereótipo \textit{key} para representar que este atributo define unicamente 
+uma sala. O estereótipo \textit{key} está estendendo o meta-modelo da UML
 \textit{Attribute}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=350px]{img/stereotype_1.png}
+	\includegraphics{img/stereotype_1.png}
 	\caption{Uso de estereótipos em um diagrama de
 	classes.}\label{fig:stereotype_1}
 \end{figure}
 
-Um estereótipo adiciona um papel a um elemento do modelo. Para adicionar
-mais informações a um elemento, podem-se definir \textbf{valores rotulados}. A
-linguagem permite associar zero ou mais valores rotulados a um estereótipo. Um valor
-rotulado pode ser um elemento do modelo, um número, um texto, um booleano ou uma
-enumeração definida pelo usuário. Ao utilizar um estereótipo em um modelo,
-deve-se definir os valores rotulados associados ao mesmo. Finalmente,
-\textbf{restrições} podem ser introduzidas ao modelo para garantir a
-consistência no próprio modelo e nos seus relacionamentos.
+Um estereótipo adiciona um papel a um elemento do modelo. Para adicionar mais informações a um elemento, podem-se definir \textbf{valores rotulados}.
+A linguagem permite associar zero ou mais valores rotulados a um estereótipo. Um valor rotulado pode ser um elemento do modelo, um número, um texto, um booleano ou uma 
+enumeração definida pelo usuário. Ao utilizar um estereótipo em um modelo, deve-se definir os valores rotulados associados ao mesmo. Os valores
+rotulados adicionam uma semântica adicional ao estereótipo, podendo ser utilizados por ferramentas que trabalham em cima dos modelos especificados. 
+Finalmente, \textbf{restrições} podem ser introduzidas ao modelo para garantir a consistência no próprio modelo e nos seus relacionamentos.
 
-A figura \ref{fig:profile_diagram} mostra a definição de um perfil UML para
-modelagem de sistemas que desejam representar veículos \cite{VisualParadigm11}. 
-Foram definidos sete estereótipos que estendem o elemento do meta-modelo
-\textit{Class}. Observa-se a generalização entre os estereótipos 
-\textit{Vehicle}, \textit{Mini}, \textit{Pickup Truck} e \textit{Convertible}. O estereótipo \textit{Pickup
-Truck} especializa o estereótipo \textit{Vehicle}. O relacionamento de
-composição entre os estereótipos \textit{Interior} e \textit{Seat} define que o
-interior de um veículo deve ter no mínimo um assento. Observa-se também a presença 
-de dois valores rotulados do tipo texto no estereótipo \textit{Seat}:
-\textit{texture} e \textit{pattern}. Este perfil pode ser exportado no formato
-\textit{XML Metadata Interchange} (XMI) \sigla{XMI}{XML Metadata Interchange}
-\cite{xmi:11} e utilizado por outras ferramentas do tipo \textit{Computer Aided
-Software Engineering} (CASE) \sigla{CASE}{Computer Aided Software Engineering}.
-Assim, é possível intercambiar perfis entre diferentes ferramentas CASE.
+A figura \ref{fig:profile_diagram} mostra a definição de um perfil UML para modelagem de sistemas que desejam representar veículos
+\cite{VisualParadigm11}. Foram definidos sete estereótipos que estendem o elemento do meta-modelo \textit{Class}. Observa-se a generalização entre os
+estereótipos \textit{Vehicle}, \textit{Mini}, \textit{Pickup Truck} e \textit{Convertible}. O estereótipo \textit{Pickup Truck} especializa o
+estereótipo \textit{Vehicle}. O relacionamento de composição entre os estereótipos \textit{Interior} e \textit{Seat} define que o interior de um
+veículo deve ter no mínimo um assento. Observa-se também a presença de dois valores rotulados do tipo texto no estereótipo \textit{Seat}:
+\textit{texture} e \textit{pattern}. Este perfil pode ser exportado no formato \textit{XML Metadata Interchange} (XMI) \sigla{XMI}{XML Metadata
+Interchange} \cite{xmi:11} e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engineering} (CASE) \sigla{CASE}{Computer Aided
+Software Engineering}. Assim, é possível intercambiar perfis entre diferentes ferramentas CASE. A vantagem do intercâmbio de perfis é o reuso de
+especificações já prontas sobre um determinado domínio de aplicação. Um exemplo de perfil que pode ser reusado por outros desenvolvedores é um perfil
+que especifique sistemas orientados a aspectos.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=425px]{img/profile_diagram.png}
+	\includegraphics{img/profile_diagram.png}
 	\caption{Diagrama de Perfil para representar
 	veículos.}\label{fig:profile_diagram}
 \end{figure}
 
 \subsection{Diagramas Comportamentais}
 
-A segunda versão da UML possui sete diagramas comportamentais: diagrama de
-atividades, máquina de estados, casos de uso, comunicação, visão geral de 
-interação, sequência e de tempo. Neste trabalho serão utilizados os
-diagramas de casos de uso e de sequência.
+A segunda versão da UML possui sete diagramas comportamentais: diagrama de atividades, máquina de estados, casos de uso, comunicação, visão geral de 
+interação, sequência e de tempo. Neste trabalho serão utilizados os diagramas de máquina de estados e de sequência.
 
-\subsubsection{Diagrama de Casos de Uso}
+\subsubsection{Diagrama de Máquina de Estados}
 
-Este diagrama permite representar as funcionalidades de um sistema, sem detalhar
-como o sistema as realiza. Cada interesse do sistema pode ser modelado como um
-caso de uso. Cada caso de uso deve ser refinado em um menor nível de abstração
-para representar como o mesmo é realizado. Podem-se utilizar diagramas de
-atividades e de sequência para representar a realização de um caso de uso.
+O diagrama de máquina de estaods representa os estados e o comportamento de um objeto, especificando a sequência de eventos que um objeto recebe
+durante sua existência. Os principais componentes deste diagrama são os estados e as transições. Um diagrama de máquina de estados também pode
+representar concorrência utilizando nodos \textit{fork} e \textit{join} com regiões concorrentes. Este mecanismo permite realizar a sincronização
+entre diferentes estados. Na POO utiliza-se o diagrama de máquina de estados para especificar os diferentes estados de uma classe.
+Neste caso, cada estado representa uma configuração dos atributos da classe. As transições são as execuções de métodos, que modificam valores de
+atributos, evoluindo a classe para um novo estado.
 
 \subsubsection{Diagrama de Sequência}
 
-O diagrama de sequência representa as trocas de mensagens entre objetos. 
-Este diagrama permite compreender a interação entre objetos com
-foco no tempo e na ordem das mensagens durante uma execução. O comportamento
+O diagrama de sequência representa as trocas de mensagens entre objetos. Este diagrama permite compreender a interação entre objetos com
+foco no tempo e na ordem das mensagens durante uma execução. Os principais componentes do diagrama de sequência são as linhas de vida de objetos, as
+mensagens e os fragmentos combinados. Um fragmento combinado permite adicionar condições e iterações em uma troca de mensagens. Outro componente
+importante e utilizado nesta dissertação é a invariante de estado, que permite estabelecer uma condição para que um conjunto de mensagens seja
+executado. Este conjunto de mensagens somente será executado quando o sistema atingir o estado associado com a invariante de estado. O comportamento
 de cada caso de uso pode ser refinado com um diagrama de sequência.
-
 
 \section{Meta-modelagem}
 
-Uma linguagem geralmente é definida através de uma gramática na forma \textit{Backus Naur Form} (BNF) 
-\sigla{BNF}{Backus Naur Form}. Uma linguagem bem definida pode ser interpretada
-de forma automatizada por um computador. Este método de definição de linguagens é utilizado até hoje 
-para representar linguagens baseadas em texto. No entanto, as linguagens para modelagem 
-contém elementos não-textuais e, por isso, necessitam de um novo
-mecanismo de definição. Este mecanismo é denominado \textbf{meta-modelagem},
-que permite a descrição de uma linguagem na forma de um modelo \cite{mda:03}. Um
-meta-modelo de uma linguagem define os elementos que podem ser utilizados na
-criação de modelos utilizando esta linguagem. Considerando a UML como exemplo, o
-meta-modelo da linguagem define elementos como Classe, Estado, Pacote, Operação, etc. 
-Assim, um modelo definido utilizando UML pode definir instâncias de classes, estados, pacotes, operações,
-etc.
+Uma linguagem geralmente é definida através de uma gramática na forma \textit{Backus Naur Form} (BNF) \sigla{BNF}{Backus Naur Form}. Uma linguagem
+bem definida pode ser interpretada de forma automatizada por um computador. Este método de definição de linguagens é utilizado até hoje para
+representar linguagens baseadas em texto. No entanto, as linguagens para modelagem contém elementos não-textuais e, por isso, necessitam de um novo
+mecanismo de definição. Este mecanismo é denominado \textbf{meta-modelagem}, que permite a descrição de uma linguagem na forma de um modelo
+\cite{mda:03}. Um meta-modelo de uma linguagem define os elementos que podem ser utilizados na criação de modelos utilizando esta linguagem.
+Considerando a UML como exemplo, o meta-modelo da linguagem define elementos como Classe, Estado, Pacote, Operação, etc. Assim, um modelo definido
+utilizando UML pode definir instâncias de classes, estados, pacotes, operações, etc.
 
 A OMG define uma arquitetura em quatro camadas para representar os modelos
 padrões para definição de modelos. Esta arquitetura pode ser visualizada
@@ -780,7 +703,7 @@ instância é um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=350px]{img/omg_meta_model.png}
+	\includegraphics{img/omg_meta_model.png}
 	\caption{Meta-modelo da Object Management
 	Group (OMG).}\label{fig:omg_meta_model}
 \end{figure}
@@ -799,7 +722,7 @@ definida no meta-modelo da OMG.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=350px]{img/uml_meta_model.png}
+	\includegraphics{img/uml_meta_model.png}
 	\caption{Meta-modelo da UML.}\label{fig:uml_meta_model}
 \end{figure}
 

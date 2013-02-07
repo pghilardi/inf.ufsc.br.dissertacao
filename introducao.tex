@@ -1,25 +1,25 @@
 \chapter{Introdução}
 
 Este capítulo contextualiza o tema deste trabalho, apresentando motivações para o uso da programação orientada a aspectos e a necessidade de realizar
-a modelagem de sistemas orientados a aspectos. Apresentam-se os objetivos, a metodologia da pesquisa e a justificativa para realização do estudo. Ao
-final, apresentam-se os resultados esperados, as limitações e a organização desta dissertação.
+a modelagem de sistemas orientados a aspectos. Apresentam-se os objetivos, a hipótese, a metodologia da pesquisa e a justificativa para realização do
+estudo. Ao final, apresentam-se os resultados obtidos, as limitações e a organização desta dissertação.
 
 \section{Contextualização}
 
 A Programação Orientada a Objetos (POO) \sigla{POO}{Programação Orientada a Objetos} é um paradigma de programação amplamente difundido e utilizado
-para o desenvolvimento de aplicações. Esse paradigma permite implementações em um maior nível de abstração e o reuso de comportamentos
+para o desenvolvimento de aplicações. Esse paradigma permite implementações em um nível mais alto de abstração e o reuso de comportamentos
 \cite{Laddad:2003:AAP:993468}.
 
 O desenvolvimento de um sistema utilizando POO geralmente é dividido em quatro fases: análise, projeto, implementação e testes
 \cite{pressman:01}. Durante as fases de análise e projeto eliciam-se os requisitos e elabora-se a modelagem do sistema. Esta modelagem deve expressar 
-características estruturais e dinâmicas. As características estruturais representam os interrelacionamentos entre os componentes do sistema:
-as classes em um programa orientado a objetos. A parte dinâmica representa as funcionalidades do sistema e como elas são realizadas em tempo de
-execução. Ambas características devem ser modeladas em alto (modelos representando o domínio do problema) e baixo nível de abstração (modelos próximos
-ao nível de código), obtendo assim uma visão do todo e da parte \cite{silva:00}.
+características estruturais e dinâmicas. As características estruturais representam os interrelacionamentos entre os componentes do sistema. A parte
+dinâmica representa as funcionalidades do sistema e como elas são realizadas em tempo de execução. Ambas características devem ser modeladas em alto 
+(modelos representando o domínio do problema) e baixo nível de abstração (modelos próximos ao nível de código), obtendo assim uma visão do todo e da
+parte \cite{silva:00}.
 
 Na fase de análise, primeiramente deve-se descobrir qual o problema do cliente e eliciar quais são os requisitos do sistema. Cada requisito
-pode ser classificado como um interesse do cliente afim de atingir um objetivo final \cite{Laddad:2003:AAP:993468}. Ao final do desenvolvimento, após
-a modelagem nas fases de análise e projeto e o código nas fases de implementação e testes, todos interesses do cliente devem estar resolvidos, tendo
+pode ser classificado como um interesse do cliente a fim de atingir um objetivo final \cite{Laddad:2003:AAP:993468}. Ao final do desenvolvimento,
+após a modelagem nas fases de análise e projeto e o código nas fases de implementação e testes, todos interesses do cliente devem estar resolvidos, tendo
 como resultado um sistema completo e funcional. Os interesses podem ser separados em dois tipos \cite{Laddad:2003:AAP:993468}:
 
 \begin{itemize}
@@ -31,7 +31,7 @@ A POO pode ser utilizada para implementação de ambos tipos de interesses. O prob
 interesses entrecortantes com interesses núcleo, prejudicando a manutenabilidade e compreensão do código. Conclui-se que a POO tem limitações para
 implementar extensões para comportamentos que impactam várias partes de um sistema: os interesses entrecortantes
 \cite{Kiczales97aspect-orientedprogramming}. A Programação Orientada a Aspectos (POA) \sigla{POA}{Programação Orientada a Aspectos} é uma extensão a
-POO para permitir uma implementação mais elegante para interesses entrecortantes.
+POO que permite uma implementação mais elegante para interesses entrecortantes.
 
 O objetivo da POA é a modularização dos interesses entrecortantes para que os mesmos fiquem separados dos módulos que implementam os interesses
 núcleo da aplicação \cite{Laddad:2003:AAP:993468}. Os interesses devem ser separados em módulos em todas as fases do desenvolvimento: análise,
@@ -46,9 +46,8 @@ Segundo \cite{silva:00}, na modelagem de programas orientados a objetos podem-se
 comportamental de sistema e estrutural e comportamental de classe. Um sistema modelado pelos quatro pontos de vista permite a compreensão e manutenção
 do sistema e contribui para a geração de código em qualquer linguagem de programação, sendo considerada assim uma modelagem completa \cite{silva:07}.
 
-Em relação a modelagem de sistemas orientados a aspectos, deve-se modelar a estrutura e a dinâmica do sistema. Algumas abordagens já foram propostas
-para modelagem de sistemas orientados a aspectos com UML. Um grupo de propostas estende o meta-modelo da linguagem
-\cite{Kienzle:2009:AMM:1509239.1509252} \cite{theme:04} \cite{Klein:2007:WMA:1805812.1805819} \cite{Jacobson:2004:ASD:1062430} \cite{france:06},
+Algumas abordagens já foram propostas para modelagem de sistemas orientados a aspectos com UML (Unified Modeling Language) \cite{uml:05}. Um
+grupo de propostas estende o meta-modelo da linguagem \cite{Kienzle:2009:AMM:1509239.1509252} \cite{theme:04} \cite{Klein:2007:WMA:1805812.1805819} \cite{Jacobson:2004:ASD:1062430} \cite{france:06},
 introduzindo novas construções para representar a estrutura e o comportamento de aplicações orientadas a aspectos. Outro conjunto de propostas estende
 a UML através de um perfil UML \cite{Evermann:2007:MSP:1229375.1229379} \cite{Cottenier06themotorola} \cite{Cui:2009:MIA:1529282.1529377}, o qual
 pode ser utilizado em ferramentas CASE que suportem a importação de perfis. No entanto, não existe nenhuma abordagem para modelagem de aspectos que
@@ -61,15 +60,14 @@ limitam a modelar apenas parte destas características.
 
 \subsection{Objetivo Geral}
 
-Propor uma metodologia para modelar aspectos nas fases de análise e projeto com a segunda versão da UML. Esta modelagem deve representar a estrutura
-e a dinâmica de um sistema, automatizar parte do processo de modelagem, permitindo a alternância de visões da dinâmica do sistema (com e sem
-explicitação dos aspectos) e, com isso, facilitar a compreensão e manutenção dos modelos.
+Propor uma abordagem para modelar sistemas orientados a aspectos nas fases de análise e projeto com a segunda versão da UML. Esta modelagem deve
+representar a estrutura e a dinâmica de um sistema, permitir automatizar parte do processo de modelagem, possibilitando a alternância de visões da
+dinâmica do sistema (com e sem explicitação dos aspectos) e, com isso, facilitar a compreensão e manutenção dos modelos.
 
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-  \item Modelar as características inerentes a aspectos com a segunda versão da Unified Modeling Language (UML) \cite{uml:05} \sigla{UML}{Unified
-  Modeling Language}.
+  \item Modelar as características inerentes a aspectos com a segunda versão da UML.
   \item Representar a estrutura e a dinâmica de sistemas orientados a aspectos, fornecendo subsídios para a composição de modelos e facilitando 
   a compreensão e manutenção do sistema.
   \item Permitir a alternância de visões do comportamento dinâmico de um sistema orientado a aspectos, visualizando o efeito de modelos de
@@ -84,7 +82,8 @@ modelagem em um procedimento algorítmico capaz de explicitar e ocultar dinamicam
 \section{Justificativa}
 
 Tratando-se de POO, uma modelagem pode ser considerada completa se modelar os quatro pontos de vista fundamentais \cite{silva:00}. Em relação a
-programas orientados a aspectos, definem-se dois requisitos importantes para se obter uma modelagem completa:
+sistemas orientados a aspectos, além da modelagem estrutural e comportamental, definem-se dois requisitos importantes para se obter uma modelagem
+completa:
 
 \begin{enumerate}
   \item Representação das características inerentes à programas orientados a aspectos como: \textit{wildcards}, pontos de corte, avisos e
@@ -128,32 +127,12 @@ relação aos procedimentos técnicos utilizados, classifica-se esta pesquisa como 
 material já publicado sobre a modelagem de sistemas orientados a aspectos. Esta pesquisa também tem um caráter \textbf{experimental} com a
 implementação do protótipo para modelagem de aspectos no ambiente SEA.
 
-\section{Resultados Esperados}
-
-Com a conclusão desse trabalho tem-se como resultados esperados:
-
-\begin{itemize}
-  \item Um perfil UML que permita representar as características de sistemas orientados a aspectos. Este perfil pode ser importado em ferramentas CASE
-  que suportem a importação de perfis.
-  \item Uma ferramenta que possibilite modelar um sistema orientado a aspectos, representando as características inerentes à POA, permitindo
-  realizar a composição de aspectos e visualizar o efeito dos mesmos em modelos núcleo. 
-  \item Comparação entre este trabalho e outros propostos na literatura, de acordo com alguns parâmetros de comparação.
-\end{itemize}
-
-\section{Limitações desta Dissertação}
-
-Este trabalho é focado na linguagem AspectJ, linguagem padrão para o desenvolvimento de programas orientados a aspectos em Java. Optou-se por
-utilizar AspectJ, pois é uma das linguagens mais maduras do paradigma de orientação a aspectos. Além disso, esta linguagem foi a primeira
-linguagem que trata de aspectos, originada a partir do trabalho pioneiro sobre aspectos de Kickzales \cite{Kiczales97aspect-orientedprogramming}. 
-
-A ferramenta proposta neste trabalho não permitirá a geração de código na linguagem AspectJ, apenas a composição em nível de modelo, pois o foco
-deste trabalho é na modelagem de sistemas em alto nível de abstração, para facilitar a compreensão e manutenção de um sistema.
-
 \section{Organização desta dissertação}
 
-Esta dissertação está organizada da seguinte maneira: o Capítulo {2} apresenta a fundamentação teórica com conceitos de programação orientada a
-aspectos e da linguagem AspectJ, conceitos de análise e projetos de sistemas e modelagem e meta-modelagem com a segunda versão da UML. O Capítulo {3}
-apresenta uma análise acerca dos trabalhos correlatos. O Capítulo {4} apresenta a metodologia de modelagem para a especificação de sistemas orientados
-a aspectos, incluindo o algoritmo para composição de aspectos. O Capítulo {5} apresenta dois estudos de caso que verificam a aplicabilidade da
-abrodagem proposta. O Capítulo {6} apresenta uma comparação entre diferentes abordagens para modelagem de sistemas orientados a aspectos. Finalizando, 
-o Capítulo {7} apresenta as conclusões deste trabalho.
+Esta dissertação está organizada da seguinte maneira: o presente capítulo descreveu a motivação para a modelagem de sistemas orientados a aspectos,
+objetivos, hipótese, método de pesquisa e justificativa. O capítulo {2} apresenta a fundamentação teórica com conceitos de programação orientada a
+aspectos e da linguagem AspectJ, conceitos de análise e projetos de sistemas e modelagem e meta-modelagem com a segunda versão da UML. O capítulo {3} 
+apresenta uma análise acerca dos trabalhos correlatos. O capítulo {4} apresenta a metodologia de modelagem para a especificação de sistemas orientados
+a aspectos, incluindo o algoritmo para composição de aspectos. O capítulo {5} apresenta dois estudos de caso que verificam a aplicabilidade da
+abrodagem proposta. O capítulo {6} apresenta uma comparação entre diferentes abordagens para modelagem de sistemas orientados a aspectos. Finalizando, 
+o capítulo {7} apresenta as conclusões deste trabalho.
