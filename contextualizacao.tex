@@ -18,13 +18,17 @@ AspectJ.
 Ao iniciar a análise e projeto de um sistema, existe um conjunto de requisitos que devem ser implementados para satisfazer as necessidades do cliente.
 Cada requisito pode ser considerado um interesse que deve ser realizado para finalizar o sistema como um todo. Assim, um sistema é composto por um
 conjunto de interesses. Em um sistema para gerenciamento de hotel, por exemplo, é possível identificá-los como: reserva de quartos, \textit{check-in},
-\textit{check-out}, plano de fidelização, controle de acesso, garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
+\textit{check-out}, acúmulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens, controle de acesso,
+garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
 
-No sistema de gerenciamento de hotel é possível classificar reserva de quartos e plano de fidelização como interesses núcleo. Controle de acesso e
-garantia de \textit{performance} impactam diversas partes do sistema, por isso, são classificados como interesses entrecortantes. Controle de acesso
-deve verificar quais usuários podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses núcleo. Garantia de
-\textit{performance} impacta todos os outros interesses, pois para garantir \textit{peformance} todo o sistema deve ser implementado com cuidados
-específicos.
+No sistema de gerenciamento de hotel é possível classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses núcleo.
+Os interesses de controle de acesso, acúmulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens e garantia
+de \textit{performance} impactam diversas partes do sistema, por isso, são classificados como interesses entrecortantes. O interesse de controle de acesso deve 
+verificar quais usuários podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses núcleo. O interesse de
+acúmulo de pontos em um programa de fidelidade impacta qualquer pagamento realizado. O interesse de controle de uma lista de espera impacta a
+reserva de quartos. Já o registro de mensagens impacta grande parte dos interesses, pois as transações do sistema são registradas. Garantia de
+\textit{performance} impacta todos os outros interesses, pois para garantir \textit{peformance} todo o sistema deve ser implementado com restrições
+de segurança.
 
 \begin{figure}
 	\centering
@@ -32,19 +36,15 @@ específicos.
 	\caption{Separação de interesses do módulo para Reserva de Quarto}\label{fig:context_aspect_concerns}
 \end{figure}
 
-Utilizando os paradigmas convencionais para implementação de
-interesses, como a Programação Orientada a Objetos (POO), o módulo
-para implementar o interesse de reserva de quartos seria composto 
-por código referente a reserva, e também a garantia de \textit{performance} e 
-controle de acesso. A figura \ref{fig:context_aspect_concerns} mostra 
-os interesses presentes no módulo de reserva de quartos. Observa-se a
-implementação de vários interesses no mesmo módulo. Segundo Laddad\cite{Laddad:2003:AAP:993468}, essa situação é conhecida como
-\textbf{emaranhamento de código} (\textit{code tangling}).
+Utilizando os paradigmas convencionais para implementação de interesses, como a Programação Orientada a Objetos (POO), o módulo
+para implementar o interesse de reserva de quartos seria composto  por código referente a reserva, e também a garantia de \textit{performance} e 
+controle de acesso. A figura \ref{fig:context_aspect_concerns} mostra os interesses presentes no módulo de reserva de quartos. Observa-se a
+implementação de vários interesses no mesmo módulo. Segundo Laddad\cite{Laddad:2003:AAP:993468}, essa situação é conhecida como \textbf{emaranhamento
+de código} (\textit{code tangling}).
 
-Outro sintoma de implementação deselegante de interesses é o
-\textbf{espalhamento de código} (\textit{code scattering}), quando o código 
-referente a um mesmo interesse está disposto em diferentes módulos
-\cite{Laddad:2003:AAP:993468}. O espalhamento de código pode acontecer em duas situações:
+Outro sintoma de implementação deselegante de interesses é o \textbf{espalhamento de código} (\textit{code scattering}), quando o código 
+referente a um mesmo interesse está disposto em diferentes módulos \cite{Laddad:2003:AAP:993468}. O espalhamento de código pode acontecer em duas
+situações:
 
 \begin{itemize}
   \item \textbf{Duplicação de código}: Diferentes módulos núcleo executam código
