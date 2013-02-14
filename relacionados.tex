@@ -799,177 +799,132 @@ especifique todos os modelos manualmente, inclusive os modelos compostos.
 
 Existem algumas abordagens para modelagem de sistemas orientados a aspectos. É importante identificar alguns pontos de variação entre estas
 abordagens. Este artigo propõe uma comparação entre diferentes abordagens considerando alguns critérios de comparação. Alguns critérios são baseados 
-em outros trabalhos disponíveis na literatura, como o trabalho de Wimmer \cite{wimmer:2011:SUA:1978802.1978807}. Utilizam-se os seguintes critérios
-propostos por Wimmer \cite{wimmer:2011:SUA:1978802.1978807}:
+no trabalho proposto por Wimmer \cite{wimmer:2011:SUA:1978802.1978807} e outros são propostos por este trabalho. Para permitir uma melhor
+visualização das tabelas de comparação, as abordagens são abreviadas com as três primeiras letras do autor principal. A seguir, são apresentados os
+critérios baseados no trabalho de Wimmer \cite{wimmer:2011:SUA:1978802.1978807} e alguns critérios propostos por esta dissertação. Para cada
+critério, apresenta-se a tabela de comparação entre as abordagens e uma pequena discussão sobre os resultados de cada tabela.
 
-
-
+\subsection{Critérios de Linguagem}
 
 \begin{itemize}
-  \item \textbf{Mecanismo de Extensão:} Algumas abordagens criam um perfil UML que estende a UML e pode ser utilizado em ferramentas CASE que
-  suportem a importação de perfis. Outras abordagens modificam o meta-modelo da UML, diminuindo a possibilidade de reuso.
-  \item \textbf{Especificação Estrutural?} As abordagens devem permitir especificar introduções, como a adição de métodos, atributos e mudanças em
-  associações (herança e implementação de interfaces). Aspectos também devem ser especificados.
-  \item \textbf{Especificação Comportamental?} A modelagem de pontos de corte e avisos é mandatória para uma abordagem que deseja especificar o
-  comportamento de sistemas orientados a aspectos. A conexão entre pontos de corte e avisos também é desejável, pois permite compreender melhor a
-  dinâmica do sistema.
-  \item \textbf{Composição Automática?} A composição automática de modelos diminui o tempo necessário para realizar uma modelagem, pois parte do
-  esforço é automatizado em uma ferramenta, sem esforço do desenvolvedor.
-  \item \textbf{Alternância de Visões:} Permite a alternância de visões, visualizando apenas os modelos núcleo, ou a composição de modelos núcleo com
-  modelos entrecortantes, diferenciando cada modelo no modelo composto.
-  \item \textbf{Nível de Abstração:} A abordagem pode especificar aspectos em baixo nível de abstração, próximo da linguagem alvo, ou em alto
-  nível de abstração, em nível de modelo, facilitando a compreensão.
-  \item \textbf{Provado por Exemplos?} Verifica se os exemplos utilizados são relevantes e comprovam a aplicabilidade da proposta para modelagem de
-  sistemas orientados a aspectos.
-  
+	\item \textbf{Linguagem para Modelagem (L.M)}: Diz respeito a linguagem utilizada para modelagem. Neste trabalho apenas abordagens que utilizam UML
+	são estudadas. Logo, abordagens podem utilizar a versão 1.x ou a segunda versão da UML.
+	\item \textbf{Mecanismo de Extensão (M.E)}: Abordagens para modelagem de sistemas orientados a aspectos podem estender a UML através de um perfil
+	leve, que pode ser utilizado em ferramentas CASE que suportem a importação de perfis, ou adicionando novos elementos, restrições e relacionamentos ao
+	meta-modelo da linguagem. A extensão através de perfis permite uma maior inter-operabilidade de abordagens para modelagem em diferentes ferramentas
+	CASE \cite{Booch:2005:UML:1088874}.
+	\item \textbf{Diagramas Estruturais (D.E)}: Quais diagramas estruturais são utilizados para descrever a estrutura de aspectos.
+	\item \textbf{Diagramas Comportamentais (D.C)}: Quais diagramas comportamentais são utilizados para descrever o comportamento de aspectos.
 \end{itemize}
 
-\begin{table*}
+A tabela \ref{tab:comparison_table_language} apresenta a comparação das abordagens em relação a critérios de linguagem. 
+
+\begin{table*}[h]
 	\centering
-	\begin{tabular}{ | c | c | c | c | c | c | c | }
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | }
 		\hline
-		  & Klein \cite{Klein:2007:WMA:1805812.1805819} & 
-		  Evermann \cite{Evermann:2007:MSP:1229375.1229379} 
-		  \\
+		 & KLE & EVE & KIE & JAC & CUI & STE & COT & CLA & GHI \\
 		\hline
-		 Mecanismo de Extensão & Meta-modelo & Perfil UML \\
+		 L.M & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 1.x & 2.0 & 2.0 (1.x) & 2.0 \\
 		\hline
-		 Especificação Estrutural? & Não & Sim \\
+		 L.E & MM & Perfil & Perfil & MM & Perfil & MM & Perfil & MM & Perfil \\
 		\hline
-		 Especificação Comportamental? & Sim & Não \\
+		 D.E & - & DC & DC & DC, DComp & - & DC & DC, DEC, DI & DP, DC & DP, DC\\
 		\hline
-		 Composição Automática? & Sim & Sim \\
-		\hline
-		 Alternância de Visões? & Não & Não \\
-		\hline
-		 Nível de Abstração & Alto & Alto \\
-		\hline
-		 Provado por Exemplos? & Não & Não \\
+		 D.C & DS & - & DS, DME & DS, DCom, DCU & DA & DCol & DME & DS & DS, DME \\
 		\hline
 	\end{tabular}
-	\caption{Comparação entre Abordagens AOM (1).}
-	\label{tab:comparison_table_1}
-\end{table*} 
+	
+	\hspace{2em}
 
+	\begin{tabular}{  p{16.81cm}  }
+		Legenda: \\
+	\end{tabular}
 
-\begin{table*}
-	\centering
-	\begin{tabular}{ | c | c | c | c | c | c | c | }
+	\begin{tabular}{ | p{16.81cm} | }
 		\hline
-		  & Kienzle \cite{Kienzle:2009:AMM:1509239.1509252} &
-		  Jacobson \cite{Jacobson:2004:ASD:1062430} 
-		  \\
-		\hline
-		 Mecanismo de Extensão & Meta-modelo & Meta-modelo \\
-		\hline
-		 Especificação Estrutural? & Sim & Sim \\
-		\hline
-		 Especificação Comportamental? & Sim & Sim \\
-		\hline
-		 Composição Automática? & Sim & Não  \\
-		\hline
-		 Alternância de Visões? & Não & Não \\
-		\hline
-		 Nível de Abstração & Alto & Alto \\
-		\hline
-		 Provado por Exemplos? & Sim & Sim \\
+		MM (Meta-Modelo), Perfil (Perfil UML), DC (Diagrama de Classes), DComp (Diagrama de Componentes), DEC (Diagrama de Estrutura Composta), DI
+		(Diagrama de Implantação), DP (Diagrama de Pacotes), DS (Diagrama de Sequência), DCol (Diagrama de Colaboração), DA (Diagrama de Atividades), 
+		DME (Diagrama de Máquina de Estados), DCU (Diagrama de Casos de Uso) e DCom (Diagrama de Comunicação)\\
 		\hline
 	\end{tabular}
-	\caption{Comparação entre Abordagens AOM (2).}
-	\label{tab:comparison_table_2}
+	\caption{Comparação entre Abordagens: Critérios de Linguagem.}
+	\label{tab:comparison_table_language}
 \end{table*} 
 
+Observa-se que a maior parte das abordagens especificam aspectos com a segunda versão da UML. As abordagens limitadas a primeira versão da UML não
+contemplam todas as construções da linguagem e, não são suportadas por qualquer ferramenta CASE. Em relação a forma de extensão, algumas
+abordagens estendem por um perfil UML, enquanto outras estendem diretamente o meta-modelo. A extensão por meta-modelo não permite utilizar a abordagem em outra
+ferramenta diferente da que foi implementada originalmente, diminuindo o potencial de reuso. Um perfil UML pode ser importado em ferramentas CASE que
+suportem a importação de perfis. A maior parte das abordagens utiliza diagramas de classe para modelagem estrutural. Em relação ao comportamento, a
+maior parte das abordagens modela com diagramas de sequência.
 
-\begin{table*}
-	\centering
-	\begin{tabular}{ | c | c | c | c | c | c | c | }
-		\hline
-		  & Cui \cite{Cui:2009:MIA:1529282.1529377} &
-		  Stein \cite{stein:02}
-		  \\
-		\hline
-		 Mecanismo de Extensão & Perfil UML & Perfil UML e Meta-modelo \\
-		\hline
-		 Especificação Estrutural? & Não & Sim \\
-		\hline
-		 Especificação Comportamental? & Sim & Sim \\
-		\hline
-		 Composição Automática? & Sim & Não  \\
-		\hline
-		 Alternância de Visões? & Não & Não \\
-		\hline
-		 Nível de Abstração & Alto & Alto \\
-		\hline
-		 Provado por Exemplos? & Não & Não \\
-		\hline
-	\end{tabular}
-	\caption{Comparação entre Abordagens AOM (3).}
-	\label{tab:comparison_table_3}
-\end{table*} 
+\subsection{Critérios de Modelos}
 
-\begin{table*}
-	\centering
-	\begin{tabular}{ | c | c | c | c | c | c | c | }
-		\hline
- 		  & Cottenier \cite{Cottenier06themotorola} &
- 		  Clarke \cite{theme:04} 
-		  \\
-		\hline
-		 Mecanismo de Extensão & Perfil UML & Perfil UML e Meta-modelo \\
-		\hline
-		 Especificação Estrutural? & Sim & Sim \\
-		\hline
-		 Especificação Comportamental? & Sim & Sim \\
-		\hline
-		 Composição Automática? & Sim & Sim \\
-		\hline
-		 Alternância de Visões? & Sim & Não \\
-		\hline
-		 Nível de Abstração & Baixo & Alto \\
-		\hline
-		 Provado por Exemplos? & Sim & Sim \\
-		\hline
-	\end{tabular}
-	\caption{Comparação entre Abordagens AOM (4).}
-	\label{tab:comparison_table_4}
-\end{table*} 
+\begin{itemize}
+	\item \textbf{Composição Simétrica (C.S)}: Este critério analisa quais modelos de interesses podem ser compostos com outros modelos. Na modelagem de
+	sistemas orientados a aspectos, em algumas abordagens, o modelo do interesse entrecortante (aspecto) é modelado diferentemente do modelo núcleo.
+	Nesses casos, a composição é assimétrica, pois apenas modelos de interesses entrecortantes podem ser compostos em modelos núcleo. A composição
+	simétrica acontece quando não há diferenciação entre modelos entrecortantes e modelos núcleo, podendo realizar a composição entre qualquer modelo.
+	\item \textbf{Tratamento de Conflitos (T.C)}: Abordagens podem evitar conflitos, detectar e resolver automaticamente, detectar e resolver
+	manualmente, ou, não tratar conflitos.
+	\item \textbf{Nível de Abstração (N.A)}: Distingue o nível de abstração dos elementos das abordagens. As abordagens podem representar construções de
+	sistemas orientados a aspectos em alto ou baixo nível de abstração. É possível que uma abordagem representa os conceitos nos dois níveis.
+\end{itemize}
 
-\begin{table*}
-	\centering
-	\begin{tabular}{ | c | c | c | c | c | c | c | }
-		\hline
- 		  & France \cite{france:06} &
- 		  Ghilardi
-		  \\
-		\hline
-		 Mecanismo de Extensão & Meta-modelo & Perfil UML \\
-		\hline
-		 Especificação Estrutural? & Sim & Sim \\
-		\hline
-		 Especificação Comportamental? & Sim (Parcial) & Sim \\
-		\hline
-		 Composição Automática? & Não & Sim \\
-		\hline
-		 Alternância de Visões? & Não & Não \\
-		\hline
-		 Nível de Abstração & Alto & Alto \\
-		\hline
-		 Provado por Exemplos? & Não & Sim \\
-		\hline
-	\end{tabular}
-	\caption{Comparação entre Abordagens AOM (5).}
-	\label{tab:comparison_table_5}
-\end{table*} 
+\subsection{Critérios de Ponto de Junção e Aviso}
 
-As tabelas de comparação entre abordagens podem ser visualizadas nas tabelas \ref{tab:comparison_table_1}, \ref{tab:comparison_table_2},
-\ref{tab:comparison_table_3}, \ref{tab:comparison_table_4} e \ref{tab:comparison_table_5}. É importante destacar as abordagens que propõem um perfil
-UML para representar aplicações orientadas a aspectos. Uma extensão através de um perfil pode ser utilizada em ferramentas CASE que suportem a
-importação de perfis, o que é uma vantagem importante para as propostas que estendem a linguagem através deste mecanismo. A composição automática de
-modelos é uma funcionalidade desejada, porque diminui o tempo gasto na modelagem, automatizando parte da mesma. É importante também representar todas
-as características das linguagens orientadas a aspectos usando diagramas estruturais e comportamentais da UML. Finalmente, abordagens que permitem a
-visualização dinãmica de interesses tem uma vantagem, pois a alternância de visões facilita a compreensão de um sistema nas primeiras fases de
-desenvolvimento. A modelagem em alto nível de abstração é desejada, pois também facilita a compreensão do sistema. Uma modelagem em baixo nível de
-abstração tem construções muito próximas do código, o que permite a geração de código, mas dificulta a compreensão do sistema.
+\begin{itemize}
+	\item \textbf{Modelo de Ponto de Junção (M.PJ)}: Este critério distingue entre duas formas possíveis de especificar pontos de junção: de maneira
+	explícita, identificando quais elementos da linguagem podem representar pontos de junção; de maneira implícita, utilizando o próprio modelo de pontos de junção
+	da linguagem para programação orientada a aspectos (POA).
+	\item \textbf{Ponto de Corte (P.C)}: Avalia se a representação de pontos de corte é realizada dentro dos padrões de especificação de pontos de corte
+	(AspectJ, OCL, etc) ou é realizado através de alguma linguagem proprietária. Também existe a possibilidade de pontos de corte não serem representados.
+	\item \textbf{Representação de Ponto de Corte (R.P.C)}: Distingue a forma de representação de pontos de corte, a qual pode ser textual ou gráfica,
+	com algum diagrama da linguagem. 
+	\item \textbf{Composição de Ponto de Corte (C.P.C)}: Avalia se a abordagem permite realizar a composição de pontos de corte, com os operadores
+	lógicos AND e OR. 
+	\item \textbf{Aviso (A)}: Avalia se a representação de avisos é realizada. Se for realizada, discrimina quais tipos de aviso são suportados: antes,
+	durante e depois.
+\end{itemize}
+
+\subsection{Critérios de Composição}
+
+\begin{itemize}
+	\item \textbf{Composição Estrutural (C.E)}: Avalia se a abordagem permite realizar a composição estrutural de modelos.
+	\item \textbf{Composição Comportamental (C.C)}: Avalia se a abordagem permite realizar a composição do comportamento de modelos.
+	\item \textbf{Método de Comparação (M.C)}: Este critério avalia o método de comparação utilizado no algoritmo para composição de modelos. A
+	comparação pode ser realizada por nome, por assinatura ou não realizada.
+	\item \textbf{Ferramenta para Modelagem (F.M)}: Distingue abordagens que disponibilizam uma ferramenta para modelagem, de abordagens que não
+	disponibilizam uma ferramenta que auxilie a modelagem. Abordagens que estendem a UML através de um perfil automaticamente disponibilizam este suporte, pois o perfil
+	pode ser importado em outras ferramentas CASE.
+	\item \textbf{Ferramenta para Composição (F.C)}: Algumas abordagens disponibilizam uma ferramenta para composição automática da estrutura e
+	comportamento de modelos, possibilitando visualizar o comportamento de aspectos inserido no sistema, sem esforço do desenvolvedor. 
+\end{itemize}
+
+
+\subsection{Critérios Propostos}
+
+Os seguintes critérios são propostos por esta dissertação para comparação de modelagens para sistemas orientados a aspectos:
+
+\subsubsection{Critérios de Especificação de Aspectos}
+
+\begin{itemize}
+	\item \textbf{Representação de Introduções (R.I)}: Avalia se a abordagem permite especificar introduções de elementos em um modelo núcleo,
+	adicionando um novo método, atributo ou modificando a hierarquia de herança de classes que especificam um interesse núcleo.
+	\item \textbf{Captura de Múltiplos Pontos de Junção (C.M.P.C)}: Distingue quais abordagens
+	permitem a captura de múltiplos pontos de junção de maneira praticável, com o uso de expressões regulares (\textit{wildcards}).
+\end{itemize}
+
+\subsubsection{Critérios de Visualização}
+
+\begin{itemize}
+	\item \textbf{Alternância de Visões (A.V)}: Avalia se a abordagem permite realizar a alternância de visões, visualizando ora o comportamento dos
+	interesses entrecortantes (aspectos), dos interesses núcleo, ou, a composição dos interesses entrecortantes com os interesses núcleos. Esta alternância de visões deve 
+	ser realizada sem o esforço do desenvolvedor.
+	\item \textbf{Efeito de Aspectos (E.A)}: Este critério distingue abordagens que permitem visualizar o efeito dos aspectos nos modelos finais,
+	diferenciando os diferentes interesses no modelo composto.
+\end{itemize}
 
 O principal diferencial da abordagem proposta nesta dissertação é a possibilidade de realizar a alternância de visões dinamicamente, visualizando os
 interesses entrecortantes, os interesses núcleo ou configurações de composição de interesses entrecortantes com interesses núcleo. O visualizador de
