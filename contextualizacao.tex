@@ -1,209 +1,210 @@
-\chapter{ContextualizaÁ„o}
+\chapter{Contextualiza√ß√£o}
 
-O objetivo deste capÌtulo È fornecer subsÌdios para a compreens„o dos assuntos tratados nesta dissertaÁ„o. Primeiramente, contextualiza-se o paradigma
-de ProgramaÁ„o Orientada a Aspectos (POA), apresentando a motivaÁ„o para o uso de aspectos e as construÁıes especÌficas da linguagem AspectJ, que devem ser represent·veis 
-na modelagem. A segunda parte discorre sobre an·lise e projeto de sistemas utilizando a segunda vers„o da UML. Apresentam-se alguns conceitos sobre
-an·lise e projeto e os diagramas da UML. O tÛpico final fala sobre meta-modelagem, que permite estender um modelo para representar elementos de um
-domÌnio especÌfico.
+O objetivo deste cap√≠tulo √© fornecer subs√≠dios para a compreens√£o dos assuntos tratados nesta disserta√ß√£o. Primeiramente, contextualiza-se o paradigma
+de Programa√ß√£o Orientada a Aspectos (POA), apresentando a motiva√ß√£o para o uso de aspectos e as constru√ß√µes espec√≠ficas da linguagem AspectJ, que devem ser represent√°veis 
+na modelagem. A segunda parte discorre sobre an√°lise e projeto de sistemas utilizando a segunda vers√£o da UML. Apresentam-se alguns conceitos sobre
+an√°lise e projeto e os diagramas da UML. O t√≥pico final fala sobre meta-modelagem, que permite estender um modelo para representar elementos de um
+dom√≠nio espec√≠fico.
 
-\section{ProgramaÁ„o Orientada a Aspectos}
+\section{Programa√ß√£o Orientada a Aspectos}
 
-Esta seÁ„o discorre sobre a separaÁ„o de um sistema em um conjunto de interesses e os problemas decorrentes da implementaÁ„o de interesses com os
-paradigmas tradicionais. Devido a estes problemas surge a necessidade de um novo paradigma para realizar a separaÁ„o de interesses: o paradigma de
-ProgramaÁ„o Orientada a Aspectos (POA). A seÁ„o È finalizada com a apresentaÁ„o da principal linguagem para implementaÁ„o de aspectos em Java: 
+Esta se√ß√£o discorre sobre a separa√ß√£o de um sistema em um conjunto de interesses e os problemas decorrentes da implementa√ß√£o de interesses com os
+paradigmas tradicionais. Devido a estes problemas surge a necessidade de um novo paradigma para realizar a separa√ß√£o de interesses: o paradigma de
+Programa√ß√£o Orientada a Aspectos (POA). A se√ß√£o √© finalizada com a apresenta√ß√£o da principal linguagem para implementa√ß√£o de aspectos em Java: 
 AspectJ.
 
-\subsection{AbstraÁ„o de Interesses}\label{sec:concerns_abstraction}
+\subsection{Abstra√ß√£o de Interesses}\label{sec:concerns_abstraction}
 
-Ao iniciar a an·lise e projeto de um sistema, existe um conjunto de requisitos que devem ser implementados para satisfazer as necessidades do cliente.
-Cada requisito pode ser considerado um interesse que deve ser realizado para finalizar o sistema como um todo. Assim, um sistema È composto por um
-conjunto de interesses. Em um sistema para gerenciamento de hotel, por exemplo, È possÌvel identific·-los como: reserva de quartos, \textit{check-in},
-\textit{check-out}, ac˙mulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens, controle de acesso,
+Ao iniciar a an√°lise e projeto de um sistema, existe um conjunto de requisitos que devem ser implementados para satisfazer as necessidades do cliente.
+Cada requisito pode ser considerado um interesse que deve ser realizado para finalizar o sistema como um todo. Assim, um sistema √© composto por um
+conjunto de interesses. Em um sistema para gerenciamento de hotel, por exemplo, √© poss√≠vel identific√°-los como: reserva de quartos, \textit{check-in},
+\textit{check-out}, ac√∫mulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens, controle de acesso,
 garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
 
-No sistema de gerenciamento de hotel È possÌvel classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses n˙cleo.
-Os interesses de controle de acesso, ac˙mulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens e garantia
-de \textit{performance} impactam diversas partes do sistema, por isso, s„o classificados como interesses entrecortantes. O interesse de controle de acesso deve 
-verificar quais usu·rios podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses n˙cleo. O interesse de
-ac˙mulo de pontos em um programa de fidelidade impacta qualquer pagamento realizado. O interesse de controle de uma lista de espera impacta a
-reserva de quartos. J· o registro de mensagens impacta grande parte dos interesses, pois as transaÁıes do sistema s„o registradas. Garantia de
-\textit{performance} impacta todos os outros interesses, pois para garantir \textit{peformance} todo o sistema deve ser implementado com restriÁıes
-de seguranÁa.
-
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics{img/context_aspect_concerns.png}
-	\caption{SeparaÁ„o de interesses do mÛdulo para Reserva de Quarto}\label{fig:context_aspect_concerns}
+	\caption{Separa√ß√£o de interesses do m√≥dulo para Reserva de Quarto}\label{fig:context_aspect_concerns}
 \end{figure}
 
-Utilizando os paradigmas convencionais para implementaÁ„o de interesses, como a ProgramaÁ„o Orientada a Objetos (POO), o mÛdulo
-para implementar o interesse de reserva de quartos seria composto  por cÛdigo referente a reserva, e tambÈm a garantia de \textit{performance} e 
-controle de acesso. A figura \ref{fig:context_aspect_concerns} mostra os interesses presentes no mÛdulo de reserva de quartos. Observa-se a
-implementaÁ„o de v·rios interesses no mesmo mÛdulo. Segundo Laddad\cite{Laddad:2003:AAP:993468}, essa situaÁ„o È conhecida como \textbf{emaranhamento
-de cÛdigo} (\textit{code tangling}).
+No sistema de gerenciamento de hotel √© poss√≠vel classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses n√∫cleo.
+Os interesses de controle de acesso, ac√∫mulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens e garantia
+de \textit{performance} impactam diversas partes do sistema, por isso, s√£o classificados como interesses entrecortantes. O interesse de controle de acesso deve 
+verificar quais usu√°rios podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses n√∫cleo. O interesse de
+ac√∫mulo de pontos em um programa de fidelidade impacta qualquer pagamento realizado. O interesse de controle de uma lista de espera impacta a
+reserva de quartos. J√° o registro de mensagens impacta grande parte dos interesses, pois as transa√ß√µes do sistema s√£o registradas. Garantia de
+\textit{performance} impacta todos os outros interesses, pois para garantir \textit{peformance} todo o sistema deve ser implementado com restri√ß√µes
+de seguran√ßa.
 
-Outro sintoma de implementaÁ„o deselegante de interesses È o \textbf{espalhamento de cÛdigo} (\textit{code scattering}), quando o cÛdigo 
-referente a um mesmo interesse est· disposto em diferentes mÛdulos \cite{Laddad:2003:AAP:993468}. O espalhamento de cÛdigo pode acontecer em duas
-situaÁıes:
+Utilizando os paradigmas convencionais para implementa√ß√£o de interesses, como a Programa√ß√£o Orientada a Objetos (POO), o m√≥dulo
+para implementar o interesse de reserva de quartos seria composto  por c√≥digo referente a reserva, e tamb√©m a garantia de \textit{performance} e 
+controle de acesso. A figura \ref{fig:context_aspect_concerns} mostra os interesses presentes no m√≥dulo de reserva de quartos. Observa-se a
+implementa√ß√£o de v√°rios interesses no mesmo m√≥dulo. Segundo Laddad\cite{Laddad:2003:AAP:993468}, essa situa√ß√£o √© conhecida como \textbf{emaranhamento
+de c√≥digo} (\textit{code tangling}).
+
+Outro sintoma de implementa√ß√£o deselegante de interesses √© o \textbf{espalhamento de c√≥digo} (\textit{code scattering}), quando o c√≥digo 
+referente a um mesmo interesse est√° disposto em diferentes m√≥dulos \cite{Laddad:2003:AAP:993468}. O espalhamento de c√≥digo pode acontecer em duas
+situa√ß√µes:
 
 \begin{itemize}
-  \item \textbf{DuplicaÁ„o de cÛdigo}: Diferentes mÛdulos n˙cleo executam cÛdigo
+  \item \textbf{Duplica√ß√£o de c√≥digo}: Diferentes m√≥dulos n√∫cleo executam c√≥digo
   referente a um mesmo interesse entrecortante.  
   
-  Exemplo: Interesse para registro de informaÁıes (\textit{logging}) de um
-  sistema; cada mÛdulo n˙cleo contÈm chamadas a mÈtodos da API
-  de \textit{logging} para registrar informaÁıes.
+  Exemplo: Interesse para registro de informa√ß√µes (\textit{logging}) de um
+  sistema; cada m√≥dulo n√∫cleo cont√©m chamadas a m√©todos da API
+  de \textit{logging} para registrar informa√ß√µes.
   
-  \item \textbf{ComplementaÁ„o de cÛdigo}: Diferentes mÛdulos executam cÛdigo
+  \item \textbf{Complementa√ß√£o de c√≥digo}: Diferentes m√≥dulos executam c√≥digo
   complementar para implementar um interesse entrecortante. 
   
-  Exemplo: Interesse para autorizaÁ„o em um sistema; um mÛdulo implementa o
-  gerenciamento da sess„o, outro mÛdulo implementa o gerenciamento de
-  permissıes e controle de acesso e outro realiza a autenticaÁ„o de usu·rios;
-  cada mÛdulo implementa uma parte do interesse de autorizaÁ„o.
+  Exemplo: Interesse para autoriza√ß√£o em um sistema; um m√≥dulo implementa o
+  gerenciamento da sess√£o, outro m√≥dulo implementa o gerenciamento de
+  permiss√µes e controle de acesso e outro realiza a autentica√ß√£o de usu√°rios;
+  cada m√≥dulo implementa uma parte do interesse de autoriza√ß√£o.
 \end{itemize}
 
-O emaranhamento e espalhamento de cÛdigo dificultam a manutenÁ„o de um sistema,
-pois modificar um interesse impacta em modificar diferentes mÛdulos. AlÈm
-disso, È complicado realizar um rastreamento entre interesses e mÛdulos, pois o
-cÛdigo de um interesse est· disposto em mais de um mÛdulo. Outro problema È a
-dificuldade de reuso de mÛdulos devido a dependÍncia de um mÛdulo com v·rios
+O emaranhamento e espalhamento de c√≥digo dificultam a manuten√ß√£o de um sistema,
+pois modificar um interesse impacta em modificar diferentes m√≥dulos. Al√©m
+disso, √© complicado realizar um rastreamento entre interesses e m√≥dulos, pois o
+c√≥digo de um interesse est√° disposto em mais de um m√≥dulo. Outro problema √© a
+dificuldade de reuso de m√≥dulos devido a depend√™ncia de um m√≥dulo com v√°rios
 interesses \cite{Laddad:2003:AAP:993468}. 
 
 \subsection{A necessidade de aspectos}
 
-Os problemas destacados na sess„o \ref{sec:concerns_abstraction} indicam a
-necessidade de separaÁ„o de interesses em diferentes mÛdulos. A ProgramaÁ„o Orientada a Aspectos 
-(POA) \cite{Kiczales97aspect-orientedprogramming} È um paradigma de programaÁ„o para representar
-elegantemente os interesses de um sistema que impactam diversos mÛdulos. 
-Uma representaÁ„o elegante de um interesse o separa em um ˙nico mÛdulo e permite
-o reuso entre diferentes aplicaÁıes. O objetivo da POA È a modularizaÁ„o dos interesses entrecortantes 
-para que os mesmos fiquem separados dos mÛdulos que implementam os interesses
-n˙cleo da aplicaÁ„o \cite{Laddad:2003:AAP:993468}.
+Os problemas destacados na sess√£o \ref{sec:concerns_abstraction} indicam a
+necessidade de separa√ß√£o de interesses em diferentes m√≥dulos. A Programa√ß√£o Orientada a Aspectos 
+(POA) \cite{Kiczales97aspect-orientedprogramming} √© um paradigma de programa√ß√£o para representar
+elegantemente os interesses de um sistema que impactam diversos m√≥dulos. 
+Uma representa√ß√£o elegante de um interesse o separa em um √∫nico m√≥dulo e permite
+o reuso entre diferentes aplica√ß√µes. O objetivo da POA √© a modulariza√ß√£o dos interesses entrecortantes 
+para que os mesmos fiquem separados dos m√≥dulos que implementam os interesses
+n√∫cleo da aplica√ß√£o \cite{Laddad:2003:AAP:993468}.
 
-… importante observar que, boa parte dos interesses de uma aplicaÁ„o
-s„o interesses n˙cleo e podem ser implementados elegantemente com a POO. Por
-isso, a POA n„o pretende substituir a ProgramaÁ„o Orientada a Objetos (POO), 
-mas sim complement·-la com uma melhor representaÁ„o para os interesses
+√â importante observar que, boa parte dos interesses de uma aplica√ß√£o
+s√£o interesses n√∫cleo e podem ser implementados elegantemente com a POO. Por
+isso, a POA n√£o pretende substituir a Programa√ß√£o Orientada a Objetos (POO), 
+mas sim complement√°-la com uma melhor representa√ß√£o para os interesses
 entrecortantes.
 
 \subsection{Metodologia de desenvolvimento}
 
 Segundo \cite{Laddad:2003:AAP:993468}, para implementar um sistema utilizando aspectos
-geralmente executam-se trÍs fases:
+geralmente executam-se tr√™s fases:
+
 
 \begin{enumerate}
-  \item \textbf{DecomposiÁ„o de Aspectos}: IdentificaÁ„o de quais requisitos s„o
-  interesses n˙cleo e quais s„o interesses entrecortantes.
-  \item \textbf{ImplementaÁ„o de Interesses}: ImplementaÁ„o de cada interesse
+  \item \textbf{Decomposi√ß√£o de Aspectos}: Identifica√ß√£o de quais requisitos s√£o
+  interesses n√∫cleo e quais s√£o interesses entrecortantes.
+  \item \textbf{Implementa√ß√£o de Interesses}: Implementa√ß√£o de cada interesse
   separadamente.
-  \item \textbf{ComposiÁ„o de Aspectos} (\textit{Weaving}): … a implementaÁ„o de
+  \item \textbf{Composi√ß√£o de Aspectos} (\textit{Weaving}): √â a implementa√ß√£o de
   um aspecto para cada interesse entrecortante. O aspecto define o comportamento
-  que ser· executado em determinados pontos de execuÁ„o de um ou mais interesses. 
-  Cada interesse entrecortante est· contido em um ˙nico mÛdulo: o aspecto. ApÛs
-  a implementaÁ„o dos aspectos, se inicia o processo de composiÁ„o \textit{weaving} 
-  que insere o comportamento dos interesses entrecortantes nos interesses n˙cleo
+  que ser√° executado em determinados pontos de execu√ß√£o de um ou mais interesses. 
+  Cada interesse entrecortante est√° contido em um √∫nico m√≥dulo: o aspecto. Ap√≥s
+  a implementa√ß√£o dos aspectos, se inicia o processo de composi√ß√£o \textit{weaving} 
+  que insere o comportamento dos interesses entrecortantes nos interesses n√∫cleo
   (nos pontos definidos nos aspectos). A figura \ref{fig:aspects_weaving} mostra
-  o fluxo de desenvolvimento de uma aplicaÁ„o orientada a aspectos.
+  o fluxo de desenvolvimento de uma aplica√ß√£o orientada a aspectos.
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics[scale=0.9]{img/aspects_weaving.png}
 	\caption{Fluxo de desenvolvimento de uma
-	aplicaÁ„o com aspectos}\label{fig:aspects_weaving}
+	aplica√ß√£o com aspectos}\label{fig:aspects_weaving}
 \end{figure}
 
 \subsection{A linguagem AspectJ}
 
-A linguagem AspectJ \cite{AspectJ11} È uma extens„o da linguagem Java para programaÁ„o orientada a aspectos. Qualquer programa implementado em Java
-pode ser estendido utilizando AspectJ. A linguagem provÍ mecanismos para representar interesses entrecortantes e permite a composiÁ„o dos mesmos com os interesses 
-n˙cleo de um sistema. A linguagem oferece construÁıes de extens„o din‚micas e est·ticas. As extensıes din‚micas permitem que um novo comportamento
-seja executado antes, durante ou depois de um determinado ponto de execuÁ„o do sistema. As extensıes est·ticas permitem adicionar novos elementos na
-estrutura das classes, por exemplo, a inserÁ„o de um novo mÈtodo ou atributo. O conte˙do das prÛximas seÁıes È baseado no guia de programaÁ„o da
-linguagem AspectJ \cite{aspectjguide} e no livro AspectJ: in Action \cite{Laddad:2003:AAP:993468}. Os exemplos, no entanto, s„o originais desta
-dissertaÁ„o.
+A linguagem AspectJ \cite{AspectJ11} √© uma extens√£o da linguagem Java para programa√ß√£o orientada a aspectos. Qualquer programa implementado em Java
+pode ser estendido utilizando AspectJ. A linguagem prov√™ mecanismos para representar interesses entrecortantes e permite a composi√ß√£o dos mesmos com os interesses 
+n√∫cleo de um sistema. A linguagem oferece constru√ß√µes de extens√£o din√¢micas e est√°ticas. As extens√µes din√¢micas permitem que um novo comportamento
+seja executado antes, durante ou depois de um determinado ponto de execu√ß√£o do sistema. As extens√µes est√°ticas permitem adicionar novos elementos na
+estrutura das classes, por exemplo, a inser√ß√£o de um novo m√©todo ou atributo. O conte√∫do das pr√≥ximas se√ß√µes √© baseado no guia de programa√ß√£o da
+linguagem AspectJ \cite{aspectjguide} e no livro AspectJ: in Action \cite{Laddad:2003:AAP:993468}. Os exemplos, no entanto, s√£o originais desta
+disserta√ß√£o.
 
-\subsubsection{ConstruÁıes Din‚micas}
+\subsubsection{Constru√ß√µes Din√¢micas}
 
-Um dos principais conceitos din‚micos que devem ser compreendidos na linguagem È o de \textbf{ponto de junÁ„o}. Um ponto de junÁ„o È um determinado
-ponto na execuÁ„o de um programa. … importante observar que, um ponto de junÁ„o n„o È uma construÁ„o sint·tica de AspectJ, mas sim um conceito. 
+Um dos principais conceitos din√¢micos que devem ser compreendidos na linguagem √© o de \textbf{ponto de jun√ß√£o}. Um ponto de jun√ß√£o √© um determinado
+ponto na execu√ß√£o de um programa. √â importante observar que, um ponto de jun√ß√£o n√£o √© uma constru√ß√£o sint√°tica de AspectJ, mas sim um conceito. 
 
-A figura \ref{fig:aspects_join_point_model} descreve o fluxo de execuÁ„o de um programa atravÈs da troca de mensagens entre diferentes objetos. Nesta
-troca de mensagens existem diversos pontos de junÁ„o que podem ser capturados pela linguagem AspectJ. A seguir, ser· destacado cada ponto de junÁ„o
-nesse fluxo de execuÁ„o. No inÌcio da troca de mensagens, È chamado o mÈtodo \textbf{umMetodo()} do \textbf{objetoA}. A chamada de um mÈtodo em
-AspectJ È representada pelo ponto de junÁ„o \textit{call}. ApÛs a chamada do mÈtodo, o cÛdigo do mesmo ser· executado. A execuÁ„o de um mÈtodo È
-representada pelo ponto de junÁ„o \textit{execution}. A duraÁ„o de execuÁ„o do mÈtodo \textbf{umMetodo()} pode ser visualizada na ocorrÍncia de
-execuÁ„o em azul. No inÌcio da execuÁ„o de \textbf{umMetodo()}, realiza-se a chamada a \textbf{outroMetodo()}. A ocorrÍncia de execuÁ„o em verde
-representa a duraÁ„o da execuÁ„o desse mÈtodo. Dentro de \textbf{outroMetodo()} o mÈtodo \textbf{metodoInterno()} È chamado. A ocorrÍncia de execuÁ„o em 
-amarelo representa a duraÁ„o de sua execuÁ„o. Finalmente, instancia-se o \textbf{objetoC} atravÈs da chamada \textit{new}. A chamada de um construtor
-tambÈm È um ponto de junÁ„o \textit{call} em AspectJ. A execuÁ„o do mesmo pode ser capturada com o ponto de junÁ„o \textit{execution}. O tempo de
-execuÁ„o da instanciaÁ„o desse construtor pode ser visualizado na ocorrÍncia de execuÁ„o em rosa. Os pontos de junÁ„o \textit{call} e
-\textit{execution} s„o utilizados para capturar chamada e execuÁ„o de mÈtodos e construtores. 
+A figura \ref{fig:aspects_join_point_model} descreve o fluxo de execu√ß√£o de um programa atrav√©s da troca de mensagens entre diferentes objetos. Nesta
+troca de mensagens existem diversos pontos de jun√ß√£o que podem ser capturados pela linguagem AspectJ. A seguir, ser√° destacado cada ponto de jun√ß√£o
+nesse fluxo de execu√ß√£o. No in√≠cio da troca de mensagens, √© chamado o m√©todo \textbf{umMetodo()} do \textbf{objetoA}. A chamada de um m√©todo em
+AspectJ √© representada pelo ponto de jun√ß√£o \textit{call}. Ap√≥s a chamada do m√©todo, o c√≥digo do mesmo ser√° executado. A execu√ß√£o de um m√©todo √©
+representada pelo ponto de jun√ß√£o \textit{execution}. A dura√ß√£o de execu√ß√£o do m√©todo \textbf{umMetodo()} pode ser visualizada na ocorr√™ncia de
+execu√ß√£o em azul. No in√≠cio da execu√ß√£o de \textbf{umMetodo()}, realiza-se a chamada a \textbf{outroMetodo()}. A ocorr√™ncia de execu√ß√£o em verde
+representa a dura√ß√£o da execu√ß√£o desse m√©todo. Dentro de \textbf{outroMetodo()} o m√©todo \textbf{metodoInterno()} √© chamado. A ocorr√™ncia de execu√ß√£o em 
+amarelo representa a dura√ß√£o de sua execu√ß√£o. Finalmente, instancia-se o \textbf{objetoC} atrav√©s da chamada \textit{new}. A chamada de um construtor
+tamb√©m √© um ponto de jun√ß√£o \textit{call} em AspectJ. A execu√ß√£o do mesmo pode ser capturada com o ponto de jun√ß√£o \textit{execution}. O tempo de
+execu√ß√£o da instancia√ß√£o desse construtor pode ser visualizado na ocorr√™ncia de execu√ß√£o em rosa. Os pontos de jun√ß√£o \textit{call} e
+\textit{execution} s√£o utilizados para capturar chamada e execu√ß√£o de m√©todos e construtores. 
 
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics{img/aspects_join_point_model.png}
-	\caption{IdentificaÁ„o de pontos de
-	junÁ„o.}\label{fig:aspects_join_point_model}
+	\caption{Identifica√ß√£o de pontos de
+	jun√ß√£o.}\label{fig:aspects_join_point_model}
 \end{figure}
 
-… importante observar a diferenÁa entre entre os pontos de junÁ„o de \textbf{chamada} (\textit{call}) e \textbf{execuÁ„o} (\textit{execution}). Um
-ponto de junÁ„o de chamada n„o est· no cÛdigo do mÈtodo ou construtor sendo chamado, mas sim no cÛdigo de quem est· chamando o mÈtodo ou construtor em
-quest„o. Observe na figura \ref{fig:call_vs_execution} que a chamada (\textit{call}) ao mÈtodo \textbf{umMetodo()} È realizada dentro do cÛdigo
-\textit{main} da aplicaÁ„o. J· o ponto de junÁ„o de execuÁ„o de um mÈtodo ou construtor È disparado no corpo do mÈtodo ou construtor em quest„o.
-Observa-se na figura que a execuÁ„o (\textit{execution}) do mÈtodo \textbf{umMetodo()} refere-se ‡ execuÁ„o do cÛdigo do prÛprio mÈtodo.
+√â importante observar a diferen√ßa entre entre os pontos de jun√ß√£o de \textbf{chamada} (\textit{call}) e \textbf{execu√ß√£o} (\textit{execution}). Um
+ponto de jun√ß√£o de chamada n√£o est√° no c√≥digo do m√©todo ou construtor sendo chamado, mas sim no c√≥digo de quem est√° chamando o m√©todo ou construtor em
+quest√£o. Observe na figura \ref{fig:call_vs_execution} que a chamada (\textit{call}) ao m√©todo \textbf{umMetodo()} √© realizada dentro do c√≥digo
+\textit{main} da aplica√ß√£o. J√° o ponto de jun√ß√£o de execu√ß√£o de um m√©todo ou construtor √© disparado no corpo do m√©todo ou construtor em quest√£o.
+Observa-se na figura que a execu√ß√£o (\textit{execution}) do m√©todo \textbf{umMetodo()} refere-se √† execu√ß√£o do c√≥digo do pr√≥prio m√©todo.
 
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics{img/call_vs_execution.png}
-	\caption{DiferenÁa entre os pontos de junÁ„o de chamada (call) e
-	execuÁ„o (execution).}\label{fig:call_vs_execution}
+	\caption{Diferen√ßa entre os pontos de jun√ß√£o de chamada (call) e
+	execu√ß√£o (execution).}\label{fig:call_vs_execution}
 \end{figure}
 
-O modelo de pontos de junÁ„o de AspectJ permite capturar tambÈm o tratamento de exceÁıes, acesso e modificaÁ„o de atributos (\textit{get} e
-\textit{set}), inicializaÁ„o e prÈ-inicializaÁ„o de objetos, contexto de uma execuÁ„o e execuÁ„o de avisos. Estes pontos de junÁ„o tambÈm devem ser
-represent·veis em uma proposta para modelagem de programas orientados a aspectos.
+O modelo de pontos de jun√ß√£o de AspectJ permite capturar tamb√©m o tratamento de exce√ß√µes, acesso e modifica√ß√£o de atributos (\textit{get} e
+\textit{set}), inicializa√ß√£o e pr√©-inicializa√ß√£o de objetos, contexto de uma execu√ß√£o e execu√ß√£o de avisos. Estes pontos de jun√ß√£o tamb√©m devem ser
+represent√°veis em uma proposta para modelagem de programas orientados a aspectos.
 
-Os pontos de junÁ„o em AspectJ definem quais s„o os pontos da execuÁ„o de um programa possÌveis de serem capturados. A linguagem deve disponibilizar
-alguma construÁ„o sint·tica para selecionar pontos de junÁ„o. Para isso, AspectJ disponibiliza os \textbf{pontos de corte} (\textit{pointcuts}). Um
-ponto de corte permite selecionar um conjunto de pontos de junÁ„o. 
+Os pontos de jun√ß√£o em AspectJ definem quais s√£o os pontos da execu√ß√£o de um programa poss√≠veis de serem capturados. A linguagem deve disponibilizar
+alguma constru√ß√£o sint√°tica para selecionar pontos de jun√ß√£o. Para isso, AspectJ disponibiliza os \textbf{pontos de corte} (\textit{pointcuts}). Um
+ponto de corte permite selecionar um conjunto de pontos de jun√ß√£o. 
 
 Existem dois tipos de ponto de corte:
 
 \begin{itemize}
   \item \textbf{Com nome}: Tem um nome e pode ser referenciado dentro de um
   aspecto.
-  \item \textbf{AnÙnimo}: N„o tem um nome e n„o pode ser referenciado dentro de
-  um aspecto. Geralmente È definido dentro de um ponto de corte nomeado.
+  \item \textbf{An√¥nimo}: N√£o tem um nome e n√£o pode ser referenciado dentro de
+  um aspecto. Geralmente √© definido dentro de um ponto de corte nomeado.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics{img/pointcut_code.png}
-	\caption{Exemplo de cÛdigo em Java.}\label{fig:pointcut_code}
+	\caption{Exemplo de c√≥digo em Java.}\label{fig:pointcut_code}
 \end{figure}
 
-O cÛdigo da figura \ref{fig:pointcut_code} mostra o exemplo de um simples cÛdigo
-em Java. … possÌvel capturar pontos especÌficos da execuÁ„o deste cÛdigo
+O c√≥digo da figura \ref{fig:pointcut_code} mostra o exemplo de um simples c√≥digo
+em Java. √â poss√≠vel capturar pontos espec√≠ficos da execu√ß√£o deste c√≥digo
 com pontos de corte. O ponto de corte \textbf{exemploDePontoDeCorte()} foi
-definido para capturar chamadas ao mÈtodo \textbf{umMetodo()} de objetos do tipo \textbf{ObjetoA}. 
-Este ponto de corte È composto por dois pontos de corte anÙnimos e pode ser 
+definido para capturar chamadas ao m√©todo \textbf{umMetodo()} de objetos do tipo \textbf{ObjetoA}. 
+Este ponto de corte √© composto por dois pontos de corte an√¥nimos e pode ser 
 visualizado na figura \ref{fig:pointcut_vs_joinpoint}. O primeiro ponto de corte
-anÙnimo seleciona um ponto de junÁ„o, capturando as chamadas ao mÈtodo \textbf{umMetodo()} de 
-objetos do tipo \textbf{ObjetoA}. O segundo ponto de corte anÙnimo seleciona v·rios
-pontos de junÁ„o, pois captura qualquer chamada a membros (atributos, mÈtodos,
+an√¥nimo seleciona um ponto de jun√ß√£o, capturando as chamadas ao m√©todo \textbf{umMetodo()} de 
+objetos do tipo \textbf{ObjetoA}. O segundo ponto de corte an√¥nimo seleciona v√°rios
+pontos de jun√ß√£o, pois captura qualquer chamada a membros (atributos, m√©todos,
 construtores, etc) de objetos do tipo \textbf{ObjetoA}. 
-… importante observar que, o segundo ponto de corte anÙnimo seleciona v·rios
-pontos de junÁ„o em uma ˙nica definiÁ„o. Entre os dois pontos de corte anÙnimos 
-encontra-se o operador bin·rio \textbf{\&\&}. Este operador especifica que o ponto de corte
-\textbf{exemploDePontoDeCorte()} somente ser· satisfeito se \textbf{os dois
-pontos de corte anÙnimos forem satisfeitos}. Assim, o ponto de corte
-\textbf{exemploDePontoDeCorte()} seleciona apenas um ponto de junÁ„o: execuÁ„o da
-chamada ao mÈtodo \textbf{umMetodo()} com o mÈtodo membro de um objeto do
-tipo \textbf{ObjetoA}. A captura de um ˙nico mÈtodo pode ser visualizada no
-cÛdigo na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
-(mÈtodo selecionado est· destacado com uma flecha laranja).
+√â importante observar que, o segundo ponto de corte an√¥nimo seleciona v√°rios
+pontos de jun√ß√£o em uma √∫nica defini√ß√£o. Entre os dois pontos de corte an√¥nimos 
+encontra-se o operador bin√°rio \textbf{\&\&}. Este operador especifica que o ponto de corte
+\textbf{exemploDePontoDeCorte()} somente ser√° satisfeito se \textbf{os dois
+pontos de corte an√¥nimos forem satisfeitos}. Assim, o ponto de corte
+\textbf{exemploDePontoDeCorte()} seleciona apenas um ponto de jun√ß√£o: execu√ß√£o da
+chamada ao m√©todo \textbf{umMetodo()} com o m√©todo membro de um objeto do
+tipo \textbf{ObjetoA}. A captura de um √∫nico m√©todo pode ser visualizada no
+c√≥digo na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
+(m√©todo selecionado est√° destacado com uma flecha laranja).
 
 \begin{figure}
 	\centering
@@ -211,495 +212,439 @@ cÛdigo na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
 	\caption{Exemplo de ponto de corte.}\label{fig:pointcut_vs_joinpoint}
 \end{figure}
 
-Para possibilitar a captura de v·rios pontos de junÁ„o em um mesmo ponto de
-corte de maneira pratic·vel, AspectJ disponibiliza os \textbf{wildcards}. 
-Um \textit{wildcard} È semelhante a uma express„o regular. As seguintes notaÁıes
-est„o disponÌveis na definiÁ„o de \textit{wildcards}:
+Para possibilitar a captura de v√°rios pontos de jun√ß√£o em um mesmo ponto de
+corte de maneira pratic√°vel, AspectJ disponibiliza os \textbf{wildcards}. 
+Um \textit{wildcard} √© semelhante a uma express√£o regular. As seguintes nota√ß√µes
+est√£o dispon√≠veis na defini√ß√£o de \textit{wildcards}:
 
 \begin{itemize}
-  \item * representa qualquer n˙mero de caracteres, exceto pontos.
-  \item .. representa um ou mais caracteres, incluindo qualquer n˙mero de
+  \item * representa qualquer n√∫mero de caracteres, exceto pontos.
+  \item .. representa um ou mais caracteres, incluindo qualquer n√∫mero de
   pontos.
   \item + representa uma subclasse ou sub-interface de um dado tipo.
 \end{itemize}
 
-Utilizando \textit{wildcards} È possÌvel modificar o ponto de corte especificado
-na figura \ref{fig:pointcut_vs_joinpoint} para que capture chamadas para
-qualquer mÈtodo pertencente a objetos do tipo \textbf{ObjetoA}. Para isso,
-modifica-se o primeiro ponto de corte anÙnimo, substituindo \textbf{umMetodo()} 
-pela notaÁ„o \textbf{*}, capturando agora todos os mÈtodos do ObjetoA, 
-independente do nome. AlÈm disso, adiciona-se a notaÁ„o
-\textbf{..}, capturando mÈtodos com qualquer n˙mero de par‚metros. A figura
-\ref{fig:pointcut_vs_joinpoint_wildcard} mostra o ponto de corte redefinido. 
-O novo ponto de corte captura a chamada de qualquer mÈtodo, com qualquer n˙mero
-de par‚metros e qualquer tipo de retorno de um objeto do tipo \textbf{ObjetoA}.
-A captura de todos os mÈtodos pode ser visualizada no cÛdigo da parte inferior
-da figura \ref{fig:pointcut_vs_joinpoint} (mÈtodos selecionados est„o destacados
-com flechas laranjas).
+Utilizando \textit{wildcards} √© poss√≠vel modificar o ponto de corte especificado na figura \ref{fig:pointcut_vs_joinpoint} para que capture chamadas
+para qualquer m√©todo pertencente a objetos do tipo \textbf{ObjetoA}. Para isso, modifica-se o primeiro ponto de corte an√¥nimo, substituindo
+\textbf{umMetodo()} pela nota√ß√£o \textbf{*}, capturando agora todos os m√©todos do ObjetoA, independente do nome. Al√©m disso, adiciona-se a 
+nota√ß√£o \textbf{..}, capturando m√©todos com qualquer n√∫mero de par√¢metros. 
 
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics{img/pointcut_vs_joinpoint_wildcard.png}
 	\caption{Exemplo de ponto de corte utilizando
 	wildcards.}\label{fig:pointcut_vs_joinpoint_wildcard}
 \end{figure}
 
-Os pontos de corte das figuras \ref{fig:pointcut_vs_joinpoint} e \ref{fig:pointcut_vs_joinpoint_wildcard} foram definidos utilizando \textbf{padrıes
-de assinatura} (\textit{signature patterns}). Um padr„o de assinatura È utilizado para especificar quais assinaturas de um programa em Java ser„o capturadas. No
+A figura \ref{fig:pointcut_vs_joinpoint_wildcard} mostra o ponto de corte redefinido, utilizando \textit{wildcards}. 
+O novo ponto de corte captura a chamada de qualquer m√©todo, com qualquer n√∫mero
+de par√¢metros e qualquer tipo de retorno de um objeto do tipo \textbf{ObjetoA}.
+A captura de todos os m√©todos pode ser visualizada no c√≥digo da parte inferior
+da figura \ref{fig:pointcut_vs_joinpoint} (m√©todos selecionados est√£o destacados
+com flechas laranjas).
+
+Os pontos de corte das figuras \ref{fig:pointcut_vs_joinpoint} e \ref{fig:pointcut_vs_joinpoint_wildcard} foram definidos utilizando \textbf{padr√µes
+de assinatura} (\textit{signature patterns}). Um padr√£o de assinatura √© utilizado para especificar quais assinaturas de um programa em Java ser√£o capturadas. No
 exemplo de ponte de corte da figura \ref{fig:pointcut_vs_joinpoint} a assinatura \textbf{public void ObjetoA.umMetodo()} permite capturar as chamadas
-ao mÈtodo \textbf{umMetodo()} do \textbf{ObjetoA} sem retornar nenhum objeto. J· a assinatura \textbf{public void ObjetoA.*(..)} da 
-figura \ref{fig:pointcut_vs_joinpoint_wildcard} permite capturar as chamadas a qualquer mÈtodo, com qualquer n˙mero de par‚metro e sem nenhum
-tipo de retorno do \textbf{ObjetoA}. AspectJ disponibiliza padrıes de assinatura para especificar pontos de corte para capturar mÈtodos, construtores,
-tipos, exceÁıes, atribuiÁıes, etc. Os seguintes padrıes de assinatura est„o disponÌveis:
+ao m√©todo \textbf{umMetodo()} do \textbf{ObjetoA} sem retornar nenhum objeto. J√° a assinatura \textbf{public void ObjetoA.*(..)} da 
+figura \ref{fig:pointcut_vs_joinpoint_wildcard} permite capturar as chamadas a qualquer m√©todo, com qualquer n√∫mero de par√¢metro e sem nenhum
+tipo de retorno do \textbf{ObjetoA}. AspectJ disponibiliza padr√µes de assinatura para especificar pontos de corte para capturar m√©todos, construtores,
+tipos, exce√ß√µes, atribui√ß√µes, etc. Os seguintes padr√µes de assinatura est√£o dispon√≠veis:
 
 \begin{itemize}
   \item \textbf{Assinaturas de Tipo} (\textit{AssinaturaDeTipo}): Permite
-  capturar definiÁıes de classes e interfaces. … possÌvel especificar o pacote e o nome
+  capturar defini√ß√µes de classes e interfaces. √â poss√≠vel especificar o pacote e o nome
   do tipo a ser capturado.
-  \item \textbf{Assinaturas de MÈtodo e Construtores}
+  \item \textbf{Assinaturas de M√©todo e Construtores}
   (\textit{AssinaturaDeMetodo} e \textit{AssinaturaDeConstrutor}): Permite
-  capturar mÈtodos e construtores. … possÌvel especificar escopo, tipo de retorno, localizaÁ„o e nome do mÈtodo
+  capturar m√©todos e construtores. √â poss√≠vel especificar escopo, tipo de retorno, localiza√ß√£o e nome do m√©todo
   ou construtor e tipos de argumentos.
   \item \textbf{Assinaturas de Atributos} (\textit{AssinaturaDeAtributo}):
-  Permite capturar definiÁıes de atributos de classes. … possÌvel especificar o escopo, tipo do
-  atributo, localizaÁ„o e nome do atributo.
+  Permite capturar defini√ß√µes de atributos de classes. √â poss√≠vel especificar o escopo, tipo do
+  atributo, localiza√ß√£o e nome do atributo.
 \end{itemize}
 
-A figura \ref{fig:signatures} mostra exemplos de padrıes de assinatura na
-captura de pontos de junÁ„o. O primeiro exemplo mostra o uso de um padr„o de mÈtodo para
-capturar chamadas ao mÈtodo \textbf{umMetodo()} de objetos do tipo
-\textbf{ObjetoA} que n„o tenha retorno e com escopo p˙blico. O segundo exemplo mostra o padr„o de
-tipo para capturar objetos do tipo \textbf{ObjetoA}. O terceiro mostra o padr„o
-de atributo para capturar atribuiÁıes ao atributo \textbf{name} de objetos do
-tipo \textbf{ObjetoB}, em qualquer o escopo. O ˙ltimo exemplo apresenta o padr„o
-de construtor para capturar a inicializaÁ„o de objetos do tipo \textbf{ObjetoA}
-sem nenhum par‚metro.
+A figura \ref{fig:signatures} mostra exemplos de padr√µes de assinatura na captura de pontos de jun√ß√£o. O primeiro exemplo mostra o uso de um padr√£o de
+m√©todo para capturar chamadas ao m√©todo \textbf{umMetodo()} de objetos do tipo \textbf{ObjetoA} que n√£o tenha retorno e com escopo p√∫blico. O segundo
+exemplo mostra o padr√£o de tipo para capturar objetos do tipo \textbf{ObjetoA}. O terceiro mostra o padr√£o de atributo para capturar atribui√ß√µes ao
+atributo \textbf{name} de objetos do tipo \textbf{ObjetoB}, em qualquer o escopo. O √∫ltimo exemplo apresenta o padr√£o de construtor para capturar a
+inicializa√ß√£o de objetos do tipo \textbf{ObjetoA} sem nenhum par√¢metro. Al√©m do operador \textbf{\&\&}, que tem a sem√¢ntica do operador l√≥gico do tipo
+AND, AspectJ disponibiliza outros operadores bin√°rios. O operador \textbf{||} tem a mesma sem√¢ntica de um operador l√≥gico do tipo OR e o operador
+\textbf{!} possui a mesma sem√¢ntica do operador l√≥gico do tipo NOT.
 
-\begin{figure}[!h]
+\begin{figure}[!hb]
+	\centering
+	\includegraphics{img/flow_p1.png}
+	\caption{Ponto de corte para captura do fluxo de execu√ß√£o inclusivo: cflow().}\label{fig:flow_p1}
+\end{figure}
+
+\begin{figure}[!hb]
+	\centering
+	\includegraphics{img/flow_p2.png}
+	\caption{Ponto de corte para captura do fluxo de execu√ß√£o exclusivo: cflowbelow().}\label{fig:flow_p2}
+\end{figure}
+ 
+Al√©m dos pontos de corte para captura de execu√ß√£o, chamada, tratamento de exce√ß√£o e atribui√ß√£o, existem pontos de corte mais complexos relativos ao
+fluxo de execu√ß√£o de um programa. Os \textbf{pontos de corte para captura do fluxo de execu√ß√£o} capturam todos os pontos de jun√ß√£o a partir de um outro ponto de
+corte. Existem dois tipos: \textit{cflow(PontoDeCorte)} e \textit{cflowbelow(PontoDeCorte)}. O ponto de corte da figura \ref{fig:flow_p1}
+√© do tipo \textit{cflow()} e captura todos os pontos de jun√ß√£o disparados a partir do ponto de corte \textbf{call(public void ObjetoA.umMetodo())},
+inclusive a chamada ao pr√≥prio m√©todo. O ponto de corte da figura \ref{fig:flow_p2} √© do tipo \textit{cflowbelow()} e captura os mesmos pontos de
+jun√ß√£o do anterior, exceto a chamada ao pr√≥prio m√©todo.
+
+\begin{figure}[!htb]
 	\centering
 	\includegraphics{img/signatures.png}
 	\caption{Exemplo de assinaturas em AspectJ.}\label{fig:signatures}
 \end{figure}
 
-AlÈm do operador \textbf{\&\&} utilizado nos pontos de corte dos exemplos
-anteriores, AspectJ disponibiliza outros operadores bin·rios. Os
-operadores disponÌveis podem ser visualizados na tabela
-\ref{tab:binary_operators}. Esses operadores s„o utilizados para formar regras
-complexas combinando diferentes pontos de corte.
-
-\begin{table}
-	\centering
-	\begin{tabular}{ | c | c | c | c | }
-		\hline
-		 \textbf{Operador} & \textbf{Nome} & \textbf{Exemplo} & \textbf{ExplicaÁ„o do
-		 Exemplo} \\ \hline 
-		 
-		 ! & NegaÁ„o & !ClasseA & Qualquer classe exceto ClasseA \\\hline 
-		 
-		 \textbar\textbar  & Ou & ClasseA\textbar\textbar ClasseB & ClasseA ou
-		 ClasseB \\ \hline 
-		 
-		 \&\&  & E & ClasseA \&\& ClasseB & ClasseA e ClasseB \\ 
-		\hline
-	\end{tabular}
-	\caption{Tipos de Pontos de JunÁ„o}
-	\label{tab:binary_operators}
-\end{table} 
-
-AlÈm dos pontos de corte para captura de execuÁ„o, chamada, tratamento de
-exceÁ„o e atribuiÁ„o, existem pontos de corte para outras
-situaÁıes mais especÌficas. Os \textbf{pontos de corte para captura do fluxo de
-execuÁ„o} capturam todos os pontos de junÁ„o a partir de um outro ponto de
-corte. Existem dois tipos: \textit{cflow(PontoDeCorte)} e
-\textit{cflowbelow(PontoDeCorte)}. O ponto de corte da figura \ref{fig:flow_p1}
-È do tipo \textit{cflow()} e captura todos os pontos de junÁ„o disparados a partir do
-ponto de corte \textbf{call(public void ObjetoA.umMetodo())}, inclusive a chamada 
-ao prÛprio mÈtodo. O ponto de corte da figura \ref{fig:flow_p2} È do tipo
-\textit{cflowbelow()} e captura os mesmos pontos de junÁ„o do anterior, exceto a
-chamada ao prÛprio mÈtodo.
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics{img/flow_p1.png}
-	\caption{Ponto de corte para captura do fluxo de execuÁ„o inclusivo:
-	cflow().}\label{fig:flow_p1}
-\end{figure}
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics{img/flow_p2.png}
-	\caption{Ponto de corte para captura do fluxo de execuÁ„o exclusivo:
-	cflowbelow().}\label{fig:flow_p2}
-\end{figure}
-
-Existem tambÈm \textbf{pontos de corte baseados na estrutura lÈxica do cÛdigo}.
-Estes pontos de corte capturam pontos de junÁ„o que ocorrem dentro de um
-determinado trecho de cÛdigo. Existem dois tipos:
-\textit{within(AssinaturaDeTipo)} e \textit{withincode(AssinaturaDeConstrutor ou
-AssinaturaDeMÈtodo)}. O primeiro tipo captura os pontos de junÁ„o que ocorrerem
-dentro de classes, aspectos ou classes aninhadas de um determinado tipo
-(\textit{AssinaturaDeTipo}. O segundo tipo captura os pontos de junÁ„o que
-estiverem dentro do cÛdigo de um dado mÈtodo ou construtor
+Existem tamb√©m \textbf{pontos de corte baseados na estrutura l√©xica do c√≥digo}. Estes pontos de corte capturam pontos de jun√ß√£o que ocorrem dentro de
+um determinado trecho de c√≥digo. Existem dois tipos: \textit{within(AssinaturaDeTipo)} e \textit{withincode(AssinaturaDeConstrutor ou
+AssinaturaDeM√©todo)}. O primeiro tipo captura os pontos de jun√ß√£o que ocorrerem dentro de classes, aspectos ou classes aninhadas de um determinado
+tipo (\textit{AssinaturaDeTipo}. O segundo tipo captura os pontos de jun√ß√£o que estiverem dentro do c√≥digo de um dado m√©todo ou construtor
 (\textit{AssinaturaDeConstrutor ou AssinaturaDeMetodo}). 
 
 Outros tipos de \textbf{ponto de corte permitem capturar o contexto de uma
-execuÁ„o}. O ponto de corte \textit{this(TipoDoObjeto)} permite capturar todos
-os pontos de junÁ„o onde o objeto que est· executando È do tipo
-\textit{TipoDoObjeto}. J· o ponto de corte \textit{target(TipoDoObjeto)} permite
-capturas os pontos de junÁ„o onde o objeto que est· sendo chamado È do tipo
-\textit{TipoDoObjeto}. Estes pontos de corte s„o importantes, pois permitem
-passar o contexto de uma execuÁ„o, isto È, inst‚ncias de objetos, para um aviso,
-o que ser· abordado ainda neste capÌtulo. 
+execu√ß√£o}. O ponto de corte \textit{this(TipoDoObjeto)} permite capturar todos
+os pontos de jun√ß√£o onde o objeto que est√° executando √© do tipo
+\textit{TipoDoObjeto}. J√° o ponto de corte \textit{target(TipoDoObjeto)} permite
+capturas os pontos de jun√ß√£o onde o objeto que est√° sendo chamado √© do tipo
+\textit{TipoDoObjeto}. Estes pontos de corte s√£o importantes, pois permitem
+passar o contexto de uma execu√ß√£o, isto √©, inst√¢ncias de objetos, para um aviso,
+o que ser√° abordado ainda neste cap√≠tulo. 
 
 Para finalizar existem os \textbf{pontos de corte para argumentos}.
 Estes pontos de corte tem a seguinte sintaxe: \textit{args(AssinaturaDeTipo, 
-\ldots , AssinaturaDeTipo)}. Eles permitem capturar pontos de junÁ„o
-baseados nos argumentos recebidos. Por exemplo, capturar os mÈtodos 
-que recebam trÍs atributos do tipo \textit{String}.
+\ldots , AssinaturaDeTipo)}. Eles permitem capturar pontos de jun√ß√£o
+baseados nos argumentos recebidos. Por exemplo, capturar os m√©todos 
+que recebam tr√™s atributos do tipo \textit{String}.
 
-ApÛs identificar quais pontos de junÁ„o ser„o capturados atravÈs de pontos de
-corte, deve-se especificar qual o comportamento que ser· executado antes, 
-durante ou depois dos locais selecionados. Para isso, AspectJ propıe uma
-construÁ„o denominada \textbf{aviso}. Um aviso È uma construÁ„o parecida com um mÈtodo
-em Java. Ele define um comportamento para ser executado. Existem trÍs tipos de
+Ap√≥s identificar quais pontos de jun√ß√£o ser√£o capturados atrav√©s de pontos de
+corte, deve-se especificar qual o comportamento que ser√° executado antes, 
+durante ou depois dos locais selecionados. Para isso, AspectJ prop√µe uma
+constru√ß√£o denominada \textbf{aviso}. Um aviso √© uma constru√ß√£o parecida com um m√©todo
+em Java. Ele define um comportamento para ser executado. Existem tr√™s tipos de
 avisos:
 
 \begin{itemize}
-  \item \textbf{Antes} (before): Executa antes do ponto de junÁ„o capturado.
-  \item \textbf{Depois} (after): Executa depois do ponto de junÁ„o capturado.
-  Existe uma variaÁ„o ao aviso \textit{after} que executar· apenas se o ponto de
-  junÁ„o capturado n„o lanÁar nenhuma exceÁ„o, isto È, sÛ ser· executado se a execuÁ„o
-  do ponto de junÁ„o tiver sucesso. Esse tipo de aviso È denominado
+  \item \textbf{Antes} (before): Executa antes do ponto de jun√ß√£o capturado.
+  \item \textbf{Depois} (after): Executa depois do ponto de jun√ß√£o capturado.
+  Existe uma varia√ß√£o ao aviso \textit{after} que executar√° apenas se o ponto de
+  jun√ß√£o capturado n√£o lan√ßar nenhuma exce√ß√£o, isto √©, s√≥ ser√° executado se a execu√ß√£o
+  do ponto de jun√ß√£o tiver sucesso. Esse tipo de aviso √© denominado
   \textit{after returning}.
-  \item \textbf{Durante} (around): … o tipo de aviso mais poderoso, pois
-  pode executar no lugar do ponto de junÁ„o capturado, continuar a execuÁ„o
-  original ou alterar o contexto de execuÁ„o.
+  \item \textbf{Durante} (around): √â o tipo de aviso mais poderoso, pois
+  pode executar no lugar do ponto de jun√ß√£o capturado, continuar a execu√ß√£o
+  original ou alterar o contexto de execu√ß√£o.
 \end{itemize}
 
 A figura \ref{fig:advice_code} mostra um exemplo de um aviso que executa
 \textbf{depois}(\textit{after}) do ponto de corte
-\textbf{exemploDePontoDeCorte()}. Este aviso recebe o contexto da execuÁ„o
-como par‚metro (um objeto do tipo \textbf{ObjetoA}) e imprime uma
-mensagem com a representaÁ„o textual deste objeto. O corpo deste aviso È o
-trecho de cÛdigo que realiza a impress„o da representaÁ„o do objeto. Em AspectJ,
-o corpo de um aviso pode conter qualquer cÛdigo Java. Observa-se tambÈm que o
-objeto passado no contexto de execuÁ„o È referenciado no corpo do aviso. Os
-pontos de corte \textit{target()} e \textit{this()} s„o muito utilizados, pois
-permitem passar o contexto de execuÁ„o para um aviso.
+\textbf{exemploDePontoDeCorte()}. Este aviso recebe o contexto da execu√ß√£o
+como par√¢metro (um objeto do tipo \textbf{ObjetoA}) e imprime uma
+mensagem com a representa√ß√£o textual deste objeto. O corpo deste aviso √© o
+trecho de c√≥digo que realiza a impress√£o da representa√ß√£o do objeto. Em AspectJ,
+o corpo de um aviso pode conter qualquer c√≥digo Java. Observa-se tamb√©m que o
+objeto passado no contexto de execu√ß√£o √© referenciado no corpo do aviso. Os
+pontos de corte \textit{target()} e \textit{this()} s√£o muito utilizados, pois
+permitem passar o contexto de execu√ß√£o para um aviso.
 
-\begin{figure}
+\begin{figure}[!hb]
 	\centering
 	\includegraphics{img/advice_code.png}
-	\caption{Exemplo de aviso com contexto de execuÁ„o.}\label{fig:advice_code}
+	\caption{Exemplo de aviso com contexto de execu√ß√£o.}\label{fig:advice_code}
 \end{figure}
 
-\subsubsection{ConstruÁıes Est·ticas}
+\subsubsection{Constru√ß√µes Est√°ticas}
 
-Uma das construÁıes est·ticas propostas por AspectJ È a \textbf{introduÁ„o}, que
+
+Uma das constru√ß√µes est√°ticas propostas por AspectJ √© a \textbf{introdu√ß√£o}, que
 permite alterar a estrutura de classes, aspectos e interfaces adicionando novos
-mÈtodos e atributos. A figura \ref{fig:introduction} mostra um aspecto que
-introduz o mÈtodo \textbf{metodoIntroduzido()} e os atributos
+m√©todos e atributos. A figura \ref{fig:introduction} mostra um aspecto que
+introduz o m√©todo \textbf{metodoIntroduzido()} e os atributos
 \textbf{atributoUm} e \textbf{atributoDois} na classe do tipo \textbf{ObjetoA}.
-Os dois atributos introduzidos s„o utilizados no prÛprio mÈtodo
-\textbf{metodoIntroduzido()} e que tambÈm foi introduzido. Isto È possÌvel, pois
-o compilador AspectJ sabe que o mÈtodo introduzido pertence ao \textbf{ObjetoA}
-e o objeto que executar· este mÈtodo ser· um objeto do tipo \textbf{ObjetoA}.
+Os dois atributos introduzidos s√£o utilizados no pr√≥prio m√©todo
+\textbf{metodoIntroduzido()} e que tamb√©m foi introduzido. Isto √© poss√≠vel, pois
+o compilador AspectJ sabe que o m√©todo introduzido pertence ao \textbf{ObjetoA}
+e o objeto que executar√° este m√©todo ser√° um objeto do tipo \textbf{ObjetoA}.
 
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.9]{img/introduction.png}
-	\caption{IntroduÁ„o de mÈtodos e atributos.}\label{fig:introduction}
+	\caption{Introdu√ß√£o de m√©todos e atributos.}\label{fig:introduction}
 \end{figure}
 
-Outra funcionalidade disponÌvel na linguagem È a
-\textbf{modificaÁ„o da hierarquia de classes}, permitindo a definiÁ„o de
-relacionamentos de heranÁa, implementaÁ„o de interfaces, dentre outras
-alteraÁıes \cite{Laddad:2003:AAP:993468}. O exemplo da figura
-\ref{fig:introduction_interface} mostra a introduÁ„o de um relacionamento de
-heranÁa entre as classes \textbf{ObjetoA} e \textbf{ObjetoB}.
+Outra funcionalidade dispon√≠vel na linguagem √© a \textbf{modifica√ß√£o da hierarquia de classes}, permitindo a defini√ß√£o de
+relacionamentos de heran√ßa, implementa√ß√£o de interfaces, dentre outras
+altera√ß√µes \cite{Laddad:2003:AAP:993468}. O exemplo da figura
+\ref{fig:introduction_interface} mostra a introdu√ß√£o de um relacionamento de
+heran√ßa entre as classes \textbf{ObjetoA} e \textbf{ObjetoB}.
 
 \begin{figure}
 	\centering
 	\includegraphics{img/introduction_interface.png}
-	\caption{IntroduÁ„o de relacionamentos de
-	heranÁa.}\label{fig:introduction_interface}
+	\caption{Introdu√ß√£o de relacionamentos de
+	heran√ßa.}\label{fig:introduction_interface}
 \end{figure}
 
 \subsubsection{Aspecto}
 
 Resumidamente, para estender um sistema utilizando Java com AspectJ, deve-se
-identificar os pontos de junÁ„o que ser„o selecionados por um ponto de corte e
-implementar o aviso que introduzir· o novo comportamento antes, durante ou
+identificar os pontos de jun√ß√£o que ser√£o selecionados por um ponto de corte e
+implementar o aviso que introduzir√° o novo comportamento antes, durante ou
 depois do ponto de corte. O elemento da linguagem que agrupa todas essas
-construÁıes È o \textbf{aspecto}. Um aspecto È uma unidade de modularizaÁ„o 
-semelhante a uma classe, mas com diferenÁas em relaÁ„o ao ciclo de vida, pois
-n„o pode ser instancializado e n„o pode especializar de um outro aspecto concreto.
+constru√ß√µes √© o \textbf{aspecto}. Um aspecto √© uma unidade de modulariza√ß√£o 
+semelhante a uma classe, mas com diferen√ßas em rela√ß√£o ao ciclo de vida, pois
+n√£o pode ser instancializado e n√£o pode especializar de um outro aspecto concreto.
 No entanto, um aspecto pode ser declarado como abstrato e aspectos concretos
-podem estendÍ-lo para implementar suas declaraÁıes abstratas.
+podem estend√™-lo para implementar suas declara√ß√µes abstratas.
 
 \subsubsection{Exemplo de Aspecto}
 
-O objetivo deste exemplo È utilizar a linguagem AspectJ para implementar de maneira elegante o padr„o de projeto \textbf{Observador}
-\cite{Gamma:1995:DPE:186897}. Este padr„o permite que um ou mais objetos se cadastrem para escutar mudanÁas de um outro objeto. A implementaÁ„o do padr„o est· 
+O objetivo deste exemplo √© utilizar a linguagem AspectJ para implementar de maneira elegante o padr√£o de projeto \textbf{Observador}
+\cite{Gamma:1995:DPE:186897}. Este padr√£o permite que um ou mais objetos se cadastrem para escutar mudan√ßas de um outro objeto. A implementa√ß√£o do padr√£o est√° 
 presente nos exemplos da IDE para desenvolvimento com aspectos: AspectJ Development Tools (AJDT) \cite{AspectJ11}.
 
-Um dos requisitos deste padr„o È que um ou mais objetos (observadores) possam
-escutar mudanÁas de um outro objeto (sujeito) e serem atualizados. Assim,
+Um dos requisitos deste padr√£o √© que um ou mais objetos (observadores) possam
+escutar mudan√ßas de um outro objeto (sujeito) e serem atualizados. Assim,
 identificam-se duas interfaces: \textit{Subject} e \textit{Observer}. A interface \textit{Subject}
-deve armazenar seus observadores e prover mÈtodos para adicionar, remover e obter
-os mesmos. A interface \textit{Observer} deve prover mÈtodos para associar e
-obter o sujeito observado. Esses requisitos s„o implementados no aspecto como
-introduÁıes de mÈtodos e atributos. O trecho de cÛdigo da figura
-\ref{fig:aspect_1} mostra as introduÁıes realizadas. Observa-se a introduÁ„o do
-atributo \textit{observers} e dos mÈtodos \textit{addObserver()},
+deve armazenar seus observadores e prover m√©todos para adicionar, remover e obter
+os mesmos. A interface \textit{Observer} deve prover m√©todos para associar e
+obter o sujeito observado. Esses requisitos s√£o implementados no aspecto como
+introdu√ß√µes de m√©todos e atributos. O trecho de c√≥digo da figura \ref{fig:aspects_observer_1} apresenta as introdu√ß√µes realizadas. Observa-se a
+introdu√ß√£o do atributo \textit{observers} e dos m√©todos \textit{addObserver()},
 \textit{removeObserver()} e \textit{getObservers()} na interface
-\textit{Subject}. Na interface \textit{Observer} foram introduzidos os mÈtodos
+\textit{Subject}. Na interface \textit{Observer} foram introduzidos os m√©todos
 \textit{setSubject()} e \textit{getSubject()} e o atributo
 \textit{subject}.
 
-\begin{figure}
-	\centering
-	\includegraphics{img/aspect_1.png}
-	\caption{IntroduÁıes de mÈtodos e atributos para
-	sujeito e observador.}\label{fig:aspect_1}
-\end{figure}
+Al√©m de introduzir os m√©todos e atributos para permitir a associa√ß√£o entre
+sujeitos e observadores, deve-se implementar a l√≥gica que capture mudan√ßas nos
+sujeitos e avise os observadores. Essa l√≥gica pode ser implementada com o uso de
+pontos de corte e avisos. O ponto de corte \textit{stateChanges()} √©
+respons√°vel por escutar mudan√ßas em um sujeito e ap√≥s (\textit{after}) cada
+mudan√ßa, um aviso √© executado para atualizar os observadores. O ponto de corte
+\textit{stateChanges()} deve ser abstrato, pois este ponto de corte ser√°
+diferente para cada sujeito a ser observado. O trecho de c√≥digo que implementa o
+ponto de corte e o aviso tamb√©m pode ser visualizado na figura \ref{fig:aspects_observer_1}.
 
-AlÈm de introduzir os mÈtodos e atributos para permitir a associaÁ„o entre
-sujeitos e observadores, deve-se implementar a lÛgica que capture mudanÁas nos
-sujeitos e avise os observadores. Essa lÛgica pode ser implementada com o uso de
-pontos de corte e avisos. O ponto de corte \textit{stateChanges()} È
-respons·vel por escutar mudanÁas em um sujeito e apÛs (\textit{after}) cada
-mudanÁa, um aviso È executado para atualizar os observadores. O ponto de corte
-\textit{stateChanges()} deve ser abstrato, pois este ponto de corte ser·
-diferente para cada sujeito a ser observado. O trecho de cÛdigo que implementa o
-ponto de corte e o aviso pode ser visualizado na figura \ref{fig:aspect_2}.
-
-\begin{figure}
-	\centering
-	\includegraphics{img/aspect_2.png}
-	\caption{EspecificaÁ„o do ponto de corte abstrato para capturar mudanÁas e
-	implementaÁ„o do aviso para atualizar observadores na
-	ocorrÍncia de uma mudanÁa.}\label{fig:aspect_2}
-\end{figure}
-
-Com esses requisitos implementados, È possÌvel juntar os dois trechos de cÛdigo
-em um aspecto abstrato que implementa o padr„o \textbf{Observador}. Este aspecto
-È abstrato, pois tem o ponto de corte abstrato \textit{stateChanges()}, que deve
-ser definido por um aspecto concreto, selecionando quais pontos de junÁ„o ser„o
-capturados para definir que uma mudanÁa ocorreu. O aspecto abstrato recebe o
+Com esses requisitos implementados, √© poss√≠vel juntar os dois trechos de c√≥digo
+em um aspecto abstrato que implementa o padr√£o \textbf{Observador}. Este aspecto
+√© abstrato, pois tem o ponto de corte abstrato \textit{stateChanges()}, que deve
+ser definido por um aspecto concreto, selecionando quais pontos de jun√ß√£o ser√£o
+capturados para definir que uma mudan√ßa ocorreu. O aspecto abstrato recebe o
 nome de \textit{SubjectObserverProtocol} e pode ser visualizado na figura
-\ref{fig:aspects_observer_1}. 
+\ref{fig:aspects_observer_1}. Um desenvolvedor que deseja utilizar o padr√£o de projeto
+observador pode reusar o aspecto abstrato \textit{SubjectObserverProtocol}, 
+estendendo-o com a implementa√ß√£o de um aspecto concreto. Este aspecto concreto
+deve especificar qual classe faz o papel de sujeito, isto √©, qual classe
+implementa a interface \textit{Subject} e qual classe faz o papel de
+observador, isto √©, qual classe implementa a interface \textit{Observer}.
+Al√©m disso, deve definir o ponto de corte \textit{stateChanges()}, para
+especificar em quais pontos de jun√ß√£o ser√£o detectadas mudan√ßas. 
 
 \begin{figure}
 	\centering
 	\includegraphics{img/aspects_observer_1.png}
-	\caption{Aspecto abstrato para implementaÁ„o do
-	padr„o de projeto Observador.}\label{fig:aspects_observer_1}
+	\caption{Aspecto abstrato para implementa√ß√£o do
+	padr√£o de projeto Observador.}\label{fig:aspects_observer_1}
 \end{figure}
 
-Um desenvolvedor que deseja utilizar o padr„o de projeto
-observador pode reusar o aspecto abstrato \textit{SubjectObserverProtocol}, 
-estendendo-o com a implementaÁ„o de um aspecto concreto. Este aspecto concreto
-deve especificar qual classe faz o papel de sujeito, isto È, qual classe
-implementa a interface \textit{Subject} e qual classe faz o papel de
-observador, isto È, qual classe implementa a interface \textit{Observer}.
-AlÈm disso, deve definir o ponto de corte \textit{stateChanges()}, para
-especificar em quais pontos de junÁ„o ser„o detectadas mudanÁas. 
-
-Considerando como exemplo um sistema de interface gr·fica com um bot„o e um
-texto com cor vari·vel. Define-se como requisito que a cor deste texto deve modificar toda vez
-que o bot„o foi clicado. Este requisito pode ser implementado utilizando o
-aspecto abstrato. O pequeno sistema de interface gr·fica contÈm a classe
-\textit{Button} representando o bot„o e a classe \textit{ColorLabel}
-representando o texto com cor. A classe \textit{Button} È o sujeito observado,
-por isso implementa a interface \textit{Subject}. O observador È a classe
-\textit{ColorLabel} que implementa a interface \textit{Observer}. AlÈm disso,
-introduz-se o mÈtodo \textit{update()} na classe \textit{ColorLabel} para
-atualizar a cor do texto quando houver alguma mudanÁa no bot„o. O que est·
-faltando definir È quais pontos na execuÁ„o do programa geram mudanÁas no bot„o.
-Estes pontos s„o definidos ao implementar o ponto de corte abstrato
-\textit{stateChanges()}. Define-se que ser„o capturadas as chamadas ao mÈtodo
-\textit{click()} da classe \textit{Button}, onde o objeto alvo È do tipo
-\textit{Subject} (neste caso È da classe \textit{Button}, pois esta classe
-implementa \textit{Subject}. O cÛdigo do aspecto concreto para implementar o
-padr„o observador pode ser visualizado na figura \ref{fig:aspects_observer_2}. 
-Este aspecto captura cliques em um bot„o, atualizando a cor de um texto.
+Considerando como exemplo um sistema de interface gr√°fica com um bot√£o e um
+texto com cor vari√°vel. Define-se como requisito que a cor deste texto deve modificar toda vez
+que o bot√£o foi clicado. Este requisito pode ser implementado utilizando o
+aspecto abstrato. O pequeno sistema de interface gr√°fica cont√©m a classe
+\textit{Button} representando o bot√£o e a classe \textit{ColorLabel}
+representando o texto com cor. A classe \textit{Button} √© o sujeito observado,
+por isso implementa a interface \textit{Subject}. O observador √© a classe
+\textit{ColorLabel} que implementa a interface \textit{Observer}. Al√©m disso,
+introduz-se o m√©todo \textit{update()} na classe \textit{ColorLabel} para
+atualizar a cor do texto quando houver alguma mudan√ßa no bot√£o. O que est√°
+faltando definir √© quais pontos na execu√ß√£o do programa geram mudan√ßas no bot√£o.
+Estes pontos s√£o definidos ao implementar o ponto de corte abstrato
+\textit{stateChanges()}. Define-se que ser√£o capturadas as chamadas ao m√©todo
+\textit{click()} da classe \textit{Button}, onde o objeto alvo √© do tipo
+\textit{Subject} (neste caso √© da classe \textit{Button}, pois esta classe
+implementa \textit{Subject}. O c√≥digo do aspecto concreto para implementar o
+padr√£o observador pode ser visualizado na figura \ref{fig:aspects_observer_2}. 
+Este aspecto captura cliques em um bot√£o, atualizando a cor de um texto.
 
 \begin{figure}
 	\centering
 	\includegraphics{img/aspects_observer_2.png}
 	\caption{Aspecto concreto implementando o
-	padr„o de projeto Observador em um sistema de
-	interface gr·fica.}\label{fig:aspects_observer_2}
+	padr√£o de projeto Observador em um sistema de
+	interface gr√°fica.}\label{fig:aspects_observer_2}
 \end{figure}
 
-\section{An·lise e Projeto com UML}
+\section{An√°lise e Projeto com UML}
 
-A an·lise e projeto de sistemas orientados a objetos È importante para o
-desenvolvimento de aplicaÁıes complexas. AplicaÁıes complexas necessitam de um
-planejamento antes da implementaÁ„o. Usualmente divide-se o desenvolvimento de
-um sistema em quatro fases: an·lise, projeto, implementaÁ„o e testes
-\cite{pressman:01}. As fases de an·lise e projeto s„o as fases aonde realiza-se 
-a maior parte do planejamento de um desenvolvimento. J· as fases de
-implementaÁ„o e testes s„o respons·veis pela codificaÁ„o com o objetivo de obter
-um programa execut·vel e que cumpra os requisitos do cliente. 
+A an√°lise e projeto de sistemas orientados a objetos √© importante para o
+desenvolvimento de aplica√ß√µes complexas. Aplica√ß√µes complexas necessitam de um
+planejamento antes da implementa√ß√£o. Usualmente divide-se o desenvolvimento de
+um sistema em quatro fases: an√°lise, projeto, implementa√ß√£o e testes
+\cite{pressman:01}. As fases de an√°lise e projeto s√£o as fases aonde realiza-se 
+a maior parte do planejamento de um desenvolvimento. J√° as fases de
+implementa√ß√£o e testes s√£o respons√°veis pela codifica√ß√£o com o objetivo de obter
+um programa execut√°vel e que cumpra os requisitos do cliente. 
 
-Nas fases de an·lise e projeto utilizam-se modelos que permitem representar o
-sistema em diferentes nÌveis de abstraÁ„o, facilitando a compreens„o e reduzindo
-a complexidade. A fase de an·lise pretende compreender os principais conceitos
-do domÌnio do problema, evitando o uso de termos computacionais. J· a fase de
-projeto foca na soluÁ„o que ser· desenvolvida para produzir um sistema a partir
-da compreens„o do problema. 
+Nas fases de an√°lise e projeto utilizam-se modelos que permitem representar o
+sistema em diferentes n√≠veis de abstra√ß√£o, facilitando a compreens√£o e reduzindo
+a complexidade. A fase de an√°lise pretende compreender os principais conceitos
+do dom√≠nio do problema, evitando o uso de termos computacionais. J√° a fase de
+projeto foca na solu√ß√£o que ser√° desenvolvida para produzir um sistema a partir
+da compreens√£o do problema. 
 
-\subsection{M˙ltiplos pontos de vista de um sistema}
+\subsection{M√∫ltiplos pontos de vista de um sistema}
 
 Segundo \cite{silva:07}, um sistema orientado a objetos pode ser visualizado por
 diferentes pontos de vista:
 
 \begin{itemize}
-  \item Estrutural de sistema: Essa vis„o contÈm o conjunto de elementos de um
+  \item Estrutural de sistema: Essa vis√£o cont√©m o conjunto de elementos de um
   sistema orientado a objetos e seus relacionamentos.
-  \item Estrutural de classe: Essa vis„o contÈm o detalhamento da estrutura de
+  \item Estrutural de classe: Essa vis√£o cont√©m o detalhamento da estrutura de
   cada um dos elementos de um sistema.
-  \item Comportamental de sistema: Essa vis„o permite compreender o
+  \item Comportamental de sistema: Essa vis√£o permite compreender o
   conjunto de funcionalidades do sistema e como os elementos iteragem em tempo
-  de execuÁ„o.
-  \item Comportamental de classe: Essa vis„o permite compreender o comportamento
-  de um elemento isoladamente. Geralmente compreende-se a variaÁ„o de estados
+  de execu√ß√£o.
+  \item Comportamental de classe: Essa vis√£o permite compreender o comportamento
+  de um elemento isoladamente. Geralmente compreende-se a varia√ß√£o de estados
   desse elemento.
 \end{itemize}
   
-Uma modelagem que permita representar esses quatro pontos de vista pode ser considerada completa. Uma \textbf{modelagem completa} fornece subsÌdios
-para a geraÁ„o de cÛdigo e facilita a compreens„o de um sistema, tornando-o manutenÌvel e possibilitando o reuso. 
+Uma modelagem que permita representar esses quatro pontos de vista pode ser considerada completa. Uma \textbf{modelagem completa} fornece subs√≠dios
+para a gera√ß√£o de c√≥digo e facilita a compreens√£o de um sistema, tornando-o manuten√≠vel e possibilitando o reuso. 
 
-\section{UML: Segunda Vers„o}
+\section{UML: Segunda Vers√£o}
 
-A segunda vers„o da UML \cite{uml:05} permite representar os elementos e o comportamento e a estrutura de um sistema nas fases de an·lise e projeto
-atravÈs de diagramas estruturais e comportamentais. Esta linguagem È um padr„o da \textit{Object Management Group} (OMG), por isso È compreendida e
-utilizada por grande parte dos desenvolvedores e analistas para realizar a modelagem de sistemas. Os diagramas da segunda vers„o da UML permitem a
-representaÁ„o dos quatro pontos de vista essenciais para programas  orientados a objetos. As seÁıes que tratam dos diagramas estruturais e
-comportamentais da UML s„o baseadas no conte˙do do livro UML 2 em Modelagem Orientada a Objetos \cite{uml2ricardo:03} e no Tutorial de UML da Sparx
+A segunda vers√£o da UML \cite{uml:05} permite representar os elementos e o comportamento e a estrutura de um sistema nas fases de an√°lise e projeto
+atrav√©s de diagramas estruturais e comportamentais. Esta linguagem √© um padr√£o da \textit{Object Management Group} (OMG), por isso √© compreendida e
+utilizada por grande parte dos desenvolvedores e analistas para realizar a modelagem de sistemas. Os diagramas da segunda vers√£o da UML permitem a
+representa√ß√£o dos quatro pontos de vista essenciais para programas  orientados a objetos. As se√ß√µes que tratam dos diagramas estruturais e
+comportamentais da UML s√£o baseadas no conte√∫do do livro UML 2 em Modelagem Orientada a Objetos \cite{uml2ricardo:03} e no Tutorial de UML da Sparx
 Systems \cite{sparx_tutorial}.
 
 \subsection{Diagramas Estruturais}
 
-A segunda vers„o da UML disponibiliza sete diagramas estruturais: diagrama de classes, componentes, estrutura composta, instalaÁ„o, objetos,
-pacotes e perfil. Os diagramas estruturais utilizados nesta dissertaÁ„o s„o os diagramas de classe e o diagrama de perfil. Este ˙ltimo foi
-introduzido na vers„o 2.2 da linguagem e È importante para extens„o da linguagem para um domÌnio especÌfico.
+A segunda vers√£o da UML disponibiliza sete diagramas estruturais: diagrama de classes, componentes, estrutura composta, instala√ß√£o, objetos,
+pacotes e perfil. Os diagramas estruturais utilizados nesta disserta√ß√£o s√£o os diagramas de classe e o diagrama de perfil. Este √∫ltimo foi
+introduzido na vers√£o 2.2 da linguagem e √© importante para extens√£o da linguagem para um dom√≠nio espec√≠fico.
 
 \subsubsection{Diagrama de Classes}
 
 O diagrama de classes permite representar a estrutura e os relacionamentos dos elementos de um sistema. Este diagrama permite visualizar o sistema
-como um todo, visualizando os relacionamentos entre os elementos e tambÈm permite visualizar a estrutura de cada elemento, com seus atributos e
-mÈtodos. Os principais componentes deste diagrama s„o as classes, associaÁıes, atributos, mÈtodos e pacotes.
+como um todo, visualizando os relacionamentos entre os elementos e tamb√©m permite visualizar a estrutura de cada elemento, com seus atributos e
+m√©todos. Os principais componentes deste diagrama s√£o as classes, associa√ß√µes, atributos, m√©todos e pacotes.
 
 \subsubsection{Diagrama de Perfil}
 
-O diagrama de perfil permite estender o modelo da linguagem para representar conceitos de um determinado domÌnio de aplicaÁıes. Um perfil È composto
-por \textbf{estereÛtipos}, \textbf{restriÁıes} e \textbf{valores rotulados}. 
+O diagrama de perfil permite estender o modelo da linguagem para representar conceitos de um determinado dom√≠nio de aplica√ß√µes. Um perfil √© composto
+por \textbf{estere√≥tipos}, \textbf{restri√ß√µes} e \textbf{valores rotulados}. 
 
-Um \textbf{estereÛtipo} adiciona uma sem‚ntica adicional a um elemento da UML.
-Geralmente adiciona-se um estereÛtipo para diferenciar os papÈis dos elementos de um
-modelo. Por exemplo, a classe \textit{RoomManager} da figura
-\ref{fig:stereotype_1} foi associada ao estereÛtipo \textit{Controller} 
-para representar que esta classe tem o papel de controlador. … possÌvel
-adicionar mais de um esreÛtipo a mesma classe. A classe
-\textit{ReservationManager} foi associada aos estereÛtipos
-\textit{Controller} e \textit{Client} para representar que esta classe È
-um controlador e que encontra-se do lado do cliente. Os estereÛtipos
-\textit{Client} e \textit{Controller} estendem o elemento do 
-meta-modelo da UML \textit{Class}, podendo assim ser aplicados a qualquer classe. 
-… importante observar que, um estereÛtipo pode ser associado a qualquer elemento 
-do meta-modelo da UML. O atributo \textit{id} da classe \textit{Room} est· associado 
-ao estereÛtipo \textit{key} para representar que este atributo define unicamente 
-uma sala. O estereÛtipo \textit{key} est· estendendo o meta-modelo da UML
-\textit{Attribute}.
+Um \textbf{estere√≥tipo} adiciona uma sem√¢ntica adicional a um elemento da UML. Geralmente adiciona-se um estere√≥tipo para diferenciar os pap√©is dos
+elementos de um modelo. Por exemplo, a classe \textit{RoomManager} da figura \ref{fig:stereotype_1} foi associada ao estere√≥tipo \textit{Controller} 
+para representar que esta classe tem o papel de controlador. √â poss√≠vel adicionar mais de um estere√≥tipo a mesma classe. A classe
+\textit{ReservationManager} √© associada aos estere√≥tipos \textit{Controller} e \textit{Client} para representar que esta classe √©
+um controlador e que encontra-se do lado do cliente. Os estere√≥tipos \textit{Client} e \textit{Controller} estendem o elemento do 
+meta-modelo da UML \textit{Class}, podendo assim ser aplicados a qualquer classe.  √â importante observar que um estere√≥tipo pode ser associado a
+qualquer elemento do meta-modelo da UML. O atributo \textit{id} da classe \textit{Room} est√° associado ao estere√≥tipo \textit{key} para representar
+que este atributo define unicamente uma sala. O estere√≥tipo \textit{key} est√° estendendo o meta-modelo da UML \textit{Attribute}.
 
 \begin{figure}
 	\centering
 	\includegraphics{img/stereotype_1.png}
-	\caption{Uso de estereÛtipos em um diagrama de
-	classes.}\label{fig:stereotype_1}
+	\caption{Uso de estere√≥tipos em um diagrama de classes.}\label{fig:stereotype_1}
 \end{figure}
 
-Um estereÛtipo adiciona um papel a um elemento do modelo. Para adicionar mais informaÁıes a um elemento, podem-se definir \textbf{valores rotulados}.
-A linguagem permite associar zero ou mais valores rotulados a um estereÛtipo. Um valor rotulado pode ser um elemento do modelo, um n˙mero, um texto, um booleano ou uma 
-enumeraÁ„o definida pelo usu·rio. Ao utilizar um estereÛtipo em um modelo, deve-se definir os valores rotulados associados ao mesmo. Os valores
-rotulados adicionam uma sem‚ntica adicional ao estereÛtipo, podendo ser utilizados por ferramentas que trabalham em cima dos modelos especificados. 
-Finalmente, \textbf{restriÁıes} podem ser introduzidas ao modelo para garantir a consistÍncia no prÛprio modelo e nos seus relacionamentos.
+Um estere√≥tipo adiciona um papel a um elemento do modelo. Para adicionar mais informa√ß√µes a um elemento, podem-se definir \textbf{valores rotulados}.
+A linguagem permite associar zero ou mais valores rotulados a um estere√≥tipo. Um valor rotulado pode ser um elemento do modelo, um n√∫mero, um texto, um booleano ou uma 
+enumera√ß√£o definida pelo usu√°rio. Ao utilizar um estere√≥tipo em um modelo, deve-se definir os valores rotulados associados ao mesmo. Os valores
+rotulados adicionam uma sem√¢ntica ao estere√≥tipo. O exemplo da figura \ref{fig:tagged_values_1} cont√©m duas classes que representam sistemas
+operacionais: \textit{Fedora64} e \textit{WindowsXP}. Estas classes s√£o marcadas com o estere√≥tipo \textit{Operating System}. Este estere√≥tipo 
+exige a defini√ß√£o do valor rotulado \textit{platfom}, que define qual a plataforma do sistema operacional. Este valor rotulado √© um enumerado com dois
+tipos: x86 e x64. No exemplo, a classe \textit{Fedora64} associa o valor x64 ao valor rotulado \textit{platform}, pois √© um sistema de 64 bits. J√° a classe
+\textit{WindowsXP} associa o valor x86 ao mesmo valor rotulado, pois √© um sistema de 32 bits. Finalmente, \textbf{restri√ß√µes} podem ser
+introduzidas ao modelo para garantir a consist√™ncia no pr√≥prio modelo e nos seus relacionamentos.
 
-A figura \ref{fig:profile_diagram} mostra a definiÁ„o de um perfil UML para modelagem de sistemas que desejam representar veÌculos
-\cite{VisualParadigm11}. Foram definidos sete estereÛtipos que estendem o elemento do meta-modelo \textit{Class}. Observa-se a generalizaÁ„o entre os
-estereÛtipos \textit{Vehicle}, \textit{Mini}, \textit{Pickup Truck} e \textit{Convertible}. O estereÛtipo \textit{Pickup Truck} especializa o
-estereÛtipo \textit{Vehicle}. O relacionamento de composiÁ„o entre os estereÛtipos \textit{Interior} e \textit{Seat} define que o interior de um
-veÌculo deve ter no mÌnimo um assento. Observa-se tambÈm a presenÁa de dois valores rotulados do tipo texto no estereÛtipo \textit{Seat}:
-\textit{texture} e \textit{pattern}. Este perfil pode ser exportado no formato \textit{XML Metadata Interchange} (XMI) \sigla{XMI}{XML Metadata
-Interchange} \cite{xmi:11} e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engineering} (CASE) \sigla{CASE}{Computer Aided
-Software Engineering}. Assim, È possÌvel intercambiar perfis entre diferentes ferramentas CASE. A vantagem do interc‚mbio de perfis È o reuso de
-especificaÁıes j· prontas sobre um determinado domÌnio de aplicaÁ„o. Um exemplo de perfil que pode ser reusado por outros desenvolvedores È um perfil
+\begin{figure}
+	\centering
+	\includegraphics{img/tagged_values_1.png}
+	\caption{Uso de valores rotulados em um diagrama de classes.}\label{fig:tagged_values_1}
+\end{figure}
+
+A figura \ref{fig:profile_diagram} mostra a defini√ß√£o de um perfil UML para modelagem de sistemas que desejam representar ve√≠culos
+\cite{VisualParadigm11}. Foram definidos sete estere√≥tipos que estendem o elemento do meta-modelo \textit{Class}. Observa-se a generaliza√ß√£o entre os
+estere√≥tipos \textit{Vehicle}, \textit{Mini}, \textit{Pickup Truck} e \textit{Convertible}. O estere√≥tipo \textit{Pickup Truck} especializa o
+estere√≥tipo \textit{Vehicle}. O relacionamento de composi√ß√£o entre os estere√≥tipos \textit{Interior} e \textit{Seat} define que o interior de um
+ve√≠culo deve ter no m√≠nimo um assento. Observa-se tamb√©m a presen√ßa de dois valores rotulados do tipo texto no estere√≥tipo \textit{Seat}:
+\textit{texture} e \textit{pattern}. Existem outros valores rotulados neste perfil como: o limite de passageiros (\textit{passenger-limit}) no
+estere√≥tipo \textit{Vehicle}, que √© do tipo inteiro; o limite de velocidade (\textit{speed-limit}) tamb√©m no estere√≥tipo \textit{Vehicle}, que √© do
+tipo ponto flutuante, dentre outros. Este perfil pode ser exportado no formato \textit{XML Metadata Interchange} (XMI) \sigla{XMI}{XML Metadata Interchange} \cite{xmi:11} 
+e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engineering} (CASE) \sigla{CASE}{Computer Aided Software Engineering}. Assim, 
+√© poss√≠vel intercambiar perfis entre diferentes ferramentas CASE. A vantagem do interc√¢mbio de perfis √© o reuso de
+especifica√ß√µes j√° prontas sobre um determinado dom√≠nio de aplica√ß√£o. Um exemplo de perfil que pode ser reusado por outros desenvolvedores √© um perfil
 que especifique sistemas orientados a aspectos.
 
 \begin{figure}
 	\centering
 	\includegraphics{img/profile_diagram.png}
 	\caption{Diagrama de Perfil para representar
-	veÌculos.}\label{fig:profile_diagram}
+	ve√≠culos.}\label{fig:profile_diagram}
 \end{figure}
 
 \subsection{Diagramas Comportamentais}
 
-A segunda vers„o da UML possui sete diagramas comportamentais: diagrama de atividades, m·quina de estados, casos de uso, comunicaÁ„o, vis„o geral de 
-interaÁ„o, sequÍncia e de tempo. Neste trabalho ser„o utilizados os diagramas de m·quina de estados e de sequÍncia.
+A segunda vers√£o da UML possui sete diagramas comportamentais: diagrama de atividades, m√°quina de estados, casos de uso, comunica√ß√£o, vis√£o geral de 
+intera√ß√£o, sequ√™ncia e de tempo. Neste trabalho ser√£o utilizados os diagramas de m√°quina de estados e de sequ√™ncia.
 
-\subsubsection{Diagrama de M·quina de Estados}
+\subsubsection{Diagrama de M√°quina de Estados}
 
-O diagrama de m·quina de estaods representa os estados e o comportamento de um objeto, especificando a sequÍncia de eventos que um objeto recebe
-durante sua existÍncia. Os principais componentes deste diagrama s„o os estados e as transiÁıes. Um diagrama de m·quina de estados tambÈm pode
-representar concorrÍncia utilizando nodos \textit{fork} e \textit{join} com regiıes concorrentes. Este mecanismo permite realizar a sincronizaÁ„o
-entre diferentes estados. Na POO utiliza-se o diagrama de m·quina de estados para especificar os diferentes estados de uma classe.
-Neste caso, cada estado representa uma configuraÁ„o dos atributos da classe. As transiÁıes s„o as execuÁıes de mÈtodos, que modificam valores de
+O diagrama de m√°quina de estaods representa os estados e o comportamento de um objeto, especificando a sequ√™ncia de eventos que um objeto recebe
+durante sua exist√™ncia. Os principais componentes deste diagrama s√£o os estados e as transi√ß√µes. Um diagrama de m√°quina de estados tamb√©m pode
+representar concorr√™ncia utilizando nodos \textit{fork} e \textit{join} com regi√µes concorrentes. Este mecanismo permite realizar a sincroniza√ß√£o
+entre diferentes estados. Na POO utiliza-se o diagrama de m√°quina de estados para especificar os diferentes estados de uma classe.
+Neste caso, cada estado representa uma configura√ß√£o dos atributos da classe. As transi√ß√µes s√£o as execu√ß√µes de m√©todos, que modificam valores de
 atributos, evoluindo a classe para um novo estado.
 
-\subsubsection{Diagrama de SequÍncia}
+\subsubsection{Diagrama de Sequ√™ncia}
 
-O diagrama de sequÍncia representa as trocas de mensagens entre objetos. Este diagrama permite compreender a interaÁ„o entre objetos com
-foco no tempo e na ordem das mensagens durante uma execuÁ„o. Os principais componentes do diagrama de sequÍncia s„o as linhas de vida de objetos, as
-mensagens e os fragmentos combinados. Um fragmento combinado permite adicionar condiÁıes e iteraÁıes em uma troca de mensagens. Outro componente
-importante e utilizado nesta dissertaÁ„o È a invariante de estado, que permite estabelecer uma condiÁ„o para que um conjunto de mensagens seja
-executado. Este conjunto de mensagens somente ser· executado quando o sistema atingir o estado associado com a invariante de estado. O comportamento
-de cada caso de uso pode ser refinado com um diagrama de sequÍncia.
+O diagrama de sequ√™ncia representa as trocas de mensagens entre objetos. Este diagrama permite compreender a intera√ß√£o entre objetos com
+foco no tempo e na ordem das mensagens durante uma execu√ß√£o. Os principais componentes do diagrama de sequ√™ncia s√£o as linhas de vida de objetos, as
+mensagens e os fragmentos combinados. Um fragmento combinado permite adicionar condi√ß√µes e itera√ß√µes em uma troca de mensagens. Outro componente
+importante e utilizado nesta disserta√ß√£o √© a invariante de estado, que permite estabelecer uma condi√ß√£o para que um conjunto de mensagens seja
+executado. Este conjunto de mensagens somente ser√° executado quando o sistema atingir o estado associado com a invariante de estado. O comportamento
+de cada caso de uso pode ser refinado com um diagrama de sequ√™ncia.
 
 \section{Meta-modelagem}
 
-Uma linguagem geralmente È definida atravÈs de uma gram·tica na forma \textit{Backus Naur Form} (BNF) \sigla{BNF}{Backus Naur Form}. Uma linguagem
-bem definida pode ser interpretada de forma automatizada por um computador. Este mÈtodo de definiÁ„o de linguagens È utilizado atÈ hoje para
-representar linguagens baseadas em texto. No entanto, as linguagens para modelagem contÈm elementos n„o-textuais e, por isso, necessitam de um novo
-mecanismo de definiÁ„o. Este mecanismo È denominado \textbf{meta-modelagem}, que permite a descriÁ„o de uma linguagem na forma de um modelo
-\cite{mda:03}. Um meta-modelo de uma linguagem define os elementos que podem ser utilizados na criaÁ„o de modelos utilizando esta linguagem.
-Considerando a UML como exemplo, o meta-modelo da linguagem define elementos como Classe, Estado, Pacote, OperaÁ„o, etc. Assim, um modelo definido
-utilizando UML pode definir inst‚ncias de classes, estados, pacotes, operaÁıes, etc.
+Uma linguagem geralmente √© definida atrav√©s de uma gram√°tica na forma \textit{Backus Naur Form} (BNF) \sigla{BNF}{Backus Naur Form}. Uma linguagem
+bem definida pode ser interpretada de forma automatizada por um computador. Este m√©todo de defini√ß√£o de linguagens √© utilizado at√© hoje para
+representar linguagens baseadas em texto. No entanto, as linguagens para modelagem cont√©m elementos n√£o-textuais e, por isso, necessitam de um novo
+mecanismo de defini√ß√£o. Este mecanismo √© denominado \textbf{meta-modelagem}, que permite a descri√ß√£o de uma linguagem na forma de um modelo
+\cite{mda:03}. Um meta-modelo de uma linguagem define os elementos que podem ser utilizados na cria√ß√£o de modelos utilizando esta linguagem.
+Considerando a UML como exemplo, o meta-modelo da linguagem define elementos como Classe, Estado, Pacote, Opera√ß√£o, etc. Assim, um modelo definido
+utilizando UML pode definir inst√¢ncias de classes, estados, pacotes, opera√ß√µes, etc. A OMG define uma arquitetura em quatro camadas para representar
+os modelos padr√µes para defini√ß√£o de modelos. Esta arquitetura pode ser visualizada
+na figura \ref{fig:omg_meta_model}. 
 
-A OMG define uma arquitetura em quatro camadas para representar os modelos
-padrıes para definiÁ„o de modelos. Esta arquitetura pode ser visualizada
-na figura \ref{fig:omg_meta_model}. O modelo M3 define elementos que podem ser
-utilizados para representar conceitos no modelo M2. O modelo M3 È considerado o
-meta-meta-modelo da OMG. O \textit{Meta-Object Facility} (MOF)
-\sigla{MOF}{Meta-Object Facility}) È um padr„o da OMG que define a linguagem que
+Na arquitetura da figura \ref{fig:omg_meta_model}, o modelo M3 define elementos que podem ser utilizados para representar conceitos no
+modelo M2. O modelo M3 √© considerado o meta-meta-modelo da OMG. O \textit{Meta-Object Facility} (MOF)
+\sigla{MOF}{Meta-Object Facility}) √© um padr√£o da OMG que define a linguagem que
 deve ser utilizada para definir linguagens para modelagem \cite{mof:11}. O MOF
-est· no nÌvel M3. O modelo M2 especifica os elementos que podem ser utilizados no modelo M1.
-Um modelo no nÌvel M2 È denominado um meta-modelo. Linguagens geralmente s„o
-definidas neste nÌvel de modelo. Observa-se na figura \ref{fig:omg_meta_model} a
-definiÁ„o de uma classe (\textit{UML Class}) e de um atributo (\textit{UML Attribute}) 
-no nÌvel M2. Estes elementos fazem parte da definiÁ„o do meta-modelo da UML. 
-O modelo M1 contÈm inst‚ncias de elementos definidos no modelo M2. Este modelo 
-È o que È definido pelo analista ao realizar a modelagem de um determinado sistema com UML. Na figura
-\ref{fig:omg_meta_model} observa-se a definiÁ„o de duas classes: \textit{Customer} 
-e \textit{Order} no nÌvel M1. AlÈm disso, definem-se os
+est√° no n√≠vel M3. O modelo M2 especifica os elementos que podem ser utilizados no modelo M1.
+Um modelo no n√≠vel M2 √© denominado um meta-modelo. Linguagens geralmente s√£o
+definidas neste n√≠vel de modelo. Observa-se na figura \ref{fig:omg_meta_model} a
+defini√ß√£o de uma classe (\textit{UML Class}) e de um atributo (\textit{UML Attribute}) 
+no n√≠vel M2. Estes elementos fazem parte da defini√ß√£o do meta-modelo da UML. 
+O modelo M1 cont√©m inst√¢ncias de elementos definidos no modelo M2. Este modelo 
+√© o que √© definido pelo analista ao realizar a modelagem de um determinado sistema com UML. Na figura
+\ref{fig:omg_meta_model} observa-se a defini√ß√£o de duas classes: \textit{Customer} 
+e \textit{Order} no n√≠vel M1. Al√©m disso, definem-se os
 atributos \textit{title}, \textit{name} e \textit{number} nessas classes. As
-classes s„o inst‚ncias da meta-classe \textit{UML Class}. Os atributos s„o
-inst‚ncias da meta-classe \textit{UML Attribute}. Finalmente, o modelo M0
-representa as inst‚ncias de um sistema representadas em um modelo. Um exemplo de
-inst‚ncia È um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody}.
+classes s√£o inst√¢ncias da meta-classe \textit{UML Class}. Os atributos s√£o
+inst√¢ncias da meta-classe \textit{UML Attribute}. Finalmente, o modelo M0
+representa as inst√¢ncias de um sistema representadas em um modelo. Um exemplo de
+inst√¢ncia √© um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody}.
 
 \begin{figure}
 	\centering
@@ -708,17 +653,8 @@ inst‚ncia È um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody}.
 	Group (OMG).}\label{fig:omg_meta_model}
 \end{figure}
 
-O meta-modelo da UML È definido no nÌvel M2 a partir do MOF. Este meta-modelo È
-uma inst‚ncia do MOF. Uma parte do meta-modelo pode ser visualizada na figura 
-\ref{fig:uml_meta_model}. Observa-se que qualquer elemento de um modelo da
-UML deve derivar de \textit{ModelElement} e por isso deve ter um nome.
-Observa-se tambÈm a pressenÁa de Classe (\textit{Class}), Atributo
-(\textit{Attribute}) e OperaÁ„o (\textit{Operation}). Estes s„o alguns dos
-elementos que podem ser utilizados na criaÁ„o de uma modelagem utilizando UML.
-Os relacionamentos entre os elementos do meta-modelo podem introduzir
-restriÁıes. Um exemplo de restriÁ„o È que uma operaÁ„o pode ter zero ou mais
-par‚metros. Qualquer modelo da UML deve respeitar estas restriÁıes e a estrutura
-definida no meta-modelo da OMG.
+O meta-modelo da UML √© definido no n√≠vel M2 a partir do MOF. Este meta-modelo √© uma inst√¢ncia do MOF. Uma parte do meta-modelo pode ser visualizada na
+figura \ref{fig:uml_meta_model}. Esta parte do modelo define os componenentes para representar classes, atributos, opera√ß√µes, etc.
 
 \begin{figure}
 	\centering
@@ -726,43 +662,55 @@ definida no meta-modelo da OMG.
 	\caption{Meta-modelo da UML.}\label{fig:uml_meta_model}
 \end{figure}
 
-\subsection{Extensıes a UML}
+√â importante observar no modelo da figura \ref{fig:uml_meta_model} que qualquer elemento de um modelo da UML deve derivar de \textit{ModelElement} e
+por isso deve ter um nome. Nota-se tamb√©m a presen√ßa de Classe (\textit{Class}), Atributo
+(\textit{Attribute}) e Opera√ß√£o (\textit{Operation}). Estes s√£o alguns dos
+elementos que podem ser utilizados na cria√ß√£o de uma modelagem utilizando UML.
+Os relacionamentos entre os elementos do meta-modelo podem introduzir
+restri√ß√µes. Um exemplo de restri√ß√£o √© que uma opera√ß√£o pode ter zero ou mais
+par√¢metros. Qualquer modelo da UML deve respeitar estas restri√ß√µes e a estrutura
+definida no meta-modelo da OMG.
 
-… possÌvel estender a UML de duas formas: criaÁ„o de um Perfil UML para
-representar os conceitos de um dado domÌnio de aplicaÁ„o ou atravÈs da
-definiÁ„o de um novo meta-modelo para este domÌnio de aplicaÁ„o.
+\subsection{Extens√µes a UML}
 
-\subsubsection{Extens„o pela definiÁ„o de um Perfil UML}
+√â poss√≠vel estender a UML de duas formas: cria√ß√£o de um Perfil UML para representar os conceitos de um dado dom√≠nio de aplica√ß√£o ou atrav√©s da
+defini√ß√£o de um novo meta-modelo para este dom√≠nio de aplica√ß√£o.
 
-A UML pode ser estendida com a definiÁ„o de diferentes perfis para
-determinados domÌnios de aplicaÁ„o. … importante observar que, o mecanismo de
-perfis n„o È um mecanismo de extens„o de primeira classe, o que significa que um perfil n„o pode modificar
-um meta-modelo (removendo restriÁıes da UML, por exemplo), apenas adapt·-lo com
-construÁıes especÌficas do domÌnio tratado. O mecanismo de extens„o por perfis È
-considerado uma mecanismo leve para extens„o da linguagem.
+\subsubsection{Extens√£o pela defini√ß√£o de um Perfil UML}
 
-A grande vantagem de estender a UML atravÈs de perfis È que qualquer ferramenta
-que suporte a importaÁ„o de perfis pode utilizar os conceitos estendidos pelo
-perfil UML. Como o diagrama de perfil È um padr„o da UML, a maior parte das
-ferramentas CASE j· est· suportando a definiÁ„o e importaÁ„o de perfis. Outra
-vantagem deste mecanismo È que È possÌvel aplicar mais de um perfil em um mesmo
-modelo. AlÈm disso um Perfil UML pode ser facilmente modificado, com a
-introduÁ„o de novos estereÛtipos, valores rotulados e restriÁıes. Esta modificaÁ„o 
-pode ser realizada em qualquer ferramenta CASE que suporte a importaÁ„o e
-definiÁ„o de perfis.
+A UML pode ser estendida com a defini√ß√£o de diferentes perfis para determinados dom√≠nios de aplica√ß√£o. √â importante observar que, o mecanismo de
+perfis n√£o √© um mecanismo de extens√£o de primeira classe, o que significa que um perfil n√£o pode modificar um meta-modelo (removendo restri√ß√µes da
+UML, por exemplo), apenas adapt√°-lo com constru√ß√µes espec√≠ficas do dom√≠nio tratado. O mecanismo de extens√£o por perfis √© considerado uma mecanismo
+leve para extens√£o da linguagem.
 
-\subsubsection{Extens„o pela definiÁ„o de um meta-modelo}
+A grande vantagem de estender a UML atrav√©s de perfis √© que qualquer ferramenta que suporte a importa√ß√£o de perfis pode utilizar os conceitos
+estendidos pelo perfil UML. Como o diagrama de perfil √© um padr√£o da UML, a maior parte das ferramentas CASE j√° est√° suportando a defini√ß√£o e
+importa√ß√£o de perfis. Outra vantagem deste mecanismo √© que √© poss√≠vel aplicar mais de um perfil em um mesmo
+modelo. Al√©m disso um Perfil UML pode ser facilmente modificado, com a introdu√ß√£o de novos estere√≥tipos, valores rotulados e restri√ß√µes. Esta
+modifica√ß√£o pode ser realizada em qualquer ferramenta CASE que suporte a importa√ß√£o e defini√ß√£o de perfis.
 
-Com meta-modelagem, o objetivo È estender o meta-modelo da UML no nÌvel M2 com a
-adiÁ„o de novos conceitos relacionados a um domÌnio de aplicaÁ„o. Uma
-extens„o neste nÌvel modifica o meta-modelo, podendo adicionar e remover
-restriÁıes, adicionar e remover meta-classes do modelo, adicionar e
+A figura \ref{fig:ejb_profile} apresenta um perfil UML para especifica√ß√£o de sistemas que utilizam o componente Enterprise Java Beans (EJB)
+\cite{ejb:12} da plataforma Java 2 Enterprise Edition (J2EE) \cite{j2ee:12}. A plataforma J2EE providencia algumas facilidades para realizar a camada
+de l√≥gica de neg√≥cio e acesso a banco de dados de um sistema. Este perfil tem diversos estere√≥tipos para representar os principais componentes de um
+sistema que utiliza EJB como: entidades (estere√≥tipo \textit{Entity EJB}), mensagens (estere√≥tipo \textit{Message EJB}), sess√£o (estere√≥tipo
+\textit{Session EJB}), dentre outros. Este perfil pode ser usado em ferramentas CASE que suportem a importa√ß√£o de perfis e est√° dispon√≠vel na internet
+\cite{ejbprofile:12}. Com ele, √© poss√≠vel representar todas as caracter√≠sticas dos componentes EJB em uma modelagem UML.
+
+\subsubsection{Extens√£o pela defini√ß√£o de um meta-modelo}
+
+Com meta-modelagem, o objetivo √© estender o meta-modelo da UML no n√≠vel M2 com a adi√ß√£o de novos conceitos relacionados a um dom√≠nio de aplica√ß√£o. Uma
+extens√£o neste n√≠vel modifica o meta-modelo, podendo adicionar e remover restri√ß√µes, adicionar e remover meta-classes do modelo, adicionar e
 modificar relacionamentos, etc. 
 
-Este tipo de extens„o n„o permite o reuso dos conceitos em qualquer ferramenta
-de modelagem, pois as ferramentas CASE suportam apenas a definiÁ„o de modelos
-dentro do meta-modelo padr„o da OMG ou modelos definidos com o uso de de
-perfis. Assim, a extens„o ser· especÌfica para uma determinada ferramenta. 
-A extens„o atravÈs de meta-modelagem pode ser utilizada quando uma extens„o tem
-uma baixa probabilidade de ser modificada no futuro e n„o existe a necessidade
-de combinar esta extens„o com outras extensıes.
+Este tipo de extens√£o n√£o permite o reuso dos conceitos em qualquer ferramenta de modelagem, pois as ferramentas CASE suportam apenas a defini√ß√£o de
+modelos dentro do meta-modelo padr√£o da OMG ou modelos definidos com o uso de de perfis. Assim, a extens√£o ser√° espec√≠fica para uma determinada
+ferramenta. A extens√£o atrav√©s de meta-modelagem pode ser utilizada quando uma extens√£o tem uma baixa probabilidade de ser modificada no futuro e n√£o
+existe a necessidade de combinar esta extens√£o com outras extens√µes.
+
+\begin{landscape}
+\begin{figure}[!H]
+	\centering
+	\includegraphics{img/ejb_profile.png}
+	\caption{Perfil UML para representar componentes EJB \cite{ejbprofile:12}.}\label{fig:ejb_profile}
+\end{figure}
+\end{landscape}

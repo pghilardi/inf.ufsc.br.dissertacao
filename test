@@ -1,0 +1,103 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Universidade Federal de Santa Catarina             
+% Biblioteca Universitária                     
+%                                                           
+% (c)2010 Roberto Simoni (roberto.emc@gmail.com)
+%         Carlos R Rocha (cticarlo@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{ufscThesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pacotes usados especificamente para este documento
+% Definidos pelo criador do documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{moreverb}
+\usepackage{setspace}
+\usepackage{anysize}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{tabularx,calc}
+
+%\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
+
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Identificadores do trabalho
+% Usados para preencher os elementos pré-textuais
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\instituicao[a]{Universidade Federal de Santa Catarina} % Opcional
+\departamento[a]{Programa de Pós-graduação em Ciência da Computação}
+\curso[a]{Universidade Federal de Santa Catarina}
+\documento[a]{Dissertação} % Opcional (Tese é o padrão)
+\titulo{Modelagem de Aspectos por Múltiplos Pontos de Vista}
+\autor{Pedro Ghilardi}
+\data{19}{março}{2013}   
+\orientador[Orientador]{Ricardo Pereira e Silva, Prof. Dr.}
+% \coorientador[Coorientador]{José Luis Almada Güntzel, Prof. Dr.}
+\coordenador[Coordenador]{Ronaldo dos Santos Mello, Prof. Dr.}                        
+
+\numerodemembrosnabanca{3} % Isso decide se haverá uma folha adicional
+\orientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{-, Prof. Dr.} %Nome do presidente da banca
+\bancaMembroB{-, Prof. Dr.} % Nome do membro da Banca
+\bancaMembroC{-, Prof. Dr.} % Nome do membro da Banca
+
+%%% Sobre a Banca
+\dedicatoria{À minha família e a minha namorada.}
+
+\agradecimento{Ao meu orientador, Ricardo, pela sua orientação, compreensão e pelas sua motivação para que eu finalizasse o trabalho.}
+
+\epigrafe{}{}
+
+\textoResumo{}
+\palavrasChave {chave 1. chave 2. ... chave n.}
+
+\textAbstract {}
+\keywords {key 1. key 2. ... key n.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Início do documento                                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%--------------------------------------------------------
+% Elementos pré-textuais
+\capa  
+\folhaderosto[comficha] 
+\folhaaprovacao
+\paginadedicatoria
+\paginaagradecimento
+\paginaepigrafe
+\paginaresumo
+\paginaabstract
+\listadefiguras
+\listadetabelas 
+\listadeabreviaturas
+\listadesimbolos
+\sumario
+
+%-------------------------------------------------------------------------------
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
+% dois tipos de elementos de texto e possuem os comandos
+% \listofalgorithms e \lstlistoflistings, respectivamente.
+%-------------------------------------------------------------------------------
+
+%--------------------------------------------------------
+% Elementos textuaisf
+
+\input{introducao}
+\input{contextualizacao}
+\input{relacionados}
+\input{specification}
+\input{casestudy}
+\input{conclusion}
+
+\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliography{bibliografia}
+
+\end{document}

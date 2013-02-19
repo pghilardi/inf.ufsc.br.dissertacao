@@ -1,138 +1,138 @@
-\chapter{IntroduÁ„o}
+\chapter{Introdu√ß√£o}
 
-Este capÌtulo contextualiza o tema deste trabalho, apresentando motivaÁıes para o uso da programaÁ„o orientada a aspectos e a necessidade de realizar
-a modelagem de sistemas orientados a aspectos. Apresentam-se os objetivos, a hipÛtese, a metodologia da pesquisa e a justificativa para realizaÁ„o do
-estudo. Ao final, apresentam-se os resultados obtidos, as limitaÁıes e a organizaÁ„o desta dissertaÁ„o.
+Este cap√≠tulo contextualiza o tema deste trabalho, apresentando motiva√ß√µes para o uso da programa√ß√£o orientada a aspectos e a necessidade de realizar
+a modelagem de sistemas orientados a aspectos. Apresentam-se os objetivos, a hip√≥tese, a metodologia da pesquisa e a justificativa para realiza√ß√£o do
+estudo. Ao final, apresentam-se os resultados obtidos, as limita√ß√µes e a organiza√ß√£o desta disserta√ß√£o.
 
-\section{ContextualizaÁ„o}
+\section{Contextualiza√ß√£o}
 
-A ProgramaÁ„o Orientada a Objetos (POO) \sigla{POO}{ProgramaÁ„o Orientada a Objetos} È um paradigma de programaÁ„o amplamente difundido e utilizado
-para o desenvolvimento de aplicaÁıes. Esse paradigma permite implementaÁıes em um nÌvel mais alto de abstraÁ„o e o reuso de comportamentos
+A Programa√ß√£o Orientada a Objetos (POO) \sigla{POO}{Programa√ß√£o Orientada a Objetos} √© um paradigma de programa√ß√£o amplamente difundido e utilizado
+para o desenvolvimento de aplica√ß√µes. Esse paradigma permite implementa√ß√µes em um n√≠vel mais alto de abstra√ß√£o e o reuso de comportamentos
 \cite{Laddad:2003:AAP:993468}.
 
-O desenvolvimento de um sistema utilizando POO geralmente È dividido em quatro fases: an·lise, projeto, implementaÁ„o e testes
-\cite{pressman:01}. Durante as fases de an·lise e projeto eliciam-se os requisitos e elabora-se a modelagem do sistema. Esta modelagem deve expressar 
-caracterÌsticas estruturais e din‚micas. As caracterÌsticas estruturais representam os interrelacionamentos entre os componentes do sistema. A parte
-din‚mica representa as funcionalidades do sistema e como elas s„o realizadas em tempo de execuÁ„o. Ambas caracterÌsticas devem ser modeladas em alto 
-(modelos representando o domÌnio do problema) e baixo nÌvel de abstraÁ„o (modelos prÛximos ao nÌvel de cÛdigo), obtendo assim uma vis„o do todo e da
+O desenvolvimento de um sistema utilizando POO geralmente √© dividido em quatro fases: an√°lise, projeto, implementa√ß√£o e testes
+\cite{pressman:01}. Durante as fases de an√°lise e projeto eliciam-se os requisitos e elabora-se a modelagem do sistema. Esta modelagem deve expressar 
+caracter√≠sticas estruturais e din√¢micas. As caracter√≠sticas estruturais representam os interrelacionamentos entre os componentes do sistema. A parte
+din√¢mica representa as funcionalidades do sistema e como elas s√£o realizadas em tempo de execu√ß√£o. Ambas caracter√≠sticas devem ser modeladas em alto 
+(modelos representando o dom√≠nio do problema) e baixo n√≠vel de abstra√ß√£o (modelos pr√≥ximos ao n√≠vel de c√≥digo), obtendo assim uma vis√£o do todo e da
 parte \cite{silva:00}.
 
-Na fase de an·lise, primeiramente deve-se descobrir qual o problema do cliente e eliciar quais s„o os requisitos do sistema. Cada requisito
+Na fase de an√°lise, primeiramente deve-se descobrir qual o problema do cliente e eliciar quais s√£o os requisitos do sistema. Cada requisito
 pode ser classificado como um interesse do cliente a fim de atingir um objetivo final \cite{Laddad:2003:AAP:993468}. Ao final do desenvolvimento,
-apÛs a modelagem nas fases de an·lise e projeto e o cÛdigo nas fases de implementaÁ„o e testes, todos interesses do cliente devem estar resolvidos, tendo
+ap√≥s a modelagem nas fases de an√°lise e projeto e o c√≥digo nas fases de implementa√ß√£o e testes, todos interesses do cliente devem estar resolvidos, tendo
 como resultado um sistema completo e funcional. Os interesses podem ser separados em dois tipos \cite{Laddad:2003:AAP:993468}:
 
 \begin{itemize}
-  \item Interesses n˙cleo: Capturam uma funcionalidade principal e impactam apenas uma parte do sistema.
+  \item Interesses n√∫cleo: Capturam uma funcionalidade principal e impactam apenas uma parte do sistema.
   \item Interesses entrecortantes (\textit{Crosscutting concerns}): Capturam uma funcionalidade que impacta uma ou mais partes do sistema. 
 \end{itemize}
 
-A POO pode ser utilizada para implementaÁ„o de ambos tipos de interesses. O problema È que para sistemas complexos, h· uma tendÍncia de misturar
-interesses entrecortantes com interesses n˙cleo, prejudicando a manutenabilidade e compreens„o do cÛdigo. Conclui-se que a POO tem limitaÁıes para
-implementar extensıes para comportamentos que impactam v·rias partes de um sistema: os interesses entrecortantes
-\cite{Kiczales97aspect-orientedprogramming}. A ProgramaÁ„o Orientada a Aspectos (POA) \sigla{POA}{ProgramaÁ„o Orientada a Aspectos} È uma extens„o a
-POO que permite uma implementaÁ„o mais elegante para interesses entrecortantes.
+A POO pode ser utilizada para implementa√ß√£o de ambos tipos de interesses. O problema √© que para sistemas complexos, h√° uma tend√™ncia de misturar
+interesses entrecortantes com interesses n√∫cleo, prejudicando a manutenabilidade e compreens√£o do c√≥digo. Conclui-se que a POO tem limita√ß√µes para
+implementar extens√µes para comportamentos que impactam v√°rias partes de um sistema: os interesses entrecortantes
+\cite{Kiczales97aspect-orientedprogramming}. A Programa√ß√£o Orientada a Aspectos (POA) \sigla{POA}{Programa√ß√£o Orientada a Aspectos} √© uma extens√£o a
+POO que permite uma implementa√ß√£o mais elegante para interesses entrecortantes.
 
-O objetivo da POA È a modularizaÁ„o dos interesses entrecortantes para que os mesmos fiquem separados dos mÛdulos que implementam os interesses
-n˙cleo da aplicaÁ„o \cite{Laddad:2003:AAP:993468}. Os interesses devem ser separados em mÛdulos em todas as fases do desenvolvimento: an·lise,
-projeto, implementaÁ„o e testes. Assim, obtÈm-se um mapeamento direto de um interesse, facilitando a manutenÁ„o e compreens„o de um sistema
-desenvolvido utilizando aspectos. A separaÁ„o de interesses È uma excelente pr·tica para a construÁ„o de sistemas complexos, pois quanto maior o
-n˙mero de interesses, maior a complexidade para implement·-los. Com a separaÁ„o de interesses, cada mÛdulo representa um interesse, que pode ser
-implementado separadamente, diminuindo a complexidade de implementaÁ„o \cite{Jacobson:2004:ASD:1062430}.
+O objetivo da POA √© a modulariza√ß√£o dos interesses entrecortantes para que os mesmos fiquem separados dos m√≥dulos que implementam os interesses
+n√∫cleo da aplica√ß√£o \cite{Laddad:2003:AAP:993468}. Os interesses devem ser separados em m√≥dulos em todas as fases do desenvolvimento: an√°lise,
+projeto, implementa√ß√£o e testes. Assim, obt√©m-se um mapeamento direto de um interesse, facilitando a manuten√ß√£o e compreens√£o de um sistema
+desenvolvido utilizando aspectos. A separa√ß√£o de interesses √© uma excelente pr√°tica para a constru√ß√£o de sistemas complexos, pois quanto maior o
+n√∫mero de interesses, maior a complexidade para implement√°-los. Com a separa√ß√£o de interesses, cada m√≥dulo representa um interesse, que pode ser
+implementado separadamente, diminuindo a complexidade de implementa√ß√£o \cite{Jacobson:2004:ASD:1062430}.
 
-\section{DefiniÁ„o do Problema}
+\section{Defini√ß√£o do Problema}
 
 Segundo \cite{silva:00}, na modelagem de programas orientados a objetos podem-se identificar quatro pontos de vista essenciais: estrutural e
-comportamental de sistema e estrutural e comportamental de classe. Um sistema modelado pelos quatro pontos de vista permite a compreens„o e manutenÁ„o
-do sistema e contribui para a geraÁ„o de cÛdigo em qualquer linguagem de programaÁ„o, sendo considerada assim uma modelagem completa \cite{silva:07}.
+comportamental de sistema e estrutural e comportamental de classe. Um sistema modelado pelos quatro pontos de vista permite a compreens√£o e manuten√ß√£o
+do sistema e contribui para a gera√ß√£o de c√≥digo em qualquer linguagem de programa√ß√£o, sendo considerada assim uma modelagem completa \cite{silva:07}.
 
-Algumas abordagens j· foram propostas para modelagem de sistemas orientados a aspectos com UML (Unified Modeling Language) \cite{uml:05}. Um
+Algumas abordagens j√° foram propostas para modelagem de sistemas orientados a aspectos com UML (Unified Modeling Language) \cite{uml:05}. Um
 grupo de propostas estende o meta-modelo da linguagem \cite{Kienzle:2009:AMM:1509239.1509252} \cite{theme:04} \cite{Klein:2007:WMA:1805812.1805819} \cite{Jacobson:2004:ASD:1062430} \cite{france:06},
-introduzindo novas construÁıes para representar a estrutura e o comportamento de aplicaÁıes orientadas a aspectos. Outro conjunto de propostas estende
-a UML atravÈs de um perfil UML \cite{Evermann:2007:MSP:1229375.1229379} \cite{Cottenier06themotorola} \cite{Cui:2009:MIA:1529282.1529377}, o qual
-pode ser utilizado em ferramentas CASE que suportem a importaÁ„o de perfis. No entanto, n„o existe nenhuma abordagem para modelagem de aspectos que
-represente a estrutura e a din‚mica de um sistema e que forneÁa subsÌdios para visualizaÁ„o do efeito dos aspectos no sistema, realizando a
-composiÁ„o de modelos de aspectos com modelos n˙cleo automaticamente. AlÈm disso, È importante que a modelagem permita representar as caracterÌsticas
-inerentes ‡ POA, como a possibilidade de capturar m˙ltiplos pontos de execuÁ„o de um programa com apenas uma express„o regular. A maior parte das propostas se
-limitam a modelar apenas parte destas caracterÌsticas.
+introduzindo novas constru√ß√µes para representar a estrutura e o comportamento de aplica√ß√µes orientadas a aspectos. Outro conjunto de propostas estende
+a UML atrav√©s de um perfil UML \cite{Evermann:2007:MSP:1229375.1229379} \cite{Cottenier06themotorola} \cite{Cui:2009:MIA:1529282.1529377}, o qual
+pode ser utilizado em ferramentas CASE que suportem a importa√ß√£o de perfis. No entanto, n√£o existe nenhuma abordagem para modelagem de aspectos que
+represente a estrutura e a din√¢mica de um sistema e que forne√ßa subs√≠dios para visualiza√ß√£o do efeito dos aspectos no sistema, realizando a
+composi√ß√£o de modelos de aspectos com modelos n√∫cleo automaticamente. Al√©m disso, √© importante que a modelagem permita representar as caracter√≠sticas
+inerentes √† POA, como a possibilidade de capturar m√∫ltiplos pontos de execu√ß√£o de um programa com apenas uma express√£o regular. A maior parte das propostas se
+limitam a modelar apenas parte destas caracter√≠sticas.
 
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
 
-Propor uma abordagem para modelar sistemas orientados a aspectos nas fases de an·lise e projeto com a segunda vers„o da UML. Esta modelagem deve
-representar a estrutura e a din‚mica de um sistema, permitir automatizar parte do processo de modelagem, possibilitando a altern‚ncia de visıes da
-din‚mica do sistema (com e sem explicitaÁ„o dos aspectos) e, com isso, facilitar a compreens„o e manutenÁ„o dos modelos.
+Propor uma abordagem para modelar sistemas orientados a aspectos nas fases de an√°lise e projeto com a segunda vers√£o da UML. Esta modelagem deve
+representar a estrutura e a din√¢mica de um sistema, permitir automatizar parte do processo de modelagem, possibilitando a altern√¢ncia de vis√µes da
+din√¢mica do sistema (com e sem explicita√ß√£o dos aspectos) e, com isso, facilitar a compreens√£o e manuten√ß√£o dos modelos.
 
-\subsection{Objetivos EspecÌficos}
+\subsection{Objetivos Espec√≠ficos}
 
 \begin{itemize}
-  \item Modelar as caracterÌsticas inerentes a aspectos com a segunda vers„o da UML.
-  \item Representar a estrutura e a din‚mica de sistemas orientados a aspectos, fornecendo subsÌdios para a composiÁ„o de modelos e facilitando 
-  a compreens„o e manutenÁ„o do sistema.
-  \item Permitir a altern‚ncia de visıes do comportamento din‚mico de um sistema orientado a aspectos, visualizando o efeito de modelos de
-  interesses entrecortantes (aspectos) em modelos n˙cleo.
+  \item Modelar as caracter√≠sticas inerentes a aspectos com a segunda vers√£o da UML.
+  \item Representar a estrutura e a din√¢mica de sistemas orientados a aspectos, fornecendo subs√≠dios para a composi√ß√£o de modelos e facilitando 
+  a compreens√£o e manuten√ß√£o do sistema.
+  \item Permitir a altern√¢ncia de vis√µes do comportamento din√¢mico de um sistema orientado a aspectos, visualizando o efeito de modelos de
+  interesses entrecortantes (aspectos) em modelos n√∫cleo.
 \end{itemize}
 
-\section{HipÛtese de Pesquisa}
+\section{Hip√≥tese de Pesquisa}
 
-… possÌvel modelar todas as caracterÌsticas de programas orientados a aspectos com a segunda vers„o de UML, bem como È possÌvel manipular esta
-modelagem em um procedimento algorÌtmico capaz de explicitar e ocultar dinamicamente os aspectos da modelagem.
+√â poss√≠vel modelar todas as caracter√≠sticas de programas orientados a aspectos com a segunda vers√£o de UML, bem como √© poss√≠vel manipular esta
+modelagem em um procedimento algor√≠tmico capaz de explicitar e ocultar dinamicamente os aspectos da modelagem.
 
 \section{Justificativa}
 
-Tratando-se de POO, uma modelagem pode ser considerada completa se modelar os quatro pontos de vista fundamentais \cite{silva:00}. Em relaÁ„o a
-sistemas orientados a aspectos, alÈm da modelagem estrutural e comportamental, definem-se dois requisitos importantes para se obter uma modelagem
+Tratando-se de POO, uma modelagem pode ser considerada completa se modelar os quatro pontos de vista fundamentais \cite{silva:00}. Em rela√ß√£o a
+sistemas orientados a aspectos, al√©m da modelagem estrutural e comportamental, definem-se dois requisitos importantes para se obter uma modelagem
 completa:
 
 \begin{enumerate}
-  \item RepresentaÁ„o das caracterÌsticas inerentes ‡ programas orientados a aspectos como: \textit{wildcards}, pontos de corte, avisos e
-  introduÁıes. 
-  \item RepresentaÁ„o da estrutura e da din‚mica do sistema para permitir a composiÁ„o em nÌvel de modelo de interesses n˙cleo com interesses
+  \item Representa√ß√£o das caracter√≠sticas inerentes √† programas orientados a aspectos como: \textit{wildcards}, pontos de corte, avisos e
+  introdu√ß√µes. 
+  \item Representa√ß√£o da estrutura e da din√¢mica do sistema para permitir a composi√ß√£o em n√≠vel de modelo de interesses n√∫cleo com interesses
   entrecortantes (aspectos).
 \end{enumerate}
 
-Sabendo que a modelagem estrutural e din‚mica de um sistema facilita a compreens„o e manutenÁ„o e tambÈm contribui para a composiÁ„o de modelos,
-conclui-se que este trabalho justifica-se pelo uso de artefatos que representem a estrutura e a din‚mica de um sistema, automatizando parte do processo de modelagem. 
-A compreens„o do fluxo de execuÁ„o de programas orientados a aspectos È difÌcil, assim, justifica-se a implementaÁ„o de um visualizador do efeito de
-aspectos em modelos n˙cleo. Sabe-se tambÈm que a segunda vers„o da UML È um padr„o e È amplamente utilizada na modelagem de aplicaÁıes, sendo assim,
-justifica-se que os modelos propostos estejam de acordo com a especificaÁ„o proposta por esta linguagem, estendendo a linguagem atravÈs de um perfil UML. Em 
-relaÁ„o a aspectos, a modelagem de \textit{wildcards} È fundamental para possibilitar a captura dos pontos do sistema que ser„o estendidos de maneira
-pratic·vel. Logo, justifica-se a preocupaÁ„o em modelar todas as caracterÌsticas inerentes ‡ POA.
+Sabendo que a modelagem estrutural e din√¢mica de um sistema facilita a compreens√£o e manuten√ß√£o e tamb√©m contribui para a composi√ß√£o de modelos,
+conclui-se que este trabalho justifica-se pelo uso de artefatos que representem a estrutura e a din√¢mica de um sistema, automatizando parte do processo de modelagem. 
+A compreens√£o do fluxo de execu√ß√£o de programas orientados a aspectos √© dif√≠cil, assim, justifica-se a implementa√ß√£o de um visualizador do efeito de
+aspectos em modelos n√∫cleo. Sabe-se tamb√©m que a segunda vers√£o da UML √© um padr√£o e √© amplamente utilizada na modelagem de aplica√ß√µes, sendo assim,
+justifica-se que os modelos propostos estejam de acordo com a especifica√ß√£o proposta por esta linguagem, estendendo a linguagem atrav√©s de um perfil UML. Em 
+rela√ß√£o a aspectos, a modelagem de \textit{wildcards} √© fundamental para possibilitar a captura dos pontos do sistema que ser√£o estendidos de maneira
+pratic√°vel. Logo, justifica-se a preocupa√ß√£o em modelar todas as caracter√≠sticas inerentes √† POA.
 
-\section{MÈtodo de Pesquisa}
+\section{M√©todo de Pesquisa}
 
-A realizaÁ„o deste trabalho È composta pelos seguintes passos:
+A realiza√ß√£o deste trabalho √© composta pelos seguintes passos:
 
 \begin{enumerate}
-  \item An·lise de trabalhos correlatos;
-  \item Proposta para a especificaÁ„o de sistemas orientados a aspectos utilizando a segunda vers„o da UML;
-  \item Implementar o suporte para modelagem proposta no ambiente SEA \cite{silva:00}, gerando um produto deste trabalho, que È o suporte a
-  modelagem de programas orientados a aspectos no ambiente SEA, permitindo a altern‚ncia de visıes dos interesses modelados automaticamente;
-  \item Realizar um estudo de caso com a proposta de modelagem, realizando a composiÁ„o de aspectos em nÌvel de modelo e utilizando o visualizador de
+  \item An√°lise de trabalhos correlatos;
+  \item Proposta para a especifica√ß√£o de sistemas orientados a aspectos utilizando a segunda vers√£o da UML;
+  \item Implementar o suporte para modelagem proposta no ambiente SEA \cite{silva:00}, gerando um produto deste trabalho, que √© o suporte a
+  modelagem de programas orientados a aspectos no ambiente SEA, permitindo a altern√¢ncia de vis√µes dos interesses modelados automaticamente;
+  \item Realizar um estudo de caso com a proposta de modelagem, realizando a composi√ß√£o de aspectos em n√≠vel de modelo e utilizando o visualizador de
   interesses.
-  \item Comparar a abordagem proposta por esta dissertaÁ„o com os trabalhos correlatos, explicitando os diferentes requisitos cumpridos por cada
+  \item Comparar a abordagem proposta por esta disserta√ß√£o com os trabalhos correlatos, explicitando os diferentes requisitos cumpridos por cada
   proposta.
 \end{enumerate}
 
-\section{ClassificaÁ„o da Pesquisa}
+\section{Classifica√ß√£o da Pesquisa}
 
-A classificaÁ„o desta pesquisa foi realizada baseando-se nas informaÁıes sobre metodologia de pesquisa de \cite{silva-menezes:01}. Em relaÁ„o a
-natureza, classifica-se esta pesquisa como \textbf{aplicada}, pois ela tem como objetivo gerar conhecimentos para aplicaÁ„o pr·tica em cima de
-problemas especÌficos na ·rea de modelagem de sistemas orientados a aspectos. A abordagem do problema utilizada nesta dissertaÁ„o È
-\textbf{qualitativa}, com o pesquisador realizando a an·lise dos dados indutivamente, onde o processo e seu significado s„o os
-focos principais da abordagem. Em relaÁ„o aos objetivos, classifica-se esta pesquisa como \textbf{exploratÛria}, realizando a an·lise dos trabalhos
-correlatos e identificando quais par‚metros s„o implementados por cada proposta para modelagem de sistemas orientados a aspectos. Finalmente, em
-relaÁ„o aos procedimentos tÈcnicos utilizados, classifica-se esta pesquisa como \textbf{pesquisa bibliogr·fica}, pois foi elaborada a partir de
-material j· publicado sobre a modelagem de sistemas orientados a aspectos. Esta pesquisa tambÈm tem um car·ter \textbf{experimental} com a
-implementaÁ„o do protÛtipo para modelagem de aspectos no ambiente SEA.
+A classifica√ß√£o desta pesquisa foi realizada baseando-se nas informa√ß√µes sobre metodologia de pesquisa de \cite{silva-menezes:01}. Em rela√ß√£o a
+natureza, classifica-se esta pesquisa como \textbf{aplicada}, pois ela tem como objetivo gerar conhecimentos para aplica√ß√£o pr√°tica em cima de
+problemas espec√≠ficos na √°rea de modelagem de sistemas orientados a aspectos. A abordagem do problema utilizada nesta disserta√ß√£o √©
+\textbf{qualitativa}, com o pesquisador realizando a an√°lise dos dados indutivamente, onde o processo e seu significado s√£o os
+focos principais da abordagem. Em rela√ß√£o aos objetivos, classifica-se esta pesquisa como \textbf{explorat√≥ria}, realizando a an√°lise dos trabalhos
+correlatos e identificando quais par√¢metros s√£o implementados por cada proposta para modelagem de sistemas orientados a aspectos. Finalmente, em
+rela√ß√£o aos procedimentos t√©cnicos utilizados, classifica-se esta pesquisa como \textbf{pesquisa bibliogr√°fica}, pois foi elaborada a partir de
+material j√° publicado sobre a modelagem de sistemas orientados a aspectos. Esta pesquisa tamb√©m tem um car√°ter \textbf{experimental} com a
+implementa√ß√£o do prot√≥tipo para modelagem de aspectos no ambiente SEA.
 
-\section{OrganizaÁ„o desta dissertaÁ„o}
+\section{Organiza√ß√£o desta disserta√ß√£o}
 
-Esta dissertaÁ„o est· organizada da seguinte maneira: o presente capÌtulo descreveu a motivaÁ„o para a modelagem de sistemas orientados a aspectos,
-objetivos, hipÛtese, mÈtodo de pesquisa e justificativa. O capÌtulo {2} apresenta a fundamentaÁ„o teÛrica com conceitos de programaÁ„o orientada a
-aspectos e da linguagem AspectJ, conceitos de an·lise e projetos de sistemas e modelagem e meta-modelagem com a segunda vers„o da UML. O capÌtulo {3} 
-apresenta uma an·lise acerca dos trabalhos correlatos. O capÌtulo {4} apresenta a metodologia de modelagem para a especificaÁ„o de sistemas orientados
-a aspectos, incluindo o algoritmo para composiÁ„o de aspectos. O capÌtulo {5} apresenta dois estudos de caso que verificam a aplicabilidade da
-abrodagem proposta. O capÌtulo {6} apresenta uma comparaÁ„o entre diferentes abordagens para modelagem de sistemas orientados a aspectos. Finalizando, 
-o capÌtulo {7} apresenta as conclusıes deste trabalho.
+Esta disserta√ß√£o est√° organizada da seguinte maneira: o presente cap√≠tulo descreveu a motiva√ß√£o para a modelagem de sistemas orientados a aspectos,
+objetivos, hip√≥tese, m√©todo de pesquisa e justificativa. O cap√≠tulo {2} apresenta a fundamenta√ß√£o te√≥rica com conceitos de programa√ß√£o orientada a
+aspectos e da linguagem AspectJ, conceitos de an√°lise e projetos de sistemas e modelagem e meta-modelagem com a segunda vers√£o da UML. O cap√≠tulo {3} 
+discute sobre os trabalhos correlatos, realizando uma compara√ß√£o entre abordagens. O cap√≠tulo {4} descreve a metodologia de modelagem
+para a especifica√ß√£o de sistemas orientados a aspectos, incluindo o algoritmo para composi√ß√£o de aspectos. O cap√≠tulo {5} mostra dois estudos de caso
+que verificam a aplicabilidade da abrodagem proposta. O cap√≠tulo {6} apresenta uma compara√ß√£o entre diferentes abordagens para modelagem de sistemas orientados a aspectos. 
+Finalizando, o cap√≠tulo {7} discute sobre as conclus√µes deste trabalho.

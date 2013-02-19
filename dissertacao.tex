@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Universidade Federal de Santa Catarina             
-% Biblioteca Universit�ria                     
+% Biblioteca Universitária                     
 %                                                           
 % (c)2010 Roberto Simoni (roberto.emc@gmail.com)
 %         Carlos R Rocha (cticarlo@gmail.com)
@@ -18,57 +18,63 @@
 \usepackage{lscape}
 \usepackage{multirow}
 \usepackage{tabularx,calc}
+\usepackage[section]{placeins}
 
 %\renewcommand{\theequation}{\arabic{equation}} %se desejar tirar o capitulo
 
-%\usepackage[labelsep=period]{caption} % O separador de legenda � um .
-\usepackage[labelsep=endash]{caption} % O separador de legenda � um -
+%\usepackage[labelsep=period]{caption} % O separador de legenda é um .
+\usepackage[labelsep=endash]{caption} % O separador de legenda é um -
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Identificadores do trabalho
-% Usados para preencher os elementos pr�-textuais
+% Usados para preencher os elementos pré-textuais
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\titulo{Modelagem de Aspectos por M�ltiplos Pontos de Vista}
+\instituicao[a]{Universidade Federal de Santa Catarina} % Opcional
+\departamento[a]{Programa de Pós-graduação em Ciência da Computação}
+\curso[a]{Universidade Federal de Santa Catarina}
+\documento[a]{Dissertação} % Opcional (Tese é o padrão)
+\titulo{Modelagem de Aspectos por Múltiplos Pontos de Vista}
 \autor{Pedro Ghilardi}
-\data{19}{mar�o}{2013}                           
-\orientador{Prof. Dr. Ricardo Pereira e Silva }
-\coordenador{Prof. Chefe, Dr. Ronaldo Santos Mello}              
+\data{19}{março}{2013}   
+\orientador[Orientador]{Ricardo Pereira e Silva, Prof. Dr.}
+\coordenador[Coordenador]{Ronaldo dos Santos Mello, Prof. Dr.}                        
 
-\departamento[o]{Departamento de Inform�tica Estat�stica}
-\curso[o]{Programa de P�s-Gradua��o em Ci�ncias da Computa��o}
-\documento[a]{Disserta��o}
-\grau{Mestre em Ci�ncias da Computa��o}
-
+\numerodemembrosnabanca{5} % Isso decide se haverá uma folha adicional
+%\orientadornabanca{sim} % Se faz parte da banca definir como sim
+\bancaMembroA{Antônio Augusto Fröhlich, Prof. Dr.} %Nome do presidente da banca
+\bancaMembroB{Marcello Thiry, Prof. Dr.} % Nome do membro da Banca
+\bancaMembroC{Patrícia Vilain, Prof. Dr.} % Nome do membro da Banca
 
 %%% Sobre a Banca
-\numerodemembrosnabanca{3} % Isso decide se haver� uma folha adicional
-\orientadornabanca{sim} % Se faz parte da banca definir como sim
-\bancaMembroA{Prof. Dr Ricardo Pereira e Silva} %Nome do presidente da banca
+\dedicatoria{À minha família.}
 
-\dedicatoria{}
-
-\agradecimento{Agrade�o ao Prof. Ricardo pela sua orienta��o e compreens�o.}
+\agradecimento{Ao meu orientador, Ricardo, pela sua orientação, compreensão e motivação.}
 
 \epigrafe{}{}
 
-\textoResumo{}
-
-\palavrasChave {chave 1. chave 2. ... chave n.}
+\textoResumo{A modelagem de sistemas orientados a aspectos tem como objetivo aumentar o nível de abstração de código para modelos. Esta dissertação
+propõe a modelagem de sistemas orientados a aspectos usando UML, através de um perfil UML, abrangendo as principais características da programação
+orientada a aspectos, e possibilitando a alternância de visões da dinâmica do sistema. O desenvolvedor pode criar diferentes composições de interesses núcleo e entrecortantes, 
+visualizando os interesses núcleo, entrecortantes, ou uma composição com os interesses núcleos junto com os interesses entrecortantes. A visualização da dinâmica 
+de aspectos pode ser atualizada dinamicamente, atualizando o modelo composto, sem esforço do desenvolvedor. Os interesses são diferenciados no modelo composto 
+através de diferentes cores. A solução proposta é implementada como uma ferramenta no ambiente SEA, a qual permite a geração automática de diagramas de sequência, 
+resultantes da composição de aspectos. Para avaliar a abordagem, realizam-se dois estudos de caso. Realiza-se também uma comparação da abordagem
+proposta com outras abordagens da literatura.}
+\palavrasChave {Modelagem Meta-Modelagem UML Aspectos Programação Orientada a Aspectos Interesses Perfil}
 
 \textAbstract {}
-
 \keywords {key 1. key 2. ... key n.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% In�cio do documento                                
+% Início do documento                                
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %--------------------------------------------------------
-% Elementos pr�-textuais
+% Elementos pré-textuais
 \capa  
-\folhaderosto[comficha] % Se nao quiser imprimir a ficha, � s� n�o usar o par�metro
+\folhaderosto[comficha] 
 \folhaaprovacao
 \paginadedicatoria
 \paginaagradecimento
@@ -82,8 +88,8 @@
 \sumario
 
 %-------------------------------------------------------------------------------
-% Para listagens de algoritmos e de c�digo, recomenda-se consultar os
-% pacotes algorithms e lstlistings, que s�o usados para definir esses
+% Para listagens de algoritmos e de código, recomenda-se consultar os
+% pacotes algorithms e lstlistings, que são usados para definir esses
 % dois tipos de elementos de texto e possuem os comandos
 % \listofalgorithms e \lstlistoflistings, respectivamente.
 %-------------------------------------------------------------------------------
@@ -98,8 +104,7 @@
 \input{casestudy}
 \input{conclusion}
 
-%\bibliographystyle{ufscThesis/ufsc-alf}
+\bibliographystyle{ufscThesis/ufsc-alf}
 \bibliography{bibliografia}
-
 
 \end{document}
