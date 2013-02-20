@@ -24,7 +24,7 @@ garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/context_aspect_concerns.png}
-	\caption{Separação de interesses do módulo para Reserva de Quarto}\label{fig:context_aspect_concerns}
+	\caption{Separação de interesses do módulo para reserva de quarto}\label{fig:context_aspect_concerns}
 \end{figure}
 
 No sistema de gerenciamento de hotel é possível classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses núcleo.
@@ -111,8 +111,7 @@ geralmente executam-se três fases:
 \begin{figure}[!hb]
 	\centering
 	\includegraphics[scale=0.9]{img/aspects_weaving.png}
-	\caption{Fluxo de desenvolvimento de uma
-	aplicação com aspectos}\label{fig:aspects_weaving}
+	\caption{Fluxo de desenvolvimento de uma aplicação com aspectos}\label{fig:aspects_weaving}
 \end{figure}
 
 \subsection{A linguagem AspectJ}
@@ -145,8 +144,7 @@ execução da instanciação desse construtor pode ser visualizado na ocorrênci
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/aspects_join_point_model.png}
-	\caption{Identificação de pontos de
-	junção.}\label{fig:aspects_join_point_model}
+	\caption{Identificação de pontos de junção}\label{fig:aspects_join_point_model}
 \end{figure}
 
 É importante observar a diferença entre entre os pontos de junção de \textbf{chamada} (\textit{call}) e \textbf{execução} (\textit{execution}). Um
@@ -158,8 +156,7 @@ Observa-se na figura que a execução (\textit{execution}) do método \textbf{um
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/call_vs_execution.png}
-	\caption{Diferença entre os pontos de junção de chamada (call) e
-	execução (execution).}\label{fig:call_vs_execution}
+	\caption{Diferença entre os pontos de junção de chamada (call) e execução (execution)}\label{fig:call_vs_execution}
 \end{figure}
 
 O modelo de pontos de junção de AspectJ permite capturar também o tratamento de exceções, acesso e modificação de atributos (\textit{get} e
@@ -182,7 +179,7 @@ Existem dois tipos de ponto de corte:
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/pointcut_code.png}
-	\caption{Exemplo de código em Java.}\label{fig:pointcut_code}
+	\caption{Exemplo de código em Java}\label{fig:pointcut_code}
 \end{figure}
 
 O código da figura \ref{fig:pointcut_code} mostra o exemplo de um simples código
@@ -209,7 +206,7 @@ código na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
 \begin{figure}
 	\centering
 	\includegraphics{img/pointcut_vs_joinpoint.png}
-	\caption{Exemplo de ponto de corte.}\label{fig:pointcut_vs_joinpoint}
+	\caption{Exemplo de ponto de corte}\label{fig:pointcut_vs_joinpoint}
 \end{figure}
 
 Para possibilitar a captura de vários pontos de junção em um mesmo ponto de
@@ -232,8 +229,7 @@ notação \textbf{..}, capturando métodos com qualquer número de parâmetros.
 \begin{figure}
 	\centering
 	\includegraphics{img/pointcut_vs_joinpoint_wildcard.png}
-	\caption{Exemplo de ponto de corte utilizando
-	wildcards.}\label{fig:pointcut_vs_joinpoint_wildcard}
+	\caption{Exemplo de ponto de corte utilizando wildcards}\label{fig:pointcut_vs_joinpoint_wildcard}
 \end{figure}
 
 A figura \ref{fig:pointcut_vs_joinpoint_wildcard} mostra o ponto de corte redefinido, utilizando \textit{wildcards}. 
@@ -275,13 +271,13 @@ AND, AspectJ disponibiliza outros operadores binários. O operador \textbf{||} t
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/flow_p1.png}
-	\caption{Ponto de corte para captura do fluxo de execução inclusivo: cflow().}\label{fig:flow_p1}
+	\caption{Ponto de corte para captura do fluxo de execução inclusivo: cflow()}\label{fig:flow_p1}
 \end{figure}
 
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/flow_p2.png}
-	\caption{Ponto de corte para captura do fluxo de execução exclusivo: cflowbelow().}\label{fig:flow_p2}
+	\caption{Ponto de corte para captura do fluxo de execução exclusivo: cflowbelow()}\label{fig:flow_p2}
 \end{figure}
  
 Além dos pontos de corte para captura de execução, chamada, tratamento de exceção e atribuição, existem pontos de corte mais complexos relativos ao
@@ -294,7 +290,7 @@ junção do anterior, exceto a chamada ao próprio método.
 \begin{figure}[!htb]
 	\centering
 	\includegraphics{img/signatures.png}
-	\caption{Exemplo de assinaturas em AspectJ.}\label{fig:signatures}
+	\caption{Exemplo de assinaturas em AspectJ}\label{fig:signatures}
 \end{figure}
 
 Existem também \textbf{pontos de corte baseados na estrutura léxica do código}. Estes pontos de corte capturam pontos de junção que ocorrem dentro de
@@ -351,7 +347,7 @@ permitem passar o contexto de execução para um aviso.
 \begin{figure}[!hb]
 	\centering
 	\includegraphics{img/advice_code.png}
-	\caption{Exemplo de aviso com contexto de execução.}\label{fig:advice_code}
+	\caption{Exemplo de aviso com contexto de execução}\label{fig:advice_code}
 \end{figure}
 
 \subsubsection{Construções Estáticas}
@@ -370,7 +366,7 @@ e o objeto que executará este método será um objeto do tipo \textbf{ObjetoA}.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.9]{img/introduction.png}
-	\caption{Introdução de métodos e atributos.}\label{fig:introduction}
+	\caption{Introdução de métodos e atributos}\label{fig:introduction}
 \end{figure}
 
 Outra funcionalidade disponível na linguagem é a \textbf{modificação da hierarquia de classes}, permitindo a definição de
@@ -382,8 +378,7 @@ herança entre as classes \textbf{ObjetoA} e \textbf{ObjetoB}.
 \begin{figure}
 	\centering
 	\includegraphics{img/introduction_interface.png}
-	\caption{Introdução de relacionamentos de
-	herança.}\label{fig:introduction_interface}
+	\caption{Introdução de relacionamentos de herança}\label{fig:introduction_interface}
 \end{figure}
 
 \subsubsection{Aspecto}
@@ -445,8 +440,7 @@ especificar em quais pontos de junção serão detectadas mudanças.
 \begin{figure}
 	\centering
 	\includegraphics{img/aspects_observer_1.png}
-	\caption{Aspecto abstrato para implementação do
-	padrão de projeto Observador.}\label{fig:aspects_observer_1}
+	\caption{Aspecto abstrato para implementação do padrão de projeto Observador}\label{fig:aspects_observer_1}
 \end{figure}
 
 Considerando como exemplo um sistema de interface gráfica com um botão e um
@@ -471,9 +465,8 @@ Este aspecto captura cliques em um botão, atualizando a cor de um texto.
 \begin{figure}
 	\centering
 	\includegraphics{img/aspects_observer_2.png}
-	\caption{Aspecto concreto implementando o
-	padrão de projeto Observador em um sistema de
-	interface gráfica.}\label{fig:aspects_observer_2}
+	\caption{Aspecto concreto implementando o padrão de projeto Observador em um sistema de
+	interface gráfica}\label{fig:aspects_observer_2}
 \end{figure}
 
 \section{Análise e Projeto com UML}
@@ -553,7 +546,7 @@ que este atributo define unicamente uma sala. O estereótipo \textit{key} está 
 \begin{figure}
 	\centering
 	\includegraphics{img/stereotype_1.png}
-	\caption{Uso de estereótipos em um diagrama de classes.}\label{fig:stereotype_1}
+	\caption{Uso de estereótipos em um diagrama de classes}\label{fig:stereotype_1}
 \end{figure}
 
 Um estereótipo adiciona um papel a um elemento do modelo. Para adicionar mais informações a um elemento, podem-se definir \textbf{valores rotulados}.
@@ -569,7 +562,7 @@ introduzidas ao modelo para garantir a consistência no próprio modelo e nos se
 \begin{figure}
 	\centering
 	\includegraphics{img/tagged_values_1.png}
-	\caption{Uso de valores rotulados em um diagrama de classes.}\label{fig:tagged_values_1}
+	\caption{Uso de valores rotulados em um diagrama de classes}\label{fig:tagged_values_1}
 \end{figure}
 
 A figura \ref{fig:profile_diagram} mostra a definição de um perfil UML para modelagem de sistemas que desejam representar veículos
@@ -588,8 +581,7 @@ que especifique sistemas orientados a aspectos.
 \begin{figure}
 	\centering
 	\includegraphics{img/profile_diagram.png}
-	\caption{Diagrama de Perfil para representar
-	veículos.}\label{fig:profile_diagram}
+	\caption{Diagrama de Perfil para representar veículos}\label{fig:profile_diagram}
 \end{figure}
 
 \subsection{Diagramas Comportamentais}
@@ -599,7 +591,7 @@ interação, sequência e de tempo. Neste trabalho serão utilizados os diagrama
 
 \subsubsection{Diagrama de Máquina de Estados}
 
-O diagrama de máquina de estaods representa os estados e o comportamento de um objeto, especificando a sequência de eventos que um objeto recebe
+O diagrama de máquina de estados representa os estados e o comportamento de um objeto, especificando a sequência de eventos que um objeto recebe
 durante sua existência. Os principais componentes deste diagrama são os estados e as transições. Um diagrama de máquina de estados também pode
 representar concorrência utilizando nodos \textit{fork} e \textit{join} com regiões concorrentes. Este mecanismo permite realizar a sincronização
 entre diferentes estados. Na POO utiliza-se o diagrama de máquina de estados para especificar os diferentes estados de uma classe.
@@ -649,8 +641,7 @@ instância é um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody
 \begin{figure}
 	\centering
 	\includegraphics{img/omg_meta_model.png}
-	\caption{Meta-modelo da Object Management
-	Group (OMG).}\label{fig:omg_meta_model}
+	\caption{Meta-modelo da Object Management Group (OMG)}\label{fig:omg_meta_model}
 \end{figure}
 
 O meta-modelo da UML é definido no nível M2 a partir do MOF. Este meta-modelo é uma instância do MOF. Uma parte do meta-modelo pode ser visualizada na
@@ -659,7 +650,7 @@ figura \ref{fig:uml_meta_model}. Esta parte do modelo define os componenentes pa
 \begin{figure}
 	\centering
 	\includegraphics{img/uml_meta_model.png}
-	\caption{Meta-modelo da UML.}\label{fig:uml_meta_model}
+	\caption{Meta-modelo da UML}\label{fig:uml_meta_model}
 \end{figure}
 
 É importante observar no modelo da figura \ref{fig:uml_meta_model} que qualquer elemento de um modelo da UML deve derivar de \textit{ModelElement} e
@@ -676,7 +667,7 @@ definida no meta-modelo da OMG.
 É possível estender a UML de duas formas: criação de um Perfil UML para representar os conceitos de um dado domínio de aplicação ou através da
 definição de um novo meta-modelo para este domínio de aplicação.
 
-\subsubsection{Extensão pela definição de um Perfil UML}
+\subsubsection{Extensão pela Definição de um Perfil UML}
 
 A UML pode ser estendida com a definição de diferentes perfis para determinados domínios de aplicação. É importante observar que, o mecanismo de
 perfis não é um mecanismo de extensão de primeira classe, o que significa que um perfil não pode modificar um meta-modelo (removendo restrições da
@@ -696,7 +687,7 @@ sistema que utiliza EJB como: entidades (estereótipo \textit{Entity EJB}), mens
 \textit{Session EJB}), dentre outros. Este perfil pode ser usado em ferramentas CASE que suportem a importação de perfis e está disponível na internet
 \cite{ejbprofile:12}. Com ele, é possível representar todas as características dos componentes EJB em uma modelagem UML.
 
-\subsubsection{Extensão pela definição de um meta-modelo}
+\subsubsection{Extensão pela Definição de um Meta-modelo}
 
 Com meta-modelagem, o objetivo é estender o meta-modelo da UML no nível M2 com a adição de novos conceitos relacionados a um domínio de aplicação. Uma
 extensão neste nível modifica o meta-modelo, podendo adicionar e remover restrições, adicionar e remover meta-classes do modelo, adicionar e
@@ -711,6 +702,6 @@ existe a necessidade de combinar esta extensão com outras extensões.
 \begin{figure}[!H]
 	\centering
 	\includegraphics{img/ejb_profile.png}
-	\caption{Perfil UML para representar componentes EJB \cite{ejbprofile:12}.}\label{fig:ejb_profile}
+	\caption{Perfil UML para representar componentes EJB \cite{ejbprofile:12}}\label{fig:ejb_profile}
 \end{figure}
 \end{landscape}

@@ -18,7 +18,7 @@ clientes em uma lista de espera) com um interesse núcleo para reserva de quarto
 para acúmulo de pontos em um programa de fidelidade e o interesse de registro de mensagens com um interesse núcleo para realizar o \textit{check-out}
 de clientes.
 
-\section{Estudo de caso: reserva de quarto, registro de mensagens e lista de espera}
+\section{Estudo de Caso: Reserva de Quarto, Registro de Mensagens e Lista de Espera}
 
 O primeiro estudo de caso envolve três interesses do sistema:
 
@@ -38,7 +38,7 @@ interesse também tem a classe \textit{ReserveRoomHandler} com o método \textit
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_structural_reserve_room.png}
-	\caption{Modelagem Estrutural: Reserva de Quarto.}\label{fig:case_study_structural_reserve_room}
+	\caption{Modelagem estrutural: reserva de quarto}\label{fig:case_study_structural_reserve_room}
   \end{figure}
 
 O segundo interesse modelado é o interesse entrecortante para registro de mensagens. Este interesse impacta vários componentes do sistema e é
@@ -55,7 +55,7 @@ inseridas antes de outros aspectos no caso de um aviso conflitante do tipo antes
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_structural_log.png}
-	\caption{Modelagem Estrutural: Registro de Mensagens.}\label{fig:case_study_structural_log}
+	\caption{Modelagem estrutural: registro de mensagens}\label{fig:case_study_structural_log}
   \end{figure}
 
 O interesse para controle de uma lista de espera de clientes é representado na modelagem da figura \ref{fig:case_study_structural_waiting_list}. O
@@ -71,7 +71,7 @@ Finalmente, a classe \textit{WaitingList} contém os métodos \textit{retrieveWa
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_structural_waiting_list.png}
-	\caption{Modelagem Estrutural: Lista de Espera.}\label{fig:case_study_structural_waiting_list}
+	\caption{Modelagem estrutural: lista de espera}\label{fig:case_study_structural_waiting_list}
   \end{figure}
   
 Após a modelagem da estrutura dos interesses, deve-se modelar o comportamento dos mesmos. A especificação do comportamento de um interesse núcleo
@@ -89,7 +89,7 @@ contrário, a reserva é realizada e o cliente recebe um código de confirmaçã
   \begin{figure}[!b]
 	\centering
 	\includegraphics{img/case_study_behavioral_reserve_room.png}
-	\caption{Diagrama de Sequência: Reserva de Quarto.}\label{fig:case_study_behavioral_reserve_room}
+	\caption{Diagrama de sequência: reserva de quarto}\label{fig:case_study_behavioral_reserve_room}
   \end{figure}
   
 O interesse entrecortante para registro de mensagem contabiliza o número de requisições a um quarto. Para realizar este objetivo, define-se um ponto
@@ -112,13 +112,13 @@ de desenvolvimento.
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_pointcut_log.png}
-	\caption{Ponto de Corte: Registro de Mensagens.}\label{fig:case_study_behavioral_pointcut_log}
+	\caption{Ponto de corte: registro de mensagens}\label{fig:case_study_behavioral_pointcut_log}
   \end{figure}
   
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_log.png}
-	\caption{Aviso: Registro de Mensagens.}\label{fig:case_study_behavioral_log}
+	\caption{Aviso: registro de mensagens}\label{fig:case_study_behavioral_log}
   \end{figure}
 
 O requisito para criação de uma lista de espera para clientes também é um interesse entrecortante. Este interesse adiciona um cliente a uma lista de
@@ -134,13 +134,13 @@ Novamente, o valor rotulado não é exibido no diagrama de sequência para não 
   \begin{figure}[tb]
 	\centering
 	\includegraphics[scale=0.8]{img/case_study_behavioral_pointcut_waiting_list.png}
-	\caption{Ponto de Corte: Controle de uma Lista de Espera.}\label{fig:case_study_behavioral_pointcut_waiting_list}
+	\caption{Ponto de corte: controle de uma lista de espera}\label{fig:case_study_behavioral_pointcut_waiting_list}
   \end{figure}
   
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_waiting_list.png}
-	\caption{Aviso: Controle de uma Lista de Espera.}\label{fig:case_study_behavioral_waiting_list}
+	\caption{Aviso: controle de uma lista de espera}\label{fig:case_study_behavioral_waiting_list}
   \end{figure}
   
 Depois da especificação estrutural e comportamental dos interesses núcleo e entrecortantes, o desenvolvedor pode intercambiar as visões do sistema,
@@ -160,17 +160,17 @@ precedência é definida pelo valor rotulado \textit{precedence}, configurado ao
   \begin{figure*}[tb]
 	\centering
 	\includegraphics[scale=0.7]{img/case_study_compound_2.png}
-	\caption{Estudo de Caso: Reserva de Quarto Composto com Registro de Mensagens e Controle de Lista de Espera.}\label{fig:case_study_compound_2}
+	\caption{Estudo de caso: reserva de quarto composto com registro de mensagens e controle de lista de espera}\label{fig:case_study_compound_2}
   \end{figure*}
 \end{landscape}
   
-\section{Estudo de caso: check-out de clientes, registro de mensagens e programa de fidelidade}
+\section{Estudo de Caso: Check-out de Clientes, Registro de Mensagens e Programa de Fidelidade}
 
 O segundo estudo de caso realiza a composição de três interesses. Um dos interesses envolvido é o de registro de mensagens, apresentado no estudo de
 caso da seção anterior, e que não sera representado nesta seção. Os outros dois interesses são:
 
 \begin{itemize}
-  \item \textbf{Check-out de clientes:} Um cliente do hotel pode realizar o check-out, após realizar o pagamento do quarto.
+  \item \textbf{Check-out de Clientes:} Um cliente do hotel pode realizar o check-out, após realizar o pagamento do quarto.
   \item \textbf{Programa de Fidelidade:} Após realizar o pagamento de um quarto, um cliente pode acumular pontos em um programa de fidelidade.
 \end{itemize}
 
@@ -183,7 +183,7 @@ não estão estereotipados, pois representam um interesse núcleo do sistema.
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_structural_check_out.png}
-	\caption{Modelagem Estrutural: Check-out de Clientes.}\label{fig:case_study_structural_check_out}
+	\caption{Modelagem estrutural: check-out de clientes}\label{fig:case_study_structural_check_out}
   \end{figure}
 
 O interesse para acúmulo de pontos em um programa de fidelidade tem sua modelagem estrutural apresentada na figura
@@ -198,7 +198,7 @@ estruturais propostas pelas classes deste interesse.
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_structural_earn_points.png}
-	\caption{Modelagem Estrutural: Acúmulo de Pontos em Programa de Fielidade.}\label{fig:case_study_structural_earn_points}
+	\caption{Modelagem estrutural: acúmulo de pontos em programa de fidelidade}\label{fig:case_study_structural_earn_points}
   \end{figure}
 
 O diagrama de sequência que representa o comportamento do interesse para \textit{check-out} de clientes pode ser visualizado na figura
@@ -209,7 +209,7 @@ conta, o cliente é removido da lista de clientes ativos através do método \te
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_check_out.png}
-	\caption{Diagrama de Sequência: Check-out de Clientes.}\label{fig:case_study_behavioral_check_out}
+	\caption{Diagrama de sequência: check-out de clientes}\label{fig:case_study_behavioral_check_out}
   \end{figure}
   
 A modelagem comportamental do interesse para acúmulo de pontos em um programa de fidelidade envolve a especificação de um ponto de corte e de um
@@ -224,13 +224,13 @@ mensagens só serão executadas após a satisfação do estado \textit{BillPaid}
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_pointcut_loyalty_points.png}
-	\caption{Ponto de Corte: Programa de Fidelidade.}\label{fig:case_study_behavioral_pointcut_loyalty_points}
+	\caption{Ponto de corte: programa de fidelidad}\label{fig:case_study_behavioral_pointcut_loyalty_points}
   \end{figure}
 
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_loyalty_points.png}
-	\caption{Aviso: Programa de Fidelidade.}\label{fig:case_study_behavioral_loyalty_points}
+	\caption{Aviso: programa de fidelidade}\label{fig:case_study_behavioral_loyalty_points}
   \end{figure}
   
 A figura \ref{fig:case_study_2_compound} apresenta a composição dos interesses para \textit{check-out} de clientes, registro de mensagens e acúmulo
@@ -241,7 +241,7 @@ fidelidade estão com o fundo amarelo. O interesse núcleo não teve suas mensag
   \begin{figure*}[tb]
 	\centering
 	\includegraphics[scale=0.7]{img/case_study_2_compound.png}
-	\caption{Estudo de Caso: Check-out de Clientes Composto com Registro de Mensagens e Programa de Fidelidade.}\label{fig:case_study_2_compound}
+	\caption{Estudo de caso: check-out de clientes composto com registro de mensagens e programa de fidelidade}\label{fig:case_study_2_compound}
   \end{figure*}
 \end{landscape}
   
