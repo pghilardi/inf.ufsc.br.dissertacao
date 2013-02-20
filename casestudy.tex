@@ -28,6 +28,12 @@ O primeiro estudo de caso envolve três interesses do sistema:
   \item \textbf{Lista de Espera:} Um cliente pode ser colocado em uma lista de espera quando um quarto não estiver disponível para reserva imediata.
 \end{itemize}
 
+  \begin{figure}[!h]
+	\centering
+	\includegraphics{img/case_study_structural_reserve_room.png}
+	\caption{Modelagem estrutural: reserva de quarto}\label{fig:case_study_structural_reserve_room}
+  \end{figure}
+
 A modelagem de um interesse começa com a criação de um diagrama de classes que representa a sua estrutura. As classes e os aspectos que
 representam o interesse ficam agrupadas dentro de um pacote da UML. Se o interesse for do tipo entrecortante, este pacote é marcado com o estereótipo
 \textit{CrosscuttingConcern}. No caso do interesse ser do tipo núcleo, o pacote não é estereotipado. O diagrama de classes da figura
@@ -35,10 +41,16 @@ representam o interesse ficam agrupadas dentro de um pacote da UML. Se o interes
 reserva de quarto contém a classe \textit{Room} com o método \textit{updateAvailability()} para atualizar a disponibilidade de um quarto. Este
 interesse também tem a classe \textit{ReserveRoomHandler} com o método \textit{makeReservation()}, responsável por realizar a reserva de um quarto.
 
-  \begin{figure}
+  \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_structural_reserve_room.png}
-	\caption{Modelagem estrutural: reserva de quarto}\label{fig:case_study_structural_reserve_room}
+	\includegraphics{img/case_study_structural_log.png}
+	\caption{Modelagem estrutural: registro de mensagens}\label{fig:case_study_structural_log}
+  \end{figure}
+
+  \begin{figure}[!h]
+	\centering
+	\includegraphics{img/case_study_structural_waiting_list.png}
+	\caption{Modelagem estrutural: lista de espera}\label{fig:case_study_structural_waiting_list}
   \end{figure}
 
 O segundo interesse modelado é o interesse entrecortante para registro de mensagens. Este interesse impacta vários componentes do sistema e é
@@ -52,12 +64,6 @@ nova classe no sistema. Observa-se a presença do valor rotulado \textit{precede
 aspecto para registro de mensagens tem precedência perante todos os outros aspectos do sistema (símbolo *), isto é, as mensagens deste aspecto serão
 inseridas antes de outros aspectos no caso de um aviso conflitante do tipo antes. O mesmo vale para os outros tipos de aviso.
 
-  \begin{figure}
-	\centering
-	\includegraphics{img/case_study_structural_log.png}
-	\caption{Modelagem estrutural: registro de mensagens}\label{fig:case_study_structural_log}
-  \end{figure}
-
 O interesse para controle de uma lista de espera de clientes é representado na modelagem da figura \ref{fig:case_study_structural_waiting_list}. O
 pacote com as classes que representam o interesse também é marcado com o estereótipo \textit{CrosscuttingConcern}. O aspecto \textit{WaitingListAspect} está
 associado com as classes \textit{WaitingListHandler}, \textit{Reservation} e \textit{WaitingList}. Essas três classes são extensões a classes do
@@ -68,35 +74,30 @@ Finalmente, a classe \textit{WaitingList} contém os métodos \textit{retrieveWa
 \textit{addPendingReservation()} para adicionar uma reserva de um cliente. Todos os métodos pertencentes a estas classes estão estereotipados com
 \textit{Introduction}, pois são introduções estruturais ao sistema de gerenciamento de hotel.
 
-  \begin{figure}
-	\centering
-	\includegraphics{img/case_study_structural_waiting_list.png}
-	\caption{Modelagem estrutural: lista de espera}\label{fig:case_study_structural_waiting_list}
-  \end{figure}
-  
 Após a modelagem da estrutura dos interesses, deve-se modelar o comportamento dos mesmos. A especificação do comportamento de um interesse núcleo
 envolve apenas o diagrama de sequência. Já os interesses entrecortantes devem ser modelados com um diagrama de máquina de estados para representar
 seus pontos de corte e um diagrama de sequência para representar a execução do comportamento do aspecto. Os pontos de corte definem quais pontos do
 sistema serão estendidos. O comportamento de um aspecto é representado pelos avisos associados ao mesmo. O diagrama de sequência que representa o
 comportamento de um aspecto, também representa a conexão entre a satisfação de um ponto de corte com a execução das mensagens do aviso de um aspecto.
 
+  \begin{figure}[!h]
+	\centering
+	\includegraphics{img/case_study_behavioral_reserve_room.png}
+	\caption{Diagrama de sequência: reserva de quarto}\label{fig:case_study_behavioral_reserve_room}
+  \end{figure}
+
 O primeiro diagrama de sequência é o que representa a troca de mensagens do interesse núcleo para reserva de quartos. O diagrama pode ser visualizado
 na figura \ref{fig:case_study_behavioral_reserve_room}. Para realizar uma reserva de quarto, primeiramente realiza-se uma chamada ao método
 \textit{makeReservation()} da classe \textit{ReserveRoomHandler} que é responsável por iniciar a reserva. Após esta chamada, executa-se o método
 para verificar se o quarto está disponível. Se o quarto não estiver disponível, uma exceção é lançada no método \textit{updateAvailability()}, caso
 contrário, a reserva é realizada e o cliente recebe um código de confirmação.
-
-  \begin{figure}[!b]
-	\centering
-	\includegraphics{img/case_study_behavioral_reserve_room.png}
-	\caption{Diagrama de sequência: reserva de quarto}\label{fig:case_study_behavioral_reserve_room}
-  \end{figure}
   
 O interesse entrecortante para registro de mensagem contabiliza o número de requisições a um quarto. Para realizar este objetivo, define-se um ponto
 de corte que captura qualquer chamada a classes do tipo \textit{Room}. Este ponto de corte é modelado usando o diagrama de máquina de estados da UML e 
-pode ser visualizado na figura \ref{fig:case_study_behavioral_pointcut_log}. Com o ponto de corte especificado, cria-se o diagrama de sequência para
-representar a troca de mensagens entre objetos para realização do registro de chamadas. O diagrama pode ser visualizado 
-na figura \ref{fig:case_study_behavioral_log} e contém o aspecto \textit{LogAspect} associado a primeira linha de vida do diagrama. De acordo com a
+pode ser visualizado na figura \ref{fig:case_study_behavioral_pointcut_log}. 
+
+Com o ponto de corte especificado, cria-se o diagrama de sequência para representar a troca de mensagens entre objetos para realização do registro de
+chamadas. O diagrama pode ser visualizado na figura \ref{fig:case_study_behavioral_log} e contém o aspecto \textit{LogAspect} associado a primeira linha de vida do diagrama. De acordo com a
 abordagem proposta, um aspecto no diagrama de sequência deve ter uma invariante de estado associada, a qual é o gatilho 
 para começar a executar a sequência de mensagens do diagrama. No exemplo em questão, a invariante de estado \textit{RoomCall} está associada ao
 aspecto \textit{LogAspect} e referencia o ponto de corte definido previamente no diagrama de máquina de estados. A semântica é que 
@@ -122,14 +123,13 @@ de desenvolvimento.
   \end{figure}
 
 O requisito para criação de uma lista de espera para clientes também é um interesse entrecortante. Este interesse adiciona um cliente a uma lista de
-espera quando um quarto não está disponível. Para realizar isto, é necessário um ponto de corte que captura a tentativa de um cliente reservar um
-quarto sem sucesso, porque o quarto está indisponível. A figura \ref{fig:case_study_behavioral_pointcut_waiting_list} representa um ponto de corte
+espera quando um quarto não está disponível. É necessário definir um ponto de corte que captura a tentativa de um cliente reservar um
+quarto, mas o quarto está indisponível. A figura \ref{fig:case_study_behavioral_pointcut_waiting_list} representa um ponto de corte
 para capturar as chamadas ao método \textit{updateAvailability()} da classe \textit{Room}, lançando a exceção \textit{NoRoomsAvailable}. Além da
 definição de um ponto de corte, é necessário definir o comportamento de como um cliente é adicionado a lista de espera. O comportamento é modelado no
-diagrama de sequência da figura \ref{fig:case_study_behavioral_waiting_list}. O diagrama tem o aspecto \textit{WaitingListAspect} como o objeto
-associado a primeira linha de vida e uma sequência de mensagens para serem executadas quando o sistema lança uma exceção de quarto indisponível. Estas
+diagrama de sequência da figura \ref{fig:case_study_behavioral_waiting_list}. O diagrama tem o aspecto \textit{WaitingListAspect} associado a primeira 
+linha de vida e uma sequência de mensagens para serem executadas quando o sistema lança uma exceção de quarto indisponível. Estas
 mensagens são executadas depois do tratamento de exceção, pois o valor rotulado que define o tipo do aviso na invariante de estado é do tipo depois.
-Novamente, o valor rotulado não é exibido no diagrama de sequência para não poluir o diagrama.
 
   \begin{figure}[tb]
 	\centering
@@ -174,16 +174,22 @@ caso da seção anterior, e que não sera representado nesta seção. Os outros 
   \item \textbf{Programa de Fidelidade:} Após realizar o pagamento de um quarto, um cliente pode acumular pontos em um programa de fidelidade.
 \end{itemize}
 
+  \begin{figure}[!h]
+	\centering
+	\includegraphics{img/case_study_structural_check_out.png}
+	\caption{Modelagem estrutural: check-out de clientes}\label{fig:case_study_structural_check_out}
+  \end{figure}
+
 A especificação estrutural do interesse núcleo para \textit{check-out} de clientes pode ser visualizada na figura
 \ref{fig:case_study_structural_check_out}. Este interesse contém a classe \textit{CheckOutHandler} que inicia a operação de \textit{check-out} através 
 do método \textit{checkOut()}. A classe \textit{Payment} possui o método \textit{payBill()}, o qual permite realizar o pagamento de um quarto. A
 classe \textit{Room} contém o método \textit{removeCustomer()}, para remover um cliente da lista de hóspedes do hotel. As classes do modelo estrutural
 não estão estereotipados, pois representam um interesse núcleo do sistema.
 
-  \begin{figure}
+  \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_structural_check_out.png}
-	\caption{Modelagem estrutural: check-out de clientes}\label{fig:case_study_structural_check_out}
+	\includegraphics{img/case_study_structural_earn_points.png}
+	\caption{Modelagem estrutural: acúmulo de pontos em programa de fidelidade}\label{fig:case_study_structural_earn_points}
   \end{figure}
 
 O interesse para acúmulo de pontos em um programa de fidelidade tem sua modelagem estrutural apresentada na figura
@@ -195,10 +201,10 @@ fidelidade de um determinado cliente. A classe \textit{EarnPointsHandler} conté
 obtenção de pontos após o pagamento. Finalmente, o aspecto \textit{EarnPointsAspect} contém o estereótipo \textit{Aspect}, e introduz as mudanças
 estruturais propostas pelas classes deste interesse.
 
-  \begin{figure}
+  \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_structural_earn_points.png}
-	\caption{Modelagem estrutural: acúmulo de pontos em programa de fidelidade}\label{fig:case_study_structural_earn_points}
+	\includegraphics{img/case_study_behavioral_check_out.png}
+	\caption{Diagrama de sequência: check-out de clientes}\label{fig:case_study_behavioral_check_out}
   \end{figure}
 
 O diagrama de sequência que representa o comportamento do interesse para \textit{check-out} de clientes pode ser visualizado na figura
@@ -206,12 +212,12 @@ O diagrama de sequência que representa o comportamento do interesse para \texti
 mensagem \textit{checkOut()}. Esta mensagem dispara a mensagem \textit{payBill()} para realizar o pagamento da conta do cliente. Após o pagamento da
 conta, o cliente é removido da lista de clientes ativos através do método \textit{removeCustomer()} da classe \textit{Room}.
 
-  \begin{figure}
+  \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_behavioral_check_out.png}
-	\caption{Diagrama de sequência: check-out de clientes}\label{fig:case_study_behavioral_check_out}
+	\includegraphics{img/case_study_behavioral_pointcut_loyalty_points.png}
+	\caption{Ponto de corte: programa de fidelidad}\label{fig:case_study_behavioral_pointcut_loyalty_points}
   \end{figure}
-  
+
 A modelagem comportamental do interesse para acúmulo de pontos em um programa de fidelidade envolve a especificação de um ponto de corte e de um
 aviso. O ponto de corte é especificado na figura \ref{fig:case_study_behavioral_pointcut_loyalty_points}. Este ponto de corte captura chamadas ao
 método \textit{payBill()} da classe \textit{Payment}. O diagrama de sequência pode ser visualizado na figura
@@ -221,22 +227,16 @@ mensagens só serão executadas após a satisfação do estado \textit{BillPaid}
 \textit{EarnPointsHandler} executa o método \textit{earnCredits()}. Este método dispara o método \textit{addLoyaltyPoints()} na classe
 \textit{LoyalyPoints}, que adiciona pontos ao saldo de pontos do cliente no programa de fidelidade.
   
-  \begin{figure}
-	\centering
-	\includegraphics{img/case_study_behavioral_pointcut_loyalty_points.png}
-	\caption{Ponto de corte: programa de fidelidad}\label{fig:case_study_behavioral_pointcut_loyalty_points}
-  \end{figure}
-
+A figura \ref{fig:case_study_2_compound} apresenta a composição dos interesses para \textit{check-out} de clientes, registro de mensagens e acúmulo
+de pontos em um programa de fidelidade. As mensagens do interesse para registro de mensagens estão com o fundo azul. Já as mensagens do programa de
+fidelidade estão com o fundo amarelo. O interesse núcleo não teve suas mensagens modificadas. 
+  
   \begin{figure}
 	\centering
 	\includegraphics{img/case_study_behavioral_loyalty_points.png}
 	\caption{Aviso: programa de fidelidade}\label{fig:case_study_behavioral_loyalty_points}
   \end{figure}
-  
-A figura \ref{fig:case_study_2_compound} apresenta a composição dos interesses para \textit{check-out} de clientes, registro de mensagens e acúmulo
-de pontos em um programa de fidelidade. As mensagens do interesse para registro de mensagens estão com o fundo azul. Já as mensagens do programa de
-fidelidade estão com o fundo amarelo. O interesse núcleo não teve suas mensagens modificadas. 
-  
+
   \begin{landscape}
   \begin{figure*}[tb]
 	\centering
