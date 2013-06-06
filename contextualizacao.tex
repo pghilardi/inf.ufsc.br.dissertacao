@@ -2,14 +2,14 @@
 
 O objetivo deste capítulo é fornecer subsídios para a compreensão dos assuntos tratados nesta dissertação. Primeiramente, contextualiza-se o paradigma
 de Programação Orientada a Aspectos (POA), apresentando a motivação para o uso de aspectos e as construções específicas da linguagem AspectJ, que devem ser representáveis 
-na modelagem. A segunda parte discorre sobre análise e projeto de sistemas utilizando a segunda versão da UML. Apresentam-se alguns conceitos sobre
+na modelagem. A segunda parte discorre sobre a análise e projeto de sistemas utilizando a segunda versão da UML. Apresentam-se alguns conceitos sobre
 análise e projeto e os diagramas da UML. O tópico final fala sobre meta-modelagem, que permite estender um modelo para representar elementos de um
 domínio específico.
 
 \section{Programação Orientada a Aspectos}
 
 Esta seção discorre sobre a separação de um sistema em um conjunto de interesses e os problemas decorrentes da implementação de interesses com os
-paradigmas tradicionais. Devido a estes problemas surge a necessidade de um novo paradigma para realizar a separação de interesses: o paradigma de
+paradigmas tradicionais. Devido a estes problemas, surge a necessidade de um novo paradigma para realizar a separação de interesses: o paradigma de
 Programação Orientada a Aspectos (POA). A seção é finalizada com a apresentação da principal linguagem para implementação de aspectos em Java: 
 AspectJ.
 
@@ -27,7 +27,7 @@ garantia de \textit{performance}, etc \cite{Jacobson:2004:ASD:1062430}.
 	\caption{Separação de interesses do módulo para reserva de quarto}\label{fig:context_aspect_concerns}
 \end{figure}
 
-No sistema de gerenciamento de hotel é possível classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses núcleo.
+No sistema de gerenciamento de hotel, é possível classificar reserva de quartos, \textit{check-in} e \textit{check-out} como interesses núcleo.
 Os interesses de controle de acesso, acúmulo de pontos em um programa de fidelidade, controle de uma lista de espera, registro de mensagens e garantia
 de \textit{performance} impactam diversas partes do sistema, por isso, são classificados como interesses entrecortantes. O interesse de controle de acesso deve 
 verificar quais usuários podem acessar quais partes do sistema e, por isso, deve ser executado em todos os interesses núcleo. O interesse de
@@ -118,16 +118,16 @@ geralmente executam-se três fases:
 
 A linguagem AspectJ \cite{AspectJ11} é uma extensão da linguagem Java para programação orientada a aspectos. Qualquer programa implementado em Java
 pode ser estendido utilizando AspectJ. A linguagem provê mecanismos para representar interesses entrecortantes e permite a composição dos mesmos com os interesses 
-núcleo de um sistema. A linguagem oferece construções de extensão dinâmicas e estáticas. As extensões dinâmicas permitem que um novo comportamento
-seja executado antes, durante ou depois de um determinado ponto de execução do sistema. As extensões estáticas permitem adicionar novos elementos na
+núcleo de um sistema. A linguagem oferece construções de extensão comportamentais e estáticas. As extensões comportamentais permitem que um novo
+comportamento seja executado antes, durante ou depois de um determinado ponto de execução do sistema. As extensões estáticas permitem adicionar novos elementos na
 estrutura das classes, por exemplo, a inserção de um novo método ou atributo. O conteúdo das próximas seções é baseado no guia de programação da
 linguagem AspectJ \cite{aspectjguide} e no livro AspectJ: in Action \cite{Laddad:2003:AAP:993468}. Os exemplos, no entanto, são originais desta
 dissertação.
 
-\subsubsection{Construções Dinâmicas}
+\subsubsection{Construções Comportamentais}
 
-Um dos principais conceitos dinâmicos que devem ser compreendidos na linguagem é o de \textbf{ponto de junção}. Um ponto de junção é um determinado
-ponto na execução de um programa. É importante observar que, um ponto de junção não é uma construção sintática de AspectJ, mas sim um conceito. 
+Um dos principais conceitos comportamentais que devem ser compreendidos na linguagem é o de \textbf{ponto de junção}. Um ponto de junção é um
+determinado ponto na execução de um programa. É importante observar que, um ponto de junção não é uma construção sintática de AspectJ, mas sim um conceito. 
 
 A figura \ref{fig:aspects_join_point_model} descreve o fluxo de execução de um programa através da troca de mensagens entre diferentes objetos. Nesta
 troca de mensagens existem diversos pontos de junção que podem ser capturados pela linguagem AspectJ. A seguir, será destacado cada ponto de junção
@@ -155,7 +155,7 @@ Observa-se na figura que a execução (\textit{execution}) do método \textbf{um
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics{img/call_vs_execution.png}
+	\includegraphics[scale=0.9]{img/call_vs_execution.png}
 	\caption{Diferença entre os pontos de junção de chamada (call) e execução (execution)}\label{fig:call_vs_execution}
 \end{figure}
 
@@ -237,13 +237,13 @@ O novo ponto de corte captura a chamada de qualquer método, com qualquer númer
 de parâmetros e qualquer tipo de retorno de um objeto do tipo \textbf{ObjetoA}.
 A captura de todos os métodos pode ser visualizada no código da parte inferior
 da figura \ref{fig:pointcut_vs_joinpoint} (métodos selecionados estão destacados
-com flechas laranjas).
+com flechas laranjas). O ponto de corte da figura \ref{fig:pointcut_vs_joinpoint_wildcard} captura três pontos de junção.
 
 Os pontos de corte das figuras \ref{fig:pointcut_vs_joinpoint} e \ref{fig:pointcut_vs_joinpoint_wildcard} foram definidos utilizando \textbf{padrões
 de assinatura} (\textit{signature patterns}). Um padrão de assinatura é utilizado para especificar quais assinaturas de um programa em Java serão capturadas. No
-exemplo de ponte de corte da figura \ref{fig:pointcut_vs_joinpoint} a assinatura \textbf{public void ObjetoA.umMetodo()} permite capturar as chamadas
+exemplo de ponte de corte da figura \ref{fig:pointcut_vs_joinpoint}, a assinatura \textbf{public void ObjetoA.umMetodo()} permite capturar as chamadas
 ao método \textbf{umMetodo()} do \textbf{ObjetoA} sem retornar nenhum objeto. Já a assinatura \textbf{public void ObjetoA.*(..)} da 
-figura \ref{fig:pointcut_vs_joinpoint_wildcard} permite capturar as chamadas a qualquer método, com qualquer número de parâmetro e sem nenhum
+figura \ref{fig:pointcut_vs_joinpoint_wildcard} permite capturar as chamadas a qualquer método, com qualquer número de parâmetros e sem nenhum
 tipo de retorno do \textbf{ObjetoA}. AspectJ disponibiliza padrões de assinatura para especificar pontos de corte para capturar métodos, construtores,
 tipos, exceções, atribuições, etc. Os seguintes padrões de assinatura estão disponíveis:
 
@@ -289,7 +289,7 @@ junção do anterior, exceto a chamada ao próprio método.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics{img/signatures.png}
+	\includegraphics[scale=0.9]{img/signatures.png}
 	\caption{Exemplo de assinaturas em AspectJ}\label{fig:signatures}
 \end{figure}
 
@@ -304,11 +304,10 @@ execução}. O ponto de corte \textit{this(TipoDoObjeto)} permite capturar todos
 os pontos de junção onde o objeto que está executando é do tipo
 \textit{TipoDoObjeto}. Já o ponto de corte \textit{target(TipoDoObjeto)} permite
 capturas os pontos de junção onde o objeto que está sendo chamado é do tipo
-\textit{TipoDoObjeto}. Estes pontos de corte são importantes, pois permitem
-passar o contexto de uma execução, isto é, instâncias de objetos, para um aviso,
+\textit{TipoDoObjeto}. Estes pontos de corte permitem passar o contexto de uma execução, isto é, instâncias de objetos, para um aviso,
 o que será abordado ainda neste capítulo. 
 
-Para finalizar existem os \textbf{pontos de corte para argumentos}.
+Existem também os \textbf{pontos de corte para argumentos}.
 Estes pontos de corte tem a seguinte sintaxe: \textit{args(AssinaturaDeTipo, 
 \ldots , AssinaturaDeTipo)}. Eles permitem capturar pontos de junção
 baseados nos argumentos recebidos. Por exemplo, capturar os métodos 
@@ -346,12 +345,11 @@ permitem passar o contexto de execução para um aviso.
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics{img/advice_code.png}
+	\includegraphics[scale=0.9]{img/advice_code.png}
 	\caption{Exemplo de aviso com contexto de execução}\label{fig:advice_code}
 \end{figure}
 
 \subsubsection{Construções Estáticas}
-
 
 Uma das construções estáticas propostas por AspectJ é a \textbf{introdução}, que
 permite alterar a estrutura de classes, aspectos e interfaces adicionando novos
@@ -359,7 +357,7 @@ métodos e atributos. A figura \ref{fig:introduction} mostra um aspecto que
 introduz o método \textbf{metodoIntroduzido()} e os atributos
 \textbf{atributoUm} e \textbf{atributoDois} na classe do tipo \textbf{ObjetoA}.
 Os dois atributos introduzidos são utilizados no próprio método
-\textbf{metodoIntroduzido()} e que também foi introduzido. Isto é possível, pois
+\textbf{metodoIntroduzido()}. Isto é possível, pois
 o compilador AspectJ sabe que o método introduzido pertence ao \textbf{ObjetoA}
 e o objeto que executará este método será um objeto do tipo \textbf{ObjetoA}.
 
@@ -471,9 +469,8 @@ Este aspecto captura cliques em um botão, atualizando a cor de um texto.
 
 \section{Análise e Projeto com UML}
 
-A análise e projeto de sistemas orientados a objetos é importante para o
-desenvolvimento de aplicações complexas. Aplicações complexas necessitam de um
-planejamento antes da implementação. Usualmente divide-se o desenvolvimento de
+A análise e projeto de sistemas orientados a objetos é uma abordagem utiliza no desenvolvimento de aplicações complexas. 
+Aplicações complexas necessitam de um planejamento antes da implementação. Usualmente divide-se o desenvolvimento de
 um sistema em quatro fases: análise, projeto, implementação e testes
 \cite{pressman:01}. As fases de análise e projeto são as fases aonde realiza-se 
 a maior parte do planejamento de um desenvolvimento. Já as fases de
@@ -482,7 +479,7 @@ um programa executável e que cumpra os requisitos do cliente.
 
 Nas fases de análise e projeto utilizam-se modelos que permitem representar o
 sistema em diferentes níveis de abstração, facilitando a compreensão e reduzindo
-a complexidade. A fase de análise pretende compreender os principais conceitos
+a complexidade. A fase de análise tem como objetivo compreender os principais conceitos
 do domínio do problema, evitando o uso de termos computacionais. Já a fase de
 projeto foca na solução que será desenvolvida para produzir um sistema a partir
 da compreensão do problema. 
@@ -506,14 +503,14 @@ diferentes pontos de vista:
 \end{itemize}
   
 Uma modelagem que permita representar esses quatro pontos de vista pode ser considerada completa. Uma \textbf{modelagem completa} fornece subsídios
-para a geração de código e facilita a compreensão de um sistema, tornando-o manutenível e possibilitando o reuso. 
+para a geração de código e facilita a compreensão e manutenção de um sistema. 
 
 \section{UML: Segunda Versão}
 
-A segunda versão da UML \cite{uml:05} permite representar os elementos e o comportamento e a estrutura de um sistema nas fases de análise e projeto
-através de diagramas estruturais e comportamentais. Esta linguagem é um padrão da \textit{Object Management Group} (OMG), por isso é compreendida e
-utilizada por grande parte dos desenvolvedores e analistas para realizar a modelagem de sistemas. Os diagramas da segunda versão da UML permitem a
-representação dos quatro pontos de vista essenciais para programas  orientados a objetos. As seções que tratam dos diagramas estruturais e
+A segunda versão da UML \cite{uml:05} permite representar o comportamento e a estrutura de um sistema nas fases de análise e projeto
+através de diagramas estruturais e comportamentais. Esta linguagem é um padrão da \textit{Object Management Group} (OMG)\sigla{OMG}{Object Management
+Group}, por isso é compreendida e utilizada por grande parte dos desenvolvedores e analistas para realizar a modelagem de sistemas. Os
+diagramas da segunda versão da UML permitem a representação dos quatro pontos de vista essenciais para programas  orientados a objetos. As seções que tratam dos diagramas estruturais e
 comportamentais da UML são baseadas no conteúdo do livro UML 2 em Modelagem Orientada a Objetos \cite{uml2ricardo:03} e no Tutorial de UML da Sparx
 Systems \cite{sparx_tutorial}.
 
@@ -521,7 +518,7 @@ Systems \cite{sparx_tutorial}.
 
 A segunda versão da UML disponibiliza sete diagramas estruturais: diagrama de classes, componentes, estrutura composta, instalação, objetos,
 pacotes e perfil. Os diagramas estruturais utilizados nesta dissertação são os diagramas de classe e o diagrama de perfil. Este último foi
-introduzido na versão 2.2 da linguagem e é importante para extensão da linguagem para um domínio específico.
+introduzido na versão 2.2 da linguagem e é utilizado para a extensão da linguagem para um domínio específico.
 
 \subsubsection{Diagrama de Classes}
 
@@ -572,8 +569,8 @@ estereótipo \textit{Vehicle}. O relacionamento de composição entre os estere�
 veículo deve ter no mínimo um assento. Observa-se também a presença de dois valores rotulados do tipo texto no estereótipo \textit{Seat}:
 \textit{texture} e \textit{pattern}. Existem outros valores rotulados neste perfil como: o limite de passageiros (\textit{passenger-limit}) no
 estereótipo \textit{Vehicle}, que é do tipo inteiro; o limite de velocidade (\textit{speed-limit}) também no estereótipo \textit{Vehicle}, que é do
-tipo ponto flutuante, dentre outros. Este perfil pode ser exportado no formato \textit{XML Metadata Interchange} (XMI) \sigla{XMI}{XML Metadata Interchange} \cite{xmi:11} 
-e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engineering} (CASE) \sigla{CASE}{Computer Aided Software Engineering}. Assim, 
+tipo ponto flutuante, dentre outros. Este perfil pode ser exportado no formato \textit{XML Metadata Interchange} (XMI)\sigla{XMI}{XML Metadata Interchange} \cite{xmi:11} 
+e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engineering} (CASE)\sigla{CASE}{Computer Aided Software Engineering}. Assim, 
 é possível intercambiar perfis entre diferentes ferramentas CASE. A vantagem do intercâmbio de perfis é o reuso de
 especificações já prontas sobre um determinado domínio de aplicação. Um exemplo de perfil que pode ser reusado por outros desenvolvedores é um perfil
 que especifique sistemas orientados a aspectos.
@@ -603,40 +600,48 @@ atributos, evoluindo a classe para um novo estado.
 O diagrama de sequência representa as trocas de mensagens entre objetos. Este diagrama permite compreender a interação entre objetos com
 foco no tempo e na ordem das mensagens durante uma execução. Os principais componentes do diagrama de sequência são as linhas de vida de objetos, as
 mensagens e os fragmentos combinados. Um fragmento combinado permite adicionar condições e iterações em uma troca de mensagens. Outro componente
-importante e utilizado nesta dissertação é a invariante de estado, que permite estabelecer uma condição para que um conjunto de mensagens seja
-executado. Este conjunto de mensagens somente será executado quando o sistema atingir o estado associado com a invariante de estado. O comportamento
+utilizado nesta dissertação é a invariante de estado, que permite estabelecer uma condição para que um conjunto de mensagens seja executado. Este conjunto de mensagens somente será executado quando o sistema atingir o estado associado com a invariante de estado. O comportamento
 de cada caso de uso pode ser refinado com um diagrama de sequência.
+
+\section{Model-Driven Engineering}
+
+O aumento da complexidade das plataformas mais utilizadas no desenvolvimento de software (CORBA, J2EE, .NET) gera um grande esforço para
+desenvolvedores portarem código de aplicação para estas plataformas \cite{Schmidt:2006:GEI:1115688.1115706}. A manutenção do código das aplicações e
+das plataformas ainda é realizada utilizando linguagens de programação tradicionais, como Java e C++. A complexidade destas plataformas implementadas
+com linguagens tradicionais dificulta a obtenção de uma visão unificada, que facilite a compreensão do impacto de uma mudança no sistema.
+
+Model-Driven Engineering (MDE) \sigla{MDE}{Model-Driven Engineering} é uma metodologia de desenvolvimento de software focada na representação de
+elementos de um domínio de problema em nível de modelo. Esta metodologia surgiu com o objetivo de permitir uma melhor representação destas plataformas
+complexas. A técnica de MDE utiliza meta-modelagem para representar o domínio de uma aplicação, definindo os relacionamentos entre os conceitos do
+sistema. Através da meta-modelagem, define-se uma linguagem específica para um determinado domínio, que pode ser reusada. A partir desta linguagem,
+independente de plataforma, é possível utilizar um transformador que transforma os modelos em uma linguagem alvo.
+
+A metodologia de MDE tem um futuro promissor, pois permite diminuir a complexidade na representação de conceitos de um domínio de aplicação
+ou de uma plataforma. A linha de aprendizado de um sistema modelado com a técnica de MDE é menor do que com modelagem tradicional (somente UML) ou com
+linguagens tradicionais. A manutenabilidade do sistema também é facilitada utilizando MDE.
 
 \section{Meta-modelagem}
 
 Uma linguagem geralmente é definida através de uma gramática na forma \textit{Backus Naur Form} (BNF) \sigla{BNF}{Backus Naur Form}. Uma linguagem
 bem definida pode ser interpretada de forma automatizada por um computador. Este método de definição de linguagens é utilizado até hoje para
-representar linguagens baseadas em texto. No entanto, as linguagens para modelagem contém elementos não-textuais e, por isso, necessitam de um novo
-mecanismo de definição. Este mecanismo é denominado \textbf{meta-modelagem}, que permite a descrição de uma linguagem na forma de um modelo
-\cite{mda:03}. Um meta-modelo de uma linguagem define os elementos que podem ser utilizados na criação de modelos utilizando esta linguagem.
-Considerando a UML como exemplo, o meta-modelo da linguagem define elementos como Classe, Estado, Pacote, Operação, etc. Assim, um modelo definido
-utilizando UML pode definir instâncias de classes, estados, pacotes, operações, etc. A OMG define uma arquitetura em quatro camadas para representar
-os modelos padrões para definição de modelos. Esta arquitetura pode ser visualizada
+representar linguagens baseadas em texto. Para facilitar a definição de linguagens para modelagem pode-se utilizar um outro mecanismo. Este mecanismo
+é denominado \textbf{meta-modelagem}, que permite a descrição de uma linguagem na forma de um modelo \cite{mda:03}. Um meta-modelo de uma linguagem define os 
+elementos que podem ser utilizados na criação de modelos utilizando esta linguagem. Considerando a UML como exemplo, o meta-modelo da linguagem define
+elementos como Classe, Estado, Pacote, Operação, etc. Assim, um modelo definido utilizando UML pode definir instâncias de classes, estados, pacotes, operações, etc. 
+A OMG define uma arquitetura em quatro camadas para representar os modelos padrões para definição de modelos. Esta arquitetura pode ser visualizada
 na figura \ref{fig:omg_meta_model}. 
 
-Na arquitetura da figura \ref{fig:omg_meta_model}, o modelo M3 define elementos que podem ser utilizados para representar conceitos no
-modelo M2. O modelo M3 é considerado o meta-meta-modelo da OMG. O \textit{Meta-Object Facility} (MOF)
-\sigla{MOF}{Meta-Object Facility}) é um padrão da OMG que define a linguagem que
-deve ser utilizada para definir linguagens para modelagem \cite{mof:11}. O MOF
-está no nível M3. O modelo M2 especifica os elementos que podem ser utilizados no modelo M1.
-Um modelo no nível M2 é denominado um meta-modelo. Linguagens geralmente são
-definidas neste nível de modelo. Observa-se na figura \ref{fig:omg_meta_model} a
-definição de uma classe (\textit{UML Class}) e de um atributo (\textit{UML Attribute}) 
-no nível M2. Estes elementos fazem parte da definição do meta-modelo da UML. 
-O modelo M1 contém instâncias de elementos definidos no modelo M2. Este modelo 
-é o que é definido pelo analista ao realizar a modelagem de um determinado sistema com UML. Na figura
-\ref{fig:omg_meta_model} observa-se a definição de duas classes: \textit{Customer} 
-e \textit{Order} no nível M1. Além disso, definem-se os
-atributos \textit{title}, \textit{name} e \textit{number} nessas classes. As
-classes são instâncias da meta-classe \textit{UML Class}. Os atributos são
-instâncias da meta-classe \textit{UML Attribute}. Finalmente, o modelo M0
-representa as instâncias de um sistema representadas em um modelo. Um exemplo de
-instância é um cliente do tipo \textit{Customer} com o nome \textit{Joe Nobody}.
+Na arquitetura da figura \ref{fig:omg_meta_model}, o modelo M3 define elementos que podem ser utilizados para representar conceitos no modelo M2. O
+modelo M3 é considerado o meta-meta-modelo da OMG. O \textit{Meta-Object Facility} (MOF) \sigla{MOF}{Meta-Object Facility}) é um padrão da OMG que define a linguagem que
+deve ser utilizada para definir linguagens para modelagem \cite{mof:11}. O MOF está no nível M3. O modelo M2 especifica os elementos que podem ser
+utilizados no modelo M1. Um modelo no nível M2 é denominado um meta-modelo. Linguagens geralmente são definidas neste nível de modelo. Observa-se na
+figura \ref{fig:omg_meta_model} a definição de uma classe (\textit{UML Class}) e de um atributo (\textit{UML Attribute}) no nível M2. Estes elementos
+fazem parte da definição do meta-modelo da UML. O modelo M1 contém instâncias de elementos definidos no modelo M2. Este modelo é o que é definido
+pelo analista ao realizar a modelagem de um determinado sistema com UML. Na figura \ref{fig:omg_meta_model} observa-se a definição de duas classes:
+\textit{Customer} e \textit{Order} no nível M1. Além disso, definem-se os atributos \textit{title}, \textit{name} e \textit{number} nessas classes. As
+classes são instâncias da meta-classe \textit{UML Class}. Os atributos são instâncias da meta-classe \textit{UML Attribute}. Finalmente, o modelo M0
+representa as instâncias de um sistema representadas em um modelo. Um exemplo de instância é um cliente do tipo \textit{Customer} com o nome
+\textit{Joe Nobody}.
 
 \begin{figure}
 	\centering
@@ -654,13 +659,10 @@ figura \ref{fig:uml_meta_model}. Esta parte do modelo define os componenentes pa
 \end{figure}
 
 É importante observar no modelo da figura \ref{fig:uml_meta_model} que qualquer elemento de um modelo da UML deve derivar de \textit{ModelElement} e
-por isso deve ter um nome. Nota-se também a presença de Classe (\textit{Class}), Atributo
-(\textit{Attribute}) e Operação (\textit{Operation}). Estes são alguns dos
-elementos que podem ser utilizados na criação de uma modelagem utilizando UML.
-Os relacionamentos entre os elementos do meta-modelo podem introduzir
-restrições. Um exemplo de restrição é que uma operação pode ter zero ou mais
-parâmetros. Qualquer modelo da UML deve respeitar estas restrições e a estrutura
-definida no meta-modelo da OMG.
+por isso deve ter um nome. Nota-se também a presença de Classe (\textit{Class}), Atributo (\textit{Attribute}) e Operação (\textit{Operation}). Estes
+são alguns dos elementos que podem ser utilizados na criação de uma modelagem utilizando UML. Os relacionamentos entre os elementos do meta-modelo
+podem introduzir restrições. Um exemplo de restrição é que uma operação pode ter zero ou mais parâmetros. Qualquer modelo da UML deve respeitar estas
+restrições e a estrutura definida no meta-modelo da OMG.
 
 \subsection{Extensões a UML}
 
@@ -676,16 +678,9 @@ leve para extensão da linguagem.
 
 A grande vantagem de estender a UML através de perfis é que qualquer ferramenta que suporte a importação de perfis pode utilizar os conceitos
 estendidos pelo perfil UML. Como o diagrama de perfil é um padrão da UML, a maior parte das ferramentas CASE já está suportando a definição e
-importação de perfis. Outra vantagem deste mecanismo é que é possível aplicar mais de um perfil em um mesmo
-modelo. Além disso um Perfil UML pode ser facilmente modificado, com a introdução de novos estereótipos, valores rotulados e restrições. Esta
-modificação pode ser realizada em qualquer ferramenta CASE que suporte a importação e definição de perfis.
-
-A figura \ref{fig:ejb_profile} apresenta um perfil UML para especificação de sistemas que utilizam o componente Enterprise Java Beans (EJB)
-\cite{ejb:12} da plataforma Java 2 Enterprise Edition (J2EE) \cite{j2ee:12}. A plataforma J2EE providencia algumas facilidades para realizar a camada
-de lógica de negócio e acesso a banco de dados de um sistema. Este perfil tem diversos estereótipos para representar os principais componentes de um
-sistema que utiliza EJB como: entidades (estereótipo \textit{Entity EJB}), mensagens (estereótipo \textit{Message EJB}), sessão (estereótipo
-\textit{Session EJB}), dentre outros. Este perfil pode ser usado em ferramentas CASE que suportem a importação de perfis e está disponível na internet
-\cite{ejbprofile:12}. Com ele, é possível representar todas as características dos componentes EJB em uma modelagem UML.
+importação de perfis. Outra vantagem deste mecanismo é que é possível aplicar mais de um perfil em um mesmo modelo. Além disso um Perfil UML pode ser
+facilmente modificado, com a introdução de novos estereótipos, valores rotulados e restrições. Esta modificação pode ser realizada em qualquer ferramenta 
+CASE que suporte a importação e definição de perfis.
 
 \subsubsection{Extensão pela Definição de um Meta-modelo}
 
@@ -698,10 +693,3 @@ modelos dentro do meta-modelo padrão da OMG ou modelos definidos com o uso de d
 ferramenta. A extensão através de meta-modelagem pode ser utilizada quando uma extensão tem uma baixa probabilidade de ser modificada no futuro e não
 existe a necessidade de combinar esta extensão com outras extensões.
 
-\begin{landscape}
-\begin{figure}[!H]
-	\centering
-	\includegraphics{img/ejb_profile.png}
-	\caption{Perfil UML para representar componentes EJB \cite{ejbprofile:12}}\label{fig:ejb_profile}
-\end{figure}
-\end{landscape}

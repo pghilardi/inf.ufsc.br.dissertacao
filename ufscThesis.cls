@@ -846,9 +846,19 @@
 	\end{center}
     \end{espacosimples}
     }
+\ABNTifnotempty{\bancanameC}
+    {
+    \begin{espacosimples}
+	\vspace{0.5em}
+	\begin{center}
+	{\rule{\ABNTsignwidth}{1pt}\par
+	 \bancaformat \bancanameC \\ \bancadataC\par}
+	\end{center}
+    \end{espacosimples}
+    }
 \vfill
 % Cria uma nova página de assinaturas
-\ifnum \nrobanca > 4
+\ifnum \nrobanca > 6
     {
     \newpage
     \if@openright\cleardoublepage\else\clearpage\fi%

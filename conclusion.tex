@@ -1,22 +1,31 @@
 \chapter{Conclusão}
 
 Este trabalho propõe uma abordagem para modelagem de sistemas orientados a aspectos usando UML, através de um perfil UML que permite especificar a
-estrutura e o comportamento de sistemas orientados a aspectos. Um importante produto deste trabalho é o visualizador de aspectos no
-ambiente SEA: SEA/Aspect. A ferramenta SEA/Aspect realiza a composição entre modelos núcleo e entrecortantes automaticamente, permitindo a
+estrutura e o comportamento de sistemas orientados a aspectos. Um produto deste trabalho é o visualizador de aspectos no
+ambiente SEA: SEA/Aspect. Esta ferramenta realiza a composição entre modelos núcleo e entrecortantes automaticamente, permitindo a
 visualização da dinãmica de aspectos em um sistema.
 
 \section{Principais Resultados}
 
-As principais vantagens da abordagem proposta em relação as outras são: 
+Uma das hipóteses de pesquisa salienta que é possível modelar todas as características de sistemas orientados a aspectos com UML. Os seguintes
+resultados conprovam esta hipótese:
 
 \begin{itemize}
-\item Representação das características importantes da POA, como a captura de múltiplos pontos de junção e a representação da dinâmica de aspectos
-com os diagramas de máquina de estado para representar pontos de corte e os diagramas de sequência para representar avisos. Este é o primeiro
-trabalho que utiliza invariantes de estado para conectar a satisfação de pontos de corte com o disparo de avisos;
-\item Possibilidade de composição automática de pontos de corte utilizando o diagrama de máquina de estados;
-\item Definição de um perfil dentro dos padrões da UML, o qual pode ser adicionado em ferramentas CASE que suportem a importação
-de perfis; 
-\item Possibilidade de composição automática e visualização dinâmica do efeito dos modelos entrecortantes (aspectos) nos modelos núcleo, que facilita
+	\item Definição de um perfil dentro dos padrões da UML, o qual pode ser adicionado em ferramentas CASE que suportem a importação
+	de perfis; 
+	\item Representação de características da POA, como a captura de múltiplos pontos de junção e a representação do comportamento de
+	aspectos com os diagramas de máquina de estado para representar os pontos de corte e os diagramas de sequência para representar os avisos. Este é o primeiro
+	trabalho que utiliza invariantes de estado para conectar a satisfação de pontos de corte com o disparo de avisos. A modelagem proposta também permite
+	realizar a composição de avisos do tipo \textit{around} e representar pontos de corte que capturam o fluxo de execução de um sistema (\textit{cflow}
+	e \textit{cflowbelow};
+\end{itemize}
+
+Em relação a automatização e manipulação da modelagem em um procedimento algorítmico para possibilitar a visualização da dinâmica de aspectos, os
+resultados a seguir comprovam a hipótese:
+
+\begin{itemize}
+\item Possibilidade de composição automática de pontos de corte, utilizando o diagrama de máquina de estados;
+\item Possibilidade de composição automática e visualização do efeito dos modelos entrecortantes (aspectos) nos modelos núcleo, que facilita
 a compreensão e manutenção de sistemas orientados a aspectos. A ferramenta que permite a composição e a alternância de visões pode ser adicionada a ferramentas CASE 
 que suportem extensão funcional, que é o caso do ambiente SEA.
 \end{itemize}
@@ -28,7 +37,7 @@ Os produtos resultantes deste trabalho de pesquisa são:
 \begin{itemize}
   \item Um perfil UML que representa as características de sistemas orientados a aspectos. Este perfil pode ser importado em ferramentas CASE
   que suportem a importação de perfis.
-  \item Uma ferramenta (SEA/Aspect) que permite modelar um sistema orientado a aspectos, representando as características inerentes à POA,
+  \item Uma ferramenta que permite modelar um sistema orientado a aspectos, representando as características inerentes à POA,
   permitindo realizar a composição de aspectos e visualizar o efeito dos mesmos em modelos núcleo;
   \item Artigo submetido e aceito: International Conference on Computers and Their Applications (CATA) \cite{ghilardi_cata:13};
   \item Artigo submetido e aceito: Congreso Iberoamericano en Ingeniería de Software (CibSE) \cite{ghilardi_cibse:13};
@@ -39,17 +48,21 @@ Os produtos resultantes deste trabalho de pesquisa são:
 O presente trabalho tem as seguintes limitações:
 
 \begin{itemize}
-  \item A especificação de aspectos é baseada nas construções disponíveis na linguagem AspectJ. Logo, a modelagem proposta por este trabalho é
-  dependente de plataforma.
   \item O perfil UML para especificação de aspectos pode ser utilizado por outras ferramentas CASE. No entanto, a ferramenta para composição de
   modelos só pode ser utilizada em ferramentas que suportem a extensão funcional, através de um plug-in, por exemplo.
-  \item A aplicabilidade da abordagem proposta é verificada em dois estudos de caso propostos por Jacobson \cite{Jacobson:2004:ASD:1062430}. Nenhum
+  \item A aplicabilidade da abordagem proposta é verificada em um exemplo proposto por Jacobson \cite{Jacobson:2004:ASD:1062430}. Nenhum
   caso real foi modelado com o perfil proposto.
+  \item Embora um perfil UML pode ser importado em diferentes ferramentas CASE comerciais, este trabalho não conseguiu realizar a importação do perfil
+  (.xmi) na ferramenta de modelagem Visual Paradigm \cite{VisualParadigm11}. Algumas ferramentas comerciais não seguem o padrão para importação de
+  perfis, o que demanda uma investigação para suportar todas as ferramentas CASE.	
 \end{itemize}
 
 \section{Trabalhos Futuros}
 
-Como trabalho futuro sugere-se realizar um novo estudo de caso com um caso real de alguma aplicação, contendo pontos de corte mais complexos, como os
-que tratam do fluxo de execução (\textit{cflow}, \textit{cflowbelow}). Este estudo de caso pode fornecer resultados mais concretos, com
-o objetivo de verificar que o visualizador de aspectos facilita a compreensão e manutenção de sistemas orientados a aspectos. Também pode-se
-investigar a possibilidade de geração de código em AspectJ, a partir dos modelos núcleo e entrecortantes.
+Como trabalho futuro pode-se investigar a possibilidade de geração de código em AspectJ, a partir da especificação e composição dos modelos núcleo e
+entrecortantes. Pode-se também realizar a composição entre modelos compostos de interesses núcleos com interesses entrecortantes, realizando uma
+operação de \textit{merge} entre os modelos (tanto comportamentais quanto estruturais). Além disso, a aplicação da proposta de modelagem em um sistema
+real pode fornecer mais resultados sobre a aplicabilidade da abordagem em casos mais complexos.
+
+O suporte a importação do perfil UML para modelagem de sistemas orientados a aspectos em ferramentas CASE é um trabalho futuro importante,
+pois remove a dependência de utilização do perfil com a ferramenta de modelagem SEA/Aspect.

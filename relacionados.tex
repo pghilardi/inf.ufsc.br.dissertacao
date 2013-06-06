@@ -7,6 +7,36 @@ definição de um novo meta-modelo. Propostas que estendem a UML através de um 
 importação de perfis. Os trabalhos que trabalham em nível de meta-modelagem podem ser utilizados em outras ferramentas CASE apenas através de
 transformações nos modelos, pois as ferramentas CASE suportam apenas o meta-modelo padrão da UML ou a extensão através de perfis. 
 
+\section{Análise dos Trabalhos Relacionados}
+
+O protocolo utilizado para obter e analisar os trabalhos relevantes na área de modelagem de sistemas orientados a aspectos é descrito nos seguintes
+passos:
+
+\begin{itemize}
+  \item Pesquisa de trabalhos relevantes nas principais fontes de pesquisa da área de engenharia de software, focando nas sub-áreas de
+  modelagem de sistemas orientados a aspectos, meta-modelagem, programação orientada a aspectos e ferramentas para visualização de aspectos. As
+  principais fontes utilizadas foram as bibliotecas da ACM (\cite{acm}) e IEEE \cite{ieee}.
+  \item Pesquisa de trabalhos relevantes nos principais congressos e conferências sobre aspectos:
+  \begin{itemize}
+    \item Aspect-Oriented Software Development (AOSD) \cite{aosd}: Principal conferência na área de programação e modelagem de sistemas orientados a
+    aspectos.
+    \item Aspect-Oriented Modeling Workshop (AOM) \cite{aom}: Importante \textit{workshop} focado somente na modelagem de sistemas orientados a
+    aspectos.
+    \item European Conference on Object-Oriented Programming (ECOOP) \cite{ecoop}: Principal conferência na área de programação orientada a objetos,
+    desenvolvimento de software, sistemas, linguagens e aplicações.
+    \item International Conference on Software Engineering (ICSE) \cite{icse}: Importante conferência sobre engenharia de software, com seções sobre
+    modelagem de sistemas orientados a aspectos e meta-modelagem.
+  \end{itemize}
+  \item Análise dos trabalhos relevantes na área a ser pesquisada (modelagem de sistemas orientados a aspectos). Propostas que trabalham
+  com a segunda versao da UML e com uma modelagem em um maior nível de abstração tiveram prioridade na seleção de trabalhos correlatos. Trabalhos de
+  maior relevância na comunidade também tiveram prioridade perante outros com menor número de citações. 
+  \item Análise de \textit{surveys} que avaliam o estado da arte da modelagem orientada a aspectos. Através destes \textit{surveys} foi
+  possível obter mais informações para realizar a comparação entre diferentes abordagens.
+  \item Análise de cada trabalho separadamente, identificando as principais contribuições e limitações dos mesmos.
+  \item Comparação entre a abordagem proposta e os trabalhos correlatos contra alguns critérios importantes na modelagem de sistemas orientados a
+  aspectos.
+\end{itemize}
+
 \section{Perfil UML Proposto por Evermann}
 
 A proposta de Evermann \cite{Evermann:2007:MSP:1229375.1229379} propõe um Perfil UML para modelagem das construções da linguagem AspectJ. O foco do
@@ -17,7 +47,7 @@ suporte a importação de perfis.
 
 Na proposta de Evermann, os aspectos são agrupados em um interesse entrecortante. Para tal introduz-se o estereótipo \textit{CrossCutingConcern} que
 estende a meta-classe \textit{Package}. Um aspecto (\textit{Aspect} é representado estendendo a meta-classe \textit{Class}. Este pode conter características
-estruturais e dinâmicas. Um aviso representa comportamento e estende a meta-classe \textit{BehavioralFeature}, significando que este aviso pode
+estruturais e comportamentais. Um aviso representa comportamento e estende a meta-classe \textit{BehavioralFeature}, significando que este aviso pode
 incluir colaborações e máquinas de estado. Os pontos de corte são características estruturais e são representados estendendo a classe do meta-modelo
 \textit{StructuralFeature}. Para representar os possíveis tipos de ponto de corte estende-se a meta-classe abstrata \textit{PointCut} em diversas
 sub-classes. Um aviso pode ter um ou mais pontos de corte associados. Os pontos de junção capturados por um ponto de corte devem ser elementos do
@@ -81,8 +111,7 @@ entrecortante no interesse núcleo pode ser visualizada na figura \ref{fig:p21_c
 A principal contribuição deste trabalho é a especificação do meta-modelo apenas em termos da UML, sem a necessidade de descrições textuais e de
 ferramentas adicionais para interpretação ou geração de código a partir do modelo. Além disso, o meta-modelo pode ser utilizado como um perfil UML em
 ferramentas que suportem a importação de perfis. Com a representação de elementos apenas em termos de meta-modelo, perde-se a possibilidade de
-representar padrões para captura de pontos de junção: os \textit{wildcards}. A especificação por padrões é uma importante
-funcionalidade da programação por aspectos, pois simplifica a forma de capturar pontos de junção, sem a necessidade de explicitar cada elemento que
+representar padrões para captura de pontos de junção: os \textit{wildcards}. A especificação por padrões é uma funcionalidade da programação por aspectos, pois simplifica a forma de capturar pontos de junção, sem a necessidade de explicitar cada elemento que
 será capturado. Assim, é importante que a extensão à UML permita representar essas características de uma maneira simples e praticável, para que seja
 possível expressar todas as características da POA na modelagem.
 
@@ -90,16 +119,16 @@ O trabalho de \cite{Evermann:2007:MSP:1229375.1229379} permite representar a est
 \textit{CrossCutingConcern}, \textit{Aspect}, \textit{PointCut} e \textit{StaticCrossCutingFeatures}. É importante observar que apenas a parte
 estrutural é especificada por esta proposta. Em relação às características comportamentais, como a meta-classe \textit{Advice} estende a meta-classe
 \textit{BehavioralFeature}, é possível representá-las com colaborações e diagramas de máquinas de estados, mas o trabalho não demonstra como realizar
-a modelagem de colaborações e nem permite a composição automatizada entre modelos que representam aspectos dinâmicos do sistema. Assim, conclui-se que
-o foco do trabalho é a representação da estrutura de um sistema orientado a aspectos. A parte dinâmica deve ser implementada manualmente no código
-gerado, que é uma limitação da abordagem, pois o desenvolvedor não pode especificar e visualizar a dinâmica de aspectos nos modelos que
-representam o sistema.
+a modelagem de colaborações e nem permite a composição automatizada entre modelos que representam aspectos comportamentais do sistema. Assim,
+conclui-se que o foco do trabalho é a representação da estrutura de um sistema orientado a aspectos. A parte comportamental deve ser implementada
+manualmente no código gerado, que é uma limitação da abordagem, pois o desenvolvedor não pode especificar e visualizar o comportamento de aspectos nos
+modelos que representam o sistema.
 
 \section{Modelos de Aspectos Reusáveis (RAM) Proposto por Kienzle}
 
 Uma modelagem por múltiplos pontos de vista é proposta por Kienzle \cite{Kienzle:2009:AMM:1509239.1509252} \cite{Kienzle2010}. Propõe-se RAM
-(\textit{Reusable Aspects Models}), uma abordagem para especificar aspectos com dois diagramas dinâmicos (diagrama de máquina de estados e de sequência) e um diagrama estrutural (diagrama de
-classes). O objetivo deste trabalho é a melhora da escalabilidade de um sistema, mantendo a consistência entre as diferentes visões de um interesse
+(\textit{Reusable Aspects Models}), uma abordagem para especificar aspectos com dois diagramas comportamentais (diagrama de máquina de estados e de
+sequência) e um diagrama estrutural (diagrama de classes). O objetivo deste trabalho é a melhora da escalabilidade de um sistema, mantendo a consistência entre as diferentes visões de um interesse
 entrecortante. RAM define modelos base para representar interesses núcleo e de aspectos para representar interesses entrecortantes.
 
 Duas ferramentas são utilizadas para a composição dos modelos. \textit{Kompose} \cite{kompose:07} é utilizado para composição da parte estrutural
@@ -131,8 +160,7 @@ deve instanciar todos os parâmetros de instanciação mandatória de B através
 classe incompleta em B, A deve especificar uma classe que possa completá-la com os métodos e atributos faltantes. Esta regra vale também para as visões de
 estado e de mensagens. Além disso, A pode definir \textbf{diretivas de ligação} que mapeiam entidades incompletas de A em entidades completas de B.
 Nesse caso, as entidades incompletas de A não podem ser parâmetros de instanciação mandatória. É importante observar que diretivas de ligação e
-parâmetros de instanciação mandatória podem ser definidos com \textit{wildcards}, permitindo a captura de padrões, uma funcionalidade
-importante da programação por aspectos.
+parâmetros de instanciação mandatória podem ser definidos com \textit{wildcards}, permitindo a captura de padrões.
 
 A proposta de Kienzle também realiza a verificação de consistências entre as diferentes visões e modelos de aspectos. São realizadas verificações em
 diferentes níveis:
@@ -201,11 +229,10 @@ aspecto, compostas com o modelo núcleo, resultando em um modelo que representa 
 \end{figure}
 \end{landscape}
 
-A abordagem RAM permite representar a estrutura de ums sistema através da visão estrutural e a dinâmica do sistema através das visões de estado
-e de troca de mensagens. A maior contribuição deste trabalho é o foco na representação das caracaterísticas dinâmicas de um sistema, utilizando
+A abordagem RAM permite representar a estrutura de ums sistema através da visão estrutural e comportamental do sistema através das visões de estado
+e de troca de mensagens. A maior contribuição deste trabalho é o foco na representação das caracaterísticas comportamentais de um sistema, utilizando
 diagramas de máquinas de estado para representar o protocolo de um aspecto e diagramas de sequência para representar as possíveis interações entre
-objetos. A especificação de pontos de corte com padrões (\textit{wildcards}) também é suportada pela ferramenta, permitindo assim o uso de uma 
-importante funcionalidade da programação orientada a aspectos. Outra característica importante de RAM é a garantia de consistência entre as
+objetos. A especificação de pontos de corte com padrões (\textit{wildcards}) também é suportada pela ferramenta. Outra característica de RAM é a garantia de consistência entre as
 diferentes visões e a orientação ao reuso de aspectos através da definição de dependências. 
 
 Uma limitação da proposta é que nem todos os diagramas podem ser elaborados apenas estendendo a UML, pois a abordagem realiza modificações no
@@ -216,12 +243,12 @@ quando uma pessoa entra em contato com novas informações, o limite de sua mem�
 modelagem proposta por Kienzle é difícil de ser compreendida, pois o modelo final (composto) contém muitos
 elementos de informação. No exemplo de composição de aspectos, o modelo final contém elementos que vieram de nove diferentes aspectos. Além disso, contém elementos
 que não são padrões na modelagem de sistemas com UML, como as diretivas de instancialização e de ligação. Para facilitar a compreensão do
-comportamento dinâmico de uma modelagem, este trabalho poderia disponibilizar um visualizador de aspectos, que permitisse habilitar e desabilitar
+comportamento de uma modelagem, este trabalho poderia disponibilizar um visualizador de aspectos, que permitisse habilitar e desabilitar
 modelos de aspectos dinamicamente em um modelo núcleo, diferenciando os aspectos no modelo final.
 
 \section{Modelagem de Aspectos com Atividades Proposto por Cui}
 
-O trabalho de Cui, \cite{Cui:2009:MIA:1529282.1529377} modela a dinâmica de um sistema com diagramas de atividades da segunda versão da UML. Os
+O trabalho de Cui, \cite{Cui:2009:MIA:1529282.1529377} modela o comportamento de um sistema com diagramas de atividades da segunda versão da UML. Os
 interesses núcleo são modelados com a versão padrão da UML. No caso dos interesses entrecortantes, é proposta uma extensão ao diagrama de atividades com
 estereótipos e valores rotulados. Um interesse entrecortante é representado por dois modelos: um para o ponto de corte e outro para o aviso.
 Adiciona-se o estereótipo \textit{Pointcut} para indicar que um diagrama de atividades representa um \textbf{modelo de ponto de corte}. O estereótipo
@@ -294,8 +321,8 @@ Em relação a POA, a abordagem não permite representar as principais caracter�
 interfaces nos modelos de interesses núcleo. Também não é possível representar todos os tipos de ponto de junção e nem adicionar avisos do tipo \textit{around}, que permite
 substituir a execução de um ponto de junção ou modificar o comportamento de execução do mesmo. Em relação as visões representadas pela modelagem, a
 parte estrutural não pode ser representada apenas com diagrama de atividades e a abordagem não utiliza nenhum diagrama estrutural para representar o
-sistema. Assim, esta proposta representa apenas a parte dinâmica de um sistema orientado a aspectos. A principal contribuição desta proposta é uma
-extensão leve e simples aos diagramas de atividades da UML para representação da dinâmica de aspectos em alto nível de abstração.
+sistema. Assim, esta proposta representa apenas a parte comportamental de um sistema orientado a aspectos. A principal contribuição desta proposta é
+uma extensão leve e simples aos diagramas de atividades da UML para representação do comportamento de aspectos em alto nível de abstração.
 
 \section{Modelagem de Aspectos com Casos de Uso Proposto por Jacobson}
 
@@ -389,21 +416,19 @@ estereótipo \textit{merge} que representa dependência entre pacotes.
 	\caption{Composição entre modelos de caso de uso}\label{fig:jacobson_use_case_merge}
 \end{figure}
 
-A proposta de Jacobson permite representar \textit{wildcards} na definição de pontos de corte dentro de uma fatia de caso de uso. Uma contribuição
-importante deste trabalho é a possibilidade de obter o rastreamento completo de um requisito até o código que o implementa. Segundo \cite{wimmer:2011:SUA:1978802.1978807}, 
+A proposta de Jacobson permite representar \textit{wildcards} na definição de pontos de corte dentro de uma fatia de caso de uso. Uma contribuição deste trabalho é a possibilidade de obter o rastreamento completo de um requisito até o código que o implementa. Segundo \cite{wimmer:2011:SUA:1978802.1978807}, 
 o mapeamento de requisitos entre as diferentes fases do desenvolvimento é importante na modelagem de sistemas orientados a aspectos, como para
 sistemas desenvolvidos em outros paradigmas como programação orientada a objetos. Em relação as diferentes visões representadas por uma modelagem, os
-modelos propostos por este trabalho permitem representar a estrutura de um sistema com fatias de caso de uso e diagramas de classes. A dinâmica do sistema 
-é representada através de colaborações que são associadas às fatias de caso de uso. Colaborações podem ser utilizadas para descrever a dinâmica de
-casos de uso e avisos. Outro ponto importante a ser destacado é a representatividade do exemplo utilizado para realizar uma modelagem com a proposta. 
-O sistema de gerenciamento de hotel é complexo e contém interesses entrecortantes de diversos tipos, possibilitando a representação de boa parte das
-características inerentes a programas orientados a aspectos.
+modelos propostos por este trabalho permitem representar a estrutura de um sistema com fatias de caso de uso e diagramas de classes. O comportamento
+do sistema é representada através de colaborações que são associadas às fatias de caso de uso. Colaborações podem ser utilizadas para descrever a
+dinâmica de casos de uso e avisos. Outro ponto a ser destacado é a representatividade do exemplo utilizado para realizar uma modelagem com
+a proposta. O sistema de gerenciamento de hotel é complexo e contém interesses entrecortantes de diversos tipos, possibilitando a representação de boa
+parte das características inerentes a programas orientados a aspectos.
 
 Em relação as limitações do trabalho de Jacobson, a principal delas é a forma de extensão à UML, com a definição de um meta-modelo, que não pode ser utilizado 
 em qualquer ferramenta CASE. Este meta-modelo tem construções específicas, como fatias de caso de uso, que não são suportadas por ferramentas CASE que
-obedecem os padrões da segunda versão da UML. Destaca-se também a falta de ferramental para composição dos modelos, o que é
-importante para que seja possível visualizar o impacto dos interesses entrecortantes nos interesses núcleo do sistema. Não é possível realizar a
-composição de pontos de corte entre modelos e visualizar a conexão entre os pontos de corte e os avisos nos modelos. Assim, a abordagem proposta por
+obedecem os padrões da segunda versão da UML. Destaca-se também a falta de ferramental para composição dos modelos, o que é importante para que seja
+possível visualizar o impacto dos interesses entrecortantes nos interesses núcleo do sistema. Não é possível realizar a composição de pontos de corte entre modelos e visualizar a conexão entre os pontos de corte e os avisos nos modelos. Assim, a abordagem proposta por
 Jacobson não permite visualizar completamente o efeito dos aspectos nos modelos núcleo do sistema. A geração automática de modelos também diminui o
 tempo necessário para realização de uma modelagem, diminuindo o tempo de entrega ao cliente. Nesta proposta, a composição entre interesses núcleos e
 interesses entrecortantes deve ser realizada manualmente, com o uso de diagramas de sequência, o que demanda um esforço adicional de modelagem.
@@ -445,7 +470,7 @@ Commit}.
 	representando um servidor de recursos}\label{fig:weavr_composite_structure}
 \end{figure}
 
-Após modelar a estrutura do sistema, deve-se modelar a dinâmica de cada um dos componentes do servidor. Para tal, utilizam-se os diagramas de
+Após modelar a estrutura do sistema, deve-se modelar o comportamento de cada um dos componentes do servidor. Para tal, utilizam-se os diagramas de
 máquina de estado focados em transições. Estes diagramas são utilizados para representar o comportamento de um componente em detalhes (sem
 ambiguidades). Um diagrama deste tipo destaca o fluxo de controle e as ações executadas durante as transições entre os diferentes estados. A figura
 \ref{fig:weavr_state_machine_base} representa a modelagem do comportamento de um tratador de requisições.
@@ -530,10 +555,9 @@ Motorola WEAVR também disponibiliza uma ferramenta para executar modelos de asp
 estado referente ao mesmo e retorna o controle a máquina de estado base. A possibilidade de executar um modelo de aspectos facilita a compreensão do
 fluxo de execução de um programa orientado a aspectos. O trabalho de Cottenier estende a segunda versão da UML através de um perfil UML para
 representar aspectos com diagramas de classes e diagramas de máquina de estados. Esta extensão pode ser importada em diferentes ferramentas CASE. 
-Diagramas de classes permitem representar a parte estrutural de um sistema. Os diagramas de máquinas de estado são responsáveis por representar a
-dinâmica do sistema. Motorola WEAVR permite representar a maior parte das características de programas orientados a aspectos, como \textit{wildcards}, 
-pontos de corte, avisos, introduções e dependência entre aspectos. A ferramenta também disponibiliza ferramental para visualização, composição e 
-execução de modelos de aspectos. Este ferramental é uma das principais contribuições do trabalho, pois automatiza parte do processo de modelagem e
+Diagramas de classes permitem representar a parte estrutural de um sistema. Os diagramas de máquinas de estado são responsáveis por representar
+o comportamento do sistema. Motorola WEAVR permite representar a maior parte das características de programas orientados a aspectos, como
+\textit{wildcards}, pontos de corte, avisos, introduções e dependência entre aspectos. A ferramenta também disponibiliza ferramental para visualização, composição e execução de modelos de aspectos. Este ferramental é uma das principais contribuições do trabalho, pois automatiza parte do processo de modelagem e
 permite gerar código em um linguagem alvo.
 
 Uma limitação desta proposta, em relação a linguagem, é que apenas avisos do tipo durante (\textit{around}) são suportados. Outra desvantagem é o baixo nível 
@@ -582,7 +606,7 @@ cSD central utiliza nodos decisão e o cSD a direita utiliza fragmentos do tipo 
 
 Para modelagem de aspectos deve-se definir um \textbf{aspecto comportamental} que é composto por dois bSD's: um para representar o ponto de corte e
 outro para representar o novo comportamento (aviso). Um ponto de corte é representado como uma sequência de mensagens entre um conjunto de objetos. A
-ferramenta não suporta a utilização de \textit{wildcards} na definição de pontos de corte, uma funcionalidade importante da POA, que permite a captura
+ferramenta não suporta a utilização de \textit{wildcards} na definição de pontos de corte, uma funcionalidade da POA, que permite a captura
 de múltiplos pontos de junção em uma única declaração. Um aviso também é representado com bSD's e pode ser executado antes, durante ou depois dos
 pontos de junção capturados por um ponto de corte. A figura \ref{fig:klein_aspects} mostra três aspectos comportamentais: registro de mensagens,
 segurança e atualização de interface gráfica. O aspecto de segurança(\textit{Aspect Security}) define um ponto de corte que captura a troca das
@@ -621,9 +645,8 @@ visualizada na figura \ref{fig:klein_composition}.
 \end{figure}
 
 Uma das limitações da proposta de Klein é a não representação da estrutura do sistema. A abordagem de Klein utiliza apenas diagramas de sequência para
-modelagem da dinâmica do sistema. Em relação a POA, não é possível representar introduções de membros em classes, uma funcionalidade importante da
-linguagem. Não é possível utilizar \textit{wildcards} na definição de pontos de corte, o que torna difícil a captura de múltiplos pontos de junção em
-um mesmo ponto de corte. Além disso, a especificação de avisos contém redundâncias, pois replicam-se as mensagens referentes ao ponto de corte
+modelagem do comportamento do sistema. Em relação a POA, não é possível representar introduções de membros em classes, uma funcionalidade da
+linguagem. Não é possível utilizar \textit{wildcards} na definição de pontos de corte, o que torna difícil a captura de múltiplos pontos de junção em um mesmo ponto de corte. Além disso, a especificação de avisos contém redundâncias, pois replicam-se as mensagens referentes ao ponto de corte
 capturado. A principal contribuição do trabalho é a possibilidade de realizar a composição de múltiplos aspectos em um mesmo ponto de junção, mantendo
 as mensagens disparadas em cada aviso e identificando corretamente os pontos de junção, mesmo com mensagens introduzidas após a introdução de um
 aviso. Em relação a forma de extensão à UML, as modificações da proposta não podem ser usadas diretamente em qualquer ferramenta CASE. Os modelos
@@ -719,7 +742,7 @@ prevendo e evitando a maior parte dos conflitos. O foco deste trabalho é a espe
 comportamental é tratada pelo trabalho de Reddy e Solberg \cite{ReddySolberg}, que estende a proposta e trata da especificação e composição 
 de diagramas de sequência. No entanto, a composição de diagramas de sequência e a adição de um suporte ferramental para a composição dos mesmos ainda estão
 sendo estudadas pelos autores. O trabalho de France e Reddy \cite{FranceReddy} estuda a implementação de uma ferramenta para composição dos modelos
-estruturais automaticamente, sem esforço do desenvolvedor. Este suporte ferramental é importante, pois automatiza parte do processo de modelagem,
+estruturais automaticamente, sem esforço do desenvolvedor. Este suporte ferramental é desejável, pois automatiza parte do processo de modelagem,
 diminuindo a quantidade de esforço manual necessária.
 
 Uma das limitações da proposta de \cite{france:06} é a não representação de algumas características importantes da POA, como a captura de múltiplos
@@ -787,13 +810,13 @@ especifique todos os modelos manualmente, inclusive os modelos compostos.
 \section{Comparação de Abordagens}
 
 Existem algumas abordagens para modelagem de sistemas orientados a aspectos. Esta dissertação propõe uma comparação entre diferentes abordagens
-considerando alguns critérios de comparação. Os critérios apresentados na próxima sessão são baseados no trabalho proposto por Wimmer
-\cite{wimmer:2011:SUA:1978802.1978807}. A próxima seção apresenta os critérios propostos por este trabalho. Para permitir uma
+considerando alguns critérios de comparação. Os critérios apresentados na seção \ref{sec:wimmer} são baseados no trabalho proposto por
+Wimmer \cite{wimmer:2011:SUA:1978802.1978807}. A seção \ref{sec:ghilardi} apresenta os critérios propostos por este trabalho. Para permitir uma
 melhor visualização das tabelas de comparação, as abordagens são abreviadas com as três primeiras letras do autor principal. 
 Para cada critério, apresenta-se a tabela de comparação entre as abordagens e uma pequena discussão sobre os resultados de
 cada tabela.
 
-\subsection{Critérios Propostos por Wimmer}
+\subsection{Critérios Propostos por Wimmer}\label{sec:wimmer}
 
 \subsubsection{Critérios de Linguagem}
 
@@ -818,7 +841,7 @@ A tabela \ref{tab:comparison_table_language} apresenta a comparação entre dife
 		\hline
 		 L.M & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 1.x & 2.0 & 2.0 (1.x) & 2.0 \\
 		\hline
-		 L.E & MM & P & P & MM & P & MM & P & MM & P \\
+		 L.E & MM & P & MM & MM & P & MM & P & MM & P \\
 		\hline
 		 D.E & - & DC & DC & DC, DComp & - & DC & DC, DEC, DI & DP, DC & DP, DC\\
 		\hline
@@ -871,7 +894,9 @@ de corte.
 	Nesses casos, a composição é assimétrica, pois apenas modelos de interesses entrecortantes podem ser compostos em modelos núcleo. A composição
 	simétrica acontece quando não há diferenciação entre modelos entrecortantes e modelos núcleo, podendo realizar a composição entre qualquer modelo.
 	\item \textbf{Nível de Abstração (N.A)}: Distingue o nível de abstração dos elementos das abordagens. As abordagens podem representar construções de
-	sistemas orientados a aspectos em alto ou baixo nível de abstração. É possível que uma abordagem represente conceitos nos dois níveis.
+	sistemas orientados a aspectos em alto ou baixo nível de abstração. É possível que uma abordagem represente conceitos nos dois níveis. Abordagens que
+	representam conceitos em nível de código são classificadas como de baixo nível de abstração, enquanto abordagens que utilizam apenas modelos estão em
+	alto nível de abstração.
 	\item \textbf{Composição Estrutural (C.E)}: Avalia se a abordagem permite realizar a composição estrutural de modelos.
 	\item \textbf{Composição Comportamental (C.C)}: Avalia se a abordagem permite realizar a composição do comportamento de modelos.
 	\item \textbf{Ferramenta para Modelagem (F.M)}: Distingue abordagens que disponibilizam uma ferramenta para modelagem, de abordagens que não
@@ -889,11 +914,11 @@ A tabela \ref{tab:comparison_table_models} apresenta a comparação entre difere
 		\hline
 		 & KLE & EVE & KIE & JAC & CUI & STE & COT & CLA & GHI \\
 		\hline
-		 C.S & sm & - & asm & asm & asm & asm & asm & sm & asm \\
+		 C.S & sm & - & asm & asm & sm & - & sm & sm & sm \\
 		\hline
 		 N.A & alto & baixo & alto & alto & alto & baixo & baixo & alto & alto \\
 		\hline
-		 C.E & não & sim & sim & não & não & sim & sim & sim & sim \\
+		 C.E & não & não & sim & não & não & não & sim & sim & sim \\
 		\hline
 		 C.C & sim & não & sim & não & sim & não & sim & sim & sim \\
 		\hline
@@ -941,8 +966,9 @@ diminuem o tempo de modelagem de um sistema.
 
 \begin{itemize}
 	\item \textbf{Modelo de Ponto de Junção (M.PJ)}: Este critério distingue entre duas formas possíveis de especificar pontos de junção: de maneira
-	explícita, identificando quais elementos da linguagem podem representar pontos de junção; de maneira implícita, utilizando o próprio modelo de pontos de junção
-	da linguagem para programação orientada a aspectos (POA).
+	explícita, identificando quais elementos da linguagem podem representar pontos de junção (mensagens no diagrama de sequência, por exemplo); de
+	maneira implícita, utilizando o próprio modelo de pontos de junção da linguagem para programação orientada a aspectos (POA) (utlizando apenas a
+	linguagem AspectJ, sem nenhum elemento em nível de modelo).
 	\item \textbf{Representação de Ponto de Corte (R.PC)}: Distingue a forma de representação de pontos de corte, a qual pode ser textual ou gráfica,
 	com algum diagrama da linguagem. 
 	\item \textbf{Composição de Ponto de Corte (C.PC)}: Avalia se a abordagem permite realizar a composição de pontos de corte, com os operadores
@@ -1002,7 +1028,7 @@ para representação dos pontos de junção. Algumas abordagens representam pont
 textualmente. A representação diagramática facilita a compreensão dos modelos, opção desta dissertação. Todas as abordagens permitem a composição de
 pontos de corte e a representação de avisos.
 
-\subsection{Critérios Propostos por Ghilardi}
+\subsection{Critérios Propostos por Ghilardi}\label{sec:ghilardi}
 
 Os seguintes critérios são propostos por esta dissertação para comparação de modelagens para sistemas orientados a aspectos:
 
@@ -1017,7 +1043,7 @@ Os seguintes critérios são propostos por esta dissertação para comparação 
 	interesses entrecortantes (aspectos), dos interesses núcleo, ou, a composição dos interesses entrecortantes com os interesses núcleos. Esta alternância de visões deve 
 	ser realizada sem o esforço do desenvolvedor.
 	\item \textbf{Efeito de Aspectos (E.A)}: Este critério distingue abordagens que permitem visualizar o efeito dos aspectos nos modelos finais,
-	diferenciando os diferentes interesses no modelo composto.
+	diferenciando os interesses no modelo composto.
 	\item \textbf{Composição Automática de Pontos de Corte (C.A.PC)}: Avalia se a abordagem permite realizar a composição automática de pontos de corte,
 	sem esforço do desenvolvedor.
 \end{itemize}
@@ -1031,7 +1057,7 @@ visualização.
 		\hline
 		 & KLE & EVE & KIE & JAC & CUI & STE & COT & CLA & GHI \\
 		\hline
-		 R.I & não & não & sim & sim & não & sim & sim & sim & sim \\
+		 R.I & não & sim & sim & sim & não & sim & sim & sim & sim \\
 		\hline
 		 C.M.PJ & não & sim & sim & sim & sim & não & sim & sim & sim \\
 		\hline
@@ -1063,22 +1089,21 @@ aspectos é disponibilizado através de uma ferramenta disponível no ambiente S
 sistema, através da diferenciação por cores no modelo composto. Apenas esta dissertação permite realizar a alternância de visões automaticamente,
 visualizando o efeito dos aspectos no sistema. 
 
-Outros critérios importantes não tratados pela pesquisa de Wimmer \cite{wimmer:2011:SUA:1978802.1978807} são: a modelagem de introduções, a captura de
+Outros critérios não tratados pela pesquisa de Wimmer \cite{wimmer:2011:SUA:1978802.1978807} são: a modelagem de introduções, a captura de
 múltiplos pontos de junção em uma mesma construção e a composição automática de pontos de corte. A abordagem proposta permite especificar introduções
-utilizando os diagramas de classe da UML. A captura de múltiplos pontos de junção de maneira é realizada utilizando a linguagem AspectJ na definição
-dos pontos de corte (especificados no diagrama de máquina de estados). Outra contribuição importante desta dissertação é a composição automática de
+utilizando os diagramas de classe da UML. A captura de múltiplos pontos de junção é realizada utilizando a linguagem AspectJ na definição
+dos pontos de corte (especificados no diagrama de máquina de estados). Outra contribuição desta dissertação é a composição automática de
 pontos de corte, através da composição de máquinas de estado. A composição automática de pontos de corte é outra contribuição deste
 trabalho, pois não é tratada por nenhum outro trabalho na área de modelagem de sistemas orientados a aspectos.
 
 \section{Discussão}
 
-A maior parte das abordagens permite representar a estrutura e o comportamento de sistemas orientados a aspectos. No entanto, algumas construções
-importantes da POA não são representadas por essas abordagens, como a representação de todos os tipos de avisos. Em algumas abordagens, as construções
-são representáveis, mas demandam um esforço adicional do desenvolvedor. Um exemplo, é o esforço necessário para realizar a captura de múltiplos pontos
-de junção, pois a maior parte das abordagens necessitam que cada elemento a ser capturado por um ponto de corte seja selecionado manualmente. Outra
-limitação da maior parte das abordagens é a falta de ferramental para composição automática de modelos. Este suporte ferramental é importante na
-etapa de modelagem, pois diminui o tempo de desenvolvimento e facilita a compreensão e manutenção dos modelos. A geração automática de modelos
-compostos gera subsídios para realização da alternância de visões, visualizando o efeito dos aspectos no sistema.
+A maior parte das abordagens permite representar a estrutura e o comportamento de sistemas orientados a aspectos. No entanto, algumas construções da POA não são representadas por essas abordagens, como a representação de todos os tipos de avisos e de alguns tipos de pontos de corte.
+Em algumas abordagens, as construções são representáveis, mas demandam um esforço adicional do desenvolvedor. Um exemplo, é o esforço necessário 
+para realizar a captura de múltiplos pontos de junção, pois a maior parte das abordagens necessitam que cada elemento a ser capturado por um ponto de
+corte seja selecionado manualmente. Outra limitação da maior parte das abordagens é a falta de ferramental para composição automática de modelos. 
+Este suporte ferramental é importante na etapa de modelagem, pois diminui o tempo de desenvolvimento e facilita a compreensão e manutenção dos
+modelos. A geração automática de modelos compostos gera subsídios para realização da alternância de visões, visualizando o efeito dos aspectos no sistema.
 
 Assim, não existe uma abordagem que represente todas as características de POA, automatizando parte do processo de modelagem, permitindo visualizar o
 efeito dos aspectos no sistema. A abordagem proposta por esta dissertação tem como objetivo representar todas as características de sistemas
