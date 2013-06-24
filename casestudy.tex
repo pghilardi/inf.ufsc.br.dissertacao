@@ -25,7 +25,7 @@ diferentes composições dos interesses núcleo com os interesses entrecortantes
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_use_cases.png}
+	\includegraphics[scale=0.8]{img/case_study_use_cases.png}
 	\caption{Diagrama de casos de uso do Sistema de Gerenciamento de Hotel.}\label{fig:case_study_use_cases}
   \end{figure}
 
@@ -84,7 +84,7 @@ Finalmente, a classe \textit{WaitingList} contém os métodos \textit{retrieveWa
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_structural_waiting_list.png}
+	\includegraphics[scale=0.8]{img/case_study_structural_waiting_list.png}
 	\caption{Modelagem estrutural: lista de espera}\label{fig:case_study_structural_waiting_list}
   \end{figure}
   
@@ -127,7 +127,7 @@ estruturais propostas pelas classes deste interesse.
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_structural_earn_points.png}
+	\includegraphics[scale=0.8]{img/case_study_structural_earn_points.png}
 	\caption{Modelagem estrutural: acúmulo de pontos em programa de fidelidade}\label{fig:case_study_structural_earn_points}
   \end{figure}
   
@@ -152,7 +152,7 @@ comportamento de um aspecto, também representa a conexão entre a satisfação 
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_behavioral_reserve_room.png}
+	\includegraphics[scale=0.8]{img/case_study_behavioral_reserve_room.png}
 	\caption{Diagrama de sequência: reserva de quarto}\label{fig:case_study_behavioral_reserve_room}
   \end{figure}
 
@@ -224,15 +224,17 @@ mensagens são executadas depois do tratamento de exceção, pois o valor rotula
 
   \begin{figure}[tb]
 	\centering
-	\includegraphics[scale=0.8]{img/case_study_behavioral_pointcut_waiting_list.png}
+	\includegraphics[scale=0.6]{img/case_study_behavioral_pointcut_waiting_list.png}
 	\caption{Ponto de corte: controle de uma lista de espera}\label{fig:case_study_behavioral_pointcut_waiting_list}
   \end{figure}
-  
+ 
+ \begin{landscape}
   \begin{figure}[!h]
 	\centering
 	\includegraphics{img/case_study_behavioral_waiting_list.png}
 	\caption{Aviso: controle de uma lista de espera}\label{fig:case_study_behavioral_waiting_list}
   \end{figure}
+ \end{landscape}
 
 O comportamento do interesse de \textit{check-in} de clientes pode ser visualizado na figura \ref{fig:case_study_behavioral_check_in}. A entrada de
 clientes no hotel começa com a chamada do método \textit{checkIn()} da classe \textit{CheckInHandler}. Após a chamada deste método, é verificado se
@@ -247,11 +249,13 @@ sequência.
 	\caption{Diagrama de sequência: check-in de clientes}\label{fig:case_study_behavioral_check_in}
   \end{figure}
 
+\begin{landscape}
   \begin{figure}[!h]
 	\centering
-	\includegraphics[scale=0.8]{img/case_study_behavioral_check_out.png}
+	\includegraphics[scale=0.7]{img/case_study_behavioral_check_out.png}
 	\caption{Diagrama de sequência: check-out de clientes}\label{fig:case_study_behavioral_check_out}
   \end{figure}
+\end{landscape}
 
 O diagrama de sequência que representa o comportamento do interesse para \textit{check-out} de clientes pode ser visualizado na figura
 \ref{fig:case_study_behavioral_check_out}. A troca de mensagens do diagrama de sequência inicia quando o objeto \textit{CheckOutHandler} executa a
@@ -309,9 +313,9 @@ por este interesse entrecortante). Este tipo de substituição no fluxo de execu
 	\centering
 	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | }
 		\hline
-		 & Wildcards & Avisos: before, around e after & Introduções & Precedência & Pontos de Corte \\
+		 & Wildcard & Avisos & Introduções & Precedência & Pontos de Corte \\
 		\hline
-		 Figuras & \ref{fig:case_study_behavioral_pointcut_log}, \ref{fig:case_study_behavioral_pointcut_authentication} 
+		 Fig & \ref{fig:case_study_behavioral_pointcut_log}, \ref{fig:case_study_behavioral_pointcut_authentication} 
 		 &\ref{fig:case_study_behavioral_authentication}, \ref{fig:case_study_behavioral_loyalty_points},
 		 \ref{fig:case_study_behavioral_pointcut_waiting_list}, \ref{fig:case_study_behavioral_pointcut_log} 
 		 & \ref{fig:case_study_structural_authentication}, \ref{fig:case_study_structural_earn_points}, \ref{fig:case_study_structural_waiting_list},
@@ -389,14 +393,14 @@ A ordem de precedência é definida pelo valor rotulado \textit{precedence}, con
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_compound_2_structural.png}
+	\includegraphics[scale=0.8]{img/case_study_compound_2_structural.png}
 	\caption{Modelo Estrutural: reserva de quarto composto com registro de mensagens e controle de lista de espera}\label{fig:case_study_compound_2_structural}
   \end{figure}
   
 \begin{landscape}
-  \begin{figure*}[tb]
+  \begin{figure*}
 	\centering
-	\includegraphics[scale=0.7]{img/case_study_compound_2.png}
+	\includegraphics[scale=0.5]{img/case_study_compound_2.png}
 	\caption{Modelo Comportamental: reserva de quarto composto com registro de mensagens e controle de lista de espera}\label{fig:case_study_compound_2}
   \end{figure*}
 \end{landscape}
@@ -414,7 +418,7 @@ composição comportamental desta configuração também pode ser visualizada na
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics[scale=0.7]{img/case_study_compound_1.png}
+	\includegraphics[scale=0.6]{img/case_study_compound_1.png}
 	\caption{Modelo Comportamental: reserva de quarto composto com registro de mensagens}\label{fig:case_study_compound_1}
   \end{figure}
 
@@ -455,7 +459,7 @@ que captura chamadas ao método \textit{removeCustomer()} da classe \textit{Room
 
   \begin{figure}[!h]
 	\centering
-	\includegraphics{img/case_study_2_compound_structural.png}
+	\includegraphics[scale=0.7]{img/case_study_2_compound_structural.png}
 	\caption{Modelo Estrutural: check-out de clientes composto com registro de mensagens, autenticação de usuários e programa de
 	fidelidade}\label{fig:case_study_2_compound_structural}
   \end{figure}
@@ -463,7 +467,7 @@ que captura chamadas ao método \textit{removeCustomer()} da classe \textit{Room
   \begin{landscape}
   \begin{figure*}[tb]
 	\centering
-	\includegraphics[scale=0.7]{img/case_study_2_compound.png}
+	\includegraphics[scale=0.5]{img/case_study_2_compound.png}
 	\caption{Modelo Comportamental: check-out de clientes composto com registro de mensagens, autenticação de usuários e programa de
 	fidelidade}\label{fig:case_study_2_compound}
   \end{figure*}

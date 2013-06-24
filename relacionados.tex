@@ -69,27 +69,31 @@ linguagem de meta-modelo, pode-se realizar a geração de código em AspectJ. É
 com as construções da linguagem alvo para geração do código. 
 
 \begin{landscape}
-\begin{figure}
+\begin{figure*}
 	\centering
-	\includegraphics[width=650px]{img/p21_aspectj_profile.png}
+	\includegraphics[scale=0.6]{img/p21_aspectj_profile.png}
 	\caption{Perfil UML para modelagem de aspectos \cite{Evermann:2007:MSP:1229375.1229379}}\label{fig:p21_aspectj_profile}
-\end{figure}
+\end{figure*}
 \end{landscape}
 
 Para exemplificar o uso deste Perfil UML em uma modelagem, Evermann implementou o padrão de projeto Observador \cite{Gamma:1995:DPE:186897} em um
 sistema para desenho de interface gráfica. O diagrama de classes do interesse núcleo pode ser visualizado na figura \ref{fig:p21_base_model}. 
 
-\begin{figure}
+\begin{landscape}
+\begin{figure*}
 	\centering
-	\includegraphics[width=400px]{img/p21_base_model.png}
+	\includegraphics[scale=0.8]{img/p21_base_model.png}
 	\caption{Interesse núcleo para desenho de interface gráfica}\label{fig:p21_base_model}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
-\begin{figure}
+\begin{landscape}
+\begin{figure*}
 	\centering
-	\includegraphics[width=400px]{img/p21_extension_model.png}
+	\includegraphics[scale=0.8]{img/p21_extension_model.png}
 	\caption{Interesse entrecortante para implementação do padrão de projeto Observador}\label{fig:p21_extension_model}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
 O interesse entrecortante é o padrão de projeto Observador e a sua modelagem  pode ser visualizada na figura \ref{fig:p21_extension_model}. 
 O modelo do interesse entrecortante contém um aspecto que especifica quatro pontos de corte, três introduções e dois avisos. O ponto de corte
@@ -184,11 +188,13 @@ indica que o objeto \textit{ICaller} da visão de mensagens do método \textit{c
 \textit{ICheckpointable} de \textit{Checkpointable}. O aspecto \textit{Recovering} também contém diretivas de instancialização para os elementos 
 incompletos dos aspectos os quais depende.
 
-\begin{figure}[!hb]
+\begin{landscape}
+\begin{figure}
 	\centering
-	\includegraphics[width=375px]{img/p87_base_model.png}
+	\includegraphics[scale=0.8]{img/p87_base_model.png}
 	\caption{Modelo núcleo para transações}\label{fig:p87_base_model}
 \end{figure}
+\end{landscape}
 
 Com o aspecto para garantia de atomicidade definido, deve-se realizar a composição com o modelo núcleo. O modelo final após a composição pode ser
 visualizado nas figuras \ref{fig:p87_class_final_model} (visão estrutural), \ref{fig:p87_state_final_model} (visão de estados) e \ref{fig:p87_sequence_final_model} (visão de mensagens). 
@@ -200,7 +206,7 @@ aspecto, compostas com o modelo núcleo, resultando em um modelo que representa 
 \begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/p87_recovering_aspect.png}
+	\includegraphics[scale=0.5]{img/p87_recovering_aspect.png}
 	\caption{Aspecto para recuperação de dados (garantia de atomicidade)}\label{fig:p87_recovering_aspect.png}
 \end{figure}
 \end{landscape}
@@ -216,7 +222,7 @@ aspecto, compostas com o modelo núcleo, resultando em um modelo que representa 
 \begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics[width=500px]{img/p87_sequence_final_model.png}
+	\includegraphics[scale=0.7]{img/p87_sequence_final_model.png}
 	\caption{Visão de mensagens do modelo final para garantia de atomicidade de transações}\label{fig:p87_sequence_final_model}
 \end{figure}
 \end{landscape}
@@ -224,7 +230,7 @@ aspecto, compostas com o modelo núcleo, resultando em um modelo que representa 
 \begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics[width=400px]{img/p87_state_final_model.png}
+	\includegraphics[scale=0.7]{img/p87_state_final_model.png}
 	\caption{Visão de estados do modelo final para garantia de atomicidade de transações}\label{fig:p87_state_final_model}
 \end{figure}
 \end{landscape}
@@ -312,7 +318,7 @@ modelos de interesses entrecortantes e a mesma é realizada em nível de modelo.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=400px]{img/withdraw_final.png}
+	\includegraphics[width=275px]{img/withdraw_final.png}
 	\caption{Modelo composto para transação bancária de
 	saque com autorização e envio de e-mail}\label{fig:withdraw_final}
 \end{figure}
@@ -348,7 +354,7 @@ classes são modificadas por apenas um caso de uso.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=400px]{img/jacobson_slices.png}
+	\includegraphics[width=350px]{img/jacobson_slices.png}
 	\caption{Fatias de casos de uso em um sistema de
 	gerenciamento de hotel}\label{fig:jacobson_slices}
 \end{figure}
@@ -362,7 +368,7 @@ ele não estende nenhum caso de uso, apenas define novas classes e introduz mét
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/jacobson_reserve_room_slice.png}
+	\includegraphics[width=300px]{img/jacobson_reserve_room_slice.png}
 	\caption{Fatia de caso de uso para o
 	caso de uso \textit{Reserve Room}}\label{fig:jacobson_reserve_room_slice}
 \end{figure}
@@ -389,7 +395,7 @@ são introduzidos dois novos métodos à classe \textit{Reservation} relativos a
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/jacobson_handle_waiting_list_slice.png}
+	\includegraphics[width=300px]{img/jacobson_handle_waiting_list_slice.png}
 	\caption{Fatia do caso de uso de extensão \textit{Handle Waiting List}}\label{fig:jacobson_handle_waiting_list_slice}
 \end{figure}
 
@@ -401,7 +407,7 @@ na figura \ref{fig:jacobson_use_case_modules}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/jacobson_use_case_modules.png}
+	\includegraphics[width=350px]{img/jacobson_use_case_modules.png}
 	\caption{Rastreamento completo de um requisito por todos modelos}\label{fig:jacobson_use_case_modules}
 \end{figure}
 
@@ -477,7 +483,7 @@ ambiguidades). Um diagrama deste tipo destaca o fluxo de controle e as ações e
 
 \begin{figure}
 	\centering
-	\includegraphics[width=450px]{img/weavr_state_machine_base.png}
+	\includegraphics[width=350px]{img/weavr_state_machine_base.png}
 	\caption{Diagrama de máquina de estados focado em transições
 	para um tratador de requisições}\label{fig:weavr_state_machine_base}
 \end{figure}
@@ -513,7 +519,7 @@ instância será destruída. Este comportamento é introduzido através do aspec
 
 \begin{figure}
 	\centering
-	\includegraphics[width=350px]{img/weavr_timeout.png}
+	\includegraphics[width=325px]{img/weavr_timeout.png}
 	\caption{Aspecto para controle de tempo ao protocolo 2PC}\label{fig:weavr_timeout}
 \end{figure}
 
@@ -546,7 +552,7 @@ uma representação da transição capturada pode ser visualizada na máquina de
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/weavr_composed.png}
+	\includegraphics[width=350px]{img/weavr_composed.png}
 	\caption{Visualização da composição do aspecto
 	para controle de tempo no tratador de requisições.}\label{fig:weavr_composed}
 \end{figure}
@@ -587,7 +593,7 @@ associadas a diagramas de sequência básicos.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/klein_meta_model.png}
+	\includegraphics[width=350px]{img/klein_meta_model.png}
 	\caption{Meta-modelo de extensão aos diagramas de
 	sequência da UML}\label{fig:klein_meta_model}
 \end{figure}
@@ -599,7 +605,7 @@ cSD central utiliza nodos decisão e o cSD a direita utiliza fragmentos do tipo 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/klein_sequence_diagrams.png}
+	\includegraphics[width=350px]{img/klein_sequence_diagrams.png}
 	\caption{Exemplos de diagramas de sequência
 	estendidos: bSD's e cSD's}\label{fig:klein_sequence_diagrams}
 \end{figure}
@@ -619,7 +625,7 @@ ponto de corte.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/klein_aspects.png}
+	\includegraphics[width=350px]{img/klein_aspects.png}
 	\caption{Exemplos de aspectos comportamentais}\label{fig:klein_aspects}
 \end{figure}
 
@@ -638,7 +644,7 @@ visualizada na figura \ref{fig:klein_composition}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=475px]{img/klein_composition.png}
+	\includegraphics[width=350px]{img/klein_composition.png}
 	\caption{Composição entre aspectos de registro de mensagens, segurança e 
 	atualização de interface gráfica com modelo
 	base para autenticação de usuário}\label{fig:klein_composition}
@@ -668,7 +674,7 @@ entrecortantes.
 
 \begin{figure}
 	\centering
-	\includegraphics{img/theme_1.png}
+	\includegraphics[scale=0.8]{img/theme_1.png}
 	\caption{Modelo núcleo: registro de estudante em curso}\label{fig:theme_1}
 \end{figure}
 
@@ -681,7 +687,7 @@ núcleo.
 
 \begin{figure}
 	\centering
-	\includegraphics{img/theme_2.png}
+	\includegraphics[scale=0.8]{img/theme_2.png}
 	\caption{Modelo entrecortante: registro de atividades do sistema}\label{fig:theme_2}
 \end{figure}
 
@@ -694,7 +700,7 @@ os modelos núcleo compostos com os interesses entrecortantes \cite{Carton:2009:
 
 \begin{figure}
 	\centering
-	\includegraphics{img/theme_3.png}
+	\includegraphics[scale=0.8]{img/theme_3.png}
 	\caption{Configuração de composição entre interesses}\label{fig:theme_3}
 \end{figure}
 
@@ -756,7 +762,7 @@ um sistema orientado a aspectos.
 \begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics{img/clarke_1.png}
+	\includegraphics[scale=0.8]{img/clarke_1.png}
 	\caption{Antes do uso de diretivas de composição para composição de aspectos}\label{fig:clarke_1}
 \end{figure}
 \end{landscape}
@@ -764,7 +770,7 @@ um sistema orientado a aspectos.
 \begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics{img/clarke_2.png}
+	\includegraphics[scale=0.8]{img/clarke_2.png}
 	\caption{Depois do uso de diretivas de composição para composição de aspectos}\label{fig:clarke_2}
 \end{figure}
 \end{landscape}
@@ -797,7 +803,7 @@ capturar cliques em um botão. Além disso, adiciona duas introduções às clas
 
 \begin{figure}
 	\centering
-	\includegraphics{img/stein_1.png}
+	\includegraphics[scale=0.8]{img/stein_1.png}
 	\caption{Um modelo de aspecto segundo a abordagem AODM}\label{fig:stein_1}
 \end{figure}
 
@@ -833,6 +839,7 @@ cada tabela.
 
 A tabela \ref{tab:comparison_table_language} apresenta a comparação entre diferentes abordagens utilizando os critérios de linguagem.
 
+\begin{landscape}
 \begin{table*}[h]
 	\centering
 	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | }
@@ -875,6 +882,7 @@ A tabela \ref{tab:comparison_table_language} apresenta a comparação entre dife
 	\caption{Comparação entre abordagens: critérios de linguagem}
 	\label{tab:comparison_table_language}
 \end{table*} 
+\end{landscape}
 
 Observa-se que a maior parte das abordagens especificam aspectos com a segunda versão da UML. As abordagens limitadas a primeira versão da UML não contemplam todas 
 as construções da linguagem e, não são suportadas por qualquer ferramenta CASE, diminuindo a expressividade da abordagem e a qualidade da mesma. Em

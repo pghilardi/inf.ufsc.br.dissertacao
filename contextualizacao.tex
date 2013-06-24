@@ -110,7 +110,7 @@ geralmente executam-se três fases:
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics[scale=0.9]{img/aspects_weaving.png}
+	\includegraphics[scale=0.6]{img/aspects_weaving.png}
 	\caption{Fluxo de desenvolvimento de uma aplicação com aspectos}\label{fig:aspects_weaving}
 \end{figure}
 
@@ -143,7 +143,7 @@ execução da instanciação desse construtor pode ser visualizado na ocorrênci
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics{img/aspects_join_point_model.png}
+	\includegraphics[scale=0.8]{img/aspects_join_point_model.png}
 	\caption{Identificação de pontos de junção}\label{fig:aspects_join_point_model}
 \end{figure}
 
@@ -155,7 +155,7 @@ Observa-se na figura que a execução (\textit{execution}) do método \textbf{um
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics[scale=0.9]{img/call_vs_execution.png}
+	\includegraphics{img/call_vs_execution.png}
 	\caption{Diferença entre os pontos de junção de chamada (call) e execução (execution)}\label{fig:call_vs_execution}
 \end{figure}
 
@@ -176,7 +176,7 @@ Existem dois tipos de ponto de corte:
   um aspecto. Geralmente é definido dentro de um ponto de corte nomeado.
 \end{itemize}
 
-\begin{figure}[!hb]
+\begin{figure}
 	\centering
 	\includegraphics{img/pointcut_code.png}
 	\caption{Exemplo de código em Java}\label{fig:pointcut_code}
@@ -203,11 +203,13 @@ tipo \textbf{ObjetoA}. A captura de um único método pode ser visualizada no
 código na parte inferior da figura \ref{fig:pointcut_vs_joinpoint}
 (método selecionado está destacado com uma flecha laranja).
 
-\begin{figure}
+\begin{landscape}
+\begin{figure*}
 	\centering
-	\includegraphics{img/pointcut_vs_joinpoint.png}
+	\includegraphics[scale=0.9]{img/pointcut_vs_joinpoint.png}
 	\caption{Exemplo de ponto de corte}\label{fig:pointcut_vs_joinpoint}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
 Para possibilitar a captura de vários pontos de junção em um mesmo ponto de
 corte de maneira praticável, AspectJ disponibiliza os \textbf{wildcards}. 
@@ -226,11 +228,13 @@ para qualquer método pertencente a objetos do tipo \textbf{ObjetoA}. Para isso,
 \textbf{umMetodo()} pela notação \textbf{*}, capturando agora todos os métodos do ObjetoA, independente do nome. Além disso, adiciona-se a 
 notação \textbf{..}, capturando métodos com qualquer número de parâmetros. 
 
-\begin{figure}
+\begin{landscape}
+\begin{figure*}
 	\centering
-	\includegraphics{img/pointcut_vs_joinpoint_wildcard.png}
+	\includegraphics[scale=0.9]{img/pointcut_vs_joinpoint_wildcard.png}
 	\caption{Exemplo de ponto de corte utilizando wildcards}\label{fig:pointcut_vs_joinpoint_wildcard}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
 A figura \ref{fig:pointcut_vs_joinpoint_wildcard} mostra o ponto de corte redefinido, utilizando \textit{wildcards}. 
 O novo ponto de corte captura a chamada de qualquer método, com qualquer número
@@ -287,11 +291,13 @@ corte. Existem dois tipos: \textit{cflow(PontoDeCorte)} e \textit{cflowbelow(Pon
 inclusive a chamada ao próprio método. O ponto de corte da figura \ref{fig:flow_p2} é do tipo \textit{cflowbelow()} e captura os mesmos pontos de
 junção do anterior, exceto a chamada ao próprio método.
 
-\begin{figure}[!htb]
+\begin{landscape}
+\begin{figure*}
 	\centering
-	\includegraphics[scale=0.9]{img/signatures.png}
+	\includegraphics[scale=0.8]{img/signatures.png}
 	\caption{Exemplo de assinaturas em AspectJ}\label{fig:signatures}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
 Existem também \textbf{pontos de corte baseados na estrutura léxica do código}. Estes pontos de corte capturam pontos de junção que ocorrem dentro de
 um determinado trecho de código. Existem dois tipos: \textit{within(AssinaturaDeTipo)} e \textit{withincode(AssinaturaDeConstrutor ou
@@ -345,7 +351,7 @@ permitem passar o contexto de execução para um aviso.
 
 \begin{figure}[!hb]
 	\centering
-	\includegraphics[scale=0.9]{img/advice_code.png}
+	\includegraphics{img/advice_code.png}
 	\caption{Exemplo de aviso com contexto de execução}\label{fig:advice_code}
 \end{figure}
 
@@ -363,7 +369,7 @@ e o objeto que executará este método será um objeto do tipo \textbf{ObjetoA}.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.9]{img/introduction.png}
+	\includegraphics{img/introduction.png}
 	\caption{Introdução de métodos e atributos}\label{fig:introduction}
 \end{figure}
 
@@ -542,7 +548,7 @@ que este atributo define unicamente uma sala. O estereótipo \textit{key} está 
 
 \begin{figure}
 	\centering
-	\includegraphics{img/stereotype_1.png}
+	\includegraphics[scale=0.9]{img/stereotype_1.png}
 	\caption{Uso de estereótipos em um diagrama de classes}\label{fig:stereotype_1}
 \end{figure}
 
@@ -575,11 +581,13 @@ e utilizado por outras ferramentas do tipo \textit{Computer Aided Software Engin
 especificações já prontas sobre um determinado domínio de aplicação. Um exemplo de perfil que pode ser reusado por outros desenvolvedores é um perfil
 que especifique sistemas orientados a aspectos.
 
-\begin{figure}
+\begin{landscape}
+\begin{figure*}
 	\centering
 	\includegraphics{img/profile_diagram.png}
 	\caption{Diagrama de Perfil para representar veículos}\label{fig:profile_diagram}
-\end{figure}
+\end{figure*}
+\end{landscape}
 
 \subsection{Diagramas Comportamentais}
 

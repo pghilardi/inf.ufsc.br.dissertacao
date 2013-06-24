@@ -27,7 +27,8 @@
 
 %---------------------------------------------------------------------------
 % Carrega classe ABNTex, com padrão de página A5, fonte 10pt, frente e verso
-\LoadClass[cleardoublepage=plain,a5paper,10pt,twoside,capchap,capsec,openright,abntfigtabnum,espacosimples]{abnt}
+%\LoadClass[cleardoublepage=plain,a5paper,10pt,twoside,capchap,capsec,openright,abntfigtabnum,espacosimples]{abnt}
+\LoadClass[a5paper,10pt,twoside,capchap,capsec,openright,abntfigtabnum,espacosimples]{abnt}
 
 %---------------------------------------------------------------------------
 % Definicao da geometria da página
@@ -762,7 +763,7 @@
     \ABNTlocaldata, \diadata\ de \mesdata\ \anodata.\par
 \end{center}
 \begin{espacosimples}
-    \vspace{0.5em}
+    \vspace{0.1em}
     \begin{center}
     {\rule{\ABNTsignwidth}{1pt}\par
      \coordenadorname \\ \coordenadortitulo}
@@ -770,108 +771,82 @@
 \end{espacosimples}
 
 \ABNTifnotempty{\ABNTorientadordata}
-    {
-    \ifthenelse{\equal{\orientadorbancadata}{nao}}
-	{
-	\begin{espacosimples}
-	    \vspace{0.5em}
-	    \begin{center}
-	    {\rule{\ABNTsignwidth}{1pt}\par
-	     \bancaformat \ABNTorientadorname \\ \ABNTorientadordata\par}
-	    \end{center}
-	\end{espacosimples}
-	}{}
-    }
+{
+  \ifthenelse{\equal{\orientadorbancadata}{nao}}
+  {
+    \begin{espacosimples}
+      \vspace{0.1em}
+      \begin{center}
+        {\rule{\ABNTsignwidth}{1pt}\par
+        \bancaformat \ABNTorientadorname \\ \ABNTorientadordata\par}
+      \end{center}
+    \end{espacosimples}
+  }{}
+}
 \ABNTifnotempty{\ABNTcoorientadordata}
-    {
-    \ifthenelse{\equal{\coorientadorbancadata}{nao}}
-	{
-	\begin{espacosimples}
-	    \vspace{0.5em}
-	    \begin{center}
-	    {\rule{\ABNTsignwidth}{1pt}\par
-	     \bancaformat \ABNTcoorientadorname \\ \ABNTcoorientadordata\par}
-	    \end{center}
-	\end{espacosimples}
-	}{}
-    }
+{
+  \ifthenelse{\equal{\coorientadorbancadata}{nao}}
+  {
+    \begin{espacosimples}
+      \vspace{0.1em}
+      \begin{center}
+        {\rule{\ABNTsignwidth}{1pt}\par
+        \bancaformat \ABNTcoorientadorname \\ \ABNTcoorientadordata\par}
+      \end{center}
+    \end{espacosimples}
+  }{}
+}
 
 {\setlength{\parindent}{0cm} \bfseries Banca Examinadora:\par}
 
 \ABNTifnotempty{\bancanameA}
-    {
-    \begin{espacosimples}
-	\vspace{0.9em}
-	\begin{center}
-	{\rule{\ABNTsignwidth}{1pt}\par
-	 \bancaformat \bancanameA \\ \bancadataA\par}
-	\end{center}
-    \end{espacosimples}
-    }
+{
+  \begin{espacosimples}
+    \vspace{0.2em}
+    \begin{center}
+      {\rule{\ABNTsignwidth}{1pt}\par
+      \bancaformat \bancanameA \\ \bancadataA\par}
+    \end{center}
+  \end{espacosimples}
+}
 
 \ABNTifnotempty{\ABNTorientadordata}
-    {
-    \ifthenelse{\equal{\orientadorbancadata}{sim}}
-	{
-	\begin{espacosimples}
-	    \vspace{0.5em}
-	    \begin{center}
-	    {\rule{\ABNTsignwidth}{1pt}\par
-	     \bancaformat \ABNTorientadorname \\ \ABNTorientadordata\par}
-	    \end{center}
-	\end{espacosimples}
-	}{}
-    }
+{
+  \ifthenelse{\equal{\orientadorbancadata}{sim}}
+  {
+    \begin{espacosimples}
+      \vspace{0.1em}
+      \begin{center}
+        {\rule{\ABNTsignwidth}{1pt}\par
+        \bancaformat \ABNTorientadorname \\ \ABNTorientadordata\par}
+      \end{center}
+    \end{espacosimples}
+  }{}
+}
 \ABNTifnotempty{\ABNTcoorientadordata}
-    {
-    \ifthenelse{\equal{\coorientadorbancadata}{sim}}
-	{
-	\begin{espacosimples}
-	    \vspace{0.5em}
-	    \begin{center}
-	    {\rule{\ABNTsignwidth}{1pt}\par
-	     \bancaformat \ABNTcoorientadorname \\ \ABNTcoorientadordata\par}
-	    \end{center}
-	\end{espacosimples}
-	}{}
-    }
+{
+  \ifthenelse{\equal{\coorientadorbancadata}{sim}}
+  {
+    \begin{espacosimples}
+      \vspace{0.1em}
+      \begin{center}
+        {\rule{\ABNTsignwidth}{1pt}\par
+        \bancaformat \ABNTcoorientadorname \\ \ABNTcoorientadordata\par}
+      \end{center}
+    \end{espacosimples}
+  }{}
+}
 
 \ABNTifnotempty{\bancanameB}
     {
     \begin{espacosimples}
-	\vspace{0.5em}
+	\vspace{0.1em}
 	\begin{center}
 	{\rule{\ABNTsignwidth}{1pt}\par
 	 \bancaformat \bancanameB \\ \bancadataB\par}
 	\end{center}
     \end{espacosimples}
     }
-\ABNTifnotempty{\bancanameC}
-    {
-    \begin{espacosimples}
-	\vspace{0.5em}
-	\begin{center}
-	{\rule{\ABNTsignwidth}{1pt}\par
-	 \bancaformat \bancanameC \\ \bancadataC\par}
-	\end{center}
-    \end{espacosimples}
-    }
-\vfill
-% Cria uma nova página de assinaturas
-\ifnum \nrobanca > 6
-    {
-    \newpage
-    \if@openright\cleardoublepage\else\clearpage\fi%
-    \if@twocolumn
-	\@restonecoltrue\onecolumn
-    \else
-	\@restonecolfalse\newpage
-    \fi
-	\thispagestyle{empty}%
-    \vfill
-    %{\setlength{\parindent}{0cm} \bfseries Banca Examinadora (continua\c{c}\~ao):\par}
-    \mbox{}
-    \vspace{0.4em}
     \ABNTifnotempty{\bancanameC}
 	{
 	\begin{espacosimples}
@@ -892,6 +867,42 @@
 	    \end{center}
 	\end{espacosimples}
 	}
+\vfill
+% Cria uma nova página de assinaturas
+\ifnum \nrobanca > 6
+    {
+    \newpage
+    \if@openright\cleardoublepage\else\clearpage\fi%
+    \if@twocolumn
+	\@restonecoltrue\onecolumn
+    \else
+	\@restonecolfalse\newpage
+    \fi
+	\thispagestyle{empty}%
+    \vfill
+    %{\setlength{\parindent}{0cm} \bfseries Banca Examinadora (continua\c{c}\~ao):\par}
+    \mbox{}
+    \vspace{0.4em}
+%    \ABNTifnotempty{\bancanameC}
+%	{
+%	\begin{espacosimples}
+%	    \vspace{0.5em}
+%	    \begin{center}
+%	    {\rule{\ABNTsignwidth}{1pt}\par
+%	    \bancaformat \bancanameC \\ \bancadataC\par}
+%	    \end{center}
+%	\end{espacosimples}
+%	}
+%    \ABNTifnotempty{\bancanameD}
+%	{
+%	\begin{espacosimples}
+%	    \vspace{0.5em}
+%	    \begin{center}
+%	    {\rule{\ABNTsignwidth}{1pt}\par
+%	    \bancaformat \bancanameD \\ \bancadataD\par}
+%	    \end{center}
+%	\end{espacosimples}
+%	}
     \ABNTifnotempty{\bancanameE}
 	{
 	\begin{espacosimples}
